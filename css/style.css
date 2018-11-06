@@ -1,0 +1,26 @@
+:root {
+      font-size: 62.5%;
+}
+
+body {
+      font-family: helvetica, sans-serif;
+      margin-top: 40vh;
+      background-color: white;
+}
+
+h1 {
+      text-align: center;
+      font-size: 10rem;
+      font-weight: 900;
+      letter-spacing: -.7rem;
+      color: #1C5D99;
+}
+
+h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #BBCDE5;
+      position: relative; 
+      left: -8.5rem;
+}
