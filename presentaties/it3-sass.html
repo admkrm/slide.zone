@@ -27,34 +27,37 @@
 				<section>
 							## What is SASS?
 							- Sass is short for Syntactically Awesome Stylesheets
-							- Sass a CSS preprocessor. A layer between your stylesheets and the .css files you serve to the browser
-							- Sass is what we call a meta-language
-							- Allows you to write DRY code that’ll be faster, more efficient, and easier to maintain
-							- http://sass-lang.com/
+							- Sass a CSS preprocessor
+							- A layer between your stylesheets and the .css files you serve to the browser
+							- Allows you to write faster, more efficient, and easier to maintain code
 				</section>
+				<section>
+							## The SASS website
+							![The SASS website](../img/sass.jpg)
+							##### http://sass-lang.com/
+			  </section>
 				<section>
 							## Why SASS?
 
 							- Enabling “super functionality” in addition to your normal CSS. It then translates (or compiles) that syntax into regular CSS files via a command-line program or web-framework plugin
-							- To be honest: I was for a long time a reluctant believer in Sass. I write stylesheets by hand! There’s a certain amount of craft that goes into the document
-							- But the reality is that Sass (and other CSS preprocessors) can be a powerful ally—a tool that any style-crafter can easily insert into their daily work
-							- As CSS can be fragile at times, it’s understandable for its authors to be somewhat protective about their creation
+							- To be honest: I was for a long time a reluctant believer in Sass. I write stylesheets by hand!
+							- But: Sass can be a powerful tool that any style-crafter can easily insert into their daily work
 				</section>
 				<section>
 							## Why SASS?
 
-							- Since the SCSS syntax is a superset of CSS3, you don’t have to change anything about the way you write CSS. Commenting, indenting, or not indenting, all your formatting preferences can remain the same when working in .scss files
-							- Inefficient, bloated stylesheets can be just as inefficient and bloated when using Sass. when used properly and intelligently though, Sass can be such a massive assist in creating websites
+							- The Sass syntax is a superset of CSS3, you don’t have to change anything about the way you write CSS
+							- All your formatting preferences can remain the same
+							- The only thing that changes is that you work in .scss files now
+							- When used properly and intelligently, Sass can be a huge help
 				</section>
 				<section>
 							## Is it different than CSS?
 
-							- Getting started with Sass syntax is painless, and you can use as little or as much as you’d like :-) So, I’m here to show you how Sass doesn’t have to disrupt your process and workflow, and how it can make your life easier
+							- Getting started with Sass syntax is painless, and you can use as little or as much as you’d like :-)
 							- The only thing is that your browser can't read Sass
-							- The reality: .scss => SASS => .css
 							- So we will need a tool that transforms our sass files to regular css
-							- In this class we will use prepros. You can also use Codepen, which allows you to write SASS.
-							Later, when you’ve become fluent with Sass (and it won’t take long), it really does feel like a natural extension of CSS
+							- In this class we will use Prepros. To familarize yourself you could also use Codepen.io
 				</section>
 				<section>
 							## Prepros
@@ -64,28 +67,28 @@
 				<section>
 							## We will use the SCSS-syntax
 
-							- There are 2 flavors but don't worry. This is the most used. Sass original... original indented syntax
-							- But for me, I prefer SCSS, with its closer alignment to normal CSS, for the reasons stated earlier
-							- You also need to know that there are other CSS-preprocessors: less, stylus, postcss, compass... => same paradigm
+							- There are 2 flavors of SASS
+							- We will use SCSS with its closer alignment to normal CSS
+							- You also need to know that there are other CSS-preprocessors: less, stylus, postcss, compass...
+							- The original sass-syntax works like this (a bit far off from regular CSS):
 
 							```
 							$pink: #ea4c89
 
-							p
-								font-size: 12px
+							p   font-size: 12px
 								color: $pink
 
-							p strong
+							p   strong
 								text-transform: uppercase
 							```
 				</section>
 				<section>
-							## The DRY principle
+							## What is the DRY principle?
 
 							- Every piece of knowledge must have a single, unambiguous, authoritative representation within a system
 							- The idea is that duplicating code can cause failure and confusion for developers
-							- CSS is anything but DRY. One look through a decent-sized CSS file, and a DRY software developer will weep, first with bewilderment, then frustration
-							- SASS is a great tool to make your css dry :-)
+							- CSS is anything but DRY
+							- SASS is a great tool to make your css dry :-) A few examples will prove this...
 				</section>
 				<section>
 							## Simple SASS example (1)
@@ -102,10 +105,8 @@
 							Will compile to:
 
 							```
-							a {
-								color: #fc3; }
-							nav {
-								background-color: #fc3; }
+							a { color: #fc3; }
+							nav { background-color: #fc3; }
 							```
 				</section>
 				<section>
@@ -129,10 +130,12 @@
 							```
 				</section>
 				<section>
-							## Don't edit your output!
+							## Don't edit your .css file!
 
-							- Important note: when you’re using Sass, you’ll no longer be editing any .css files. The .scss files are where it will happen from now on
-							- The reason being, any changes you make to the .css file will eventually get overridden as soon as you update the .scss and Sass compiles the output. So stick to the .scss :-)
+							- Important note: when you’re using Sass, you’ll no longer be editing any .css files
+							- The .scss files are where it will happen from now on
+							- The reason being, any changes you make to the .css file will eventually get overridden as soon as you update the .scss and Sass compiles the output
+							- A typical beginner's mistake :-)
 				</section>
 				<section class="chapter">
 							## Using SASS
@@ -140,12 +143,12 @@
 				<section>
 							## Using Sass
 
-							- I will focus here on a number of things you can do with Sass => most easy to add, productive things
-							- This will get you started and hopefully make you fall in love with Sass
-							- The capabilities of Sass are overwhelming—it is a very powerful tool to help bring sanity to creating complex stylesheets
+							- Focus today: is on quick wins => most easy to add, most productive things
+							- This will get you started and hopefully make you fall in love with Sass ;-)
+							- The true capabilities of Sass are overwhelming
 				</section>
 				<section>
-						## Variables
+						## 1. Variables
 
 						- THE reason to start using SASS
 						- We repeat ourselves so often in a stylesheet. Colors, fonts, background images, widths, etc.—there are patterns that require an epic battle with find-and-replace should any of those patterns be changed. Variables make all of that much simpler and easier to maintain.
@@ -163,7 +166,7 @@
 						```
 				</section>
 				<section>
-						## Variables: using them for style guides
+						## 1. Variables: using them for style guides
 
 						At the top of your stylesheet:
 
@@ -176,7 +179,7 @@
 						Next, using the darken or lighten color function in Sass, we can generate different shades of color that will always be based on the brand palette
 				</section>
 				<section>
-						## Variables: using them for style guides
+						## 1. Variables: using them for style guides
 
 						Let’s darken the pink (#ea4c89) by 30%:
 
@@ -197,13 +200,14 @@
 						Lots of functionality! http://sass-lang.com/
 				</section>
 				<section>
-						## Mixins
+						## 2. Mixins
 
-						- Mixins allow you to define and reuse blocks of styles. Rather than typing the same rules over and over again in various declarations, you can use mixins to define a group of styles just once and refer to it anytime those styles are needed
-						- Shared styles can be abstracted into mixins, and you’ll still have the ability to override or augment those styles with additional rules. Powerful stuff!
+						- Mixins allow you to define and reuse blocks of styles
+						- Use mixins to define a group of styles just once and refer to it anytime those styles are needed
+						- Shared styles can be abstracted into mixins, and you’ll still have the ability to override or augment those styles with additional rules
 				</section>
 				<section>
-						## Mixins
+						## 2. Mixins
 
 						```
 						@mixin title-style {
@@ -223,7 +227,7 @@
 						```
 				</section>
 				<section>
-						## Mixins: arguments
+						## 2. Mixins (with arguments)
 
 						- Sass mixins can also take arguments that we pass to the mixin when we call it
 						- You can pass multiple arguments by separating the values with commas in the mixin definition
@@ -243,7 +247,7 @@
 						```
 				</section>
 				<section>
-						## Mixins: arguments and their defaults
+						## 2. Mixins (with arguments and their defaults)
 
 						When you use mixin arguments, it’s often convenient to define defaults. That way, you simply call the mixin with no arguments, if that’s the norm, but can still pass in overrides.
 
@@ -262,7 +266,7 @@
 						```
 				</section>
 				<section>
-						## Mixins: arguments and their defaults
+						## 2. Mixins (with arguments and their defaults)
 
 						Additionally, when you have multiple, default arguments defined for a mixin, you can override those selectively without having to redefine them all.
 
@@ -280,10 +284,10 @@
 						```
 				</section>
 				<section>
-						## Mixins + @import: creating a mixin library
+						## 3. @import
 
-						- Tip: create a single place for your mixins once and reuse them for any project
-						- Enter the @import rule, which Sass extends to allow the importing of multiple SCSS files, merging them into a single CSS file
+						- The @import rule: import other stylesheets, and create a mixins library while you are at it ;-)
+						- Sass merges them into a single CSS file
 						- Handy: a single CSS means fewer HTTP connections. Performance!
 
 						```
@@ -296,7 +300,7 @@
 						```
 				</section>
 				<section>
-						## @extend
+						## 4. @extend
 
 						- Ever find yourself writing a CSS class that has the same styles as another class, except for just a few other rules?
 						- Using @extend also allows us to be terser in our semantics, defining class names based on meaning rather than appearance
@@ -313,7 +317,7 @@
 						```
 				</section>
 				<section>
-						## Multiple @extend-s
+						## 4. Multiple @extend-s
 
 						```
 						.alert {
@@ -333,7 +337,7 @@
 						```
 				</section>
 				<section>
-						## Placeholder selectors + @extend
+						## 5. Placeholder selectors (+ @extend)
 
 						- What if the class you’re extending exists solely for the purpose of extending other styles? In other words, you might create a class that’s not used on its own
 						- Enter placeholder selectors, which allow you to define “phantom” classes that won’t appear in the outputted CSS on their own. You can reference placeholders using @extend
@@ -350,13 +354,7 @@
 						```
 				</section>
 				<section>
-						## @extend vs @mixin
-
-						- Where a mixin will write the same rules in each declaration it’s called from, @extend will create multiple, comma-separated selectors for shared styles
-						- It’s good to keep that difference in mind when you’re debating which to use
-				</section>
-				<section>
-						## Nesting rules
+						## 6. Nesting rules
 
 						- With Sass, you can nest CSS rules inside each other instead of repeating selectors in separate declarations
 						- The nesting also reflects the markup structure
@@ -375,7 +373,7 @@
 						```
 				</section>
 				<section>
-						## Nesting namespaced properties
+						## 6. Nesting namespaced properties
 
 						In addition to nesting rules, you can nest properties that share a namespace in Sass (e.g., font-family, font-size, font-weight, etc.) like so:
 
@@ -396,7 +394,7 @@
 						```
 				</section>
 				<section>
-						## Referencing parent selectors with &
+						## 7. Referencing parent selectors with &
 
 						- Sass adds the ability to reference the current parent selector using the ampersand as a special placeholder
 						- The ampersand inserts the parent selector, in this case a
@@ -416,7 +414,7 @@
 						```
 				</section>
 				<section>
-							## Referencing parent selectors with &
+							## 7. Referencing parent selectors with &
 
 							The ampersand is also useful in inserting overrides that happen in the presence of a specific class
 
@@ -431,7 +429,7 @@
 							```
 				</section>
 				<section>
-							## Commenting in Sass
+							## 8. Commenting in Sass
 
 							You can ensure important comments (copyright info, attribution, notes on hacks, etc.) appear in the compressed style output by inserting an ! as the first character of the comment:
 
