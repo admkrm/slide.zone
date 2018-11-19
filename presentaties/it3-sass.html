@@ -1,0 +1,454 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT3: SASS</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Information technology 3
+							## SASS
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## What is SASS?
+				</section>
+				<section>
+							## What is SASS?
+							- Sass is short for Syntactically Awesome Stylesheets
+							- Sass a CSS preprocessor. A layer between your stylesheets and the .css files you serve to the browser
+							- Sass is what we call a meta-language
+							- Allows you to write DRY code that’ll be faster, more efficient, and easier to maintain
+							- http://sass-lang.com/
+				</section>
+				<section>
+							## Why SASS?
+
+							- Enabling “super functionality” in addition to your normal CSS. It then translates (or compiles) that syntax into regular CSS files via a command-line program or web-framework plugin
+							- To be honest: I was for a long time a reluctant believer in Sass. I write stylesheets by hand! There’s a certain amount of craft that goes into the document
+							- But the reality is that Sass (and other CSS preprocessors) can be a powerful ally—a tool that any style-crafter can easily insert into their daily work
+							- As CSS can be fragile at times, it’s understandable for its authors to be somewhat protective about their creation
+				</section>
+				<section>
+							## Why SASS?
+
+							- Since the SCSS syntax is a superset of CSS3, you don’t have to change anything about the way you write CSS. Commenting, indenting, or not indenting, all your formatting preferences can remain the same when working in .scss files
+							- Inefficient, bloated stylesheets can be just as inefficient and bloated when using Sass. when used properly and intelligently though, Sass can be such a massive assist in creating websites
+				</section>
+				<section>
+							## Is it different than CSS?
+
+							- Getting started with Sass syntax is painless, and you can use as little or as much as you’d like :-) So, I’m here to show you how Sass doesn’t have to disrupt your process and workflow, and how it can make your life easier
+							- The only thing is that your browser can't read Sass
+							- The reality: .scss => SASS => .css
+							- So we will need a tool that transforms our sass files to regular css
+							- In this class we will use prepros. You can also use Codepen, which allows you to write SASS.
+							Later, when you’ve become fluent with Sass (and it won’t take long), it really does feel like a natural extension of CSS
+				</section>
+				<section>
+							## Prepros
+							![Prepros](../img/prepros.jpg)
+							##### http://prepros.io
+			  </section>
+				<section>
+							## We will use the SCSS-syntax
+
+							- There are 2 flavors but don't worry. This is the most used. Sass original... original indented syntax
+							- But for me, I prefer SCSS, with its closer alignment to normal CSS, for the reasons stated earlier
+							- You also need to know that there are other CSS-preprocessors: less, stylus, postcss, compass... => same paradigm
+
+							```
+							$pink: #ea4c89
+
+							p
+								font-size: 12px
+								color: $pink
+
+							p strong
+								text-transform: uppercase
+							```
+				</section>
+				<section>
+							## The DRY principle
+
+							- Every piece of knowledge must have a single, unambiguous, authoritative representation within a system
+							- The idea is that duplicating code can cause failure and confusion for developers
+							- CSS is anything but DRY. One look through a decent-sized CSS file, and a DRY software developer will weep, first with bewilderment, then frustration
+							- SASS is a great tool to make your css dry :-)
+				</section>
+				<section>
+							## Simple SASS example (1)
+
+							```
+							$brand-color: #fc3;
+
+							a {
+								color: $brand-color; }
+							nav {
+								background-color: $brand-color; }
+							```
+
+							Will compile to:
+
+							```
+							a {
+								color: #fc3; }
+							nav {
+								background-color: #fc3; }
+							```
+				</section>
+				<section>
+							## Simple SASS example (2)
+
+							```
+							p { margin-bottom: 20px; font-size: 14px; line-height: 1.5; }
+							footer { margin-bottom: 20px; font-size: 14px; line-height: 1.5; }
+							```
+
+							Can be written in SASS like this:
+
+							```
+							@mixin default-type {
+								margin-bottom: 20px;
+								font-size: 14px;
+								line-height: 1.5;}
+
+							p { @include default-type; }
+							footer {@include default-type;}
+							```
+				</section>
+				<section>
+							## Don't edit your output!
+
+							- Important note: when you’re using Sass, you’ll no longer be editing any .css files. The .scss files are where it will happen from now on
+							- The reason being, any changes you make to the .css file will eventually get overridden as soon as you update the .scss and Sass compiles the output. So stick to the .scss :-)
+				</section>
+				<section class="chapter">
+							## Using SASS
+				</section>
+				<section>
+							## Using Sass
+
+							- I will focus here on a number of things you can do with Sass => most easy to add, productive things
+							- This will get you started and hopefully make you fall in love with Sass
+							- The capabilities of Sass are overwhelming—it is a very powerful tool to help bring sanity to creating complex stylesheets
+				</section>
+				<section>
+						## Variables
+
+						- THE reason to start using SASS
+						- We repeat ourselves so often in a stylesheet. Colors, fonts, background images, widths, etc.—there are patterns that require an epic battle with find-and-replace should any of those patterns be changed. Variables make all of that much simpler and easier to maintain.
+
+						```
+						$color-main: #333;
+						$font-sans: Helvetica;
+						body {
+								padding: 0 8%;
+								font-family: $font-sans;
+								font-size: 100%;
+								color: $color-main;
+								background: #fff url(../img/bg.jpg) repeat-x -80% 0;
+						}
+						```
+				</section>
+				<section>
+						## Variables: using them for style guides
+
+						At the top of your stylesheet:
+
+						```
+						$color-main: #333; // black
+						$color-light: #999; // grey
+						$color-accent: #ea4c89; // pink
+						```
+
+						Next, using the darken or lighten color function in Sass, we can generate different shades of color that will always be based on the brand palette
+				</section>
+				<section>
+						## Variables: using them for style guides
+
+						Let’s darken the pink (#ea4c89) by 30%:
+
+						```
+							section.secondary {
+								background: darken($color-accent, 30%);
+							}
+						```
+
+						We can also lighten colors:
+
+						```
+							section.secondary {
+								background: lighten($color-accent, 30%);
+							}
+						```
+
+						Lots of functionality! http://sass-lang.com/
+				</section>
+				<section>
+						## Mixins
+
+						- Mixins allow you to define and reuse blocks of styles. Rather than typing the same rules over and over again in various declarations, you can use mixins to define a group of styles just once and refer to it anytime those styles are needed
+						- Shared styles can be abstracted into mixins, and you’ll still have the ability to override or augment those styles with additional rules. Powerful stuff!
+				</section>
+				<section>
+						## Mixins
+
+						```
+						@mixin title-style {
+								margin: 0 0 20px 0;
+								font-family: $font-serif;
+								font-size: 20px;
+								font-weight: bold;
+								text-transform: uppercase;
+						}
+						section.main h2 {
+								@include title-style;
+						}
+						section.secondary h3 {
+								@include title-style;
+								color: #999;
+						}
+						```
+				</section>
+				<section>
+						## Mixins: arguments
+
+						- Sass mixins can also take arguments that we pass to the mixin when we call it
+						- You can pass multiple arguments by separating the values with commas in the mixin definition
+
+						```
+						@mixin title-style($color) {
+								margin: 0 0 20px 0;
+								font-family: $font-serif;
+								font-size: 20px;
+								font-weight: bold;
+								color: $color;
+						}
+
+						section.main h2 {
+								@include title-style(#c63);
+						}
+						```
+				</section>
+				<section>
+						## Mixins: arguments and their defaults
+
+						When you use mixin arguments, it’s often convenient to define defaults. That way, you simply call the mixin with no arguments, if that’s the norm, but can still pass in overrides.
+
+						```
+						@mixin title-style($color, $background: #eee) {
+								margin: 0 0 20px 0;
+								font-family: $font-serif;
+								font-size: 20px;
+								color: $color;
+								background: $background;}
+
+						section.main h2 {
+								@include title-style(#c63);}
+						section.secondary h3 {
+								@include title-style(#39c, #333);}
+						```
+				</section>
+				<section>
+						## Mixins: arguments and their defaults
+
+						Additionally, when you have multiple, default arguments defined for a mixin, you can override those selectively without having to redefine them all.
+
+						```
+						@mixin title-style($color: blue, $background: green) {
+									font-family: $font-serif;
+									font-size: 20px;
+									color: $color;
+									background: $background;
+						}
+
+						section.main h2 {
+									@include title-style($background: pink);
+						}
+						```
+				</section>
+				<section>
+						## Mixins + @import: creating a mixin library
+
+						- Tip: create a single place for your mixins once and reuse them for any project
+						- Enter the @import rule, which Sass extends to allow the importing of multiple SCSS files, merging them into a single CSS file
+						- Handy: a single CSS means fewer HTTP connections. Performance!
+
+						```
+						// Import other files
+						@import "reset.scss";
+						@import "variables.scss";
+						@import "mixins.scss";
+						// Site-specific styles
+						body {...}
+						```
+				</section>
+				<section>
+						## @extend
+
+						- Ever find yourself writing a CSS class that has the same styles as another class, except for just a few other rules?
+						- Using @extend also allows us to be terser in our semantics, defining class names based on meaning rather than appearance
+
+						```
+						<h2 class="alert-positive">This is a positive alert!</h2>
+						```
+
+						```
+							.alert-positive {
+									@extend .alert;
+									background: #9c3;
+							}
+						```
+				</section>
+				<section>
+						## Multiple @extend-s
+
+						```
+						.alert {
+								padding: 15px;
+								font-size: 1.2em;
+								text-align: center;
+								background: $color-accent;
+						}
+						.important {
+								font-size: 4em;
+						}
+						.alert-positive {
+								@extend .alert;
+								@extend .important;
+								background: #9c3;
+						}
+						```
+				</section>
+				<section>
+						## Placeholder selectors + @extend
+
+						- What if the class you’re extending exists solely for the purpose of extending other styles? In other words, you might create a class that’s not used on its own
+						- Enter placeholder selectors, which allow you to define “phantom” classes that won’t appear in the outputted CSS on their own. You can reference placeholders using @extend
+
+						```
+						%button {
+								padding: 10px;
+								font-weight: bold;
+								background: blue;
+								border-radius: 6px;
+						}
+						.buy {
+								@extend %button; }
+						```
+				</section>
+				<section>
+						## @extend vs @mixin
+
+						- Where a mixin will write the same rules in each declaration it’s called from, @extend will create multiple, comma-separated selectors for shared styles
+						- It’s good to keep that difference in mind when you’re debating which to use
+				</section>
+				<section>
+						## Nesting rules
+
+						- With Sass, you can nest CSS rules inside each other instead of repeating selectors in separate declarations
+						- The nesting also reflects the markup structure
+						- Nesting in Sass means less typing, using indentation to reflect the selector (and property) formation
+
+						```
+						ol {
+								margin: 0;
+
+								li {
+							    color: red;
+							    border: 1px solid black;
+							    margin-bottom: 5px;
+							    }
+						}
+						```
+				</section>
+				<section>
+						## Nesting namespaced properties
+
+						In addition to nesting rules, you can nest properties that share a namespace in Sass (e.g., font-family, font-size, font-weight, etc.) like so:
+
+						```
+						header h1 {
+							padding: 15px 0;
+							font: {
+								size: 54px;
+								family: Jubilat, Georgia, serif;
+								weight: bold;
+							}
+							text: {
+								transform: uppercase;
+								decoration: underline;
+								align: center;
+							}
+							line-height: 1;}
+						```
+				</section>
+				<section>
+						## Referencing parent selectors with &
+
+						- Sass adds the ability to reference the current parent selector using the ampersand as a special placeholder
+						- The ampersand inserts the parent selector, in this case a
+
+
+						```
+						a {
+								font-weight: bold;
+								text-decoration: none;
+								color: red;
+								border-bottom: 2px solid red;
+
+								&:hover {
+									color: maroon; border-color: maroon;
+								}
+						}
+						```
+				</section>
+				<section>
+							## Referencing parent selectors with &
+
+							The ampersand is also useful in inserting overrides that happen in the presence of a specific class
+
+							```
+							section.main p {
+								margin: 0 0 20px 0; font-size: 18px; line-height: 1.5;
+
+								body.store & {
+							        font-size: 16px; line-height: 1.4;
+							    }
+							}
+							```
+				</section>
+				<section>
+							## Commenting in Sass
+
+							You can ensure important comments (copyright info, attribution, notes on hacks, etc.) appear in the compressed style output by inserting an ! as the first character of the comment:
+
+							```
+							/*! This is a multi-line comment that will appear in the final .css file */
+							```
+
+							Single-line comments use the // prefix at the beginning of each line and aren’t included in the final output, so you can safely use them for private comments:
+
+							```
+							// This comment will not make it to the final CSS file
+							```
+				</section>
+				<section>
+							## IT3: SASS
+							### Questions?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
