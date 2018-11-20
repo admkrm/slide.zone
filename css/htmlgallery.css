@@ -49,10 +49,18 @@ section a {
 
 h2 {
       font-size: 3.57vw;
-      line-height: 4vw;
+      line-height: 4.8vw;
       margin-bottom: 2.8572vw;
       font-family: 'Karla', sans-serif;
       font-weight: 700;}
+
+strong {
+			text-decoration: underline;
+}
+
+em {
+			font-style: italic;
+}
 
 /*  -------------------  */
 /*  |   FRONT/BACK    |  */

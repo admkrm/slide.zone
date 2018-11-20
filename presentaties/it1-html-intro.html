@@ -22,40 +22,44 @@
 							### Elementen voor opmaak en structuur
 							#### Kristof Michiels
 				</section>
+				<section class="test">
+							## Eén afspraak: niet praten tijdens de les!
+				</section>
 				<section>
 							## In deze presentatie
-							- Structuur en betekenis van een document
+							- Structuur en betekenis van een HTML-document
 							- Welke elementen voorziet HTML voor ons?
 							- Hoe maak je een keuze uit deze elementen?
-							- Aanloop naar onze eerste oefeningen
+							- De aanloop naar onze eerste oefeningen
 				</section>
 				<section class="chapter">
-							## Goed geschreven HTML geeft structuur en betekenis aan je documenten
+							## Goed geschreven HTML zorgt voor **structuur** en **betekenis** in je documenten
 				</section>
 				<section>
-							## Enkele termen
-							- De content: de informatie in je documenten (teksten, afbeeldingen, links)
-							- De Structuur: de outline van je document
-							- De semantiek: de betekenis van iets. HTML-element zorgen voor semantiek/betekenis in een document
-							- De HTML5 standaard: de versie van HTML5 die we vandaag gebruiken. Deze standaard wordt opgesteld door het W3C (www.w3. org/TR/html5/). De laatste voorstelde versie is HTML 5.2 (www.w3. org/TR/html52/).
+							## Enkele termen verklaard
+							- **Content**: alle vormen van informatie in je documenten (teksten, afbeeldingen, links,...)
+							- **Structuur**: de manier waarop iets in elkaar zit, waarop elementen van een verzameling samenhangen
+							- **Semantiek** of **betekenis**: HTML-element zorgen voor semantiek/betekenis in een document
+							- **Opmaken**: structuur en betekenis geven met behulp van HTML
 				</section>
 				<section>
-							## Eerst dit
-							- Alle informatie binnen een document moet in een html-element verpakt zitten. Wordt naakte of anonieme tekst genoemd en zorgt ervoor dat het document als niet-correct wordt beschouwd
-							- Heel belangrijk je elementen juist te kiezen => semantisch juist, op een manier die zo goed mogelijk aansluit bij de betekenis.
-							- Hoe het er uit zal zien is hierbij niet van belang => je verandert dit met een stylesheet.
-							- Semantisch correcte markup => verzekert ons dat het er goed uitziet op alle schermen, dat Google het juist kan inschatten, schermlezers ,...
+							## Correct HTML schrijven
+							- Elk stukje informatie moet in een html-element verpakt worden
+							- Anders spreken we over "naakte" of "anonieme" tekst. Je document is dan niet-correct opgemaakt
+							- Je dient je html-element **juist** te kiezen, volgens de betekenis van de ingesloten informatie
+							- Goed voor je lezers maar ook voor zoekmachines of <a href="https://nl.wikipedia.org/wiki/Schermlezer">schermlezers</a>
+							- Hoe het er uit zal zien is hierbij niet van belang. De vormgeving is het domein van CSS
 				</section>
 				<section class="chapter">
 							## Drie content-elementen: paragrafen, hoofdingen en lijsten
 				</section>
 				<section>
-							## Paragrafen: &lt;p&gt;
+							## Paragrafen: &lt;p&gt;...&lt;/p&gt;
 
-							- Paragrafen zijn zowat de belangrijkste bouwstenen van een tekstdocument
-							- Het element begint met de &lt;p&gt;-tag en eindigt met de &lt;/p&gt;-tag
-							- Paragrafen kunnen behalve tekst ook andere (inline) elementen bevatten (bvb. afbeeldingen)
-							- Hoofdingen, lijsten of andere block-level elementen mogen evenwel niet
+							- Het paragraaf-element is zowat de belangrijkste bouwsteen van tekstdocument
+							- Het begint met de &lt;p&gt;-tag en eindigt met de &lt;/p&gt;-tag
+							- Het kan behalve tekst ook andere html-elementen bevatten (bvb. afbeeldingen)
+							- Hoofdingen, lijsten (we zien later dat dit block-elementen zijn) kunnen evenwel niet
 
 							```
 							<p>
@@ -69,9 +73,10 @@
 				<section>
 							## Hoofdingen: &lt;h1&gt;, &lt;h2&gt;, ... , &lt;h6&gt;
 
-							- Met hoofdingen geef je titels en subtitels weer. Belangrijke elementen om structuur aan te brengen
-							- Het element begint met de &lt;h1&gt;-tag (bij een h1-element) en eindigt met de &lt;/h1&gt;-tag
-							- HTML geeft ons 6 niveau's: &lt;h1&gt; voor de belangrijkste hoofding. Van daaruit werk je verder met &lt;h2&gt;, &lt;h3&gt;... om tot een heldere documentstructuur en outline komen
+							- Met hoofdingen geef je titels en subtitels weer
+							- bvb. het h1-element begint met de &lt;h1&gt;-tag en eindigt met de &lt;/h1&gt;-tag
+							- HTML geeft ons 6 niveau's voor hoofdingen
+							- &lt;h1&gt; voor de belangrijkste hoofding. Van daaruit werk je verder met &lt;h2&gt;, &lt;h3&gt;...
 
 							```
 							<h1>Je belangrijkste titel</h1>
@@ -83,12 +88,12 @@
 							```
 				</section>
 				<section>
-							## Regels rond hoofdingen
+							## Hoofdingen: &lt;h1&gt;, &lt;h2&gt;, ... , &lt;h6&gt;
 
-							- Op elke pagina mag slechts één &lt;h1&gt;-element voorkomen
-							- De overige hoofdingen: zo vaak je wenst. Je hoeft ze dus niet alle zes te gebruiken
+							- **Regel**:  op elke pagina mag slechts één &lt;h1&gt;-element
+							- De overige h-elementen: zo vaak als nodig
+							- Je hoeft ze niet alle zes te gebruiken. Ook niet van &lt;h1&gt; tot &lt;h6&gt; voor elke volgende titel
 							- De structuur die je aanbrengt is zoals bij een boek: één titel (&lt;h1&gt;), hoofdstukken (allen &lt;h2&gt;), onderdelen van hoofdstukken (allen &lt;h3&gt;) enz...
-							- Dus niet van &lt;h1&gt; tot &lt;h6&gt; voor elke volgende hoofding. Denk in niveau's
 
 							```
 							<h1>Mijn blog</h1>
@@ -99,24 +104,22 @@
 							```
 				</section>
 				<section>
-							## Oplijstingen: &lt;ul&gt; en &lt;ol&gt;
+							## Lijsten: &lt;ul&gt; en &lt;ol&gt;
 
-							- Wordt heel vaak gebruikt (links, afbeeldingen,opsommingen...)
-							- Voor alles wat meer dan één keer voorkomt kan je een lijst gebruiken
+							- Worden heel vaak gebruikt, veel méér dan voor "lijstjes"
+							- Links, afbeeldingen, tekstuele opsommingen: alles wat meer dan één keer voorkomt kan je in lijst vatten
 							- HTML geeft ons verschillende manieren om lijsten te maken: we zien er vandaag twee
 				</section>
 				<section>
-							## Niet-geordende lijsten: &lt;ul&gt;
+							## Niet-geordende lijsten: &lt;ul&gt;...&lt;/ul&gt;
 
 							- Voor een opsomming zonder volgorde gebruiken we het ul-element
 							- Het element begint met de &lt;ul&gt;-tag en eindigt met de &lt;/ul&gt;-tag
-							- Elke lijst bestaat uit meerdere lijstelementen. Hiervoor gebruiken we li-elementen (li staat voor list items)
-							- De browser plaatst standaard een bolletje voor elk list item, maar dit kan worden aangepast
+							- Een lijst is binnenin opgebouwd uit lijstelementen. Deze worden geplaatst binnen li-tags (zie voorbeeld)
+							- De browser plaatst standaard een _bullet_ voor elk list item (aanpasbaar met CSS)
 
 							```
 							<ul>
-								<li>Helvetica</li>
-								<li>Garamond</li>
 								<li>Times New Roman</li>
 								<li>Courier</li>
 								<li>Comic Sans</li>
@@ -124,10 +127,11 @@
 							```
 				</section>
 				<section>
-							## Niet-geordende lijsten: &lt;ul&gt;
+							## Niet-geordende lijsten: &lt;ul&gt;...&lt;/ul&gt;
 
-							- List items zijn de enige elementen die direct binnen een ul mogen gebruikt worden. Binnen een li ben je vrij
-							- We noemen de li's de "kinderen" van het ul-element. Gebruik steeds insprongen voor betere leesbaarheid
+							- Binnen de lijstelementen kan je vrij andere elementen gebruiken (zie het voorbeeld)
+							- Merk op hoe we inspringen om alles leesbaar te houden. Insprongen maak je met tabs of spaties
+							- Html-elementen die in elkaar genest zitten: we spreken over _ouders_ en _kinderen_
 
 							```
 							<ul>
@@ -143,35 +147,35 @@
 							```
 				</section>
 				<section>
-							## Geordende lijsten: &lt;ol&gt;
+							## Geordende lijsten: &lt;ol&gt;...&lt;/ol&gt;
 
-							- Worden gebruikt voor lijsten waarin de volgorde wel belangrijk is
+							- Gebruik je wanneer de volgorde wél belangrijk is
+							- Het element begint met de &lt;ol&gt;-tag en eindigt met de &lt;/ol&gt;-tag
 							- Voor de rest werken ze op gelijkaardige manier als niet-geordende lijsten
-							- De browser kent standaard een nummering toe. Ook dit kan aangepast worden via CSS
+							- Ook deze lijst is binnenin opgebouwd uit lijstelementen
+							- De browser kent standaard een nummering toe (aanpasbaar met CSS)
 
 							```
 							<ol>
 								<li>Helvetica</li>
 								<li>Garamond</li>
 								<li>Times New Roman</li>
-								<li>Courier</li>
-								<li>Comic Sans</li>
 							</ol>
 							```
 				</section>
 				<section>
-							## Geordende lijsten: &lt;ol&gt;
+							## Geordende lijsten: &lt;ol&gt;...&lt;/ol&gt;
 
-							- Met start-attribuut - indien aanwezig - kan je de nummering aanpassen
-							- We zagen het reeds bij het img-element in het algemeen voorbeeld: een element kan attributen of eigenschappen hebben. Soms verplicht, soms vrijblijvend
+							- Met het start-attribuut kan je de nummering aanpassen
+							- Attributen komen vaak voor en hebben steeds dezelfde vorm: naam + "=" en daarna tussen aanhalingstekens de waarde
+							- Bij het schrijven van een attribuut gebruik je best geen spaties
+							- Hier mag je het attribuut weglaten, sommige elementen (bvb het img-element) hebben verplichte attributen
 
 							```
 							<ol start="5">
 								<li>Helvetica</li>
 								<li>Garamond</li>
 								<li>Times New Roman</li>
-								<li>Courier</li>
-								<li>Comic Sans</li>
 							</ol>
 							```
 				</section>
@@ -179,7 +183,7 @@
 							## De list-style-type eigenschap
 
 							- Hiermee lopen we even vooruit: CSS geeft je controle over de manier waarop lijsten worden voorgesteld
-							- De bullet kan worden weggelaten, een vierkant of open cirkel worden, ...
+							- De _bullet_ bij niet-geordende lijsten kan worden weggelaten, een vierkant of open cirkel worden, ...
 							- Bij geordende lijsten kan gekozen worden voor Romeinse cijfers, letters, ...
 
 							```
@@ -193,19 +197,19 @@
 							```
 				</section>
 				<section>
-							## Lijsten in elkaar vlechten
+							## Lijst-elementen in elkaar vlechten
 
 							- We kunnen lijsten in elkaar vervlechten. De browser zal automatisch inspringen en de bullets aanpassen
 							- Je ziet: html schrijven is je hoofd erbij houden. Denk aan de insprongen
 
 							```
 							<ol>
-								<li>...</li>
+								<li>Helvetica</li>
 								<li>
 									<ul>
-										<li>...</li>
-										<li>...</li>
-										<li>...</li>
+										<li>Helvetica Neue</li>
+										<li>Akzidenz Grotesk</li>
+										<li>Neue Haas Grotesk</li>
 									</ul>
 								</li>
 							</ol>
@@ -217,183 +221,194 @@
 				<section>
 							## Informatie organiseren
 
-							- Organiseren = betekenis geven en onderverdelen
-							- De elementen die we reeds zagen slaan op specifieke en kleinere stukjes informatie
+							- Elementen als &lt;h1&gt;, &lt;p&gt;, &lt;ul&gt; slaan op specifieke en kleinere stukjes informatie
 							- Er zijn ook elementen die betekenis geven aan een bepaald deel van een webpagina
-							- Zij bevatten dan ook doorgaans meerdere andere HTML-elementen. Je kan spreken van verzamelingen
-							- De elementen die we zullen zien zijn speciaal gecreëerd om betekenis te geven aan de pagina
-							- De juiste verzamel-elementen gebruiken: het is een skill die je langzaam onder de knie zal krijgen
+							- Het zijn stuk voor stuk verzamel-elementen die andere HTML-elementen gaan bevatten
+							- Hier de juiste keuzes maken is een skill die je langzaam onder de knie zal krijgen
 				</section>
 				<section>
-							## Het main-element
+							## Het main-element: &lt;main&gt;...&lt;/main&gt;
 
 							- Hiermee identificeer je het belangrijkste deel van je webpagina
-							- Het helpt schermlezers en zoekmachines om te leren waar zich de belangrijkste en unieke informatie op een pagina bevindt
-							- De informatie binnen het main-element hoort uniek te zijn en niet gedeeld te worden met andere webpagina's die samen de site vormen
-							- M.a.w. headers en footers, die we in de volgende slides zullen zien horen hier niet bij
+							- Je trekt hiermee een cirkel rond de belangrijkste en unieke informatie op de pagina
+							- M.a.w. headers en footers, die we in de volgende slides zullen zien horen hier niet bij: zij bevatten informatie die terugkomt op andere pagina's
 
 							```
-							<main>...</main>
+							<main>
+								<h1>Mat Mania or Exciting Hour</h1>
+								<h2>Introduction</h2>
+								<p>Is a 1985 Japanese <em>pro wrestling-themed</em> arcade game developed by
+								Technōs Japan and published by Taito. It is a spiritual successor to the 1983
+								arcade game Tag-Team Wrestling, also developed by Technōs Japan, but published
+								by Data East. It was also ported to the PS4 console in 2015.</p>
+							</main>
 							```
 				</section>
 				<section>
-							## Het header-element
+							## Het header-element: &lt;header&gt;...&lt;/header&gt;
 
-							- Gebruikt voor verzameling elementen bovenaan webpagina's, een sectie of artikel
-							- Er is geen lijst van wat een header moet of hoort te bevatten: jij kiest
-							- Een navigatie-element, logo, ... die je meestal vindt bovenaan elke pagina op een site is bvb een goeie kandidaat om een header-element van te maken
+							- Voor een verzameling elementen bovenaan webpagina's, een sectie of artikel (zie verder)
+							- Geen vaste ingrediënten voor wat een header hoort te bevatten: jij kiest
+							- Bevat vaak een h1-element, een logo-afbeelding, een nav-element met links (komen verder nog aan bod)
 
 							```
-							<header>...</header>
+							<header>
+								<img src="mijnlogo.jpg" alt="het Taito-logo">
+								<h1>Taito Japan</h1>
+								<nav>
+									<ul>
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Over ons</a></li>
+									</ul>
+								</nav>
+							</header>
 							```
 				</section>
 				<section>
-							## Het footer-element
+							## Het footer-element: &lt;footer&gt;...&lt;/footer&gt;
 
 							- Gebruikt voor verzameling elementen onderaan een pagina, sectie of artikel
-							- Kan bevatten: auteursinformatie, copyright-informatie, verwante documenten of pagina's, sitenavigatie ...
-							- Footer verwijst niet naar het laatste element op een pagina. Terug: jij kiest en bent vrij, zolang het zinnig is
+							- Geen vaste ingrediënten voor wat een footer hoort te bevatten: jij kiest
+							- Bevat vaak auteursinformatie, copyright-informatie, verwante documenten of pagina's, sitenavigatie ...
 
 							```
-							<footer>...</footer>
-							```
-				</section>
-				<section>
-							## Het section-element
-
-							- Thematisch groeperen van informatie
-							- Een sectie kan gebruikt worden om een pagina op te splitsen in onderdelen
-							- Of om op te delen in thematische secties binnen een enkel artikel
-
-							```
-							section.../section
+							<footer>
+								<p>Deze site werd gemaakt door Kristof Michiels te Antwerpen in 2018</p>
+								<nav>
+									<ul>
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Over ons</a></li>
+									</ul>
+								</nav>
+							</footer>
 							```
 				</section>
 				<section>
-							## Het article-element
+							## Het nav-element: &lt;nav&gt;...&lt;/nav&gt;
 
-							- Een op zich zelf staande verzameling van informatie
-							- Iets dat zou kunnen functioneren zonder hoofding, footer, ... => buiten de context van de pagina
-							- Een langer artikel kan bestaan uit meerdere sections
-							- Een pagina kan evenwel ook bestaan uit meerdere artikels
-
-							```
-							<article>...</article> Self-contained, reusable composition
-							```
-				</section>
-				<section>
-							## Section vs article: verwarrend
-							The section and article elements are easily confused, particularly because it is possible to nest one in the other and vice versa. Keep in mind that if the content is self-contained and could appear outside the current context, it is best marked up as an article.
-				</section>
-				<section>
-							## Het aside-element
-
-							- Gerelateerde Informatie, denk zijbalk (maar zijbalk heeft met styling te maken => toch goed mentaal model)
-							- Quotes, achtergrondinformatie, lijst met links, alles wat kan zijdelings geassocieerd worden met een document, maar niet strikt noodzakelijk is om de informatie te begrijpen
-							- Het aan de zijkant plaatsen van een aside gebeurt niet automatisch => dat gaan we moeten doen met CSS
+							- Gebruikt om de belangrijkste navigatie-gedeeltes te benoemen
+							- Denk aan de navigatiebalk op de sites die je bezoekt: links naar andere pagina's op de site
+							- Je gaat deze links omwille van het lijst-aspect vaak in een ul-element plaatsen
 
 							```
-							<aside>...</aside> tangentially related material
-							```
-				</section>
-				<section>
-							## Het navigation-element
-
-							- Gebruikt om de navigatie op een site te benoemen
-							- Denk aan de navigatiebalk op de sites die je bezoekt
-							- Zal meestal een reeks links bevatten waarop de bezoeker kan klikken
-							- Niet te gebruiken voor alle lijsten met links: wel voor de primaire navigatie
-
-							```
-							<nav>...</nav>
+							<nav>
+								<ul>
+									<li><a href="#">Home</a></li>
+									<li><a href="#">Over ons</a></li>
+								</ul>
+							</nav>
 							```
 				</section>
 				<section class="chapter">
-							## Inline elementen
+							## Inline elementen (en wat zijn block-elementen?)
 				</section>
 				<section>
-							## Inline elementen
+							## Block vs Inline-elementen
 
-							- block level elementen: alle elementen die we tot nu toe hebben gezien zijn block-level Elementen
-							- Betekent dat ze starten en eindigen op een nieuwe lijn
-							- Goeie manier: om aan hen te denken als dat ze elementen zijn met ellebogen. Ze duwen de elementen boven en onder hen naar een nieuwe lijn
-							- Inline elementen hebben die kracht niet!
-							- Elk element is ofwel een block of inline. Je zal dit binnenkort wel kunnen veranderen met CSS
-							- We gaan nu enkele inline elementen overlopen. Ze worden met name gebruikt om bepaalde accenten te leggen binnen een tekst en duwen wat voorafgaat en volgt niet naar een nieuwe lijn. Ze zitten ook zo goed als steeds binnen een ander element.
-							- We komen er nog op terug want er zijn er vele: vandaag twee belangrijke om ermee te kunnen oefenen
+							- Alle HTML-elementen zijn ofwel van het type **block** of **inline**
+							- Alle elementen die we tot hiertoe hebben gezien zijn van het type block
+							- Dit betekent dat ze beginnen na en eindigen voor een eigen witte regel
+							- Truukje: het zijn de elementen zijn met ellebogen. Ze gebruiken ze om de omliggende elementen naar een nieuwe lijn te duwen
 				</section>
 				<section>
-							## Tekst benadrukken met em
+							## Block vs Inline-elementen
+							- Inline elementen hebben die kracht niet!
+							- Ze zitten ook zo goed als steeds binnen een ander element
+							- Ze worden met name gebruikt om bepaalde accenten te leggen binnen een tekst
+							- We gaan nu enkele inline elementen overlopen
+				</section>
+				<section>
+							## Tekst benadrukken met em: &lt;em&gt;...&lt;/em&gt;
 
 							- em staat voor emphasized
-							- We benadrukken hiermee een onderdeel van de tekst
-							- ! hoe de betekenis van een zin dient geïnterpreteerd te worden, tone of voice
-							- Dat de browser dit schuin afdrukt is van kleiner belang en kan worden aangepast met css
-							- Belangrijk hier is dat jij zegt: dit onderdeel van de tekst hoort benadrukt te worden
+							- We benadrukken hiermee één of meerdere woorden in de tekst
+							- We willen hiermee hun _belang in de zin_ onderstrepen
+							- De browser drukt dit standaard schuin gedrukt af, maar we zullen leren aan te passen vanuit CSS
 
 							```
-							<em>...</em> Stressed emphasis
+							<em>Benadrukte tekst</em>
+
+							<p>Grotere context met <em>Benadrukte tekst</em></p>
+							```
+
+				</section>
+				<section>
+							## Tekst benadrukken met strong: &lt;strong&gt;...&lt;/strong&gt;
+
+							- Ook met strong benadrukken we één of meerdere woorden in de tekst
+							- Verschil met em is subtiel. De woorden in strong springen als het ware uit de tekst, je kent aan hen een speciaal belang toe in de grotere context van de pagina
+							- De browser drukt dit standaard vet gedrukt af, maar we zullen leren aan te passen vanuit CSS
+
+							```
+							<strong>Benadrukte tekst</strong>
+
+							<p>Grotere context met <strong>Benadrukte tekst</strong></p>
 							```
 				</section>
 				<section>
-							## Tekst belangrijk maken met strong
+							## Het img-element: &lt;img&gt;
 
-							- Strong staat voor sterk benadrukken
-							- We gaan hiermee een onderdeel van de tekst sterk benadrukken
-							- ! woord of reeks woorden is belangrijk, benadrukt de belangrijke delen
-							- Dat de browser dit vet afdrukt is van kleiner belang en kan worden aangepast met css
-							- Belangrijk hier is dat jij zegt: dit onderdeel van de tekst hoort sterk benadrukt te worden
+							- Hiermee plaats je afbeeldingen
+							- Is een element zonder afsluittag
+							- 2 verplichte attributen: src en alt
+							- Met source geef je aan welke afbeelding je wil tonen (aanwezig in de folder waar ook je html-bestand staat)
+							- Bij alt geef je een woordelijke beschrijving van de foto
 
 							```
-							<strong>...</strong>
+							<img src="tijger.jpg" alt="Afbeelding van een tijger uit de zoo van Antwerpen">
 							```
+
 				</section>
+
 				<section class="chapter">
 							## Generieke elementen
 				</section>
 				<section>
-							## Generieke HTML-elementen
-
-							```
-							<div>...</div> <!-- Block-element voor algemeen gebruik -->
-							<span>...</span> <!-- Inline element voor algemeen gebruik -->
-							```
+							## Generieke HTML-elementen: &lt;div&gt; en &lt;span&gt;
 
 							- Generiek = merkloos (bvb bij generische medicijnen)
-							- We zagen eerder elementen als : main, header, footer, article, sections, nav, aside,...
+							- We zagen eerder elementen als : main, header, footer, nav
 							- Dit zijn verzamelelementen, met een extra betekenis: bvb "hoofding" voor header
 							- Wat nu als geen enkel van deze genoemde elementen past bij een verzameling die je wil maken?
 							- Dan gebruik je div en span :-)
 				</section>
 				<section>
-							## div
+							## Het div-element: &lt;div&gt;...&lt;/div&gt;
+							- Div staat voor _division_
+							- Het is een block-element
+							- Te gebruiken als een verzamel-element als er geen beter passend element bestaat
 
 							```
-							< div id =" news" > < h1 > New This Week </ h1 > < p > We've been working on... </ p > < p > And last but not least,... </ p > </ div >
+							<div>
+								<img src="mijnlogo.jpg" alt="het Taito-logo">
+								<h1>Taito Japan</h1>
+								<nav>
+									<ul>
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Over ons</a></li>
+									</ul>
+								</nav>
+							</div>
 							```
-
-							- Met een div-element maak je een logische groepering van elementen op de pagina
-							- Je geeft daarmee aan dat ze samen horen of je wil ze samennemen voor gebruik in CSS/JavaScript
-							- Tip: een div met daarin slechts één element is NOOIT nodig. Het is een zonde die ik vaak bij studenten zie
-							- Kwaal: "divitis", veel meer divs gebruiken dan nodig. Je ziet het zelfs bij professionele designers. Wees zuinig op je elementen. Heb je die allemaal wel nodig?
-							- Noot: in het voorbeeld hierboven had ik perfect een section element kunnen gebruiken. Het is waar: sinds HTML5 is de noodzaak om HTML5 te gebruiken serieus verminderd
 				</section>
 				<section>
-							## span
+							## Het span-element: &lt;span&gt;...&lt;/span&gt;
+
+							- Span staat voor span (=omspannen)
+							- Het is een inline element
+							- Je gebruikt het bvb. binnen een tekst om een extra accent te leggen met CSS/JS
 
 							```
-							< ul > < li > John: < span class =" tel" > 999.8282 </ span > </ li > < li > Paul: < span class =" tel" > 888.4889 </ span > </ li > < li > George: < span class =" tel" > 888.1628 </ span > </ li > < li > Ringo: < span class =" tel" > 999.3220 </ span > </ li > </ ul >
+							<p>Mijn broer heeft <span>blauwe</span> ogen.</p>
 							```
-
-							- spans hebben dezelfde voordelen als divs
-							- Wordt gebruikt binnen andere elementen
-							- Het is een inline-element en kan enkel andere inline elementen bevatten
-							- Gebruik hangt vast aan verder gebruik door CSS/JavaScript
+				</section>
+				<section class="chapter">
+							## id en class
 				</section>
 				<section>
 							## Identificatie en classificatie met id en class
 
-							- We zagen eerder wat attributen zijn
+							- We kwamen eerder een attribuut tegen (weet je nog dewelke?)
 							- id en class zijn twee attributen waarmee je je elementen van een naam voorziet
 							- Die naam kan dan gebruikt worden vanuit CSS/JavaScript om iets met dat/die element(en) te doen
 							- Wordt vaak geassocieerd met div en span, maar je kan een id of class toevoegen aan alle html-elementen
@@ -402,52 +417,46 @@
 				<section>
 							## Identificatie met id
 
-							```
-								<div id="hoofding">
-										<h2>...</h2>
-										<p>...</p>
-								</div>
-							```
-
 							- Gebruik id om te identificeren
-							- E en id moet uniek zijn. Dus de waarde "hoofding" mag per pagina slechts één keer gebruikt worden
+							- Een id is uniek: de waarde "hoofding" mag op deze pagina slechts één keer gebruikt worden
 							- Een id moet bestaan uit minstens 1 karakter. Gebruik als eerste karakter steed een letter
 							- Mag "a", "x", ... zijn. Mijn advies: probeer een betekenisvolle naam te geven
-							- Gebruik je hoofdletters, bvb "Hoofding" dan moet je straks vanuit CSS/JavaScript correct verwijzen!
+
+							```
+							<div id="hoofding">
+								<h2>Mijn hoofding</h2>
+								<p>Mijn paragraaf</p>
+							</div>
+							```
+
 				</section>
 				<section>
 							## Classificatie met class
-
-							```
-								<p class="beschrijving">...</p>
-								<p class="beschrijving">...</p>
-							```
 
 							- Gebruik class om te classificeren
 							- De class-naam mag gedeeld zijn door meerdere elementen
 							- Door een klassenaam te gebruiken kunnen je CSS-stijlen toepassen op alle elementen die dezelfde klassenaam delen
 							- Elementen kunnen zowel een klassenaam en een id-naam hebben
+
+							```
+							<p class="beschrijving">Mijn paragraaf</p>
+							<p class="beschrijving">Mijn paragraaf</p>
+							```
 				</section>
 				<section>
-							## Geen exacte wetenschap
+							## HTML schrijven
 
-							- Betekenis aan structuur geven aan een document: het is geen exacte wetenschap
+							- Geen exacte wetenschap
 							- HTML5 geeft je een set van elementen
-							- Het is aan jou om ze in de eerste plaats correct te leren schrijven
-							- En opletten: het is bedrieglijk gemakkelijk, maar ik zie heel vaak fouten!
-							- Eens je correct kunt schrijven: creatief en juist toepassen
-							- Een semantisch correct opgemaakt document is op zich als heel mooi! Voor een designer genieten geblazen ;-)
-
-							```
-							< article > < header > < h1 > More about WOFF </ h1 > < p > by Jennifer Robbins, < time datetime =" 2017-11-11" > November 11, 2017 </ time > </ p > </ header > <!-- article content here --> </ article >
-							```
+							- Er zijn vaak meerdere manieren om een document te beschrijven
+							- Een semantisch correct opgemaakt document kan op zich heel mooi zijn ;-)
 				</section>
 				<section>
-							## In de oefeningen
-
-							- Algemeen: comfortabel worden met HTML te schrijven
-							- Belangrijkste elementen eerst: hoofdingen, paragrafen, lijsten, afbeeldingen, header, main, footer
-							- Minder belangrijk voorlopig: sections, articles, class, id
+							## In de oefeningensessies deze week:
+							- Onze tools leren gebruiken
+							- De algemene html leren gebruiken
+							- Leren foutenvrije html schrijven
+							- Teksten van de juiste elementen voorzien
 				</section>
 				<section>
 							## IT1: introductie tot HTML: elementen voor opmaak en structuur
