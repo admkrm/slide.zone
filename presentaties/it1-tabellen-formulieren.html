@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT1: Tables en forms</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Informatietechnologie 1
+							## HTML: Tabellen en Formulieren
+							### Links en afbeeldingen
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In deze presentatie
+							- Tabellen
+							- Formulieren
+				</section>
+				<section class="chapter">
+							## Tabellen
+				</section>
+				<section>
+							## Tabellen
+							- Wanneer/waarom tabellen gebruiken?
+							- HTML-structuur van tabellen
+							- Cellen samenvoegen
+							- Toegankelijkheid
+				</section>
+				<section>
+							## Een tabel
+							![Tabel](../img/tabel.jpg)
+							##### Geduld! Met CSS maak je ook deze tabel nog veel mooier
+				</section>
+				<section>
+							## Wanneer/waarom tabellen gebruiken?
+							- HTML tabellen zijn gecreëerd om informatie geordend in rijen en kolommen te kunnen toevoegen aan webpagina's
+							- Vbn: statistieken, schema's, produktvergelijkingen,...
+							- Tabellen kunnen van alles bevatten: getalinformatie, maar ook teksten, afbeeldingen, ... elke andere vorm van HTML!
+							- Vroeger: tabellen gebruikt om layouts te maken...
+				</section>
+				<section>
+							## Minimale tabelstructuur
+
+							De elementen waarmee we een tabel gaan vormen:
+
+							```
+							&lt;table&gt;...&lt;/table&gt; <!-- De tabel zelf (rijen en kolommen)-->
+							&lt;tr&gt;...&lt;/tr&gt; <!-- Een tabel-rij -->
+							&lt;th&gt;...&lt;/th&gt; <!-- Een tabel-hoofding -->
+							&lt;td&gt;...&lt;/td&gt; <!-- Een tabel-cel-data -->
+							```
+				</section>
+				<section>
+							## Een eenvoudige tabel
+							<p data-height="500" data-theme-id="35252" data-slug-hash="YRjBPW" data-default-tab="html,result" data-user="admkrm" data-pen-title="Een eenvoudige tabel" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Table headers: &lt;th&gt;
+							- Worden anders weergegeven dan &lt;td&gt; elementen
+							- Belangrijk omdat ze informatie bevatten over de elementen die eronder worden weergegeven
+							- Maken een tabel "toegankelijk"
+							- Niet verplicht maar gebruik ze altijd!
+				</section>
+				<section>
+							## Cellen samenvoegen/uitsmeren
+							-	Ook _cell spanning_ genoemd. Dwz dat je een cel _uitsmeert_ over meerdere rijen of kolommen
+							- Je kunt er je tabelstructuren complexer en gesofisticeerder mee maken
+							- Je opmaak wordt er iets minder gemakkelijk te lezen door
+							- Je kan een cel uitsmeren door gebruik te maken van de **colspan** en **rowspan** attributen
+				</section>
+				<section>
+							## Colspans
+							- Gebruik je in het td of th element
+							- Je smeert er cellen mee uit naar rechts
+							- colspan="2" betekent dat het element dan 2 kolommen plaats inneemt
+							- Jij moet er op toe zien dat het totaal aantal kolommen steeds klopt
+							- Je hebt in dit geval dan één kolom minder nodig voor deze rij
+				</section>
+				<section>
+							## Een eenvoudige colspan-voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="OawdoE" data-default-tab="html,result" data-user="admkrm" data-pen-title="Een eenvoudige tabel met colspan" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Rowspans
+							- Werken op dezelfde manier als colspans
+							- Maar ze smeren de cel naar beneden uit over meerdere rijen
+							- rowspan="3" betekent dat het element dan 3 rijen plaats inneemt
+							- Jij moet er op toe zien dat het totaal aantal rijen steeds klopt
+							- Je hebt in dit geval dan twee rijen minder nodig voor deze kolom
+				</section>
+				<section>
+							## Een eenvoudig rowspan-voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="mQjoyK" data-default-tab="html,result" data-user="admkrm" data-pen-title="Een eenvoudige tabel met rowspan" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Vormgeven van tabellen
+							Doen we de komende weken met behulp van CSS. Eerst leren we ze goed opmaken in HTML...
+				</section>
+				<section>
+							## Tabellen en toegankelijkheid
+							- We voorzien hiervoor een tabelbeschrijving met &lt;caption&gt;
+							- _Captions_ worden meestal boven de tabel getoond (al kan dit met CSS aangepast worden: caption-side: bottom)
+							- Beschrijft de informatie in de tabel en kan ook verwijzen naar de structuur van de tabel
+							- Wanneer aanwezig: eerste element binnen de tabel
+				</section>
+				<section>
+							## Voorbeeld van een tabel met caption
+							<p data-height="500" data-theme-id="35252" data-slug-hash="bQjZYX" data-default-tab="html,result" data-user="admkrm" data-pen-title="Eenvoudige tabel met caption" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Headers met cellen verbinden: scope
+							- Om aan te geven op welke data de header-beschrijving slaat
+							- Toegankelijkheidsexperten raden aan dat elk th element een scope attribuut heeft
+							- Waarden: row, column
+							- Zie voorbeeld op slide 14 (https://codepen.io/admkrm/pen/mQjoyK)
+				</section>
+				<section>
+							## Rijen groeperen: thead, tbody en tfoot
+							<p data-height="500" data-theme-id="35252" data-slug-hash="MzBRyE" data-default-tab="html,result" data-user="admkrm" data-pen-title="Rijen groeperen: thead, tbody, tfoot" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Kolommen groeperen: colgroup, col
+							- Je kan kolommen beschrijven met class en id met een colgroup element
+							- Kolomgroepen worden beschreven aan het begin van een tabel, net onder de caption
+							- Ze bevatten geen informatie, ze beschrijven enkel hoe de kolommen geschikt zijn binnen tabel
+				</section>
+				<section>
+							## Voorbeeld met colgroup en col
+							<p data-height="500" data-theme-id="35252" data-slug-hash="KrBYvv" data-default-tab="html,result" data-user="admkrm" data-pen-title="Kolommen groeperen met colgroup en col" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section class="chapter">
+							## Formulieren
+				</section>
+				<section>
+							## Formulieren (of forms)
+							- Hoe forms werken
+							- Form elementen
+							- Toegankelijkheid
+				</section>
+				<section>
+							## Een form
+							![Form](../img/form.jpg)
+							##### Ook hier geduld! Met CSS maak je ook deze form nog veel mooier
+				</section>
+				<section>
+							## Hoe forms werken
+
+							- Er zijn twee gedeelten aan een werkende form
+							- Het eerste is wat je ziet op de pagina zelf, gemaakt in HTML
+							- Forms zijn gemaakt van buttons, input velden, drop down menus
+							- We noemen deze **form controls**
+							- Forms kunnen ook tekst en andere HTML-elementen bevatten
+							- Het tweede gedeelte zijn scripts om de form-data te verwerken: geen onderwerp van IT1
+				</section>
+				<section>
+							## Het form element: &lt;form&gt;
+
+							- Forms worden toegevoegd aan een webpagina met het form element
+							- Alle form-informatie staat binnen dit element
+							- Het geeft 2 attributen: action en method
+							- Het action attribuut verwijst naar de locatie van het script (wij: #)
+							- De method attribuut: POST of GET (standaard). Mag weggelaten worden
+							- Een form element mag geen ander form element bevatten
+
+							```
+							<form action="#" method="POST">...</form>
+							```
+				</section>
+				<section>
+							## Een eenvoudig voorbeeld van een form
+							<p data-height="500" data-theme-id="35252" data-slug-hash="zMLQxQ" data-default-tab="html,result" data-user="admkrm" data-pen-title="Eenvoudige form" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Form elementen en hun karakteristieken
+
+							- Er zijn verschillende form elementen die een designer hoort te kennen
+							- Elk hebben ze hun kenmerken en attributen. Sommigen komen bij elk element terug, anderen zijn specifiek voor een bepaald form element
+
+							```
+							<textarea name="bericht" rows="4" cols="15" placeholder="Post bericht"></textarea>
+							```
+				</section>
+				<section>
+							## Het name attribuut
+
+							- Geeft een variabelenaam aan het element die naderhand door het script kan worden gebruikt om de formdata te verwerken
+							- Wij zorgen dat het attribuut er steeds staat, maar gebruiken het voorlopig verder niet
+							- De naam die je geeft hoort steeds uniek te zijn binnen de form
+
+							```
+							<textarea name="bericht" rows="4" cols="15" placeholder="Post bericht"></textarea>
+							```
+				</section>
+				<section>
+							## Form elementen (ook controls genoemd)
+
+							- (gespecialiseerde) Elementen voor tekstinvoer
+							- Submit knoppen (buttons)
+							- Radio en checkbox knoppen
+							- Dropdown keuzemenu's
+							- Elementen om met bestanden te werken
+							- Verborgen controls
+							- Datum- en tijd elementen
+							- Cijfer controls
+							- Kleurkeuze elementen
+				</section>
+				<section>
+							## Elementen voor tekstinvoer
+							<p data-height="500" data-theme-id="35252" data-slug-hash="aQjgbB" data-default-tab="html,result" data-user="admkrm" data-pen-title="Elementen voor tekstinvoer" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Gespecialiseerde elementen voor tekstinvoer
+							<p data-height="560" data-theme-id="35252" data-slug-hash="KrBjmw" data-default-tab="html,result" data-user="admkrm" data-pen-title="Gespecialiseerde elementen voor tekstinvoer" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Submit en reset knoppen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="rQrEZm" data-default-tab="html,result" data-user="admkrm" data-pen-title="Submit en reset knoppen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Radio en checkbox knoppen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="VVBJJq" data-default-tab="html,result" data-user="admkrm" data-pen-title="Radio en checkbox knoppen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Dropdown keuzemenu's
+							<p data-height="500" data-theme-id="35252" data-slug-hash="pQZMbw" data-default-tab="html,result" data-user="admkrm" data-pen-title="Dropdown keuzemenu's" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Scrollmenu's
+							<p data-height="500" data-theme-id="35252" data-slug-hash="dQjxZB" data-default-tab="html,result" data-user="admkrm" data-pen-title="Scrollmenu's" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Menu's groeperen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="pQZMKp" data-default-tab="html,result" data-user="admkrm" data-pen-title="Menu's groeperen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Andere controls
+							<p data-height="500" data-theme-id="35252" data-slug-hash="RqBXEr" data-default-tab="html,result" data-user="admkrm" data-pen-title="Andere controls" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Toegankelijkheid met labels, fieldset en legend
+							<p data-height="500" data-theme-id="35252" data-slug-hash="GwXKpW" data-default-tab="html,result" data-user="admkrm" data-pen-title="Forms: toegankelijkheid met labels" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## IT1 - Tabellen en Formulieren
+							### Vragen?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
