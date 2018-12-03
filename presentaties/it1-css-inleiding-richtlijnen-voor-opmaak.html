@@ -1,0 +1,485 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT1: Introductie tot CSS</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Informatietechnologie 1
+							## Inleiding tot CSS
+							### Richtlijnen voor opmaak
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In deze presentatie
+							- Voordelen en kracht van CSS
+							- Hoe schrijf je CSS stijlregels?
+							- Toevoegen aan HTML documenten
+							- Basisconcepten: overerfbaarheid, specificiteit, de cascade, volgorde van regels, het box model
+							- Meeteenheden
+							- Demo's
+				</section>
+				<section class="chapter">
+							## De voordelen en kracht van CSS
+				</section>
+				<section>
+							## CSS in een notendop
+							- CSS staat voor cascading style sheets
+							- Wij gebruiken versie 3
+							- CSS is een afzonderlijke taal, met een geheel eigen syntax
+							- Voorziet precisiecontrole over tekstzetting en layout
+							- Eén enkele stylesheet kan de vormgeving van een gehele site bepalen: __eenduidig__ en __efficiënt__!
+							- Alle vormgeving bij CSS laat focussen op structuur en betekenis toe in HTML: __toegankelijkheid__!
+				</section>
+				<section>
+							## Geschiedenis van CSS
+							- HTML is een stuk ouder dan CSS
+							- Eerste versie van CSS in 1996
+							- Eigenschappen voor kleur, lettertypes, ruimte tussen pagina elementen
+							- Gebrek aan voldoende ondersteuning in de browsers: heel moeilijk bruikbaar
+							- Periode van "elke browser een eigen versie HTML/CSS"
+				</section>
+				<section>
+							## Geschiedenis van CSS
+							- CSS2 kwam er in 1998
+							- Ondersteuning voor pagina layouts
+							- Ondersteuning voor andere pagina-types: print, handhelds,...
+							- CSS 2.1 werd een officiële aanbeveling in 2011
+				</section>
+				<section>
+							## Geschiedenis van CSS
+							- CSS3 is de versie die we vandaag gebruiken
+							- Eerste documenten stammen uit 1999 / nu samen met HTML5 ca. 4/5 jaar echt in gebruik
+							- Opgedeeld in verschillende modules: animatie, multiple column layouts, borders,...
+							- Bepaalde modules gestandaardiseerd, anderen nog steeds experimenteel en in ontwikkeling
+							- Modules hebben een level-nummer: hoe lager hoe experimenteler
+							- Grid Layout module: starten op level 1
+							- Enorm veel modules nog in ontwikkeling. Je kan dit zelf volgen (zie 3 volgende slides)
+				</section>
+				<section>
+							## W3C Consortium
+							![W3C Consortium](../img/w3c1.jpg)
+							##### https://www.w3.org/
+				</section>
+				<section>
+							## W3C: CSS home page
+							![W3C: CSS home page](../img/w3c2.jpg)
+							##### https://www.w3.org/Style/CSS//
+				</section>
+				<section>
+							## W3C: CSS current work and how to participate
+							![W3C: CSS current work and how to participate](../img/w3c3.jpg)
+							##### https://www.w3.org/Style/CSS/current-work
+				</section>
+				<section>
+							## W3C: Grid Layout module
+							![W3C: Grid Layout module](../img/w3c4.jpg)
+							##### https://www.w3.org/TR/css-grid-1/
+				</section>
+				<section>
+							## De kracht van CSS
+							- CSS is een uitermate krachtig designsysteem
+							- Veel meer dan wat lettertypen en kleuren bepalen zoals je in het begin gaat doen
+							- Bewijs? CSS Zen Garden (2003-2013, David Shea)
+							- Alle designs gebruiken exact dezelfde HTML
+							- Geen enkel img-element in de html
+				</section>
+				<section>
+							## CSS Zen Garden
+							![CSS Zen Garden](../img/zengarden1.jpg)
+							##### http://www.csszengarden.com
+				</section>
+				<section>
+							## CSS Zen Garden
+							![CSS Zen Garden](../img/zengarden2.jpg)
+							##### http://www.csszengarden.com
+				</section>
+				<section>
+							## Hoe stylesheets werken?
+							- Je maakt het document op met __HTML__
+								- Focus op betekenis en structuur van het document = de structuurlaag
+								- Meesterschap hier is cruciaal voor je werk als schrijver van CSS
+							- Je schrijft een  __CSS__-stylesheet
+								- Verzameling stijlregels die beschrijven hoe een (groep van) element(en) getoond moeten worden
+							- Je voegt de stijlregels toe aan het document
+				</section>
+				<section class="chapter">
+							## Hoe schrijf je CSS stijlregels?
+				</section>
+				<section>
+							## CSS stijlregels
+
+							```
+							selector {
+								eigenschap: waarde;}
+
+							andere_selector {
+								andere_eigenschap: waarde;
+								nog_andere_eigenschap: waarde;}
+							```
+
+							- Een selector identificeert het element of de elementen die je wenst aan te passen
+							- Daarna volgen tussen accolades {} één of meerdere declaraties
+							- Een declaratie bestaat uit eigenschappen/waarde-koppels
+							- De eigenschappen en de waardes worden gescheiden door een dubbelpunt en eindigen op een puntkomma
+				</section>
+				<section>
+							## Selectors
+
+							```
+							h1 {
+								color: green;}
+
+							p {
+								font-size: 35px;
+								font-family: sans-serif;}
+							```
+
+							- h1 en p noemen we *element type selectors*
+							- Dit is het meest eenvoudige type selector
+							- De declaraties zullen toegepast worden op elke h1 en p in het document
+				</section>
+				<section>
+							## Selectors
+
+							```
+							<h2 id="recept">Titel van mijn recept</h2>
+							```
+
+							```
+							#recept {
+								color: blue;}
+							```
+
+							- Een ander type selector is de ID selector
+							- Op basis van het id attribuut van een bepaald element
+							- Binnen CSS verwijs je ernaar met een hashtag (#)
+							- Er bestaan naast element type selectors en ID selectors nog tal van andere: zij komen nog aan bod
+							- Het goed selecteren en gebruiken van selectors is een belangrijke stap in het beheersen van CSS
+				</section>
+				<section>
+							## Declaraties
+							- Declaraties bestaan uit een eigenschap/waarde paar
+							- Alle declaraties en de accolades worden samen de declaratieblok genoemd
+							- Elke declaratieblok kan bestaan uit meerdere declaraties
+							- Elke declaratie eindigt op een puntkomma om ze te scheiden van de volgende
+							- Om de leesbaarheid te vergroten geven we alle declaraties hun eigen regel en tab-insprong
+
+							```
+							p {
+								font-size: 35px;
+								font-family: sans-serif;
+								font-weight: 900;
+							}
+							```
+				</section>
+				<section>
+							## Declaraties
+							- Eigenschappen
+								- Centraal bij CSS staan de eigenschappen die aan elementen kunnen worden toegekend
+								- Het zijn er momenteel een kleine 360 :-) Wij focussen ons op de belangrijkste
+							- Waarden
+								- Mogelijke waarden variëren van eigenschap tot eigenschap
+								- Wanneer je een eigenschap gebruikt is het belangrijk te weten welke waarden mogelijk zijn
+				</section>
+				<section class="chapter">
+							## CSS toevoegen aan HTML documenten
+				</section>
+				<section>
+							## Stijlregels toevoegen aan het HTML document
+							- Dit kan gebeuren op drie manieren:
+								- Een externe stylesheet
+								-	Een ingesloten stylesheet
+								- Inline stijlen toevoegen
+							- Hint: wij gaan het met een externe stylesheet doen
+				</section>
+				<section>
+							## Een ingesloten stylesheet
+							- De CSS komt hier binnen een style-element in het head-gedeelte van de pagina
+							- Draagt niet de voorkeur weg
+							- Wordt soms gebruikt in combinatie met externe stylesheets voor kleinere aanpassingen
+
+							```
+							&lt;head&gt;
+								&lt;title&gt;Titel van het document&lt;/title&gt;
+								&lt;style&gt;
+									/* hier komt jouw CSS */
+								&lt;/style&gt;
+							&lt;/head&gt;
+							```
+				</section>
+				<section>
+							## Commentaar in CSS
+
+							```
+							/* Commentaar komt hier terecht */
+							```
+
+							```
+							/* HEADER STIJLEN */
+							```
+
+							```
+							body {
+								font-size: 2rem;
+								/* bovenstaande nog aan te passen */
+							}
+							```
+
+							```
+							/* body {
+								font-size: 2rem;
+							} */
+							```
+				</section>
+				<section>
+							## Inline stijlen toevoegen
+							- Je kan in de HTML stijlen toevoegen met het style attribuut
+							- Om meerdere stijlen toe te voegen scheidt je ze door een puntkomma
+							- Absoluut door ons te vermijden
+
+							```
+							<h1 style="color: red">Een rode hoofding</h1>
+							<h2 style="color: red;margin-top: 2em">Een rode sub-hoofding</h2>
+							```
+				</section>
+				<section>
+							## Een externe stylesheet
+							- Dit is een afzonderlijk tekstbestand dat een aantal stijlregels bevat
+							- De naam van het bestand moet eindigen op .css
+							- Het .css bestand wordt vervolgens gelinkt met één of meerdere html-documenten
+							- Op deze manier kunnen alle html-documenten van een website gelinkt worden aan één stylesheet
+							- Wij gaan deze methode - de meest krachtige! - gebruiken
+
+							```
+							&lt;head&gt;
+								<link rel="stylesheet" href="/css/master.css">
+							&lt;/head&gt;
+							```
+
+				</section>
+				<section class="chapter">
+							## CSS Basisconcepten
+				</section>
+				<section>
+							## Overerving
+							- Net zoals ouders sommige kenmerken doorgeven aan hun kinderen...
+							- HTML geven sommige stijlen door aan de elementen die ze bevatten
+							- Overerfbaarheid geeft je een mechanisme om elementen vorm te geven zonder deze zelf expliciet van stijlregels te moeten voorzien
+							- We vermeldden eerder: HTML documenten volgen een hiërarchie, met ouders en kinderen als een soort familiestamboom
+				</section>
+				<section>
+							## Overerving
+							- Bepaalde elementen worden doorgegeven, andere niet
+							- Eigenschappen rond tekst worden over het algemeen doorgegeven: lettertype, kleur, stijl, ...
+							- Randen, marges, achtergronden die de ruimte rond elementen beschrijft dan weer niet
+							- Daarom is goede kennis van de HTML documentstructuur van groot belang voor de vormgeving
+							- Je kan dan overerving voor jou laten werken
+
+							```
+							body {
+								color: blue;
+								font-family: helvetica, sans-serif;
+								margin: 25px;
+							}
+							```
+				</section>
+				<section>
+							## Cascade
+							- CSS laat toe verschillende stylesheets/stijlregels te koppelen aan zelfde document: mogelijke conflicten!
+							- Er is een hiërarchisch systeem (cascade = waterval) dat gewichten toekent aan de verschillende stijlregels die gebruikt werden
+							- Een CSS stijlregel blijft gelden tot ze mogelijk overruled wordt door een stijlregel met meer gewicht
+							- Dat gewicht is gebaseerd op prioriteit, specificiteit van de selector en de volgorde van de stijlregel
+				</section>
+				<section>
+							## Cascade: prioriteit (van hoog naar laag)
+							- Elke stijlregel die door de gebruiker gemarkeerd is als !important
+							- Elke stijlregel die door de auteur van de pagina gemarkeerd is als !important
+							- Style sheets geschreven door de auteur van de webpagina (*author style sheet*)
+							- Style sheets gecreëerd door de bezoeker van de webpagina (*reader style sheet*)
+							- Interne stylesheet van de browser (*user agent style sheet*)
+
+							```
+							p {
+								color: blue !important;}
+							```
+				</section>
+				<section>
+							## Cascade: specificiteit
+							- Conflicten kunnen ook volgen uit meervoudige stijlinstructies
+							- De aard van de selector zal dan uitmaken wie wint
+							- Onderstaand voorbeeld: ID-naam krijgt meer gewicht dan de element selector
+							- Algemene regel: hoe specifieker de selector, hoe meer gewicht
+
+							```
+							p {
+								color: orange;}
+
+							#mijnparagraaf {
+								color: green;
+							}
+							```
+				</section>
+				<section>
+							## Cascade: volgorde
+							- Bij conflicten met zelfde prioriteit en specificiteit speelt de volgorde
+							- De cascade volgt hier het "de laatste wint" principe
+							- We gaan dit principe in ons voordeel gaan gebruiken, bvb bij ondersteuning voor meerdere schermbreedtes
+
+							```
+							p {
+								color: blue;}
+
+							p {
+								color: red;}
+
+							```
+				</section>
+
+				<section>
+							## Het box model
+							- De hoeksteen van het visueel formatteren van HTML elementen
+							- De browser ziet elk element (block en inline) als binnen een kleine rechthoekige box
+							- Je kan aan elk element eigenschappen aan deze box toekennen: borders, margins, padding en backgrounds
+							- Block elementen kan je positioneren t.o.v. andere elementen, inline element boxes bevatten enkel de content en hier speelt het box model beperkter
+
+							```
+							p {
+								border: 5px solid red;
+								margin: 25px;
+								padding: 15px;
+								background-color: yellow;}
+							```
+				</section>
+				<section>
+							## Gegroepeerde selectors
+							- Je kan stijlregels toepassen op meerdere selectors tegelijk in één enkele stijlregel
+							- De selectors dienen gescheiden te worden door een komma
+							- Belangrijk om je style sheet beknopter en leesbaar te houden
+
+							```
+							h1, h2, p, em, img {
+								border: 1px solid black;}
+							```
+				</section>
+				<section class="chapter">
+							## CSS Meeteenheden
+				</section>
+				<section>
+							## CSS meeteenheden
+							- CSS biedt tal van mogelijkheden om groottes en afstanden uit te drukken
+							- Gebruik: lettergrootte, breedte en hoogte van elementen, afstanden tussen elementen, ...
+							- Sommigen ken je en spreken voor zich, andere zijn heel specifiek voor CSS
+							- Goed en efficiënt gebruik: belangrijk voor soepel werken met CSS
+							- Twee soorten: __absolute__ en __relatieve__ meeteenheden
+
+							```
+							p {
+								font-size: 14px;
+								margin-bottom: 25px;
+								line-height: 22px;
+							}
+							```
+				</section>
+				<section>
+							## Absolute eenheden
+							- Hebben een vastgelegde waarde en geven dus een precieze controle
+							- CSS biedt er een aantal: pt, cm, mm, px
+							- Meest populaire eenheid is de px of pixel. In CSS3 gedefinieerd als 1/96 inch
+							- Maar vandaag kennen we een veelheid aan schermen met uiteenlopende pixeldensiteit. Van 68.84 ppi tot wel 445ppi...
+							- Daarom minder en minder geschikt om vorm te geven voor het web
+							- Pixels kunnen wel gebruikt worden voor zaken als borders en voor afbeeldingen
+				</section>
+				<section>
+							## Relatieve eenheden
+							- Relatieve eenheden zijn gebaseerd op iets anders zoals de standaard tekstgrootte of de grootte van het moederelement
+							- CSS biedt er verschillende: rem, em, vw, vh en %
+							- Ze zijn door hun aard vandaag beter geschikt om gebruikt te worden binnen de context van de veelheid aan schermen waarvoor we vormgeven
+				</section>
+				<section>
+							## rem
+							- Nieuw bij CSS3. Staat voor root em en gebaseerd op de lettertype grootte van het root (html) element
+							- In moderne browsers is deze standaard 16 pixels
+							- Een rem staat dus gelijk aan 16 pixels (tenzij je de grootte van het root element gaat aanpassen)
+							- Je kan rem eenheden dus gaan gebruiken als een absolute meeteenheid
+							- De flexibiliteit zit hem in het veranderen van de grootte van het root element. Alles schaalt dan netjes mee en blijft proportioneel
+
+							```
+							div {
+								height: 10rem; /* zal 160px zijn */
+							}
+							```
+				</section>
+				<section>
+							## rem
+
+							Deze methode gaan wij gebruiken:
+
+							```
+							:root {
+								font-size: 62.5%;}
+
+							div {
+								height: 10rem; /* zal 10x10px dus 100pixels zijn */
+							}
+
+							h1 {
+								font-size: 1.6rem; /* zal 1,6x10px dus 16pixels zijn */
+							}
+							```
+				</section>
+				<section>
+							## em
+							- Een em is een relatieve meeteenheid die uit de traditionele typografie komt
+							- Gebaseerd op de hoofdletter M (vandaar de naam "em")
+							- CSS berekent em als de afstand tussen de lijnen waarin de font is gezet
+							- Je kan em dan ook gebruiken voor insprongen, marges, breedtes en hoogtes
+							- Belangrijk: em verwijst naar de fontgrootte van het element waarop je de em gaat toepassen
+							- rem verwijst steeds naar de grootte van het root element en is in die zin eenduidiger
+				</section>
+				<section>
+							## vw en vh
+							- Viewport width (vw) en viewport height (vh): relatief t.o.v. de viewport
+							- 1 vw is gelijk aan 1/ 100 van de breedte van de viewport
+							- 1 vh is gelijk aan 1/ 100 van de hoogte van de viewport
+							- Geschikt om tekst en afbeeldingen dynamisch af te stemmen op de beschikbare breedte
+							- Hieraan gerelateerd: vmin (= waarde van vw of vh, kleinste van de twee)
+							- Hieraan gerelateerd: vmax (= waarde van vw of vh, grootste van de twee)
+
+							```
+ 							header {
+								width: 90vw;
+								height: 90vh; }
+							```
+				</section>
+				<section>
+							## Percentages (%)
+							- Ook een vaak gebruikte meeteenheid voor webpagina elementen
+							- Zijn relatief t.o.v. het ouder element
+							- Zorgt ervoor dat het element proportioneel blijft en vloeiend
+
+							```
+ 							img {
+								width: 50%;}
+							```
+
+				</section>
+				<section>
+							## IT1 - Inleiding tot CSS - Richtlijnen voor opmaak
+							### Vragen?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
