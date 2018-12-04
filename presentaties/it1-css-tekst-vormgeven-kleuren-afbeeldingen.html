@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>IT1: CSS - Tekst vormgeven</title>
+		<title>IT1: CSS - Tekst vormgeven - kleuren - afbeeldingen</title>
 		<link rel="stylesheet" type="text/css" href="../css/reset.css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
@@ -27,7 +27,8 @@
 							- Lettertypes kiezen en vormgeven
 							- Web fonts
 							- Tekstregels
-							- Selectors: descendant, ID, class, andere contextuele selectors
+							- Kleuren/achtergronden
+							- Selectors: descendant, ID, class, andere contextuele selectors + pseudo-class selectors
 							- Specificiteit
 							- Lijsten
 				</section>
@@ -113,30 +114,6 @@
 							https://codepen.io/admkrm/pen/NEmYZv
 				</section>
 				<section>
-							## Tekstkleur wijzigen: color
-							- Doen we met de color eigenschap
-							- Waarden kunnen kleurnamen zijn, of numerieke kleurwaarden
-							- Handig: een colorpicker appje!
-							- De beste kleurtools voor vormgevers: http://bit.ly/2E0UlWc
-				</section>
-				<section>
-							## Handig: lijst met kleurnamen
-							![Neil Orangepeel](../img/neilorangepeel.jpg)
-							##### http://colors.neilorangepeel.com/
-				</section>
-				<section>
-							## Handig: Coolors kleurengenerator
-							![Coolors](../img/coolors.jpg)
-							##### https://coolors.co/
-				</section>
-				<section>
-							## Tekstkleur wijzigen: color
-							<p data-height="500" data-theme-id="35252" data-slug-hash="MzRGGx" data-default-tab="html,css" data-user="admkrm" data-pen-title="Kleur wijzigen met color" data-editable="true" class="codepen"></p>
-							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-							https://codepen.io/admkrm/pen/MzRGGx
-				</section>
-				<section>
 							## Regelhoogte: line-height
 							- Bepaalt de regelhoogte
 							- Waarden: een lengte eenheid
@@ -176,6 +153,69 @@
 
 							https://codepen.io/admkrm/pen/zMXLmJ
 				</section>
+				<section class="chapter">
+							## Kleuren/achtergronden
+				</section>
+				<section>
+							## Tekstkleur wijzigen: color
+							- Doen we met de color eigenschap
+							- Waarden kunnen kleurnamen zijn, of numerieke kleurwaarden
+							- Handig: een colorpicker appje!
+							- De beste kleurtools voor vormgevers: http://bit.ly/2E0UlWc
+				</section>
+				<section>
+							## Handig: lijst met kleurnamen
+							![Neil Orangepeel](../img/neilorangepeel.jpg)
+							##### http://colors.neilorangepeel.com/
+				</section>
+				<section>
+							## Handig: Coolors kleurengenerator
+							![Coolors](../img/coolors.jpg)
+							##### https://coolors.co/
+				</section>
+				<section>
+							## Tekstkleur wijzigen: color
+							<p data-height="500" data-theme-id="35252" data-slug-hash="MzRGGx" data-default-tab="html,css" data-user="admkrm" data-pen-title="Kleur wijzigen met color" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/MzRGGx
+				</section>
+				<section>
+							## Achtergrondkleur: background-color
+							- Wijzigt de achtegrondkleur van een element
+							- Waarden: kleur | transparent
+				</section>
+				<section>
+							## Doorschijnend maken: opacity
+							- Maakt een volledig element doorschijnend
+							- Waarden: tussen 0 en 1
+							- Nadeel: alles wordt doorschijnend. Soms beter te werken met rgba-waarde!
+				</section>
+				<section>
+							## Background-color, opacity
+							<p data-height="500" data-theme-id="35252" data-slug-hash="jQRvjd" data-default-tab="html,css" data-user="admkrm" data-pen-title="Background-color" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+							https://codepen.io/admkrm/pen/jQRvjd
+				</section>
+				<section>
+							## Achtergrondafbeeldingen
+							- Voeg je toe aan elementen met de background-image eigenschap
+							- Waarden: url(locatie van de afbeelding) | none
+							- Je kan de afbeeldingen "stapelen" met background-repeat
+							- Waarden: repeat | no-repeat | repeat-x | repeat-y | space | round
+							- Je kan de achtergrond positioneren met background-position
+							- Waarden: lengte eenheid | left | center | right | top | bottom
+							- Je kan de grootte van de afbeelding bepalen met background-size
+							- Waarden: lengte eenheid | auto | cover | contain
+				</section>
+				<section>
+							## Achtergrondafbeeldingen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="RqOeYe" data-default-tab="html,css" data-user="admkrm" data-pen-title="Achtergrondafbeeldingen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/RqOeYe
+				</section>
+
 				<section class="chapter">
 							## Nieuwe selector-kracht
 				</section>
@@ -265,6 +305,28 @@
 
 							De realiteit is iets complexer maar voor nu is bovenstaande volgorde voldoende
 				</section>
+				<section>
+							## Pseudo-Class selectors
+
+							<p data-height="500" data-theme-id="35252" data-slug-hash="NEmOjm" data-default-tab="html,css" data-user="admkrm" data-pen-title="Pseudo-class selectors" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/NEmOjm
+				</section>
+				<section>
+							## Andere pseudo-Class selectors
+
+							- :root
+							- :first-child
+							- :last-child
+							- :only-child
+							- :first-of-type
+							- :last-of-type
+							- :only-of-type
+							- :nth-child()
+							- ...
+				</section>
+
 				<section class="chapter">
 							## Lijsten vormgeven
 				</section>
