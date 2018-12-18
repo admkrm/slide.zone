@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT1: CSS - Flexbox</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Informatietechnologie 1
+							## Cascading Style Sheets
+							### Flexbox
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In deze presentatie
+							- Flexbox?
+							- Flexbox containers en items
+							- Flex-richting en flexen over meerdere lijnen/kolommen 
+							- Flex elementen uitlijnen
+							- Elementen laten groeien en krimpen met "flex"
+				</section>
+				<section class="chapter">
+							## Flexbox?
+				</section>
+				<section>
+							## Flexbox
+							- Module heet voluit CSS Flexible box layout module
+							- Zorgt voor controle over het plaatsen van elementen op één as (horizontaal of verticaal)
+							- Bijzonder geschikt voor menubalken en andere navigatie, produktlijstjes, afbeeldingsgalerijen, ...
+							- Zorgt er samen met Grid Layout (werkt op 2 assen) voor dat we fantastische layouts kunnen maken met CSS
+				</section>
+				<section>
+							## Flexbox
+							- Elementen kunnen uitrekken of krimpen binnen hun containers
+							- Zo verhinderen we teveel of te weinig ruimte: super voor responsive web design
+							- Andere mogelijkheden:
+								- Alle elementen zelfde hoogte te geven
+								- Eenvoudig horizontaal of verticaal centreren
+								- Volgorde van de elementen te veranderen (los van HTML-volgorde)
+				</section>
+				<section class="chapter">
+							## Flexbox containers en items
+				</section>
+				<section>
+							## Een flexbox container aanmaken
+							- Flexbox is - net als inline, block en grid - een layout mode
+							- Een flexbox container aanmaken doe je dus met _display:flex_
+							- Op de volgende slide staat een basisvoorbeeld:
+								- Standaard worden de divs als block elementen onder elkaar geplaatst
+								- Als we de flexbox aanzetten gaan ze automatisch horizontaal in één rij staan
+								- De elementen worden standaard in een rij van links naar rechts geplaatst
+				</section>
+				<section>
+							## Een flexbox container
+							<p data-height="500" data-theme-id="35252" data-slug-hash="KbgvLQ" data-default-tab="html,css,result" data-user="admkrm" data-pen-title="Flexbox container" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/KbgvLQ
+				</section>
+				<section class="chapter">
+							## Flex-richting en flexen over meerdere lijnen/kolommen
+				</section>
+				<section>
+							## De "flow" controleren met _flex-direction_
+							- Je kan binnen een flex-container controleren op welke manier de binnenste elementen geplaatst worden
+							- De opties die we hier hebben worden aangestuurd door de _flex-direction_ eigenschap
+							- De waarden die we kunnen gebruiken: row (standaard) | column | row-reverse | column-reverse
+							- Bij _row_ is de as horizontaal, bij _column_ is de as verticaal
+				</section>
+				<section>
+							## De "flow" controleren met _flex-direction_
+							<p data-height="500" data-theme-id="35252" data-slug-hash="YdGrJV" data-default-tab="html,css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-direction" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/YdGrJV
+				</section>
+				<section>
+							## Uitsmeren over meerdere lijnen met _flex-wrap_
+							- Met _flex-wrap_ bepaal je of de flexbox zich over meerdere lijnen mag uitstrekken
+							- De waarden die we kunnen gebruiken: nowrap (standaard) | wrap | wrap-reverse
+							- Standaard wordt alles op één lijn gezet
+				</section>
+				<section>
+							## Uitsmeren over meerdere lijnen met _flex-wrap_
+							<p data-height="500" data-theme-id="35252" data-slug-hash="LMROYy" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-wrap" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/LMROYy
+				</section>
+				<section>
+							## Uitsmeren over meerdere kolommen met _flex-wrap_
+							<p data-height="500" data-theme-id="35252" data-slug-hash="JwROKN" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-wrap binnen een column" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/JwROKN
+				</section>
+				<section>
+							## _Flex-direction_ en _flex-wrap_ verkort...
+							- Doe je met flex-flow
+							- Waarden: flex-direction flex-wrap
+
+							```
+							div.mijndiv {
+								display: flex;
+								height: 35rem;
+								flex-flow: column wrap;
+							}
+							```
+				</section>
+				<section class="chapter">
+							## Flex elementen uitlijnen
+				</section>
+				<section>
+							## Uitlijnen van elementen in de flexbox container
+							- Uitlijnen op de hoofdas doen we met _justify-content_
+							- Je past het toe op de flex-container
+							- Waarden: flex-start (standaard) | flex-end | center | space-between | space-around
+
+							```
+							div.mijndiv {
+								display: flex;
+								justify-content: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Uitlijnen van elementen in de flexbox container
+							<p data-height="500" data-theme-id="35252" data-slug-hash="ebdeXW" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-wrap binnen een column" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/ebdeXW
+				</section>
+				<section>
+							## Uitlijnen van elementen (kolom)
+							<p data-height="500" data-theme-id="35252" data-slug-hash="roMYXz" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: justify-content (column)" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/ebdeXW
+				</section>
+				<section>
+							## Uitlijnen op de kruis-as
+							- Hiermee bedoelen we in de hoogte (bij row) en links/rechts (bij column)
+							- Uitlijnen op de kruis-as doen we met _align-items_
+							- Je past het toe op de flex-container
+							- Waarden: stretch (standaard) | flex-start | flex-end | center | baseline
+
+							```
+							div.mijndiv {
+								display: flex;
+								align-items: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Uitlijnen op de kruis-as
+							<p data-height="500" data-theme-id="35252" data-slug-hash="PXGENo" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: align-items" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Individuele elementen uitlijnen
+							- Doe je op de kruis-as met _align-self_
+							- Waarden: flex-start | flex-end | center | baseline | stretch (standaard)
+
+							```
+							div {
+								align-self: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Meerdere flexlijnen uitlijnen
+							- Doe je met align-content
+							- Je bepaalt hiermee hoe je meerdere flexlijnen uitspreid over de kruis-as
+							- Waarden: flex-start | flex-end | center | space-around | space-between | stretch (standaard)
+
+							```
+							body {
+      					display: flex;
+      					flex-direction: row;
+      					height: 60vh;
+      					align-content: center;
+      					flex-wrap: wrap;
+      					border: 0.1rem solid grey;}
+							```
+
+				</section>
+				<section>
+							## Meerdere flexlijnen uitlijnen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="qLapov" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: align-content" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/qLapov
+				</section>
+				<section>
+							## Flexbox op de navigatiebalk
+							<p data-height="500" data-theme-id="35252" data-slug-hash="BvLJeW" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox op de navigatiebalk" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/BvLJeW
+				</section>
+				<section class="chapter">
+							## Elementen laten groeien en krimpen met "flex"
+				</section>
+				<section>
+							## Bepalen hoe elementen "flexen" in de container
+							- We kunnen hiermee automatisch elementen laten groeien en krimpen
+							- Doen we met de flex-eigenschap
+							- Deze eigenschap wordt op de elementen gezet, niet op de container (kan individueel)
+							- Waarden: none | 'flex-grow flex-shrink flex-basis'
+							- Standaard: 0 1 auto;
+							- 1 staat voor "zet aan", 0 voor "zet uit"
+							- De flex-basis: zet de startafmeting. Je kan dit ook gebruiken om de width te zetten
+				</section>
+				<section>
+							## "Flexen" met flex
+							<p data-height="500" data-theme-id="35252" data-slug-hash="vvXdmy" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/vvXdmy
+				</section>
+				<section>
+							## Spelen met flex en flex-grow
+							<p data-height="500" data-theme-id="35252" data-slug-hash="REGQQV" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex - spelen met flex-grow" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/REGQQV
+				</section>
+				<section>
+							## Shortcuts voor de flex eigenschap
+							- _flex:initial_ : zelfde als flex: 0 1 auto; Elementen zullen niet automatisch groeien, maar wel krimpen
+							- _flex: auto_ : zelfde als flex: 1 1 auto; Elementen zullen groeien en krimpen
+							- _flex: none_ : zelfde als flex: 0 0 auto; Niet krimpen en niet groeien
+							- _flex: getal_ : zelfde als flex: getal 1 0px; Absolute flex. Getal bepaalt hoeveel vrije ruimte het element krijgt
+				</section>
+				<section>
+							## De volgorde van flex elementen aanpassen
+							- Soms handig bij responsive web design
+							- Vooral nuttig indien je flexbox gebruikt voor layout en wij gaan dat zelden doen
+							- Je gebruikt hiervoor de eigenschap order
+							- Werkt op zelfde manier als z-index bij positioning
+							- Elk element heeft standaard 0. Je kiest getal zelf. Negatief getal kan ook
+				</section>
+				<section>
+							## De volgorde aanpassen met order
+							<p data-height="500" data-theme-id="35252" data-slug-hash="VqKQoz" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: order" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/VqKQoz
+				</section>
+				<section>
+							## IT1 - Flexbox
+							### Vragen?
+							#### kristof.michiels01@ap.be
+				</section>
+				<!-- Notities:
+				- Flexboxen kunnen genest worden =>
+ 				-->
+	</body>
+</html>
