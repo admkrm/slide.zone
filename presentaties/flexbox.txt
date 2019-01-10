@@ -1,0 +1,21 @@
+BASIC STUFF
+
+- Display: flex
+- Flex-direction: row (standaard) | column | row-reverse | column-reverse
+- Flex-wrap: nowrap (standard) | wrap | wrap-reverse (MEERDERE LIJNEN)
+
+
+ALIGNING STUFF
+
+- Justify-content: flex-start (standard) | flex-end | center | space-between | space-around
+- Align-items: stretch (standard) | flex-start | flex-end | center | baseline
+- Align-self: stretch (standard) | flex-start | flex-end | center | baseline
+- Align-content: stretch (standard) | flex-start | flex-end | center | space-around | space-between [FOR ALIGNING MULTIPLE FLEX-LINES]
+
+
+GROWING AND SHRINKING WITH FLEX
+
+flex: 1 1 auto;
+Values: none | 'flex-grow flex-shrink flex-basis'
+- Dafault: 0 1 auto;
+- 1 means "turn on", 0 voor "turn off"

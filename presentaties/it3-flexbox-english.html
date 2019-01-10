@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT3: Flexbox</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Information Technology 3
+							## Flexbox
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In this presentation
+							- Flexbox?
+							- Flexbox containers and items
+							- Flex-direction_ and flexing over multiple lines/columns
+							- Aligning flexbox elements
+							- Letting elements grow and shrink with "flex"
+				</section>
+				<section class="chapter">
+							## Flexbox?
+				</section>
+				<section>
+							## Flexbox
+							- Full name of the CSS module: CSS Flexible box layout module
+							- Gives control for layouting elements on 1 AXIS (horizontal or vertical)
+							- We may use it for menus and other navigation, lists of items, image galleries, ...
+							- Grid Layout (works in 2 dimensions) remains primary tool for page layout, supported in some cases by Flexbox
+							- Together they form a fantastic duo for building extremely solid layouts
+				</section>
+				<section>
+							## Flexbox
+							- Elements can grow or shrink within their containers
+							- Super voor responsive web design
+							- Other possibilities:
+								- Give all elements same heights
+								- centering elements horizontally or vertically
+								- Changing the order of elements without changing the HTML
+				</section>
+				<section class="chapter">
+							## Flexbox containers and items
+				</section>
+				<section>
+							## Making a flexbox container
+							- Flexbox is - like inline, block and grid - a layout mode
+							- So you create a flexbox container with _display:flex_
+							- On the next slide you'll find a basic example:
+								- If we turn on the flexbox container the 5 divs are placed horizontally in a row
+								- The 5 elements are placed automatically from left to right, taking no more than their natural width
+				</section>
+				<section>
+							## A flexbox container
+							<p data-height="500" data-theme-id="35252" data-slug-hash="KbgvLQ" data-default-tab="html,css,result" data-user="admkrm" data-pen-title="Flexbox container" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/KbgvLQ
+				</section>
+				<section class="chapter">
+							## Flex-direction and flexing over multiple lines/columns
+				</section>
+				<section>
+							## Controlling "flow" with flex-direction
+							- Flex-direction allows you to control how the elements are placed in the container
+							- Values we can use: row (standard) | column | row-reverse | column-reverse
+							- USe row and the axis is horizontal, use column and it is vertical
+				</section>
+				<section>
+							## Controlling "flow" with flex-direction
+							<p data-height="500" data-theme-id="35252" data-slug-hash="YdGrJV" data-default-tab="html,css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-direction" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/YdGrJV
+				</section>
+				<section>
+							## Flexing over multiple lines with flex-wrap
+							- With flex-wrap you can allow the flexbox container to spread over multiple lines
+							- Values: nowrap (standard) | wrap | wrap-reverse
+				</section>
+				<section>
+							## Flexing over multiple lines with flex-wrap
+							<p data-height="500" data-theme-id="35252" data-slug-hash="LMROYy" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-wrap" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/LMROYy
+				</section>
+				<section>
+							## Flexing over multiple lines with flex-wrap
+							<p data-height="500" data-theme-id="35252" data-slug-hash="JwROKN" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-wrap binnen een column" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/JwROKN
+				</section>
+				<section class="chapter">
+							## Aligning flex elements
+				</section>
+				<section>
+							## Aligning flex elements
+							- Aligning on the head-axis is done with justify-content
+							- It is applied on the flex container
+							- Values: flex-start (standard) | flex-end | center | space-between | space-around
+
+							```
+							div.mydiv {
+								display: flex;
+								justify-content: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Aligning flex elements (horizontal axis)
+							<p data-height="500" data-theme-id="35252" data-slug-hash="ebdeXW" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex-wrap binnen een column" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/ebdeXW
+				</section>
+				<section>
+							## Aligning flex elements (vertical axis)
+							<p data-height="500" data-theme-id="35252" data-slug-hash="roMYXz" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: justify-content (column)" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/roMYXz
+				</section>
+				<section>
+							## Aligning on the cross-axis
+							- By which we mean the height (with flex-direction:row) and left/right (with flex-direction:column)
+							- You do it using the align-items property
+							- You place align-items on the flex container
+							- Values: stretch (standard) | flex-start | flex-end | center | baseline
+
+							```
+							div.mydiv {
+								display: flex;
+								align-items: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Aligning on the cross-axis
+							<p data-height="500" data-theme-id="35252" data-slug-hash="PXGENo" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: align-items" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/PXGENo
+				</section>
+				<section>
+							## Aligning individual elements(on cross-axis)
+							- You do it with align-self
+							- Values: stretch (standard) | flex-start | flex-end | center | baseline
+
+							```
+							div {
+								align-self: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Aligning multiple flex-lines
+							- You do it with align-content
+							- Determines how you spread multiple flex-lines over the cross-axis
+							- Values: stretch (standard) | flex-start | flex-end | center | space-around | space-between
+
+							```
+							body {
+      					display: flex;
+      					flex-direction: row;
+      					height: 60vh;
+      					align-content: center;
+      					flex-wrap: wrap;
+      					border: 0.1rem solid grey;}
+							```
+
+				</section>
+				<section>
+							## Aligning multiple flex-lines
+							<p data-height="500" data-theme-id="35252" data-slug-hash="qLapov" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: align-content" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/qLapov
+				</section>
+				<section>
+							## Flexbox in a navigation menu
+							<p data-height="500" data-theme-id="35252" data-slug-hash="BvLJeW" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox op de navigatiebalk" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/BvLJeW
+				</section>
+				<section class="chapter">
+							## Letting elements grow and shrink with "flex"
+				</section>
+				<section>
+							## Letting elements grow and shrink with "flex"
+							- With the flex property we can make elements grow and shrink automatically
+							- This property is placed on the elements, not the flex container
+							- Values: none | 'flex-grow flex-shrink flex-basis'
+							- Dafault: 0 1 auto;
+							- 1 means "turn on", 0 voor "turn off"
+							- Flex-basis: sets the starting width. You may use it to set the width of your element
+				</section>
+				<section>
+							## "Flexing" with flex
+							<p data-height="500" data-theme-id="35252" data-slug-hash="vvXdmy" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/vvXdmy
+				</section>
+				<section>
+							## Toying with flex and flex-grow
+							<p data-height="500" data-theme-id="35252" data-slug-hash="REGQQV" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: flex - spelen met flex-grow" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/REGQQV
+				</section>
+				<section>
+							## Shortcuts for the flex property
+							- _flex:initial_ : same as flex: 0 1 auto;
+							- _flex: auto_ : same as flex: 1 1 auto;
+							- _flex: none_ : same as flex: 0 0 auto;
+							- _flex: number_ : same as flex: number 1 0px; =Absolute flex. Number decides how much room the element gets
+				</section>
+				<section>
+							## Changing the order of flex elements
+							- With the property border
+							- Good for responsive web design
+							- Expecially if you use flexbox for layouting and we won't :-)
+							- Works the same way as z-index with positioning
+							- Standard value for each element is 0
+				</section>
+				<section>
+							## Changing the order
+							<p data-height="500" data-theme-id="35252" data-slug-hash="VqKQoz" data-default-tab="css,result" data-user="admkrm" data-pen-title="Flexbox container: order" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/VqKQoz
+				</section>
+				<section>
+							## IT1 - Flexbox
+							### Questions?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
