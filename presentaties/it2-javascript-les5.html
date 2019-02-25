@@ -1,0 +1,18 @@
+	<section>
+				## Alternatief voor appendChild(): insertBefore()
+				Met de appendChild() method zagen we vorige week hoe je een nieuwe element in de DOM hangt. Dat nieuwe element wordt dan het laatste kind van het moederelement waarop je appendChild() toepast. De .insertBefore() method werkt op een gelijkaardige manier, maar neemt nog een tweede argument: dat van het zuster. Het enige verschil is dat het nieuwe element toegevoegd wordt als EERSTE kind van het moederelement. In het onderstaande voorbeeld wordt een h1-element toegevoegd boven de paragraaf.
+
+				```html
+				<div>
+					<p>Dit is een paragraaf</p>
+				</div>
+				```
+
+				```js
+				let mijnNieuwElement = document.createElement("h1");
+				mijnNieuwElement.innerHTML = "Dit is de belangrijkste hoofding";
+				let mijnDiv = document.querySelector("div");
+				mijnDiv.insertBefore(mijnNieuwElement,mijnDiv.childNodes[0]);
+				```
+
+	</section>
