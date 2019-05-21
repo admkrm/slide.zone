@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT2: CSS - filters</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Informatietechnologie 2
+							## CSS - filters
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Wat zijn CSS Filters?
+							- Krachtig instrument om visuele effecten te bereiken
+							- Als Photoshop filters voor de browser
+							- Effecten worden gezet op het element vooraleer het wordt getoond
+							- Filters kunnen worden gezet op een afbeelding, een achtergrond, een border, een element...
+				</section>
+				<section>
+							## Voorbeelden
+
+							```CSS
+							.blurren {
+  							filter: blur(20px);
+							}
+							```
+
+							```css
+							.meerdere-dingen {
+  							filter: blur(20px) grayscale(20%);
+							}
+							```
+
+							Meerdere functies kunnen gebruikt worden, gescheiden door een spatie
+				</section>
+				<section>
+							## Mogelijke filter-functies
+							- blur()
+							- brightness()
+							- contrast()
+							- grayscale()
+							- hue-rotate()
+				</section>
+				<section>
+							## Mogelijke filter-functies (2)
+							- invert()
+							- opacity()
+							- saturate()
+							- sepia()
+							- url() - om SVG-filters toe te passen
+							- none
+				</section>
+				<section>
+							## Waarden voor de filter-functies
+							- Werk met de juiste eenheden
+							- %
+							- deg
+							- enkel getallen
+				</section>
+				<section>
+							## Enkele voorbeelden
+							```CSS
+							img {
+  							filter: grayscale(40%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: sepia(20%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: saturate(9);
+							}
+							```
+				</section>
+				<section>
+							## Enkele voorbeelden
+							```CSS
+							img {
+  							filter: hue-rotate(120deg);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: invert(80%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: opacity(0%);
+							}
+							```
+				</section>
+				<section>
+							## Enkele voorbeelden
+							```CSS
+							img {
+  							filter: brightness(45%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: contrast(200%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: blur(5px);
+							}
+							```
+				</section>
+				<section>
+							## Het goede aan filters?
+							- Filter is een animatable propertie!
+							- Met andere woorden: je kan je filters animeren
+							- Vrijdag: mix-blend-mode...
+				</section>
+				<section>
+							## IT2 - CSS - filters
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
