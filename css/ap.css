@@ -108,7 +108,7 @@ section:first-child h2 {
 }
 
 section:last-child {
-      background-image: url('../img/ap/ap-laatste-slide.png');
+      background-image: url('ap-laatste-slide.jpg');
       background-size: auto 80vh;
       background-repeat: no-repeat;
       background-position: center 10vh;
