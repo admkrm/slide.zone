@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT2: CSS - de mix-blend-mode eigenschap</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Informatietechnologie 2
+							## CSS - de mix-blend-mode eigenschap
+							#### Kristof Michiels
+				</section>
+				<section>
+							## mix-blend-mode
+							- Defines how an element’s content should blend with its background
+							- This means that any images or text, borders or headings will be influenced by this property
+
+							```CSS
+							.blend {
+  							mix-blend-mode: exclusion;
+							}
+							```
+				</section>
+				<section>
+							## Waarden
+							-initial: the default setting of the property that does not set a blend mode.
+							- inherit: an element will inherit the blend mode from its parent element.
+							-	unset: removes the current blend mode from an element.
+							- <blend-mode>: this is the attribute of one of the blend modes beneath:
+							- normal: this attribute applies no blending whatsoever.
+				</section>
+				<section>
+							## Waarden
+							- multiply: the element is multiplied by the background and replaces the background color. The resulting color is always as dark as the background.
+							- screen: multiplies the background and the content then complements the result. This will result in content which is brighter than the background-color.
+							- overlay: multiplies or screens the content depending on the background color. This is the inverse of the hard-light blend mode.
+							- darken: the background is replaced with the content where the content is darker, otherwise it is left as it was.
+				</section>
+				<section>
+							## Waarden
+							- lighten: the background is replaced with the content where the content is lighter.
+							- color-dodge: this attribute brightens the background color to reflect the color of the content.
+							- color-burn: this darkens the background to reflect the content’s natural color.
+							- hard-light: depending on the color of the content this attribute will screen or multiply it.
+							- soft-light: depending on the color of the content this will darken or lighten it.
+							- difference: this subtracts the darker of the two colors from the lightest color.
+				</section>
+				<section>
+							## Waarden
+							- exclusion: similar to difference but with lower contrast.
+							- hue: creates a color with the hue of the content combined with the saturation and luminosity of the background.
+							- saturation: creates a color with saturation of the content combined with the hue and luminosity of the background.
+							- color: creates a color with the hue and saturation of the content and the luminosity of the background.
+							- luminosity: creates a color with the luminosity of the content and the hue and saturation of the background. This is the inverse of the color attribute.
+				</section>
+				<section>
+							## IT2 - CSS - de mix-blend-mode eigenschap
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
