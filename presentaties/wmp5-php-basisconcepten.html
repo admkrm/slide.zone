@@ -1,0 +1,453 @@
+<!doctype html>
+<html>
+	<head>
+		<title>WMP5: PHP - Basisconcepten</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Webmediaproductie 5
+							## PHP - Basisconcepten
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Basisconcepten van PHP
+				</section>
+				<section>
+							## In deze les
+							- Plaatsen van PHP binnen web pagina’s
+							- Data sturen als output naar de browser
+							- Commentaar toevoegen in je code
+							- Gebruik van variabelen
+							- Werken met PHP foutmeldingen
+							- Een HTML5 template creëren
+				</section>
+				<section>
+							## In deze les
+							- Gebruik van objecten
+							- Strings samenvoegen
+							- URL variabelen oproepen met $_GET
+							- Een class definitie declareren
+							- Dynamische CSS embedden
+				</section>
+				<section>
+							## PHP scripts insluiten
+							- Voor de server een opgevraagd bestand naar de browser stuurt, wordt eerst het PHP script uitgevoerd
+							- Hoe weet de server waar te zoeken naar PHP?
+							- Om te beginnen zoekt de server enkel in bestanden met de .php-extensie
+							- Een .php-bestand kan uiteraard ook andere zaken bevatten (zoals html)
+							- Om efficiënt te kunnen zoeken maken we gebruik van PHP scheidingstekens: &lt;?php en ?>
+							- Alles buiten die scheidingstekens wordt behandeld als html
+							- Je mag zoveel PHP blokken toevoegen als je wil
+				</section>
+				<section>
+							## PHP scripts insluiten
+
+							```php
+							&lt;p&gt;Statische tekst&lt;/p&gt;
+							&lt;?php echo "&lt;p&gt;Deze tekst werd aangemaakt door PHP!&lt;/p&gt;"; ?&gt;
+							&lt;p&gt;Deze tekst niet.&lt;/p&gt;
+							```
+
+							```php
+							&lt;?php echo "&lt;p>Dit is enige tekst.&lt;/p>"; ?>
+							&lt;p>Sommige van deze tekst is statisch,
+							&lt;?php echo "Maar deze tekst dan weer niet"; ?>
+							&lt;/p>
+							&lt;?php echo "&lt;p>"; ?>
+							Deze tekst wordt begrensd door p-elementen aangemaakt door php.
+							&lt;?php echo "&lt;/p>"; ?>
+							```
+				</section>
+				<section>
+							## Echo: output sturen naar de browser
+
+							![Echo](../img/wmp5-php-docs-echo.png)
+							##### https://www.php.net/manual/en/function.echo.php
+				</section>
+				<section>
+							## Variabelen
+							- Een variabele is een woord dat verwijst naar een waarde die in het systeemgeheugen is opgeslagen
+							- Je code kan een reeks acties uitvoeren gebaseerd op een bepaalde inhoud van een variabele
+							- Enkel de variabele veranderen resulteert dan in een andere output
+							- In één enkele lijn kan je in PHP een variabele declareren en er een waarde aan toekennen
+
+							```php
+							&lt;?php
+							$mijnNaam = "Pedro";
+							$vriendNaam = "Ronny";
+							echo "&lt;p>Mijn naam is $mijnNaam en mijn vriend heet $vriendNaam.&lt;/p>";
+							?>
+							```
+				</section>
+				<section>
+							## Naamgeving van je variabelen
+							- In PHP beginnen alle variabelen verplicht met een $
+							- Er zijn andere beperkingen, maar als je enkel alfabetische karakters gebruikt is er nooit een probleem
+							- Gebruik geen spaties of speciale karakters zoals !"#€%&/.
+							- Je mag nummers gebruiken, maar niet als eerste karakter. $1a kan niet, $a1 wel
+				</section>
+				<section>
+							## PHP foutmeldingen
+							- Je zal ongetwijfeld fouten maken bij het schrijven van je eerste PHP-code
+							- Uiteraard belangrijk om uitleg te krijgen over de aard van de fout. Je kan ze dan verbeteren en er uit leren
+							- Niet alle fouten worden getoond door PHP, tenzij je er om vraagt
+							- Foutmeldingen zijn soms cryptisch. Vaak moeten google of bvb stackoverﬂow.com raad brengen
+							- Onthou gewoon: plaats beide regels op volgende slide bovenaan elke php-pagina
+
+				</section>
+				<section>
+							## PHP foutmeldingen
+
+							- https://www.php.net/manual/en/function.error-reporting.php
+							- https://www.php.net/manual/en/function.ini-set.php
+
+							```php
+							&lt;?php
+							// deze lijnen dragen PHP op om foutmeldingen weer te geven in browser
+							error_reporting( E_ALL );
+							ini_set( "display_errors", 1 );
+							// we plaatsen hier een fout
+							echo "Deze string eindigt niet;
+							?>
+							```
+				</section>
+				<section>
+							## Een HTML-pagina maken in PHP
+							- PHP is een fantastische taal om dynamische HTML-pagina’s te maken
+							- Hier maak je in het geheugen een valide HTML5 pagina die je vervolgens echo-t naar de browser
+							- Probeer zelf de code uit en bekijk zeker ook de source code in je browser
+
+							```php
+							&lt;?php error_reporting( E_ALL );
+							ini_set( "display_errors", 1 );
+							$titel = "Mijn portfolio - startpagina";
+							$content = "&lt;h1>Wereld, maak kennis met mijn portfolio!&lt;/h1>";
+							$pagina = "&lt;!DOCTYPE html>&lt;html>&lt;head>&lt;title>$titel&lt;/title>
+								&lt;meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>&lt;/head>
+								&lt;body>$content&lt;/body>&lt;/html>";
+							echo $pagina;
+							?>
+							```
+
+				</section>
+				<section>
+							## Een eenvoudige template maken
+							- Creëer de volgende pagina en noem ze pagina.php.
+							- Stop het bestand in een folder met de naam templates
+							- Het return statement is zeer handig.
+							- Elke waarde die volgt op return wordt teruggegeven. Daarna stopt het script
+
+							```php
+							&lt;?php
+							return "&lt;!DOCTYPE html>&lt;html>&lt;head>&lt;title>$titel&lt;/title>
+							&lt;meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+							&lt;/head>&lt;body>$content&lt;/body>&lt;/html>";
+							?>
+							```
+
+				</section>
+				<section>
+							## Een eenvoudige template aanmaken
+							- Om een ander bestand toe te voegen gebruik je het statement include_once
+							- We spreiden hiermee code over verschillende bestanden. We noemen dit bestand index.php.
+							- De template zit nu in een afzonderlijk bestand en kan herbruikt worden in verschillende contexten
+
+							```php
+							&lt;?php
+							error_reporting( E_ALL );
+							ini_set( "display_errors", 1 );
+							$titel = "Mijn portfolio - startpagina";
+							$content = "&lt;h1>Hallo wereld!&lt;/h1>";
+							//gebruik het relatieve pad naar het bestand dat je wil gebruiken
+							$pagina = include_once "templates/pagina.php";
+							echo $pagina;
+							?>
+							```
+				</section>
+				<section>
+							## Commentaar in je code
+							- Gebruik // voor een enkele regel commentaar
+							- of /* en */ voor commentaar gespreid over meerdere regels
+							- Net zoals bij css dus :-)
+
+							```php
+							&lt;?php
+							//dit is een enkele lijn-commentaar
+							/* Dit is commentaar gespreid over verschillende regels
+								we noemen dat een block-commentaar */
+							?>
+							```
+				</section>
+				<section>
+							## Naamgevingsconflicten variabelen vermijden
+							- Je zal op termijn PHP projecten maken met honderden regels code.
+							- Je zal veel variabelen aanmaken die elk uniek en betekenisvol moeten zijn
+							- Je moet conﬂicten qua naamgeving vermijden zoals in bovenstaand voorbeeld
+
+							```php
+							&lt;?php
+							$titel = "welkom op mijn blog";
+							/* honderden regels code later */
+							$titel = "webontwikkelaar";
+							/* tweemaal dezelfde variabele aanmaken, dat is een probleem
+							Gelukkig zijn er oplossingen :-) */
+							?>
+
+				</section>
+				<section>
+							## Objecten
+							- Je kan problemen te vermijden door een context te creëren in de vorm van een object
+							- Je creëert een standaard PHP object door gebruik van StdClass
+							- Een PHP object is net zoals een variabele waarin je waarden kan opslaan
+							- Een variabele kan één waarde bevatten. In een object kan je zoveel waarden onderbrengen als je nodig hebt
+
+							```php
+							&lt;?php
+							$paginaData = new StdClass();
+							$paginaData-&gt;titel = "Welkom op mijn blog";
+							/* honderden regels code later */
+							$jobData = new StdClass();
+							$jobData-&gt;titel = "Web ontwikkelaar";
+							?&gt;
+							```
+				</section>
+				<section>
+							## Objecten
+							- Elke individuele waarde kan opgeslagen worden als een unieke objecteigenschap (property)
+							- Het object biedt een context, zal het eenvoudiger maken om de juiste titel op de juiste plek te gebruiken
+							- Je kan objecten gebruiken om je code in betekenisvolle units te organiseren die samen horen
+							- Er is veel meer aan objecten dan hier behandeld. Objecten gebruiken is standaard in het ontwikkelen van complexere systemen. We komen er nog op terug!
+				</section>
+				<section>
+							## Objecten
+							- Objecten kunnen dus gebruikt worden als namespaces voor eigenschappen. Zo worden conﬂicten vermeden en wordt een duidelijke context geboden
+							- Om waarden van een object property te krijgen moet je 2 zaken aangeven: het object en de eigenschap
+							- De object operator ziet eruit als een pijltje. Dat geeft aan dat je een bepaalde eigenschap wenst binnen een speciﬁek object
+
+							```php
+							$objectNaam->eigenschapNaam;
+							```
+				</section>
+				<section>
+							## StdClass gebruiken voor pagina data
+							- We kunnen nu onze index.php en pagina.php van daarnet aanpassen
+
+							```php
+							<?php error_reporting( E_ALL ); ini_set( "display_errors", 1 ); $paginaData = new stdClass(); $paginaData->titel = "Nieuwe object-georiënteerde test titel"; $paginaData->content = “<h1>Hallo, object!</h1>”; $pagina = include_once "templates/pagina.php"; echo $pagina; ?>
+							```
+
+							```php
+							<?php  return "<!DOCTYPE html>  <html>  <head>  <title>$paginaData->titel</title>  <meta http-equiv='Content-Type' content='text/html;charset=utf-8' /> </ head>  <body>  $paginaData->content  </body>  </html>"; ?>
+							```
+				</section>
+				<section>
+							## Object eigenschappen zijn als variabelen
+							- Objecteigenschappen (of properties) gedragen zich als variabelen
+							- We hebben in het vorige voorbeeld twee variabelen vervangen door een StdClass object met twee eigenschappen. Elke waarde is nu een unieke object eigenschap geworden
+							- Elk object kan verschillende eigenschap hebben
+							- Elke eigenschap kan één waarde bevatten
+				</section>
+				<section>
+							## Pagina views
+							- Een site zal al snel verschillende pagina’s bevatten
+							- Voor een dynamische site moet je geen afzonderlijke HTML-pagina’s maken
+							- Je kan dezelfde pagina-template gebruiken voor 2 verschillende pagina views
+							- Een pagina-view kan je beschouwen als een individuele pagina
+							- Sla de volgende pagina op in een subfolder views: views/films.php en views/muziek.php
+
+							```php
+							<?php return “<h1>Mijn favoriete films</h1> <p>Hier lees je alles over mijn passie voor films</p> “; ?>
+							```
+
+							```php
+							<?php return “<h1>Mijn favoriete muziek</h1> <ul> <li>Hier komt mijn CD top 10</li> </ul>”; ?>
+							```
+				</section>
+				<section>
+							## dynamische site navigatie
+							- Je kan een globale site navigatie pagina maken voor je gehele site
+							- Noem ze views/navigatie.php
+							- Als je in die ﬁle wijzigingen aanbrengt zal dit over de hele site zichtbaar zijn.
+							- Maakt je code veel eenvoudiger qua onderhoud
+							- Als we deze bestanden opslaan en openen zien we de navigatie al, maar de links tonen nog niet de juiste pagina. Dat doen we in wat volgt
+
+							```php
+							<?php return " <nav>
+								<a href='index.php?pagina=films'>Films</a>
+								<a href='index.php?pagina=muziek'>Muziek</a> </nav> “;
+							?>
+							```
+
+							```php
+							<?php error_reporting( E_ALL ); ini_set( "display_errors", 1 ); $paginaData = new stdClass(); $paginaData->titel = “Kristof Michiels: persoonlijke site”; $paginaData->content = include_once "views/navigatie.php"; $pagina = include_once "templates/pagina.php"; echo $pagina; ?>
+							```
+				</section>
+				<section>
+							## Informatie doorgeven in PHP
+							- Data doorgeven is wat dynamische web pagina’s onderscheid van statische pagina’s
+							- Je kan de keuze van de gebruiker de hele gebruikerservaring laten kleuren en op deze manier waarde toevoegen aan een web site
+							- We geven informatie via PHP door via URL variabelen
+							- Een URL variabele is een variabele die meegegeven wordt in de URL
+							- Als we op de links klikken (zie rechts) dan wordt een URL variabele meegegeven naar de volgende pagina. Die kan daar gebruikt worden
+
+							```php
+							index.php?pagina=films
+							index.php?pagina=muziek
+							```
+				</section>
+				<section>
+							## URL-variabelen gebruiken
+							- Om de URL variabelen te krijgen gebruik je de $_GET superglobal array
+							- Bestudeer in de code hiernaast rustig hoe we die variabele opvragen en gebruiken
+
+							```php
+							<?php error_reporting( E_ALL ); ini_set( "display_errors", 1 ); $paginaData = new stdClass(); $paginaData->titel = "Kristof Michiels: persoonlijke site"; $paginaData->content = include_once "views/navigatie.php"; $navigatieIsClicked = isset($_GET['pagina']); if ($navigatieIsClicked ) {
+$fileToLoad = $_GET['pagina'];
+$paginaData->content .= “<p>Hier moet $fileToLoad.php komen</p>"; } $pagina = include_once "templates/pagina.php"; echo $pagina; ?>
+							```
+				</section>
+				<section>
+							## isset() gaat na of de variabele bestaat
+							- Als je een variabele wil gebruiken die niet bestaat, dan zal PHP een foutmelding geven
+							- Je wil dus eerst zeker zijn dat de variabele bestaat
+							- Je doet dat met de isset() functie. Deze zal true teruggeven als de variabele bestaat
+
+							```php
+							$navigatieIsClicked = isset($_GET['pagina']);
+							```
+				</section>
+				<section>
+							## $_GET
+							- Met $_GET krijg je toegang tot alle URL variabelen
+
+							```php
+							$_GET[‘naam van de URL variabele'];
+							```
+				</section>
+				<section>
+							## De pagina view dynamisch toevoegen
+							- Bestudeer goed volgende code. Op deze manier laden we de juiste view op basis van de aanwezige URL variabele
+ 							- Hiervan gebruik makend kan je nu reeds een eenvoudige dynamische site maken met een eenduidige globale navigatie
+
+							```php
+							<?php error_reporting( E_ALL ); ini_set( "display_errors", 1 ); $paginaData = new stdClass(); $paginaData->titel = "Kristof Michiels: persoonlijke site"; $paginaData->content = include_once "views/navigatie.php"; $navigatieIsClicked = isset($_GET['pagina']); if ($navigatieIsClicked ) {
+
+$fileToLoad = $_GET['pagina'];
+
+$paginaData->content .=include_once "views/$fileToLoad.php"; } $pagina = include_once "templates/pagina.php"; echo $pagina; ?>
+							```
+				</section>
+				<section>
+							## Samenvoegen
+							- Wordt ook concatenatie genoemd
+							- Heb je daarnet de .= in de code gespot?
+ 							- Wordt de incrementele concatenatieoperator genoemd
+ 							- Bestudeer de werking op basis van de code rechts
+				</section>
+				<section>
+							## Een default pagina tonen
+							- Door het if-statement (zien we volgende week) een beetje aan te passen kan je ervoor zorgen dat er steeds een pagina wordt geladen.
+							- Hier kiezen we voor muziek.php maar je zou ook een speciﬁeke 404 pagina kunnen aanmaken
+
+							```php
+							//deelcode voor index.php if ($navigatieIsClicked ) {
+
+$fileToLoad = $_GET[‘pagina']; } else {
+
+$fileToLoad = "muziek"; } $paginaData->content .=include_once "views/$fileToLoad.php";
+							```
+				</section>
+				<section>
+							## Pagina stylen met CSS
+							- Doe je uiteraard net op dezelfde manier als bij statische HTML
+							- We gaan hier in deze oefening zorgen dat de link naar de css ﬁle correct wordt aangegeven
+							- We doen dit met een nieuwe paginadata eigenschap
+
+							```php
+							<?php  return "<!DOCTYPE html>  <html>  <head>  <title>$paginaData->titel</title>  <meta http-equiv='Content-Type' content='text/html;charset=utf-8' /> $paginaData->css  </head> <body> $paginaData->content </body> </html>”; ?>
+							```
+				</section>
+				<section>
+							## Pagina stylen met CSS
+							- Voila!
+
+							```php
+							<?php  //partial code listing for index.php  error_reporting( E_ALL );  ini_set( "display_errors", 1 );  $paginaData = new stdClass();  $paginaData->titel = "Kristof Michiels: persoonlijke site"; $paginaData->content = include_once "views/navigatie.php";  $paginaData->css = "<link href='css/styling.css' rel='stylesheet' />"; ?>
+							```
+
+				</section>
+				<section>
+							## Pagina_data class aanmaken
+							- Soms kan het handig zijn om een interne stylesheet (speciﬁek voor elke pagina) toe te voegen aan de externe
+							- We zouden hiervoor een eigenschap kunnen aanmaken binnen het paginaData object
+							- Hier gaan we het wat anders aanpakken: soms heb je een interne stylesheet nodig, en soms niet
+							- We gaan een custom class aanmaken voor pagina data
+							- Maak een nieuwe folder aan die je classes noemt
+							- Maak in deze folder een nieuwe ﬁle aan die je Pagina_Data.class.php noemt
+							- Voila, we hebben onze klasse gedeﬁnieerd met lege waarden voor elk van de eigenschappen
+							- Conventie = begint met een hoofdletter, woorden scheiden met een underscore, laten eindigen op .class.php
+				</section>
+				<section>
+							## Pagina_data class aanmaken
+
+							```php
+							<?php  return "<!DOCTYPE html>  <html>  <head>  <title>$paginaData->titel</title>  <meta http-equiv='Content-Type' content='text/html;charset=utf-8' /> $paginaData->css  $paginaData->embeddedStyle  </head>  <body>  $paginaData->content  </body>  </html>"; ?>
+							```
+
+							```php
+							<?php class Pagina_Data { public $titel = ""; public $content = ""; public $css = ""; public $embeddedStyle = ""; }
+							```
+				</section>
+				<section>
+							## Klasses maken objecten
+							- Zo maak je nu een object aan vanuit je klassedeﬁnitie
+
+							```php
+							//deelcode voor index.php include_once "classes/Pagina_Data.class.php"; $paginaData = new Pagina_Data(); //onderstaande regel dien je te verwijderen uit index.php //$paginaData = new stdClass();
+							```
+				</section>
+				<section>
+							## Index.php wordt dan...
+							- Met deze concepten kom je al een heel eind bij het maken van een dynamische site
+ 							- Let ook op de speciale css selector die we hier gebruiken!
+
+							```php
+							<?php error_reporting( E_ALL ); ini_set( "display_errors", 1 ); include_once "classes/Pagina_Data.class.php"; $paginaData = new Pagina_Data(); $paginaData->titel = "Kristof Michiels: persoonlijke site"; $paginaData->content = include_once "views/navigatie.php"; $paginaData->css = "<link href='css/styling.css' rel='stylesheet' />"; $navigatieIsClicked = isset($_GET[‘pagina']); if ($navigatieIsClicked ) {
+
+$fileToLoad = $_GET[‘pagina’]; } else {
+
+$fileToLoad = "muziek"; } $paginaData->content .=include_once "views/$fileToLoad.php"; $paginaData->embeddedStyle = " <style> nav a[href *= '?pagina=$fileToLoad']{
+
+background-color:white;
+
+} </style>"; $pagina = include_once "templates/pagina.php"; echo $pagina; ?>
+							```
+				</section>
+				<section>
+							## Tot besluit
+							In deze presentatie: de basis van PHP gezien. Deze kennis zal je toelaten data aan te maken, op te slaan, te manipuleren en uit te sturen naar de browser
+ We breiden in de volgende presentatie onze PHP-kennis verder uit.
+
+
+Het is van het grootste belang dat je de opgedane kennis inoefent. Breid de site uit die we in deze presentatie zijn begonnen. Meng je ondertussen opgedane skills op vlak van HTML, CSS en JavaScript met PHP scripting. Experimenteer! Het is de sleutel tot een goede kennis van PHP
+ Opdracht1: maak een eenvoudige persoonlijke website met minstens 5 pagina’s waarin je de concepten die we vandaag zagen gebruikt.
+ Opdracht2: instuderen van De WMP5-ﬁles#1
+				</section>
+				<section>
+							## WMP5 - PHP Introductie en eerste stappen
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
