@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+	<head>
+		<title>WMP5: PHP - Introductie - Eerste stappen</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Webmediaproductie 5
+							## PHP - Introductie en eerste stappen
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Introductie
+				</section>
+				<section>
+							## Wat gaan we doen in WMP5?
+							- Leren programmeren in PHP + WordPress revisited
+							- Relax: dit vak heeft GEEN examen (meer)
+							- De evaluatie gebeurt aan de hand van een aantal oefeningen die je maakt (adhv voorbeeldcode)
+							- 3de jaar: dus af en toe eigen voorbereiding + opzoekingswerk
+							- Tips:
+								- Geconcenteerd alle lessen meevolgen
+								- Leerstof op tijd verwerken
+								- Alle oefeningen maken
+				</section>
+				<section>
+							## Waarom programmeren, waarom PHP?
+							- PHP is de programmeertaal waarop WordPress draait (basiskennis is belangrijk als WP designer)
+							- Kennis van PHP staat goed op je cv: het is de meest gebruikte "server-side" scripting taal
+							- We gaan eerst met behulp van PHP kleinere interactieve web applicaties bouwen
+							- Daarna gaan we zien hoe we onze PHP-kennis kunnen gebruiken bij het opzetten van WordPress sites
+				</section>
+				<section class="chapter">
+							## PHP
+				</section>
+				<section>
+							## PHP is een "server-side" programmeertaal
+							- Wanneer je voor je computer zit en een webpagina opvraagt, gebeurt er een klein gesprek tussen jouw browser (__de client__) en de andere computer waar de bestanden zich op bevinden (__de server__)
+							- De webserver stuurt de opgevraagde bestanden telkens netjes door naar de browser van de client
+							- Je browser kan enkel HTML, CSS en JavaScript-bestanden lezen en uitvoeren.
+							- __Statische webapplicaties__ bestaan enkel uit dit type bestanden. De webserver hoeft ze alleen maar door te sturen
+							- Het nadeel van statische webapplicaties: je moet elke pagina handmatig aanmaken
+				</section>
+				<section>
+							## Client-server model
+							![client-server model](../img/wmp5-clientserver.png)
+							##### https://en.wikipedia.org/wiki/Client%E2%80%93server_model
+				</section>
+				<section>
+							## PHP is een "server-side" programmeertaal
+							- Bij __dynamische webapplicaties__ ligt dat anders. Daar gaat de webserver telkens een vraag van de client komt eerst nog code uitvoeren vooraleer het antwoord door te sturen
+							- PHP is een technologie die altijd op een server wordt uitgevoerd
+							- Bvb: telkens een WordPress-pagina wordt opgevraagd wordt met behulp van PHP databankinformatie opgevraagd en wordt op basis hiervan "dynamisch" een HTML-pagina samengesteld en naar de client opgestuurd
+							- De browser krijgt dus __nooit__ PHP-code te zien. En dat is maar goed ook, want de browser "spreekt" geen PHP
+				</section>
+				<section>
+							## "dynamische" webpagina's
+							![dynamische webpagina](../img/wmp5-dynamicpage.png)
+							##### https://en.wikipedia.org/wiki/Dynamic_web_page
+				</section>
+				<section>
+							## PHP is een "server-side" programmeertaal
+							- PHP is een programmeertaal: je schrijft hiermee instructies in de taal PHP
+							- We spreken soms ook over een PHP engine. Deze voert op de web server regels PHP code uit
+							- Wij gaan om te kunnen programmeren in PHP ook zo'n web server met PHP engine moeten installeren op onze laptop
+				</section>
+				<section>
+						## Voordelen van PHP
+						- Gebruik van PHP is gratis
+						- Gebruik van PHP is vrij (open-source)
+						- PHP werkt op zowat alle platformen (Win, Mac, Linux)
+						- PHP is (nog steeds) zeer populair
+						- PHP is relatief eenvoudig om te leren
+						- PHP is gebouwd voor het web
+				</section>
+				<section>
+						## PHP: wie, wanneer, versies
+						- In 1995 gemaakt door Rasmus Lerdorf
+						- Lerdorf zocht een eenvoudige manier om data te verwerken bij het aanmaken van web pagina’s
+						- PHP stond oorspronkelijk voor “Personal Home Page”, en was van meet af aan vrij, open broncode
+						- Eerste gebruik: een tellertje dat weergaf hoeveel maal zijn online cv werd bezocht
+						- Script werd enorm populair en Lerdorf bleef de taal verder ontwikkelen
+						- Andere ontwikkelaars zijn hem beginnen helpen
+						- Vandaag is het de meest populaire scripting taal
+				</section>
+				<section>
+							## Rasmus Lerdorf
+							![Rasmus Lerdorf](../img/wmp5-lerdorf.png)
+							##### https://en.wikipedia.org/wiki/Rasmus_Lerdorf
+				</section>
+				<section>
+						## PHP: wie, wanneer, versies
+						- In 1997 hernoemd tot PHP: Hypertext Preprocessor
+						- Op dit moment zitten we aan versie 7.3.9 als "current stable version"
+						- Op het web zijn oudere versies nog steeds in gebruik op tal van web servers
+				</section>
+				<section>
+							## PHP website - downloads
+							![PHP website - downloads](../img/wmp5-php-downloads.png)
+							##### https://www.php.net/downloads.php
+				</section>
+				<section>
+							## PHP website
+							![PHP website](../img/wmp5-php-site.png)
+							##### https://php.net
+				</section>
+				<section>
+							## PHP website - documentatie
+							![PHP website - documentatie](../img/wmp5-php-docs.png)
+							##### https://php.net/docs.php
+				</section>
+				<section>
+							## PHP website - documentatie - echo
+							![PHP website - documentatie - echo](../img/wmp5-php-docs-echo.png)
+							##### https://www.php.net/manual/en/function.echo.php
+				</section>
+				<section>
+							## PHP website - documentatie
+							![PHP website - documentatie - echo](../img/wmp5-php-docs-echo-vbn.png)
+							##### https://www.php.net/manual/en/function.echo.php
+				</section>
+				<section>
+						## PHP: populariteit en alternatieven
+						- Ruggengraat van de grote online web applicaties zoals Facebook, Slack en uiteraard WordPress!
+						- Er zijn tal van andere server-side scripting talen: JavaScript, Python, Ruby, ASP.NET...
+						- Voor beginners: PHP is relatief gemakkelijke taal. Je kan heel wat doen met een beetje PHP
+						- Goede kennis van PHP belangrijke asset: go for it! Je kan PHP ook gebruiken als niet-web scriptingtaal
+						- Heel populair, met een grote PHP-community online
+				</section>
+				<section>
+							## W3Techs - PHP gebruik wereldwijd
+							![PHP gebruik wereldwijd](../img/wmp5-w3techs.png)
+							##### https://w3techs.com/technologies/details/pl-php/all/all
+				</section>
+				<section class="chapter">
+							## PHP ontwikkelomgeving
+				</section>
+				<section>
+							## PHP ontwikkelomgeving
+							- Om te kunnen ontwikkelen in PHP heb je - bij voorkeur op je ontwikkelmachine - een werkende installatie nodig van Apache, PHP en MySQL
+							- Apache = een web server die in staat is om PHP scripts te verwerken. Dus zeer belangrijk om lokaal te kunnen ontwikkelen
+							- MariaDB = een relationele databank. Veel PHP sites gebruiken informatie die ligt opgeslagen in een databank. MariaDB is een vrij, open broncode project
+				</section>
+				<section>
+							## Apache
+							![Apache](../img/wmp5-apache.png)
+							##### https://httpd.apache.org
+				</section>
+				<section>
+							## MariaDB
+							![MariaDB](../img/wmp5-mariadb.png)
+							##### https://mariadb.org
+				</section>
+				<section>
+							## PHP ontwikkelomgeving: XAMPP
+							- Een belangrijke horde om te nemen voor startende webontwikkelaars. We gaan het dus doen tijdens deze les!
+							- Gelukkig moeten we vandaag de dag niet meer alles individueel installeren: we hebben namelijk XAMPP!
+							- XAMPP bundelt Apache, MariaDB, PHP en enkele andere nuttige tools in 1 gebruiksvriendelijke installatieprocedure
+							- XAMPP is gratis en beschikbaar voor Windows, Mac en Linux
+				</section>
+				<section>
+							## XAMPP
+							![LAMP](../img/wmp5-xampp.png)
+							##### https://www.apachefriends.org/index.html
+				</section>
+				<section>
+							## By the way… XAMPP => LAMP STACK
+							- Meeste web servers op het web draaien op een versie van Linux
+							- Men spreekt over de LAMP-stack
+								- = Linux, Apache, MySQL/MariaDB, PHP
+							- Vandaag: JavaScript-alternatieven zoals MEAN, MERN, MEVN, …
+				</section>
+				<section>
+							## De LAMP STACK
+							![LAMP](../img/wmp5-lamp.png)
+							##### http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29
+				</section>
+				<section>
+							## Als editor: https://atom.io
+							![Atom.io](../img/wmp5-atom.png)
+							##### Of je eigen favoriete teksteditor natuurlijk!
+				</section>
+				<section class="chapter">
+							## Je eerste stappen met PHP
+				</section>
+				<section>
+							## Je eerste stappen met PHP
+							- Ik wil hier enkel uitleggen hoe PHP werkt. Maak je geen zorgen over de details
+							- De PHP engine is enkel geïnteresseerd in stukjes PHP-code
+							- Omdat de PHP engine zou weten welke bestanden op PHP-instructies te doorzoeken gaan we de bestanden met PHP instructies laten eindigen op .php
+							- We gaan dit aangeven met PHP begin- en eindtags: __&lt;?php__ en __?&gt;__
+							- Je mag zoveel stukjes PHP toevoegen als je nodig hebt
+							- Je kan ze mengen met pagina's die voor de rest bestaan uit HTML
+				</section>
+				<section>
+							## Een voorbeeld: hallo_wereld.php
+
+							```PHP
+							&lt;html>
+								&lt;head>&lt;title>PHP zegt Hallo wereld&lt;/title>&lt;/head>
+								&lt;body>
+									&lt;h1>
+									&lt;?php
+									echo "Hallo wereld!";
+									?>
+									&lt;/h1>
+								&lt;/body>
+							&lt;/html>
+							```
+				</section>
+				<section>
+							## Het resultaat in jouw browser
+
+							```HTML
+							&lt;html>
+								&lt;head>&lt;title>PHP zegt Hallo wereld&lt;/title>&lt;/head>
+								&lt;body>
+									&lt;h1>Hallo wereld&lt;/h1> <!-- PHP is HTML geworden -->
+								&lt;/body>
+							&lt;/html>
+							```
+
+				</section>
+				<section>
+							## Ander vb: hallo_form.html en hallo_zeggen.php
+
+							```HTML
+							&lt;form method="POST" action="hallo_zeggen.php"&gt;
+								Jouw naam: &lt;input type="text" name="gebruiker"/>
+								&lt;br/&gt;
+								&lt;button type="submit">Hallo zeggen&lt;/button>
+							&lt;/form>
+							```
+
+							```PHP
+							&lt;?php
+								print "Hallo, ";
+								// afdrukken wat in de form is meegegeven als parameter 'gebruiker'
+								print $_POST['gebruiker'];
+								print "!";
+							?&gt;
+							```
+
+				</section>
+				<section class="chapter">
+							## Opdracht
+				</section>
+				<section>
+							## Opdracht tegen volgende les
+							- XAMPP installeren
+							- XAMPP kunnen opstarten, stoppen
+							- Weten waar je de XAMPP folder kan vinden
+							- Weten hoe je er een subfolder voor een nieuwe site kan maken
+							- Testen met een eigen bestand aangemaakt via Atom (gebruik "Add project folder")
+				</section>
+
+				<section>
+							## WMP5 - PHP Introductie en eerste stappen
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
