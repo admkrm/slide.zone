@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT3: Grid Layout revisited</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Information Technology 3
+							## Grid Layout Revisited
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Revisiting?
+				</section>
+				<section>
+							## Revisiting? Yes!
+							- Yes, because mastering grid layout is one of the most important aspects of CSS
+							- Yes, because specification is being updated to address some of the limitations that existed in the first version of Grid
+							- Yes, because expert knowledge of Grid Layout will help you ace your IT3 exam
+				</section>
+				<section>
+							## A short history of CSS Grid
+							- CSS Grid arrived in 2017 with massive browser support
+							- Much anticipated after it first appeared in 2012 in Internet Explorer alone
+							- Designers could now dump floating as a layout technique. Lucky them, lucky you :-)
+				</section>
+				<section>
+							## Support has risen to more than 94%
+							![Grid support Can I Use](../img/it3-grid-support.png)
+							##### https://caniuse.com/#search=grid
+				</section>
+				<section>
+							## Support has risen to more than 94%
+							- Was 90% at the end of 2018 when you learned to work with grid
+							- Coming from 83% at the end of 2017
+							- This means we can now finally drop @supports (grid-area: auto) {}
+							- This means you can start using grid for the mobile version of your site
+				</section>
+				<section>
+							## Level 2 of specification being implemented in Firefox
+							![Subgrid support Can I Use](../img/it3-subgrid-support.png)
+							##### https://caniuse.com/#search=grid
+
+				</section>
+				<section>
+							## Level 2 of specification being implemented in Firefox
+							- E.g. subgrids currently only marginally supported
+							- We'll leave it untouched for now
+							- Adoption might rise quickly in the near future
+							- I'll keep you posted :-)
+				</section>
+				<section class="chapter">
+							## What again is Grid Layout?
+				</section>
+				<section>
+							## Grid Layout?
+							- The CSS grid layout Module defines a __two-dimensional grid__ layout system
+							- Once a grid has been established on a containing element, __the direct children__ of that element can be placed into a flexible or fixed layout grid
+							- The grid can be __redefined using media queries__
+							- Grid is a very flexible module, so there are a number of ways to use it
+				</section>
+				<section>
+							## Defining a grid
+							A grid is defined using a new value of the display property, display: grid
+
+							```html
+							&lt;div class="wrapper">
+								&lt;div class="box a">A&lt;/div>
+								&lt;div class="box b">B&lt;/div>
+								&lt;div class="box c">C&lt;/div>
+								&lt;div class="box d">A&lt;/div>
+								&lt;div class="box e">B&lt;/div>
+								&lt;div class="box f">C&lt;/div>
+							&lt;/div>
+							```
+
+							```css
+							.wrapper {
+								display: grid;
+							}
+							```
+				</section>
+				<section>
+							## Describing rows and columns
+							- Next, you describe what the grid looks like
+							- Grids have rows and columns, which the CSS Grid Layout Module gives us properties to describe
+
+							```CSS
+							.wrapper {
+								display: grid;
+								grid-template-columns: 10rem 10rem 10rem;
+								grid-template-rows: 10rem 10rem;
+							}
+							```
+If we take a look at our page after we’ve declared a grid, we’ll see that the child elements have placed themselves on the grid.
+They do this according to Grid’s auto-placement rules, which simply fill each cell in turn with a direct child of the grid container.
+
+				</section>
+				<section>
+							## Terminology
+							![Grid Terminology](../img/it3-terminology.png)
+							##### Clockwise: column line 2, track between row lines 2 and 3, a grid cell, a grid area
+				</section>
+				<section>
+							## The explicit and the implicit grid
+							- In the example we created an __explicit__ grid: the child elements automatically slotted into the cells created by those grid tracks
+							- If we don’t create enough cells, or place something outside of the explicit grid, Grid creates __implicit__ grid tracks for us
+							- This means that we can remove the grid-template-rows property, and the items will still place themselves on the grid
+							- The rows are then auto-sized. An auto-sized track will be large enough to fit the content.
+				</section>
+				<section>
+							## Gaps between grid tracks
+							We can do this by using the gap property, or individual properties of column-gap and row-gap
+
+							```css
+							.wrapper {
+								display: grid;
+								grid-template-columns: 10rem 10rem 10rem;
+								gap: 10rem;
+							}
+				</section>
+				<section>
+							## Sizing implicit rows
+							Auto-sized is the initial value of implicit tracks. We can however specify a size for them using the grid-auto-rows and grid-auto-columns properties.
+
+							```css
+							.wrapper {
+								display: grid;
+								grid-template-columns: 10rem 10rem 10rem;
+								grid-auto-rows: 10rem;
+								gap: 10rem;
+							}
+							```
+				</section>
+				<section>
+							## The minmax() function
+							In the previous example we could run into a situation where the content overflows the fixed-height track. We can achieve more flexibility by using the minmax() function for our track sizing. It allows us to pass in a minimum and a maximum value.
+
+							```css
+							.wrapper {
+								display: grid;
+								grid-template-columns: 10rem 10rem 10rem;
+								grid-auto-rows:minmax(10rem, auto);
+								gap: 10rem;
+							}
+							```
+				</section>
+				<section>
+							## The fr unit
+							- Tracks can be created with any valid CSS length unit, or with percentages
+							- You can also size tracks using the Grid-specific fr unit
+							- This value represents a fraction of the available space in the grid container
+
+							```css
+							.wrapper {
+								width: 60rem;
+								display: grid;
+								grid-template-columns: 2fr 1fr 1fr;
+								grid-auto-rows:minmax(10rem, auto);
+								gap: 10rem;
+							}
+							```
+				</section>
+				<section>
+							## The repeat() notation
+							- With repeat(), we place comma-separated values between parentheses
+							- The value before the comma stands for the number of times a pattern should repeat
+							- The value after the comma refers to the pattern
+							- We can repeat a single track value or a track listing
+
+							```css
+							.wrapper {
+								display: grid;
+								grid-template-columns: repeat(12, 1fr);
+							}
+							```
+				</section>
+				<section>
+							## The auto-fill keyword
+							- Say we want to have as many tracks (with a minimum size) as will fit into our grid container
+							- This enables a responsive number of column tracks without relying on media queries to add breakpoints
+							- This is achieved by using the auto-fill keyword instead of a number before the comma in our repeat notation
+
+							```css
+							.wrapper {
+								display: grid;
+								grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+							}
+							```
+				</section>
+				<section>
+							## Placing grid items by line number
+							- In the previous example we auto-placed the grid items
+							- We can of course place them manually using css
+							- The simplest method to use is line-based placement
+
+							```css
+							.a {
+								grid-row: 1 / 3;
+								grid-column: 1 / 3;
+							}
+							```
+				</section>
+				<section>
+							## Overlapping items on the grid
+							- When placing items using lines, we can place an item into the same cell as another item
+							- Items that are lower in the source display on top of items that come before them
+							- we can use the z-index property to change the stacking order of items
+				</section>
+				<section>
+							## Positioning using grid template areas
+							Here we create named grid areas and use grid-template-areas to describe where on the grid they sit
+
+							```css
+							.a {grid-area: area-a;}
+							.b {grid-area: area-b;}
+							.c {grid-area: area-c;}
+							.d {grid-area: area-d;}
+							.e {grid-area: area-e;}
+							.f {grid-area: area-f;}
+
+							.wrapper {
+								display: grid;
+								grid-template-columns: 1fr 1fr 1fr;
+								grid-template-areas:
+									"area-a area-b area-c"
+									"area-d area-e area-f";
+							}
+							```
+				</section>
+				<section>
+							## Positioning using grid template areas
+							Another possibility:
+
+							```css
+							.wrapper {
+								display: grid;
+								grid-template-columns: 1fr 1fr 1fr;
+								grid-template-areas:
+									"area-a area-a area-a"
+									".      area-b area-b"
+									".      area-c area-d"
+									"area-f area-f area-f"
+									"area-e area-e area-e";
+							}
+				</section>
+				<section>
+							## Grids within grids
+							![Grids within grids](../img/it3-gridswithingrids.png)
+							##### https://codepen.io/admkrm/full/EbREvK
+				</section>
+				<section>
+							## Grids within grids
+							- This is an important one
+							- Understanding this 100% will enable you to look at a design and immediately see where you need one or more grids
+							- Each web page may contain any number of grids
+							- It is also possible that a grid element can become a grid in its own right: these grids we call nested grids
+							- When designing a page: develop your ideas on paper first and determine where you will apply your grids
+							- Don’t take the one mother-of-all-grids approach: you don’t need this kind of complexity
+				</section>
+
+				<section>
+							## IT3 - Grid Layout Revisited
+				</section>
+	</body>
+</html>
