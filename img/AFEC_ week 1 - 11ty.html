@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>AFEC: week 1 - 11ty</title>
+		<link rel="stylesheet" type="text/css" href="file:///Users/kristofmichiels/Devspace/slide.zone/css/reset.css">
+		<link href="./AFEC_ week 1 - 11ty_files/css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="file:///Users/kristofmichiels/Devspace/slide.zone/highlight/styles/googlecode.css">
+		<link href="./AFEC_ week 1 - 11ty_files/css(1)" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="file:///Users/kristofmichiels/Devspace/slide.zone/css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="file:///Users/kristofmichiels/Devspace/slide.zone/css/htmlgallery.css">
+		<script src="./AFEC_ week 1 - 11ty_files/scroll-converter.min.js"></script>
+		<script src="./AFEC_ week 1 - 11ty_files/marked.min.js"></script>
+		<script src="file:///Users/kristofmichiels/Devspace/slide.zone/highlight/highlight.pack.js"></script>
+		<script src="file:///Users/kristofmichiels/Devspace/slide.zone/js/script.js" defer=""></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+	</head>
+	<body data-markdown="true" style="grid-template-columns: repeat(27, 100vw);">
+				<section data-band-name="default" data-band-id="0" data-band-unit="0" data-band-length="27"><h1 id="advanced-front-end-coding">Advanced Front-end Coding</h1>
+<h2 id="week-1---an-experiment-with-11ty">Week 1 - An experiment with 11ty</h2>
+<h4 id="kristof-michiels">Kristof Michiels</h4>
+<div class="navigation"><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">1 / 27</div></section>
+				<section class="chapter" data-band-name="default" data-band-id="0" data-band-unit="1" data-band-length="27"><h2 id="up-front">Up-front</h2>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">2 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="2" data-band-length="27"><h2 id="up-front">Up-front</h2>
+<ul>
+<li>Advanced Front-end Coding (AFEC) is an open space for experimentation</li>
+<li>Don't worry about the exam: there is none ;-)</li>
+<li>I will evaluate both your process and your work</li>
+<li>Even if the work has not been a 100% success, the process might have been interesting</li>
+<li>Make sure you've had an interesting process, and perhaps also a few interesting little experiments...</li>
+<li>... and we are cool ;-)</li>
+<li>Please don't give up!</li>
+</ul>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">3 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="3" data-band-length="27"><h2 id="required-knowledge">"Required" knowledge</h2>
+<ul>
+<li>HTML, CSS</li>
+<li>Basics of JavaScript</li>
+<li>Basics of Node (<a href="https://nodejs.org/">https://nodejs.org</a>)</li>
+<li>Basics of GitHub (<a href="https://github.com/">https://github.com</a>)</li>
+<li>Basics of working with the terminal</li>
+<li>Basics to writing Markdown (<a href="https://www.markdownguide.org/">https://www.markdownguide.org/</a>)</li>
+</ul>
+<p>(Again, don't worry. No matter what your level of expertise, we'll find something for you to do)</p>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">4 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="4" data-band-length="27"><h2 id="perseverance">Perseverance</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/perseverance.jpg" alt="11ty"></p>
+<h5 id="hang-in-there-httpsenwikipediaorgwikisisyphus">Hang in there! <a href="https://en.wikipedia.org/wiki/Sisyphus">https://en.wikipedia.org/wiki/Sisyphus</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">5 / 27</div></section>
+				<section class="chapter" data-band-name="default" data-band-id="0" data-band-unit="5" data-band-length="27"><h2 id="topics-well-dive-into">Topics we'll dive into</h2>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">6 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="6" data-band-length="27"><h2 id="topics-this-year">Topics this year</h2>
+<ul>
+<li>Static Site Generators (between plain HTML and WordPress ;-) )</li>
+<li>Front-end Frameworks: Vue.js</li>
+<li>Frameworkless development</li>
+<li>Freedom to explore everything front-end</li>
+</ul>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">7 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="7" data-band-length="27"><h2 id="for-a-sneak-peak-into-vuejs">For a sneak peak into vue.js</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-vue.png" alt="Vue"></p>
+<h5 id="httpsvuejsorg"><a href="https://vuejs.org/">https://vuejs.org</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">8 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="8" data-band-length="27"><h2 id="javascript-frameworks">JavaScript Frameworks</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-frameworks.png" alt="Vue"></p>
+<h5 id="httpsmediumcomcuelogic-technologiestop-3-best-javascript-frameworks-for-2019-3e6d21eff3d0"><a href="https://medium.com/cuelogic-technologies/top-3-best-javascript-frameworks-for-2019-3e6d21eff3d0">https://medium.com/cuelogic-technologies/top-3-best-javascript-frameworks-for-2019-3e6d21eff3d0</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">9 / 27</div></section>
+
+				<section class="chapter" data-band-name="default" data-band-id="0" data-band-unit="9" data-band-length="27"><h2 id="11ty">11ty</h2>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">10 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="10" data-band-length="27"><h2 id="eleventy-is-a-simpler-static-site-generator">"Eleventy is a simpler static site generator"</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-11ty.png" alt="11ty"></p>
+<h5 id="https11tyio"><a href="https://11ty.io/">https://11ty.io</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">11 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="11" data-band-length="27"><h2 id="static-site-generators-">Static Site Generators ?</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-staticgen.png" alt="11ty"></p>
+<h5 id="httpsstaticgencom"><a href="https://staticgen.com/">https://staticgen.com</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">12 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="12" data-band-length="27"><h2 id="static-site-generators-">Static Site Generators ?</h2>
+<p>"The typical CMS driven website works by building each page on-demand, fetching content from a database and running it through a template engine. This means each page is assembled from templates and content on each request to the server."</p>
+<p>"For most sites this is completely unnecessary overhead and only adds complexity, performance problems and security issues. After all, by far the most websites only change when the content authors or their design team makes changes."</p>
+<p>"A <strong>Static Site Generator</strong> takes a different approach and generates all the pages of the website once when there's actually changes to the site. This means there's no moving parts in the deployed website. Caching gets much easier, performance goes up and static sites are far more secure."</p>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">13 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="13" data-band-length="27"><h2 id="what-is-11ty">What is 11ty</h2>
+<ul>
+<li>Written in JavaScript</li>
+<li>Allows you to build websites</li>
+<li>With pages, posts and navigation</li>
+<li>Total design freedom</li>
+<li>Easy to maintain</li>
+</ul>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">14 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="14" data-band-length="27"><h2 id="sites-made-using-11ty">Sites made using 11ty</h2>
+<ul>
+<li><a href="https://www.webstoemp.com/">https://www.webstoemp.com</a></li>
+<li><a href="https://markboulton.co.uk/">https://markboulton.co.uk/</a></li>
+<li><a href="https://okitavera.me/">https://okitavera.me/</a></li>
+<li><a href="https://every-layout.dev/">https://every-layout.dev/</a></li>
+<li><a href="https://paulrobertlloyd.com/">https://paulrobertlloyd.com/</a></li>
+<li><a href="https://hire.wil.to/">https://hire.wil.to/</a></li>
+<li><a href="https://www.fantomas-ls.com/">https://www.fantomas-ls.com/</a></li>
+</ul>
+<p>(More here: <a href="https://www.11ty.io/docs/sites/">https://www.11ty.io/docs/sites/</a>)</p>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">15 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="15" data-band-length="27"><h2 id="competitors">Competitors</h2>
+<ul>
+<li>Jekyll (Ruby)</li>
+<li>Hugo (Go)</li>
+<li>Hexo (JavaScript)</li>
+<li>Gatsby (JavaScript using React)</li>
+<li>Nuxt (JavaScript using Vue)</li>
+</ul>
+<p>(if you wanna try one of those, be my guest!)</p>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">16 / 27</div></section>
+				<section class="chapter" data-band-name="default" data-band-id="0" data-band-unit="16" data-band-length="27"><h2 id="the-challenge">The challenge</h2>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">17 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="17" data-band-length="27"><h2 id="the-challenge">The challenge</h2>
+<ul>
+<li>Build a better designed personal site than I will using 11ty :-)</li>
+<li>Try to get as far as you can by next tuesday</li>
+<li>Next tuesday we'll review all of our sites and talk about them</li>
+<li>I will document my process and talk about it</li>
+<li>I will create a site, share source code and discuss it with you</li>
+<li>I will create an easy-to-use workflow to maintain my site and will talk about it</li>
+<li>You will then have extra time to finish your site</li>
+</ul>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">18 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="18" data-band-length="27"><h2 id="try-deploy-your-experiment-to-github">Try: deploy your experiment to GitHub</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-ghpages.png" alt="GitHub"></p>
+<h5 id="httpsgithubcom"><a href="https://github.com/">https://github.com</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">19 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="19" data-band-length="27"><h2 id="bonus-try-deploy-your-experiment-to-netlify">Bonus try: deploy your experiment to Netlify</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-netlify.png" alt="Netlify"></p>
+<h5 id="httpsnetlifycom"><a href="https://netlify.com/">https://netlify.com</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">20 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="20" data-band-length="27"><h2 id="bonus-try-deploy-your-experiment-to-netlify">Bonus try: deploy your experiment to Netlify</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-netlify-connect.png" alt="Netlify"></p>
+<h5 id="httpsnetlifycom"><a href="https://netlify.com/">https://netlify.com</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">21 / 27</div></section>
+				<section class="chapter" data-band-name="default" data-band-id="0" data-band-unit="21" data-band-length="27"><h2 id="getting-you-started">Getting you started</h2>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">22 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="22" data-band-length="27"><h2 id="youll-try-to-climb-this-mountain-first-yourself">You'll try to climb this mountain first yourself</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/perseverance.jpg" alt="11ty"></p>
+<h5 id="hang-in-there">Hang in there!</h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">23 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="23" data-band-length="27"><h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.11ty.io/">https://www.11ty.io</a></li>
+<li><a href="https://www.11ty.io/docs/">https://www.11ty.io/docs/</a></li>
+<li><a href="https://www.youtube.com/watch?v=p7TkCS01lI8&amp;t=91s">https://www.youtube.com/watch?v=p7TkCS01lI8&amp;t=91s</a></li>
+<li><a href="https://www.youtube.com/watch?v=JpK0G4vQjZI">https://www.youtube.com/watch?v=JpK0G4vQjZI</a></li>
+<li><a href="https://www.youtube.com/watch?v=dS4IWTITNQM&amp;list=PLOSLUtJ_J3roi5Eb3v-SkUV3nfGIyc_LF&amp;index=3">https://www.youtube.com/watch?v=dS4IWTITNQM&amp;list=PLOSLUtJ_J3roi5Eb3v-SkUV3nfGIyc_LF&amp;index=3</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLOSLUtJ_J3rrJ1R1qEf8CCEpV3GgbJGNr">https://www.youtube.com/playlist?list=PLOSLUtJ_J3rrJ1R1qEf8CCEpV3GgbJGNr</a></li>
+<li><a href="https://hylia.website/">https://hylia.website/</a></li>
+</ul>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">24 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="24" data-band-length="27"><h2 id="start-here">Start here</h2>
+<p><img src="file:///Users/kristofmichiels/Devspace/slide.zone/img/afec-11tydocs.png" alt="11ty docs"></p>
+<h5 id="httpswww11tyiodocs"><a href="https://www.11ty.io/docs/">https://www.11ty.io/docs/</a></h5>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">25 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="25" data-band-length="27"><h2 id="enjoy-the-ride">Enjoy the ride!</h2>
+<ul>
+<li>Imagine that this question came from a client, internship,... =&gt; for real, and you are on your own</li>
+<li>If it really doesn't work out for you, prepare a static personal site!</li>
+</ul>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a><a id="toRight" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">→</a></div><div class="pagination">26 / 27</div></section>
+				<section data-band-name="default" data-band-id="0" data-band-unit="26" data-band-length="27"><h2 id="afec---1---an-experiment-with-11ty">AFEC - 1 - An experiment with 11ty</h2>
+<div class="navigation"><a id="toLeft" href="file:///Users/kristofmichiels/Devspace/slide.zone/presentaties/afec-1-11ty.html#">←</a></div><div class="pagination">27 / 27</div></section>
+	
+
+</body></html>
