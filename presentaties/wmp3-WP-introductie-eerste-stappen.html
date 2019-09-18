@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+	<head>
+		<title>WMP3: WP - Introductie - Eerste stappen</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Webmediaproductie 3
+							## WordPress - Introductie en eerste stappen
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Introductie
+				</section>
+				<section>
+							## Wat gaan we doen in WMP3?
+
+							- Basiskennis voor het designen en ontwikkelen voor het web met WordPress
+							- WordPress thema's bouwen
+							- WordPress als platform: het maken van een webwinkel met WordPress
+
+							(Dit vak heeft geen examen ;-) Dus: goed de oefeningen mee maken en alles is ok!)
+				</section>
+				<section>
+							## WordPress.org
+							![WordPress.org](../img/wmp3-wordpressorg.png)
+							##### https://wordpress.org
+				</section>
+				<section>
+							## WordPress.org
+							- "WordPress is open source..."
+							- "software you can use..."
+							- "to create a beautiful website, blog, or app"
+				</section>
+				<section>
+							## WordPress.org - download WordPress
+							![WordPress.org](../img/wmp3-wordpressorgdownload.png)
+							##### https://wordpress.org
+				</section>
+				<section>
+							## Get WordPress
+							- "Get WordPress"
+							- "Use the software that powers over 34% of the web"
+							- "Download WordPress and use it on your site"
+				</section>
+				<section>
+							## WordPress moet gehost worden op een web server
+							![Combell](../img/wmp3-combell.png)
+							##### https://www.combell.com/nl/ (hosten kost geld, je krijgt eerstdaags een bericht op Digitap)
+				</section>
+				<section>
+							## WordPress is zeer uitgebreid :-/
+							![Boeing cockpit](../img/wmp3-cockpit.png)
+							##### WordPress is een platform. Ermee leren werken neemt tijd. Je vrij voelen als designer neemt tijd en oefening.
+				</section>
+				<section>
+							## Gelukkig loont de moeite die je erin steekt
+							![Motionmill](../img/wmp3-motionmill.png)
+							##### https://motionmill.com (Antwerpen Berchem)
+				</section>
+				<section>
+							## Testen of een site met WP gemaakt is? Isitwp doet dat
+							![Isitwp](../img/wmp3-isitwp.png)
+							##### https://isitwp.com
+				</section>
+				<section>
+							## Isitwp test: Motionmill.com is gemaakt in WP :-)
+							![Isitwp scan Motionmill](../img/wmp3-isitwp-motionmill.png)
+							##### https://isitwp.com
+				</section>
+				<section>
+							## Wat gaan we doen: concreet
+							- Positionering WordPress binnen het CMS-landschap. Overzicht van de alternatieven
+							- Karakteristieken van het WordPress-platform
+							- Wanneer wel een CMS, wanneer een applicatie-op-maat?
+							- Installeren van een WordPress lokaal als ontwikkelomgeving én op een webserver
+							- Beheer en uitbouw: vertrouwd raken met de basisfunctionaliteit
+							- Diverse media toevoegen. Slideshows, banners toevoegen
+							- SEO-instellingen WordPress
+							- Gebruik van templates en thema's. Aanpassen van bestaande thema's
+							- Selecteren, toevoegen en werken met WordPress plugins
+				</section>
+				<section>
+							## Wat gaan we doen: gevorderd
+							- WordPress thema’s bouwen
+							- Overzicht van de mogelijkheden: kindthema's, starterthema's, of volledig zelf bouwen
+							- Maken van een eigen thema
+							- WordPress als basis voor een e-commercesite
+							- Maken van een webwinkel met WordPress
+				</section>
+				<section class="chapter">
+							## Positionering binnen het CMS landschap / WP of een app op maat?
+				</section>
+				<section>
+							## WordPress technisch
+							- Wordpress geschreven in PHP. PHP is een "server-side" programmeertaal
+							- Wanneer je voor je computer zit en een webpagina opvraagt, gebeurt er een klein gesprek tussen jouw browser (__de client__) en de andere computer waar de bestanden zich op bevinden (__de server__)
+							- De webserver stuurt de opgevraagde bestanden telkens netjes door naar de browser van de client
+							- Je browser kan enkel HTML, CSS en JavaScript-bestanden lezen en uitvoeren.
+							- __Statische webapplicaties__ bestaan enkel uit dit type bestanden. De webserver hoeft ze alleen maar door te sturen
+							- Het nadeel van statische webapplicaties: je moet elke pagina handmatig aanmaken
+				</section>
+				<section>
+							## Client-server model
+							![client-server model](../img/wmp5-clientserver.png)
+							##### https://en.wikipedia.org/wiki/Client%E2%80%93server_model
+				</section>
+				<section>
+							## WordPress technisch
+							- Bij __dynamische webapplicaties__ ligt dat anders. Daar gaat de webserver telkens een vraag van de client komt eerst nog code uitvoeren vooraleer het antwoord door te sturen
+							- PHP is een technologie die altijd op een server wordt uitgevoerd
+							- Bvb: telkens een WordPress-pagina wordt opgevraagd wordt met behulp van PHP databankinformatie opgevraagd en wordt op basis hiervan "dynamisch" een HTML-pagina samengesteld en naar de client opgestuurd
+							- De browser krijgt dus __nooit__ PHP-code te zien. En dat is maar goed ook, want de browser "spreekt" geen PHP
+				</section>
+				<section>
+							## "dynamische" webpagina's
+							![dynamische webpagina](../img/wmp5-dynamicpage.png)
+							##### https://en.wikipedia.org/wiki/Dynamic_web_page
+				</section>
+				<section>
+							## Een tussenvorm: static site generators
+							![staticgen](../img/afec-staticgen.png)
+							##### https://staticgen.com
+				</section>
+				<section>
+							## Static Site Generators ?
+
+							"The typical CMS driven website works by building each page on-demand, fetching content from a database and running it through a template engine. This means each page is assembled from templates and content on each request to the server."
+
+							"For most sites this is completely unnecessary overhead and only adds complexity, performance problems and security issues. After all, by far the most websites only change when the content authors or their design team makes changes."
+
+							"A __Static Site Generator__ takes a different approach and generates all the pages of the website once when there's actually changes to the site. This means there's no moving parts in the deployed website. Caching gets much easier, performance goes up and static sites are far more secure."
+				</section>
+				<section>
+							## CMS staat voor Content Management System
+							- CMSen zijn systemen om digitale content te maken en te beheren
+							- De klant heeft geen designer of ontwikkelaar meer nodig om zijn website aan te passen
+							- Maar kan dit zelf doen
+							- Bij WordPress heeft de klant een dashboard waar dit kan gebeuren
+							- Volgende week verkennen we dit aspect van WordPress
+				</section>
+				<section>
+							## Alternatieven? Waarom focussen op WordPress?
+							![W3Techs](../img/wmp3-w3techs.png)
+							##### https://w3techs.com/technologies/overview/content_management/all
+				</section>
+				<section>
+							## WP of een app op maat? Wat doen professionals?
+							- Kleine websites met beperkt budget die niet of heel weinig moeten veranderen: statische website
+							- Kleine tot middelgrote websites die door designer of technisch min of meer onderlegd moeten kunnen worden gewijzigd: static site generator
+							- Heel specifieke toepassingen met veel dynamische functionaliteit die je enkel op maat kan maken: een app op maat (vaak duur!)
+							- Alle andere toepassingen: WordPress (of alternatief). WordPress is een platform, een ecosysteem
+				</section>
+				<section>
+							## WordPress plugins
+							![WordPress plugins](../img/wmp3-plugins.png)
+							##### https://wordpress.org/plugins/
+				</section>
+				<section>
+							## WordPress plugins: Woocommerce
+							![WordPress plugins woocommerce](../img/wmp3-plugins-woocommerce.png)
+							##### https://wordpress.org/plugins/search/woocommerce/
+				</section>
+				<section class="chapter">
+							## Eerste stappen: opdrachten tegen volgende week
+				</section>
+				<section>
+							## Opdracht 1
+							![WordPress.com](../img/wmp3-wordpresscom.png)
+							##### https://wordpress.com
+				</section>
+				<section>
+							## Opdracht 1
+							![WordPress.com](../img/wmp3-wordpresscom-account.png)
+							##### https://wordpress.com/start/user
+				</section>
+				<section>
+							## Opdracht 1
+							- Maak een account aan
+							- Creëer een site
+							- Hou het gratis
+							- Maak een postje
+							- Maak een pagina
+							- Publiceer je website en kijk eens naar de mogelijkheden
+							- Voordelen WordPress.com: geen custom ontwikkeling, geen code, in principe gratis (wel premium features)
+							- Zit je vast: https://www.linkedin.com/learning/wordpress-com-essential-training-3
+				</section>
+				<section>
+							## Opdracht 2
+							![Local by Flywheel](../img/wmp3-local-flywheel.png)
+							##### https://www.linkedin.com/learning/installing-and-running-wordpress-local-by-flywheel/
+				</section>
+				<section>
+							## Opdracht 2
+							![Local by Flywheel](../img/wmp3-local-flywheel-com.png)
+							##### https://localbyflywheel.com
+				</section>
+				<section>
+							## Opdracht 2
+							- Je volgt de tutorial "Installing and Running WordPress: Local by FlyWheel"
+							- Je installeert Local op je eigen computer, maakt een lokale versie van WordPress en verkent de omgeving adhv de tutorial
+				</section>
+				<section>
+							## WMP3 - WP - Introductie en eerste stappen
+				</section>
+	</body>
+</html>

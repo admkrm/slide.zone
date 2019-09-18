@@ -52,7 +52,6 @@
 							## Level 2 of specification being implemented in Firefox
 							![Subgrid support Can I Use](../img/it3-subgrid-support.png)
 							##### https://caniuse.com/#search=grid
-
 				</section>
 				<section>
 							## Level 2 of specification being implemented in Firefox
@@ -70,6 +69,9 @@
 							- Once a grid has been established on a containing element, __the direct children__ of that element can be placed into a flexible or fixed layout grid
 							- The grid can be __redefined using media queries__
 							- Grid is a very flexible module, so there are a number of ways to use it
+				</section>
+				<section class="chapter">
+							## Defining a grid
 				</section>
 				<section>
 							## Defining a grid
@@ -92,10 +94,14 @@
 							}
 							```
 				</section>
+				<section class="chapter">
+							## Describing rows and columns
+				</section>
 				<section>
 							## Describing rows and columns
-							- Next, you describe what the grid looks like
 							- Grids have rows and columns, which the CSS Grid Layout Module gives us properties to describe
+							- Child elements place themselves automatically on the grid according to Grid's auto-placement rules
+							- These simply fill each cell in turn with a direct child of the grid container
 
 							```CSS
 							.wrapper {
@@ -104,9 +110,6 @@
 								grid-template-rows: 10rem 10rem;
 							}
 							```
-If we take a look at our page after we’ve declared a grid, we’ll see that the child elements have placed themselves on the grid.
-They do this according to Grid’s auto-placement rules, which simply fill each cell in turn with a direct child of the grid container.
-
 				</section>
 				<section>
 							## Terminology
