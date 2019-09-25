@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+	<head>
+		<title>WMP3: WP - De basis</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Webmediaproductie 3
+							## WordPress - De basis
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Inleiding
+				</section>
+				<section>
+							## Wat gaan we vandaag zien?
+							- Een lokale site opstarten met Local by Flywheel
+							- Content aanmaken, beheren en publiceren met behulp van WordPress en de nieuwe block editor
+							- Voor de ongeduldigen: volgende week zien we het algemeen beheer van de site
+							- Ondertussen is het niet verboden om te experimenteren :-)
+				</section>
+				<section class="chapter">
+							## Local (by Flywheel)
+				</section>
+				<section>
+							## Local (by Flywheel)
+							- Maakt het opzetten van een lokale ontwikkelmachine zo pijnloos mogelijk
+							- Normaal gezien eenvoudig te installeren. Bij wie het niet lukt: laat ons dit bekijken
+							- Gebruikt VirtualBox: een virtuele server
+							- Duurt even voor Local opstart, dus wees geduldig
+							- Met Live Link: zelfs tijdelijk toegang van buitenaf naar je WP-site
+							- Toegang bestanden: home folder => local sites. Richt Atom op app => public
+							- Toegang databank => met Adminer
+				</section>
+				<section>
+							## Flywheel
+							![WordPress Flywheel](../img/wmp3-flywheel-home.png)
+							##### https://getflywheel.com
+				</section>
+				<section>
+							## Flywheel hosting => duurder marktsegment
+							![WordPress Flywheel](../img/wmp3-flywheel-pricing.png)
+							##### https://getflywheel.com
+				</section>
+				<section>
+							## Combell hosting
+							![Combell hosting](../img/wmp3-combell.png)
+							##### https://combell.be => promocode = ArtesisWEB2019
+				</section>
+				<section>
+							## Local: nieuwe site toevoegen
+							![WordPress Flywheel](../img/wmp3-local-by-flywheel.png)
+							##### Druk op de groene plus om een nieuwe site aan te maken
+				</section>
+				<section>
+							## Local by Flywheel
+							![WordPress Flywheel](../img/wmp3-local-update.png)
+							##### Af en toe zijn updates beschikbaar
+				</section>
+				<section>
+							## Local: nieuwe site naamgeving en keuzes
+							![WordPress Flywheel](../img/wmp3-local-new-site.png)
+							##### Kies een naam. Je kan hier ook zien/bepalen welke naam en plaats voor de bestanden zal worden gekozen
+				</section>
+				<section>
+							## Local: omgevingskeuzes
+							![WordPress Flywheel](../img/wmp3-local-new-site-prefs.png)
+							##### Veilige keuze: "preferred"
+				</section>
+				<section>
+							## Local: administrator account
+							![WordPress Flywheel](../img/wmp3-local-new-site-creds.png)
+							##### De sleutels tot je site. Opschrijven en onthouden is de boodschap
+				</section>
+				<section>
+							## Local by Flywheel
+							![WordPress Flywheel](../img/wmp3-local-new-site-added.png)
+							##### Nieuwe site toegevoegd: admin panel
+				</section>
+				<section>
+							## Local: "voorkant" van de nieuwe site
+							![WordPress Flywheel](../img/wmp3-local-new-site-front.png)
+							##### De eerste blik op je nieuwe site. Dit is de gebruikerszijde
+				</section>
+				<section>
+							## Local: "achterkant" van de nieuwe site
+							![WordPress Flywheel](../img/wmp3-local-new-site-back.png)
+							##### Inloggen met het administrator account: https://domeinnaam/wp-login
+				</section>
+				<section>
+							## Local: "achterkant" van de nieuwe site
+							![WordPress Flywheel](../img/wmp3-local-new-site-back-admin.png)
+							##### Het dashboard wanneer je ingelogd bent
+				</section>
+				<section>
+							## Local: een veilige https-site ipv http
+							![WordPress Flywheel](../img/wmp3-local-preferences-ssl.png)
+							##### Selecteer SSL en klik daarna op "Trust"
+				</section>
+				<section>
+							## Local: je kan een volledige export doen van je site
+							![WordPress Flywheel](../img/wmp3-local-export-files.png)
+							##### Control+klik hiervoor op je sitenaam en kies export uit het menu. Download de export als zip-bestand
+				</section>
+				<section>
+							## Local: de WP site-bestanden
+							![WordPress Flywheel](../img/wmp3-local-new-site-files.png)
+							##### Op Mac: ~/Local Sites/naamvanjesite
+				</section>
+				<section>
+							## Local: de WP site-bestanden benaderen via Atom
+							![WordPress Flywheel](../img/wmp3-local-new-site-files-atom.png)
+							##### In Atom: file => add project folder
+				</section>
+				<section>
+							## Local: de Databank van je site
+							![WordPress Flywheel](../img/wmp3-local-new-site-db.png)
+							##### Benader je via Adminer: Local => Database => Adminer
+				</section>
+				<section>
+							## Local: de Databank van je site
+							![WordPress Flywheel](../img/wmp3-local-new-site-db-export.png)
+							##### Ook via Adminer kan je de databank exporteren
+				</section>
+				<section class="chapter">
+							## Het admin panel
+				</section>
+				<section>
+							## Het admin panel
+							- Er zijn bij WP geen pagina's: enkel een idee van een pagina
+							- WP scheidt content van contentbeheer en van presentatie van de content
+							- Je vindt het admin panel op site-url/wp-admin
+							- Het admin panel bestaat uit (1) de top toolbar, (2) de admin navigation en (3) de admin panels
+				</section>
+				<section>
+							## Het admin panel
+							![WordPress Admin panel](../img/wmp3-admin-panel.png)
+							##### https://site-url/wp-admin (na het inloggen)
+				</section>
+				<section>
+							## Screen options
+							![WordPress Admin panel screen options](../img/wmp3-admin-panel-screen-options.png)
+							##### Hiermee kan je features toevoegen of verwijderen. De panels kunnen met drag/drop ook verplaatst worden
+				</section>
+				<section>
+							## Taal van de site (settings => general => site language)
+							![WordPress Admin panel taal van de site](../img/wmp3-admin-panel-language.png)
+							##### Altijd aanpassen aan de taal van de site (SEO!). Jouw profiel heeft ook een taalsetting (enkel voor jou)
+				</section>
+				<section class="chapter">
+							## Content management
+				</section>
+				<section>
+							## WP heeft 3 content types
+							- Post/bericht (= verzameling van verschillende types content)
+							- Pagina (= verzameling van verschillende types content)
+							- Media element (bestand)
+				</section>
+				<section>
+							## Posts/berichten
+							![WordPress Admin panel berichten](../img/wmp3-admin-panel-posts-all.png)
+							##### Zijn het belangrijkste content type. Worden getoond in een lijst volgens omgekeerd-chronologische volgorde
+				</section>
+				<section>
+							## Post/bericht aanmaken of bewerken
+							![WordPress Admin panel enkel bericht](../img/wmp3-admin-panel-post-single.png)
+							##### Let op: concept vs gepubliceerd, de content blokken, permalink, categorieën, tags
+				</section>
+				<section>
+							## Pagina's
+							![WordPress Admin panel pagina's](../img/wmp3-admin-panel-pages-all.png)
+							##### Pagina's zijn statische/op zichzelf staande content-elementen
+				</section>
+				<section>
+							## Een enkele pagina
+							![WordPress Admin panel enkele pagina](../img/wmp3-admin-panel-page-single.png)
+							##### Pagina's zijn statische/op zichzelf staande content-elementen
+				</section>
+				<section>
+							## Bericht of pagina?
+							- Zal het gedeeld worden op sociale media? = bericht
+							- Hoort het in het navigatiemenu te staan? = pagina
+							- Is de content altijd aanwezig (= pagina) of eerder vluchtig (=bericht)
+				</section>
+				<section>
+							## Media
+							- Bestanden
+							- Metadata: titel, beschrijving, alt-tekst, bestandsgrootte...
+							- Kunnen gebruikt/herbruikt worden op berichten/pagina's
+				</section>
+				<section>
+							## Media
+							![WordPress Admin panel media](../img/wmp3-admin-panel-media.png)
+				</section>
+				<section>
+							## Media
+							![WordPress Admin panel media](../img/wmp3-admin-panel-media-2.png)
+				</section>
+				<section>
+							## Media
+							![WordPress Admin panel media](../img/wmp3-admin-panel-media-3.png)
+				</section>
+				<section class="chapter">
+							## Werken met blokken
+				</section>
+				<section>
+							## Werken met blokken
+							- Nieuw vanaf WordPress versie 5
+							- Elk onderdeeltje informatie op een bericht/pagina is een blok
+							- Elke blok heeft eigen kenmerken en mogelijkheden
+							- De volgorde van de blokken kan worden gewijzigd
+							- Diverse bloktypes zijn mogelijk: hoofding, paragraaf, afbeelding, ...
+							- Blokken kunnen uitgelijnd worden naast elkaar, de breedte aangepast (als thema dit ondersteunt)
+							- Sterk gelinkt aan het geïnstalleerde thema (verhoogt beetje drempel om zelf thema's te maken)
+				</section>
+				<section>
+							## Diverse bloktypes
+							![WordPress Admin panel media](../img/wmp3-admin-panel-block.png)
+				</section>
+				<section>
+							## Diverse bloktypes
+							![WordPress Admin panel media](../img/wmp3-admin-panel-block-2.png)
+							##### Allemaal blokken
+				</section>
+				<section>
+							## De blok-editor taakbalk
+							![WordPress Admin panel media](../img/wmp3-admin-panel-block-3.png)
+							##### De drie puntjes: heel wat functionaliteit. Sidebar verdwijnt door op wiel te klikken. Bekijk ook opties onderaan
+				</section>
+				<section>
+							## Diverse bloktypes
+							- Maak ook eens een link/knop blok aan
+							- Je kan ermee linken naar andere berichten/pagina's op je site
+							- Experimenteer met zoveel mogelijk blokken
+							- Bekijk zeker de "meer" blok (teaser na de meer blok :-))
+							- Bekijk hun eigenschappen en probeer uit
+							- Je kan blokken van type doen veranderen
+							- Goed berichten/pagina's kunnen maken is het begin van goed kunnen werken met WordPress :-)
+				</section>
+				<section>
+							## Blokken in WordPress
+							- Elk blok heeft een taakbalk, opties en eigenschappen
+							- Teksblokken: lettergroottes aangepast aan het thema, initiaal, kleursettings, achtergrond
+							- Afbeeldingsblok: standaard uitlijning is thema-afhankelijk
+							- Bedekking/cover: afbeelding als achtergrond met tekst erover, bvb als hoofding, vaste achtergrond, bedekkingskleur, opacity van de achtergrond
+							- Galerijblok: afbeeldingsgalerij maken van afbeeldingen
+							- Layout-elementen: bvb media&tekst is een container van andere blokken, kolommen die individuele blokken kunnen bevatten
+							- Insluitingen: instagram, twitter (WP herkent bovendien automatisch geplakte links)
+				</section>
+				<section>
+							## Herbruikbare blokken
+							- Elk blok kan tot een herbruikbare blok worden omgevormd (bvb een terugkomend element dat je onderaan elk bericht wil vermelden)
+							- Blok => opties (drie puntjes) => voeg toe aan herbruikbare blokken
+				</section>
+				<section>
+							## De blok editor als code
+							![WordPress Admin blok editor code](../img/wmp3-admin-panel-block-code.png)
+							##### Je kan je berichten/pagina's ook zien als code (via document opties)
+				</section>
+				<section class="chapter">
+							## De document context
+				</section>
+				<section>
+							## De document context
+							- Je hebt een blok context en een document context
+							- Belangrijkste kenmerken: opslaan als draft, preview, publiceren
+							- Status en zichtbaarheid: openbaar, privé, beschermd met een wachtwoord. Onmiddellijk publiceren/later, ...
+							- Permalink: het url-adres die het document zal krijgen
+							- Categorieën: het belangrijkste organisatiesysteem van je site. Richtlijn: alle berichten (minstens) in één categorie. Categorieën kunnen subcategorieën hebben
+							- Tags: een bijkomend en losser systeem van bijkomende metadata. Overdrijf er niet mee
+							- Uitgelichte afbeelding: metadata. Waar het verschijnt hangt af van het thema. In principe: elke post/pagina heeft het nodig
+							- Samenvatting (legacy; moderne thema's maken gebruik van meer/more blok)
+				</section>
+				<section>
+							## De document context
+							![WordPress Admin panel document context](../img/wmp3-admin-panel-document.png)
+							##### ...
+				</section>
+				<section>
+							## Beheer categorieën
+							![WordPress Admin panel categories](../img/wmp3-admin-panel-categories.png)
+							##### Beheer van de categorieën: belangrijkste opdeling van je informatie
+				</section>
+				<section>
+							## Beheer tags
+							![WordPress Admin panel categories](../img/wmp3-admin-panel-tags.png)
+							##### Beheer van de tags: vrijere associaties, maken je informatie gemakkelijker doorzoekbaar
+				</section>
+				<section class="chapter">
+							## Opdracht
+				</section>
+				<section>
+							## Opdracht
+							- Maak enkele berichten en pagina's in je eerste eigen WordPress
+							- Experimenteer met zoveel mogelijk blokken en hun kenmerken
+							- Overloop nog eens alles wat we in deze les hebben gezien en experimenteer ermee
+				</section>
+				<section>
+							## WMP3 - WP - De basis
+				</section>
+	</body>
+</html>
