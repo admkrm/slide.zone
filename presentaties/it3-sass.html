@@ -399,34 +399,33 @@
 						- Sass adds the ability to reference the current parent selector using the ampersand as a special placeholder
 						- The ampersand inserts the parent selector, in this case a
 
-
-						```
+						<pre>
 						a {
 								font-weight: bold;
 								text-decoration: none;
 								color: red;
 								border-bottom: 2px solid red;
 
-								&:hover {
+								&amp;:hover {
 									color: maroon; border-color: maroon;
 								}
 						}
-						```
+						</pre>
 				</section>
 				<section>
 							## 7. Referencing parent selectors with &
 
 							The ampersand is also useful in inserting overrides that happen in the presence of a specific class
 
-							```
+							<pre>
 							section.main p {
 								margin: 0 0 20px 0; font-size: 18px; line-height: 1.5;
 
-								body.store & {
+								body.store &amp; {
 							        font-size: 16px; line-height: 1.4;
 							    }
 							}
-							```
+							</pre>
 				</section>
 				<section>
 							## 8. Commenting in Sass
