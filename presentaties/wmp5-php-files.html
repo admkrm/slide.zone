@@ -1,0 +1,422 @@
+<!doctype html>
+<html>
+	<head>
+		<title>WMP5: PHP - werken met bestanden</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Webmediaproductie 5
+							## PHP - Werken met bestanden
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Toepassing: dynamische afbeeldingsgalerij
+				</section>
+				<section>
+							## Een nieuwe toepassing
+							- Een dynamische webtoepassing met afbeeldingsgalerij
+							- Deze toepassing zal de mogelijkheid bieden om afbeeldingen toe te voegen via een upload form
+				</section>
+				<section>
+							## Uitgangspunten
+							- Nieuwe folder met zelfde opbouw als bij de voorbeelden die we eerder zagen
+							- Kopieer de folders __templates__ en __classes__
+							- Maak volgende nieuwe folders aan: __css__, __views__, __img__.
+							- Zorg voor een vijftal __jpg-afbeeldingen__ in de img folder
+				</section>
+				<section>
+							## De navigatiepagina
+							-	Ook deze toepassing zal uit 2 pagina views bestaan
+ 							- De eerste view toont de galerij
+ 							- De tweede view toont een form die toelaat om nieuwe afbeeldingen toe te voegen
+
+							Maak __navigatie.php__ aan in de __views__ folder met volgende code
+
+							```php
+							&lt;?php
+								return '
+								<nav>
+									<a href='index.php?pagina=galerij'>Galerij</a>
+									<a href='index.php?pagina=opladen'>Nieuwe afbeelding toevoegen</a>
+								</nav> ';
+							```
+				</section>
+				<section>
+							## Twee pagina views
+							We maken twee nieuwe pagina’s aan in de views folder: __galerij.php__ en __opladen.php__
+
+							```php
+							&lt;?php
+								//code voor views/galerij.php
+								return '<h1>Afbeeldingsgalerij</h1>';
+							```
+
+							```php
+							&lt;?php
+								//code voor views/opladen.php
+								return '<h1>Nieuwe afbeelding toevoegen</h1>';
+							```
+				</section>
+				<section>
+							## De index.php
+
+							... zou er ondertussen vertrouwd moeten uitzien
+
+							```php
+							&lt;?php
+								include_once "classes/Pagina_Data.class.php";
+								$paginaData = new Pagina_Data();
+								$paginaData->titel = "Dynamische afbeeldingsgalerij";
+								$paginaData->content = include_once "views/navigatie.php";
+								$userClicked = isset($_GET['pagina']);
+								if ($userClicked) {
+									$fileToLoad = $_GET['pagina'];
+								} else {
+									$fileToLoad = "galerij"; }
+								$paginaData->content .=include_once "views/$fileToLoad.php";
+								$pagina = include_once "templates/pagina.php";
+								echo $pagina;
+							```
+				</section>
+				<section class="chapter">
+							## Object methods
+				</section>
+				<section>
+							## 2 stylesheets toevoegen
+							- Stel: we willen twee stylesheets toevoegen
+							- We zouden dit kunnen doen vanuit index.php met volgende code:
+
+							```php
+							$paginaData->css = '<link href="css/layout.css" rel="stylesheet" />';
+							$paginaData->css .= '<link href="css/navigatie.css" rel="stylesheet" />';
+							```
+
+							- Maar: DRY-principe: don't repeat yourself. Altijd proberen zo weinig mogelijk repetitieve code te schrijven
+							- We gaan dit oplossen door gebruik van een krachtig concept: object methods
+				</section>
+				<section>
+							## Object method aanmaken
+
+							- Object methods zijn net als functies
+							- Methods worden ook gedeclareerd als functies
+							- Maar ze worden gedeclareerd binnen een klasse, hier onze Pagina_Data.class.php
+
+							```php
+							&lt;?php
+								class Pagina_Data {
+									public $titel = "";
+									public $content = "";
+									public $css = "";
+									public $embeddedStyle = "";
+									public function addCSS($href){
+										$this->css .= '<link href="$href" rel="stylesheet" />';}
+								}
+							```
+				</section>
+				<section>
+							## $this ?
+							Wanneer je binnen een klasse definitie verwijst naar het object zelf, dan gebruik je $this
+
+							```php
+							public function addCSS($href){
+								$this->css .= '<link href="$href" rel="stylesheet" />';
+							}
+							```
+				</section>
+				<section>
+							## De nieuwe method gebruiken
+							Je kan nu de nieuwe method gebruiken vanuit index.php
+
+							```php
+							$paginaData->addCSS('css/layout.css');
+							$paginaData->addCSS('css/navigatie.css');
+							```
+				</section>
+				<section>
+							## Een functie om afbeeldingen te tonen
+							We passen __views/galerij.php__ aan en starten met volgende code
+
+							```php
+							&lt?php
+								return toonAfbeeldingen();
+								function toonAfbeeldingen(){
+									$out = '<h1>Afbeeldingsgalerij</h1>';
+									$out .= '<ul id="afbeeldingen">';
+									$out .= '<li>Hier komen de afbeeldingen te staan</li>';
+									$out .= '</ul>';
+									return $out;
+								}
+							```
+				</section>
+				<section>
+							## Itereren met while loops
+							While loops herhalen dezelfde blok code zolang aan de voorwaarde is voldaan
+
+							```php
+							while ($voorwaarde) {
+								//code die dient herhaald te worden
+							}
+							```
+
+							```php
+							&lt;?php
+								$nummer = 1;
+								while ($nummer < 5) {
+									echo "deze while loop heeft $nummer loops gemaakt<br />";
+									$nummer = $nummer + 1;
+								}
+							```
+				</section>
+				<section class="chapter">
+							## DirectoryIterator
+				</section>
+				<section>
+							## DirectoryIterator
+							- We kunnen een native PHP object gebruiken om de inhoud van een folder weer te geven: __DirectoryIterator__
+							- Hieronder een algemeen voorbeeld waarin DirectoryIterator wordt gebruikt
+							- Met de valid() method weet je wanneer je te maken hebt met een bestaand item in de folder
+							- Met de next() method ga je naar het volgende item
+
+							```php
+							$filesInFolder = new DirectoryIterator("img");
+							$numItemsInFolder = 0;
+							while ($filesInFolder->valid()) {
+								$numItemsInFolder = $numItemsInFolder + 1;
+								$filesInFolder->next();
+							}
+							echo "$numItemsInFolder items gevonden in folder img";
+							```
+				</section>
+				<section>
+							## views/galerij.php: toonAfbeeldingen() aanpassen
+
+							```php
+							function toonAfbeeldingen(){
+								$out = '<h1>Afbeeldingsgalerij</h1><ul id="afbeeldingen">';
+								$folder = 'img';
+								$filesInFolder = new DirectoryIterator($folder);
+								while ($filesInFolder->valid()) {
+									$file = $filesInFolder->current();
+									$filename = $file->getFilename();
+									$src = '$folder/$filename';
+									$fileInfo = new Finfo(FILEINFO_MIME_TYPE);
+									$mimeType = $fileInfo->file($src);
+									if ($mimeType === 'image/jpeg') {$out .= '<li><img src="$src" /></li>';}
+									$filesInFolder->next();
+								}
+								$out .= '</ul>';
+								return $out;
+							}
+							```
+				</section>
+				<section>
+						## Afbeeldingen opladen met een form
+						- We maken een form aan in een nieuw bestand, __views/upload-form.php__
+						- We gebruiken een HTML form met method en action eigenschappen
+						- Als we bestanden willen opladen via HTTP moeten we ook een __enctype__ eigenschap toevoegen en die gelijk stellen aan __multipart/form-data__
+						- Ook nieuw: input type="ﬁle" zorgt voor een file upload control. Heeft een accept eigenschap
+				</section>
+				<section>
+						## views/upload-form.php
+
+						```php
+						&lt;?php
+							return '
+								<h1>Nieuwe JPG afbeeldingen opladen</h1>
+								<form method="post" action="index.php?pagina=opladen"
+								enctype="
+								multipart/form-data" >
+								<label>JPG afbeelding vinden om op te laden</label>
+								<input type="file" name="image-data" accept="image/jpeg"/>
+								<input type="submit" value="upload" name="new-image" /></form>';
+						```
+				</section>
+				<section>
+						## Deze form tonen
+						- We passen hiervoor __views/opladen.php__ aan
+						- Als eerste stap...
+
+						```php
+						&lt;?php
+								$output = include_once 'views/upload-form.php';
+								return $output;
+						```
+
+				</section>
+				<section class="chapter">
+							## $_FILES
+				</section>
+				<section>
+						## $_FILES
+						- Wanneer we een afbeelding opladen via een HTML form, dan kan de bestandsdata opgevraagd worden via de $_FILES superglobal array
+						- We gaan via print_r() eerst kijken naar wat PHP ziet
+						- Pas hiervoor views/opladen.php aan (zie volgende slide)
+						- Je kan nu de form testen en een jpg bestand selecteren...
+				</section>
+				<section>
+						## $_FILES met print_r()
+
+						```php
+						&lt;?php
+							//tijdelijke code voor views/opladen.php
+							$newImageSubmitted = isset($_POST['new-image']);
+							if ($newImageSubmitted) {
+								$output = opladen();
+							} else {
+								$output = include_once "views/upload-form.php";
+							}
+							return $output;
+
+							function opladen(){
+								$out = '<pre>';
+								$out .= print_r($_FILES, true);
+								$out .= '</pre>';
+								return $out;
+							}
+				</section>
+				<section>
+							## $_FILES met print_r(): output
+							- De array $_FILES heeft 1 index: image-data (= name eigenschap van de upload control)
+							- Binnen $_FILES['image-data'] zit er nog een array met 5 indices: name, type, tmp_name, error, size
+							- $_FILES[‘image-data']['tmp_name'] = plaats waar de file data tijdelijk wordt opgeslagen
+
+							```
+							Array (
+								[image-data] => Array (
+									[name] => afbeelding.jpg
+									[type] => image/jpeg
+									[tmp_name] => /Applications/XAMPP/xamppfiles/temp/phpYPcBjK
+									[error] => 0
+									[size] => 119090 )
+							)
+							```
+				</section>
+				<section>
+							## Bestanden uploaden met PHP
+							- Je neemt de tijdelijke filedata en je slaat ze permanent op
+							- Je moet aangeven in welke folder je wil opslaan en welke filenaam je aan het bestand wil geven
+							- Er is een native PHP functie die dit voor je doet: move_uploaded_file()
+							- Eerste argument ($data) moet correcte bestandsdata bevatten
+							- Tweede argument ($bestemming) moet een bestaande beschrijfbare folder zijn
+							- Deze functie geeft TRUE terug als het bestand succesvol werd opgeslagen, FALSE bij een fout
+
+							```
+							move_uploaded_file( $data,$bestemming );
+							```
+				</section>
+				<section>
+							## Een oplader klasse aanmaken
+
+							- Bestanden opladen: als PHP ontwikkelaar is het een vaak voorkomende zaak.
+							- Om code herbruikbaar te maken gaan we een klasse aanmaken
+							- We maken een nieuw bestand aan, __classes/Oplader.class.php__
+
+							```php
+							&lt;?php
+								class Oplader {
+									private $filename;
+									private $fileData;
+									private $destination;
+									public function saveIn( $folder ) {
+										$this->destination = $folder;
+									}
+									public function save(){ /*hier nog geen code*/ }
+								}
+							```
+				</section>
+				<section>
+							## __construct
+
+							```php
+							&lt;?php
+								class Oplader {
+									private $filename;
+									private $fileData;
+									private $destination;
+									//een constructor method aanmaken
+									public function __construct($key) {
+										$this->filename = $_FILES[$key]['name'];
+										$this->fileData = $_FILES[$key]['tmp_name'];
+									}
+									public function saveIn( $folder ) {
+										$this->destination = $folder;
+									}
+									public function save(){/*hier nog geen code*/ }
+								}
+							```
+				</section>
+				<section>
+							## __construct
+							- Je kan methods creëren die enkel worden gebruikt bij de creatie van het object
+							- We noemen dit type method een constructor
+							- $fileName en $fileData krijgen zo vanuit $_FILES hun invulling bij de creatie van het object
+							- $key moet hier identiek zijn aan het value attribuut van de upload control (image-data)
+				</section>
+				<section>
+							## Het bestand opslaan
+							- We moeten nu enkel nog de save-method aanpassen
+							- We zorgen voor de nodige foutmeldingen indien we niet naar de folder kunnen schrijven...
+
+							```php
+							//gedeeltelijke code voor classes/Oplader.class.php
+							public function save(){
+								$folderIsWriteAble = is_writable( $this->destination );
+								if( $folderIsWriteAble ){
+									$name = "$this->destination/$this->filename";
+									$succes = move_uploaded_file( $this->fileData, $name ); }
+								else {
+									trigger_error("kan niet schrijven naar $this->destination");
+									$succes = false; }
+								return $succes;
+							}
+							```
+				</section>
+				<section>
+							## De oplader klasse gebruiken
+							- De meeste code zit in onze Oplader klasse
+							- Aanroepen en gebruik van deze klasse vanuit opladen.php is al wat nodig is om bestanden op te laden
+
+							```php
+							function opladen(){
+								include_once "classes/Oplader.class.php";
+								$oplader = new Oplader("image-data");
+								$oplader->saveIn("img");
+								$fileUploaded = $oplader->save();
+								if ($fileUploaded) {
+									$out = "nieuw bestand opgeladen";
+								} else {
+									$out = "er is iets foutgelopen";
+								}
+								return $out;
+							}
+							```
+				</section>
+				<section>
+							## Img-folder: web server met schrijfrechten
+							- Vergeet niet de rechten voor everyone op lezen en schrijven te zetten
+							- Anders kan Apache het opgeladen bestand niet toevoegen aan de img-folder
+							- Op Mac bvb via rechtsklikken op folder en info selecteren
+				</section>
+				<section>
+							## Opdracht
+							- Bekijk de broncode grondig die bij deze les hoort
+							- Zelfstudie: zorg ervoor dat je deze code goed begrijpt tegen morgen
+				</section>
+				<section>
+							## WMP5 - PHP - Werken met bestanden
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
