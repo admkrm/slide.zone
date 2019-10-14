@@ -82,6 +82,9 @@
 							![MariaDB](../img/wmp5-mysql-6.png)
 							##### http://localhost:8080/phpmyadmin/server_sql.php
 				</section>
+				<section class="chapter">
+							## Nieuwe app: poll site
+				</section>
 				<section>
 							## Als voorbeeld: een poll site
 							- Als voorbeeld zullen we een een databankgedreven poll site ontwikkelen
@@ -213,6 +216,9 @@
 							- We gaan in onze applicatie de databank die we daarnet hebben gemaakt gebruiken als opslagruimte
 							- We gaan hiervoor een PDO object gebruiken. Dit object zal onze app binden met een MySQL databank
 							- We zullen ook gebruik maken van een code-design patroon dat ervoor zal zorgen dat onze code gestructureerd kan worden opgeslagen: MVC
+				</section>
+				<section class="chapter">
+							## Het MVC-patroon
 				</section>
 				<section>
 							## Model-View-Controller patroon
@@ -434,80 +440,98 @@
 							Hier zie je hoe het $pollData object kan gebruikt worden om data weer te geven
 
 							```php
-							<?php //code voor views/poll-html.php return " <div id='poll'>
-
-<h1>Poll resultaat</h1>
-
-<ul>
-
-<li>$pollData->ja zeiden ja</li>
-
-<li>$pollData->nee zeiden nee</li>
-
-</ul> </div> ";
+							&lt;?php
+							//code voor views/poll-html.php
+							return '
+								<div id="poll">
+								<h1>Poll resultaat</h1>
+								<ul>
+									<li>$pollData->ja zeiden ja</li>
+									<li>$pollData->nee zeiden nee</li>
+								</ul>
+								</div> ';
 							```
 				</section>
 				<section>
 							## Een poll form tonen
-							We tonen de form in views/poll-html.php
- Het $pollData object is essentieel voor het functioneren van de form
- Je kan testen of het object beschikbaar is
- Indien niet dan can je een custom foutboodschap trieerden (trigger_error), zoals we hier doen
-
+							- code staat op volgende slide
+							- We tonen de form in views/poll-html.php
+							- Het $pollData object is essentieel voor het functioneren van de form
+							- Je kan testen of het object beschikbaar is
+							- Indien niet dan can je een custom foutboodschap trieerden (trigger_error), zoals we hier gaan doen
 				</section>
 				<section>
 							## Een poll form tonen
 
 							```php
-							<?php  //code voor views/poll-html.php  $dataGevonden = isset( $pollData );  if( $dataGevonden === false ){
-
-trigger_error( 'views/poll-html.php noodzaakt een $pollData object' ); } return " <div id='poll'>
-
-<form method='post' action='index.php'> <p>$pollData->poll_vraag</p> <select name='user-input'> <option value=‘ja’>Ja, het is moeilijk!</option> <option value=‘nee’>Nee, niet echt!</option> </select> <input type='submit' value='post' />
-
-</form>
-
-<h1>Poll resultaten</h1>
-
-<ul>
-
-<li>$pollData->ja zeiden ja</li>
-
-<li>$pollData->nee zeiden nee</li>
-
-</ul> </div> ";
+							&lt;?php 
+							$dataGevonden = isset( $pollData ); 
+							if( $dataGevonden === false ){
+								trigger_error( 'views/poll-html.php noodzaakt een $pollData object' );
+							}
+							return '<div id="poll">
+								<form method="post" action="index.php"> <p>$pollData->poll_vraag</p>
+								<select name="user-input">
+								<option value="ja">Ja, het is moeilijk!</option>
+								<option value="nee">Nee, niet echt!</option> </select>
+								<input type="submit" value="post" />
+								</form>
+								<h1>Poll resultaten</h1>
+								<ul>
+								<li>$pollData->ja zeiden ja</li>
+								<li>$pollData->nee zeiden nee</li>
+								</ul></div> ';
 							```
 				</section>
 				<section>
 							## Databank tabel updaten
-							Als een gebruiker de poll beantwoordt, dan moeten we de tabel aanpassen
- We maken hiervoor een nieuwe method aan in de Poll class
- De databank updaten hoort te gebeuren in een model, gebruikersinput behandelen: dat is werk voor een controller
- We zullen de updatePoll() method dan ook aanroepen vanuit de controller
-							```php
-							<?php // nieuwe method in de Poll class… public function updatePoll ( $input ) {
-
-if ( $input === "ja" ) { $updateSQL = "UPDATE poll SET ja = ja+1 WHERE poll_id = 1"; } else if ( $input === "nee" ) {
-
-$updateSQL = "UPDATE poll SET nee = nee+1 WHERE poll_id = 1"; } $updateStatement = $this->db->prepare($updateSQL); $updateStatement->execute();
-
-}								```
+							- Als een gebruiker de poll beantwoordt, dan moeten we de tabel aanpassen
+							- We maken hiervoor een nieuwe method aan in de Poll class
+							- De databank updaten hoort te gebeuren in een model, gebruikersinput behandelen: dat is werk voor een controller
+							- We zullen de updatePoll() method dan ook aanroepen vanuit de controller
 				</section>
 				<section>
-								## Behandelen van gebruikersinput
-								Doen we in de poll controller. We gebruiken hiervoor de volgende code…
+							## Databank tabel updaten
 
+							```php
+							&lt;?php
+							// nieuwe method in de Poll class…
+							public function updatePoll ( $input ) {
+							if ( $input === "ja" ) {
+								$updateSQL = "UPDATE poll SET ja = ja+1 WHERE poll_id = 1";
+							} else if ( $input === "nee" ) {
+								$updateSQL = "UPDATE poll SET nee = nee+1 WHERE poll_id = 1";
+							}
+							$updateStatement = $this->db->prepare($updateSQL);
+							$updateStatement->execute();
+							}
+							```
+				</section>
+				<section>
+							## Behandelen van de gebruikersinput
+							- Doen we in de poll controller
+							- We gebruiken hiervoor de volgende code...
+							- Hiermee hebben we de laatste steen gelegd aan onze eerste databank-gedreven toepassing
+							- Probeer deze applicatie zelf te doen functioneren
+							- In haar eenvoud illustreert ze niet alleen hoe je een databank kan gebruiken om data uit op te vragen en naar weg te schrijven, maar ook hoe je je code scheidt volgens het MVC patroon
+				</section>
+				<section>
+							## Behandelen van de gebruikersinput
 
-Hiermee hebben we de laatste steen gelegd aan onze eerste databank-gedreven toepassing
- Probeer deze applicatie zelf te doen functioneren
- In haar eenvoud illustreert ze niet alleen hoe je een databank kan gebruiken om data uit op te vragen en naar weg te schrijven, maar ook hoe je je code scheidt volgens het MVC pattern.
-									```php
-									<?php //volledige code voor controllers/poll.php include_once "models/Poll.class.php"; $poll = new Poll( $db ); $isPollAanwezig = isset( $_POST['user-input'] ); if ( $isPollAanwezig ) {
-
-$input = $_POST['user-input'];
-
-$poll->updatePoll( $input ); } $pollData = $poll->getPollData(); $pollAlsHTML = include_once "views/poll-html.php"; return $pollAlsHTML;
-									```
+							```php
+							&lt;?php
+							//volledige code voor controllers/poll.php
+							include_once "models/Poll.class.php";
+							$poll = new Poll( $db );
+							$isPollAanwezig = isset( $_POST['user-input'] );
+							if ( $isPollAanwezig ) {
+								$input = $_POST['user-input'];
+								$poll->updatePoll( $input );
+							}
+							$pollData = $poll->getPollData();
+							$pollAlsHTML = include_once "views/poll-html.php";
+							return $pollAlsHTML;
+							```
 				</section>
 				<section>
 							## WMP5 - PHP - Werken met databanken
