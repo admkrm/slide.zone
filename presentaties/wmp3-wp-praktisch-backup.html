@@ -1,0 +1,345 @@
+<!doctype html>
+<html>
+	<head>
+		<title>WMP3: WP - Praktisch - Backup</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Webmediaproductie 3
+							## WordPress - Praktisch - Backup
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## SSL & HTTPS
+				</section>
+				<section>
+							## SSL & HTTPS
+							![SSL & HTTPS](../img/wmp3-praktisch-1.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/ssl/webmediaproductie3_be
+				</section>
+				<section>
+							## SSL & HTTPS
+							![SSL & HTTPS](../img/wmp3-praktisch-2.png)
+							##### https://letsencrypt.org/
+				</section>
+				<section>
+							## SSL & HTTPS
+							- Combell doet dit automatisch
+							- Hiermee kan https als protocol worden gebruikt voor je site
+							- https://en.wikipedia.org/wiki/HTTPS
+							- Google straft sinds juni 2018 http-sites met een lagere ranking
+				</section>
+				<section class="chapter">
+							## WordPress backup strategie
+				</section>
+				<section>
+							## Backup strategie
+							- Belangrijk om een strategie te hebben los van Combell
+							- Er kan altijd iets gebeuren met de site en/of de data
+							- Nooit 100% garantie vanuit webhosting bedrijf
+							- Webservers kunnen crashen en data verliezen
+							- Je site en/of backups kunnen gehackt worden
+							- Zelfs je backups op de server zelf zijn dan niet meer betrouwbaar
+							- Soms moet of wil je zelf veranderen van hosting provider
+				</section>
+				<section>
+							## Termen
+							- Backup = een kopie maken van je site of bepaalde onderdelen
+							- Restore = een backup terugzetten na een probleem of dataverlies
+				</section>
+				<section>
+							## Wat te backuppen?
+							- WordPress-bestanden (eens per maand of minder)
+							- Thema's en plugins (eens per maand of telkens na een wijziging)
+							- Databank (maandelijks, wekelijks, elk uur, afhankelijk van veranderlijkheid/belang van site)
+							- Uploads folder (maandelijks, wekelijks, elk uur, afhankelijk van veranderlijkheid/belang van site)
+				</section>
+				<section>
+							## Oplossingen die we gaan zien
+							- Handmatige backup en restore
+							- Door de webhost (Combell in ons geval) aangeboden backup en restore
+							- Door plugins (3rd party) aangeboden backup en restore
+							- Door plugins (3rd party) aangeboden migratie
+				</section>
+				<section>
+							## Belangrijk bij backups
+							- Gebruik meerdere overlappende oplossingen
+							- Loopt er iets mis bij de ene, dan kan de andere oplossing je redden
+							- Bvb gebruik maken van Combell backup en eigen backups via een plugin
+				</section>
+				<section class="chapter">
+							## Handmatige backup en restore
+				</section>
+				<section>
+							## Handmatig backuppen
+							- Belangrijk dat je dit kan
+							- Toont dat je weet hoe een WordPress site werkt en welke onderdelen belangrijk zijn
+				</section>
+				<section>
+							## De databank
+							- Toegang via webhost
+							- Onze databank is van het type MySQL
+							- Vaak phpMyAdmin: hiermee kan je de databank beheren
+							- Meeste tabellen in databank zijn belangrijk, sommige aangemaakt door plugins
+				</section>
+				<section>
+							## Webhost en databanken
+							![Combell databanken](../img/wmp3-praktisch-3.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/databases/webmediaproductie3_be
+				</section>
+				<section>
+							## phpMyAdmin
+							![phpMyAdmin](../img/wmp3-praktisch-4.png)
+							##### https://phpmyadmin.combell.com/db_structure.php?server=1&db=ID303682_wmp3
+				</section>
+				<section>
+							## Data backuppen
+							- Gaan we doen via een export
+							- Levert een bestand op dat we gaan downloaden
+							- Zorg dat je in de databank zelf ziet: niet op server, of in een specifieke tabel
+				</section>
+				<section>
+							## phpMyAdmin: data export
+							![Data export](../img/wmp3-praktisch-5.png)
+							##### https://phpmyadmin.combell.com/db_structure.php?server=1&db=ID303682_wmp3
+				</section>
+				<section>
+							## phpMyAdmin: data export
+							![Data export](../img/wmp3-praktisch-6.png)
+							##### Compressie: gzipped, maakt bestand kleiner
+				</section>
+				<section>
+							## phpMyAdmin: data export
+							![Data export](../img/wmp3-praktisch-7.png)
+							##### Object creation options - deze twee opties aanvinken
+				</section>
+				<section>
+							## phpMyAdmin: data export
+							![Data export](../img/wmp3-praktisch-8.png)
+							##### Onderaan op go klikken en site backup begint te downloaden - leesbaar bestand, bevat SQL
+				</section>
+				<section>
+							## phpMyAdmin: restore
+							![Data restore](../img/wmp3-praktisch-9.png)
+							##### Zorg dat je in de database bent - klik restore - kies bestand - klik op Go onderaan
+				</section>
+				<section>
+							## WordPress bestanden backuppen
+							- Toegang tot de bestanden via webhosting-bedrijf
+							- Soms een web-gebaseerd bestandsbeheer
+							- Combell werkt met FTP (of SSH)
+							- Via een FTP-programma kan je aan je bestanden
+							- Niet alle bestanden en folders even belangrijk
+							- Belangrijk: wp-content folder, .htaccess bestand, wp-config bestand
+				</section>
+				<section>
+							## Combell: FTP
+							![Data restore](../img/wmp3-praktisch-12.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/ftp-users/webmediaproductie3_be
+				</section>
+				<section>
+							## Filezilla
+							![Filezilla](../img/wmp3-praktisch-11.png)
+							##### Filezilla = gratis FTP-applicatie
+				</section>
+				<section>
+							## FTP bestanden
+							![FTP bestanden](../img/wmp3-praktisch-10.png)
+							##### Zorg dat je in de database bent - klik restore - kies bestand - klik op Go onderaan
+				</section>
+				<section>
+							## WordPress bestanden backuppen
+							- Thema's, plugins en uploads zitten in WP_content
+							- .htaccess: hoe WP communiceert met de web server
+							- wp-config.php: o.m. hoe WP communiceert met databank
+							- Andere bestanden zijn optioneel, al kun je uiteraard kiezen voor een volledige manuele backup
+				</section>
+				<section>
+							## WordPress bestanden restoren
+							- Bij bepaalde problemen: best om een nieuwe versie van WordPress te installeren en enkel bovengenoemde folder en files terug te kopiëren via FTP
+							- Je kan ook een volledige restore doen
+				</section>
+				<section class="chapter">
+							## Door de webhost aangeboden backup en restore
+				</section>
+				<section>
+							## Door de webhost aangeboden backup en restore
+							- Verschilt van host tot host
+							- Soms zeer gebruiksvriendelijk: klikken en restoren
+							- Soms minder geautomatiseerd
+							- Hoe vaak backups worden genomen en hoe lang ze bewaard blijven hangt ook af van host tot host
+							- Nogmaals: belang van dubbele strategie
+							- Combell: je kan geen handmatige backup maken
+				</section>
+				<section>
+							## Door de webhost aangeboden backup en restore
+							![Combell backups](../img/wmp3-praktisch-14.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/backup/webmediaproductie3_be
+				</section>
+				<section>
+							## Door de webhost aangeboden backup en restore
+							![Combell backups](../img/wmp3-praktisch-15.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/backup/webmediaproductie3_be
+				</section>
+				<section>
+							## Door de webhost aangeboden backup en restore
+							![Combell backups](../img/wmp3-praktisch-16.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/backup/webmediaproductie3_be
+				</section>
+				<section>
+							## Door de webhost aangeboden backup en restore
+							![Combell backups](../img/wmp3-praktisch-17.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/backup/webmediaproductie3_be
+				</section>
+				<section>
+							## Door de webhost aangeboden backup en restore
+							![Combell backups](../img/wmp3-praktisch-18.png)
+							##### https://my.combell.com/nl/product/webhosting/linux/backup/webmediaproductie3_be
+				</section>
+				<section class="chapter">
+							## Backup en restore via een plugin
+				</section>
+				<section>
+							## Backup via een plugin
+							- Superbelangrijk om ook een eigen backup strategie te hebben
+							- Combinatie: hosting backup + plugin backup
+							- Veel mogelijkheden
+							- Wij kiezen hier voor UpdraftPlus
+				</section>
+				<section>
+							## UpdraftPlus
+							![UpdraftPlus](../img/wmp3-praktisch-19.png)
+							##### https://updraftplus.com/
+				</section>
+				<section>
+							## UpdraftPlus
+							![UpdraftPlus](../img/wmp3-praktisch-20.png)
+							##### https://updraftplus.com/
+				</section>
+				<section>
+							## UpdraftPlus
+							![UpdraftPlus](../img/wmp3-praktisch-21.png)
+							##### https://updraftplus.com/
+				</section>
+				<section>
+							## UpdraftPlus
+							![UpdraftPlus](../img/wmp3-praktisch-23.png)
+							##### https://updraftplus.com/
+				</section>
+				<section>
+							## UpdraftPlus
+							![UpdraftPlus](../img/wmp3-praktisch-22.png)
+							##### https://updraftplus.com/
+				</section>
+				<section>
+							## Dropbox
+							![UpdraftPlus](../img/wmp3-praktisch-25.png)
+							##### https://dropbox.com/ : gratis account aanmaken voor elke site
+				</section>
+				<section>
+							## UpdraftPlus: restore proces
+							![UpdraftPlus](../img/wmp3-praktisch-26.png)
+							##### https://updraftplus.com/
+				</section>
+				<section class="chapter">
+							## Migratie via een plugin
+				</section>
+				<section>
+							## Migratie via een plugin
+							- Een backup = een kopie van een WP site/databank
+							- Migratie = overzetten van een WP site/databank naar een nieuwe omgeving
+							- Een voorbeeld: van lokaal naar online, veranderen van hosting provider
+							- Heel gelijkaardig aan backuppen en restoren
+							- En is ook eigenlijk bijna hetzelfde
+							- Veel plugins voor migratie beschikbaar
+							- Soms zorgen ze voor backup én migratie, net zoals backup plugins ook vaak migratie-opties aanbieden
+				</section>
+				<section>
+							## All-in-one WP Migration
+							![WordPress Online gaan](../img/wmp3-online-28.png)
+							##### Je installeert deze plugin op je lokale site én op je site op Combell
+				</section>
+				<section>
+							## All-in-one WP Migration
+							![WordPress Online gaan](../img/wmp3-online-29.png)
+							##### Klaar met je lokale site? Doe een export...
+				</section>
+				<section>
+							## All-in-one WP Migration
+							![WordPress Online gaan](../img/wmp3-online-30.png)
+							##### Klaar met je lokale site? Doe een export naar een bestand
+				</section>
+				<section>
+							## All-in-one WP Migration
+							![WordPress Online gaan](../img/wmp3-online-31.png)
+							##### Ga naar je site op Combell, log in en doe een import. Pas op: alle settings, ook paswoord worden overgenomen
+				</section>
+				<section class="chapter">
+							## Oefening
+				</section>
+				<section>
+							## Oefening
+							- Maak tegen dinsdag 5 november een nieuwe WordPress site
+							- Je vertrekt van een bestaande KMO (bvb hairequipe.be)
+							- Geen posts, enkel pagina's
+							- Je kiest voor een uitgebalanceerd thema
+							- BELANGRIJK: je gaat experimenteren met de pagebuilder Elementor
+							- Niet snel-snel maar goed!
+							- Uiteraard staat de site online: je stuurt in de opdracht de URL door
+							- Je werkt hiervoor met een Combell subsite (zie slides vorige week)
+				</section>
+				<section>
+							## hairequipe
+							![hairequipe](../img/wmp3-praktisch-27.png)
+							##### Ga naar je site op Combell, log in en doe een import. Pas op: alle settings, ook paswoord worden overgenomen
+				</section>
+				<section>
+							## Elementor
+							- Een pagebuilder plugin
+							- Je installeert de plugin op de site en je kan ze vanaf dan gebruiken om pagina's of posts mee vorm te geven
+							- Hoe werken met Elementor? Volg de videos van de Ultimate Elementor Guide (zie volgende slide)
+							- We gaan dieper in op Elementor in de volgende les
+							- Jij gaat nu laten zien dat je ook zelf het basisgebruik van deze plugin onder de knie kan krijgen
+				</section>
+				<section>
+							## Elementor
+							![Elementor](../img/wmp3-praktisch-28.png)
+							##### https://elementor.com/getting-started
+				</section>
+				<section>
+							## Elementor plugin
+							![Elementor](../img/wmp3-praktisch-29.png)
+							##### https://elementor.com
+				</section>
+				<section>
+							## Elementor in dashboard
+							![Elementor](../img/wmp3-praktisch-30.png)
+							##### https://elementor.com
+				</section>
+				<section>
+							## Elementor bij nieuwe pagina
+							![Elementor](../img/wmp3-praktisch-31.png)
+							##### https://elementor.com
+				</section>
+				<section>
+							## Elementor pagebuilder
+							![Elementor](../img/wmp3-praktisch-32.png)
+							##### https://elementor.com
+				</section>
+				<section>
+							## WMP3 - WP - Praktisch - backup
+				</section>
+	</body>
+</html>
