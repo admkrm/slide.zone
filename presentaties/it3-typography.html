@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>HTML.gallery - 1</title>
+		<title>IT3: Typography</title>
 		<link rel="stylesheet" type="text/css" href="../css/reset.css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
@@ -19,7 +19,6 @@
 				<section>
 							# Information Technology 3
 							## Typesetting for the Web
-							### Made with Agnes.js
 							#### Kristof Michiels
 				</section>
 				<section class="chapter">
@@ -27,26 +26,22 @@
 				</section>
 				<section>
 							## The importance of typesetting
-							- As a reader, you know the importance of well formatted, expertly styled text
-							- Good typesetting makes the act of reading recede into the background. You’re not scanning letters on a page, you’re visualizing worlds
+							- Good typesetting makes the act of reading recede into the background
 							- Skillful typesetting allows readers to absorb information quickly
 							- Good typesetting is often invisible
 							- As a web designer, you should be sensitive to how text is used in design examples
 				</section>
 				<section>
-							## Typesetting for the Web
-							- Typesetting for the Web is really important
-							- Important concept: typography driven design
+							## Typography-driven design?
 							- You start your design from text
 							- It might be looked at as the secret cornerstone of flexible, responsive design
 							- This week we'll make a web page wherein typography plays an important role
 				</section>
 				<section>
 							## The nature of the text
-							- The nature of the text you will be using is really important
-							- Take responsibility for the text
+							- The nature of the text is really important
 							- You have to care about the text in order to make a good web design out of it
-							- With real-world projects: getting good text copy will sometimes be a problem
+							- In real-world projects: getting good text copy will sometimes be a problem
 							- As a general rule, if you don’t have enough text, ask for more
 							- If it’s not the final version, ask for an update
 							- If the text is going to change all the time, like news, find some representative example text
@@ -70,7 +65,7 @@
 							- It’s our core means of establishing hierarchy, patterns, and meaning
 				</section>
 				<section>
-							## Reset default styles
+							## Refresher: reset default styles
 							- Most browsers and user agents ship with default styles
 							- To counter this, use reset stylesheet
 							- Eric Meyer has advocated the use of reset stylesheets since 2007
@@ -79,28 +74,20 @@
 				</section>
 				<section>
 						## Framing the composition
-						- The problem is that we need to frame our compositions differently for the web than for traditional media
+						- Framing compositions is different for the web than for traditional media
 						- We don't have control over the myriad of screens our text will be read on
-						- We do however have one reliable building block for typesetting today: default font size
-
-						``` html
-							<meta name="viewport" content="width=device-width">
-						```
-
-						``` css
-							@viewport {
-								width: device-width;}
-
-							:root {
-								font-size: 100%;}
-						```
+						- First, we need to make sure readers see our composition at its actual size on any device, without any artificial scaling
 				</section>
 				<section>
 						## Framing the composition
-						- First, we need to make sure readers see our composition at its actual size on any device, without any artificial scaling, while maintaining their ability to zoom in if they want to
-						- We do this with CSS Device Adaptation—the @viewport rule. It is telling the browser to fit the width of our layout to the width of a person’s device. This makes our text actual-size, instead of scaling it to match a specific pixel-based width
-						- Note that it’s important to specify both the @viewport descriptor in CSS and the HTML meta tag, because browsers currently use either one or the other
+						- We do this with the viewport metatag
+						- It tells the browser to fit the width of our layout to the width of a person’s device
+						- A reliable building block for typesetting: default font size
 						- You can set the font-size to 100%, or for example to 62.5%, which makes an em or rem 10px in size
+
+						```html
+						&lt;meta name="viewport" content="width=device-width, initial-scale=1">
+						```
 
 						``` css
 							:root {
@@ -113,11 +100,30 @@
 				<section>
 						## Getting to webfonts
 						- Webfonts aren’t hard to find
-						- Places like Adobe Typekit or Fontstand are better than Google Fonts, but cost money. For professional designers it is not an issue
+						- Places like Adobe Typekit or Fontstand are better than Google Fonts, but cost money
 						- Repositories of free and open-source fonts—even something as convenient as Google Fonts—have significantly fewer choices for text use
 						- In many of these fonts, character sets are incomplete, random glyphs look wrong, critical features are missing, spacing is sloppy, and styles like bold and italic are either nonexistent or incongruous with the main style
 						- Design pros will immediately spot this :-/
-						- Still: in your exercise you are allowed to use fonts.google.com or download fonts from a free font platform
+				</section>
+				<section>
+							## Adobe fonts
+							![Adobe fonts](../img/it3-fonts-1.png)
+							##### https://fonts.adobe.com/
+				</section>
+				<section>
+							## How to add Adobe fonts to your website
+							![Adobe fonts](../img/it3-fonts-2.png)
+							##### https://helpx.adobe.com/fonts/using/add-fonts-website.html
+				</section>
+				<section>
+							## Adobe fonts
+							![Adobe fonts](../img/it3-fonts-3.png)
+							##### https://fonts.adobe.com/
+				</section>
+				<section>
+							## Adobe fonts
+							![Adobe fonts](../img/it3-fonts-4.png)
+							##### https://fonts.adobe.com/
 				</section>
 				<section>
 					## Getting webfonts
@@ -140,9 +146,6 @@
 								src: url("SourceSansPro-Regular.woff2") format("woff2");
 						}
 					```
-
-					Here’s an example using the “deepest possible browser support” recommendation from CSS-Tricks ( ):
-					https://css-tricks.com/snippets/css/using-font-face/
 				</section>
 				<section>
 					## Declaring the fonts
@@ -159,9 +162,6 @@
 								font-style: bold;
 						}
 					```
-
-					Because you’ve defined the Source Sans Pro family, the browser knows which files to use when you refer to that name in a declaration. If you’re writing your own @font-face definitions, the family name can be anything you wish.
-					If you’re using Typekit or Google fonts, check the Kit Editor for the family name.
 				</section>
 				<section class="chapter">
 					## Designing your page
@@ -170,11 +170,10 @@
 					## Creating text-based layouts
 					- Everything matters here: the fonts you select (do they match?), the horizontal margins, the vertical margins, the line heights, ...
 					- Everything needs to be in balance
-					- There is no shortcut. People often turn to script libraries or frameworks they hope will make it easier to manage a site’s typography or save development time by handling all of the details
-					- Such a typographic system makes decisions on your behalf. But in the end it al comes down to the skills of the designer. You need to be able to do it yourself
+					- There is no shortcut: you have to experiment and work hard to make it work
 				</section>
 				<section>
-					## Limiting the width of your text
+					## Don't make the text too wide: limit the width
 
 					``` css
 						:root {
@@ -236,11 +235,11 @@
 					```
 				</section>
 				<section>
-					## Vertical margins
+					## Margins
 					- If you’re using a margin between paragraphs, try a margin-bottom equivalent to half of the line height,
 					or try a small number from your modular scale
 					- Whichever value you choose, use rem units so that vertical margins relate to the body-text font size
-					- And set vertical margins in a single direction on every element: https://csswizardry.com/2012/06/single-direction-margin-declarations/
+					- And set margins in a single direction on every element: https://csswizardry.com/2012/06/single-direction-margin-declarations/
 
 					``` css
 						h1 {
@@ -250,13 +249,6 @@
 								margin-bottom: 1.5rem;}
 					```
 
-				</section>
-				<section>
-					## Horizontal margins
-					- Here also, you can work on feeling
-					- Horizontal margin sizes can fluctuate a lot, from very tight to very loose, and still look okay
-					- But make deliberate decisions about these, too. At the body text’s narrowest, or when a small screen pressures the text to be even narrower, what amount of marginal, horizontal space should surround the text?
-					- Here of course CSS Grid comes into play (or positioning)
 				</section>
 				<section>
 					## Different sizes for different screen widths
@@ -273,38 +265,38 @@
 							}
 					```
 				</section>
+				<section>
+					## Experiment with responsive typography
+
+					If you use vw for font-size then the font-size will adapt itself to the available width
+
+					``` css
+
+							h1 {
+								font-size: 5vw;
+							}
+					```
+				</section>
 				<section class="chapter">
-					## Your exercise for this week
+					## Your assignment for this week
 				</section>
 				<section>
 					## Exercise
-					- You will make a web page combining 5 poems you have selected from http://www.poetryfoundation.org
-					- You will select at least 3 webfonts that you will use appropriately on this page
-					- Pay attention to all the stuff we have seen today: all that stuff matters
-					- Choose your heights, margins, line-heights, colors, ... carefully
+					- You will write a biography page (1 page, scroll-down style) for one of the following artists: Peter Paul Rubens, Pieter Bruegel, Antoon Van Dyck, Hieronymus Bosch
+					- The page will consist only of text, no images
+					- You play with type, color, size, grid layout (+ positioning), space, CSS transitions & animations
+					- You will select at least 3 Adobe fonts that you will use appropriately on this page
+					- Pay attention to all the stuff we have seen today: details matter
 					- Your site needs to be typography (and mobile) first, and should be responsive
-					- Please take note that this is a visual experiment, not an actual website that you are making
-					- As a tip: look at the site of London based designer Kate Moross: https://www.katemoross.com/ For smaller screen widths the images are stacked underneath each other. For larger screen widths position is used to give this a spread effect. Perhaps you could do the same with your poems?
 				</section>
 				<section>
-							## Poetry Foundation
-							![Poetry Foundation](/img/poetry.jpg)
-							##### https://www.poetryfoundation.org
+							## Use your imagination
+							![Adobe fonts](../img/it3-fonts-5.png)
+							##### No dull text please => make a text sculpture. Try letting the artist's style shine through in your design
 				</section>
+
 				<section>
-							## Kate Moross
-							![Kate Moross](/img/kate1.jpg)
-							##### https://katemoross.com
-				</section>
-				<section>
-							## Kate Moross
-							![Kate Moross](/img/kate2.jpg)
-							##### https://katemoross.com
-				</section>
-				<section>
-							## Information Technology 3
-							### Questions?
-							#### kristof.michiels01@ap.be
+							## IT 3 - Typography
 				</section>
 	</body>
 </html>
