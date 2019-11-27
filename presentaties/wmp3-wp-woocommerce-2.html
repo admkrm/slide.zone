@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+	<head>
+		<title>WMP3: WP - WooCommerce - bis</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Webmediaproductie 3
+							## WordPress - WooCommerce - vervolg
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## WooCommerce: verzendkosten
+				</section>
+				<section>
+							## WooCommerce: verzendkosten
+							- Kopers: snel, gratis, opties (leverancier)
+							- Verkoper: aanvaardbaar qua prijs, één provider
+							- Grote producten: logistieke partner?
+							- WooCommerce moet omkunnen met al die mogelijkheden
+							- Wij: starten met één optie / gratis verzenden
+				</section>
+				<section>
+							## WooCommerce Shipping zones
+							![WordPress](../img/wmp3-woo2-1.png)
+							##### WooCommerce -> Settings -> Shipping zones
+				</section>
+				<section>
+							## WooCommerce: zones
+							- WooCommerce -> settings -> shipping
+							- Volgorde is belangrijk: eerste zone die past zal getoond worden
+							- Van lokaal naar globaal
+							- Aan elk van die zones -> verzendmethode koppelen
+				</section>
+				<section>
+							## WooCommerce Shipping methods
+							![WordPress](../img/wmp3-woo2-2.png)
+							##### Shipping zones -> Add shipping method
+				</section>
+				<section>
+							## WooCommerce: Flat rate
+							- Kosten bvb 5
+							- Kosten bvb 5 + 2*[qty]
+							- Klik op vraagteken: meerdere opties
+							- Naam geven: "standaard verzenden", "express verzenden", elk met eigen kost
+							- Eenvoudig om in te stellen, zeer veelzijdig, maar is een schatting dus kan geld kosten
+							- Goed om mee te starten
+				</section>
+				<section>
+							## WooCommerce: gratis verzenden
+							- Zeer geapprecieerd door klanten
+							- Selecteer free shipping
+							- En kies bvb "minimum order amount"
+							- Minimum order amount: bvb 50eur
+							- Zal klanten soms een extra item doen bestellen om aan 50eur te geraken
+				</section>
+				<section>
+							## WooCommerce: live rates
+							- Extra plugins noodzakelijk
+							- bvb USPS
+							- Je kan API rates gebruiken
+							- Te vermijden voor je eerste webwinkel
+				</section>
+				<section>
+							## WooCommerce: labels afdrukken
+							- Gratis label functionaliteit in WooCommerce
+							- WooCommerce -> Orders -> Shipping Label
+							- Create shipping label
+							- Je zal een betaalkaart moeten toevoegen om dit te doen werken
+							- Enkel doen bij een echte e-commerce store
+							- Je kan dan ook order status veranderen: van "processed" naar "completed"
+				</section>
+				<section>
+							## WooCommerce Bpost plugin
+							![WordPress](../img/wmp3-woo2-3.png)
+							##### https://nl-be.wordpress.org/plugins/bpost-shipping/
+				</section>
+				<section>
+							## Shipstation
+							![WordPress](../img/wmp3-woo2-4.png)
+							##### shipstation.com (of Shippo, ShippingEasy...)
+				</section>
+				<section class="chapter">
+							## WooCommerce: betalingen
+				</section>
+				<section>
+							## WooCommerce: betalingen
+							- Hiermee maak je een echte e-commerce store van je site
+							- We hebben bij de installatie reeds 2 gateways toegevoegd (en tijdelijk gedeactiveerd)
+							- Paypal (inloggen eigen account en geld transfereren)
+							- Stripe (gegevens invullen op eigen site)
+							- Achter de schermen: zeer complex gegeven -> verifiëren geld, storten, …
+							- HTTPS verplicht, SSL certificate noodzakelijk (Let’s encrypt)
+				</section>
+				<section>
+							## PayPal
+							- Enkel e-mail adres noodzakelijk voor "Paypal standard"
+							- Veilig en eenvoudig te activeren
+							- Sommige webstores krijgen 50% van transacties via PayPal => zeer populair
+							- Zorg hierbij dat de plugin geïnstalleerd en geactiveerd is
+							- Instellen via WooCommerce -> Settings -> Payments
+							- Andere plugin: WooCommerce PayPal Checkout Payment gateways	- - Biedt nog meer opties (werkt enkel met PayPal business account)
+				</section>
+				<section>
+							## PayPal
+							- Bij PayPal standard => je klikt op setup
+							- PayPal email veld => jouw emailadres dat je hebt gebruikt bij aanmaak PayPal account
+							- "Enable PayPal sandbox" => om te testen
+							- "Enable logging" => Enkel loggen indien je een probleem hebt
+							- PayPal identity token => interessant om te gebruiken
+							- PayPal API ook gebruiken => je kan dan bvb direct refunden vanuit WooCommerce
+							- Heel interessant om dat eens echt uit te testen bij je eigen site. Dus sterk aangeraden maar niet verplicht
+				</section>
+				<section>
+							## Stripe
+							- Reeds geïnstalleerd: WooCommerce Stripe Payment Gateway plugin
+							- Niet vergeten te activeren!
+							- Instellen via WooCommerce -> Settings -> Payments -> Stripe
+							- Bij de settings heb je verschillende opties die je allemaal kan aanvinken:
+								- Handig: je kan een testaccount aanmaken ("Enable test mode")
+								- Bij Stripe.com kan je een gratis testaccount krijgen
+								- Publishable key toevoegen
+								- Secret key toevoegen
+				</section>
+				<section>
+							## Stripe
+							- Heel interessant om dat eens echt uit te testen bij je eigen site. Dus sterk aangeraden maar niet verplicht
+							- "Capture charge immediately" = verzendkosten automatisch meenemen in de kost
+							- Apple Pay / Chrome Pay kunnen ook gebruikt worden via Stripe
+							- "Enable Payment via Saved Cards" = via een token, veilig
+				</section>
+				<section>
+							## Andere vormen van betaling
+							- "Cash on Delivery" = offline betaling bestelling gaat on-hold tot er betaald is
+							- Weet dat er tal van andere betaalmogelijkheden zijn: overweeg ze bij een echte webwinkel
+							- Als je ook een fysieke winkel hebt: overweeg Square
+				</section>
+				<section class="chapter">
+							## WooCommerce: taksen
+				</section>
+				<section>
+							## WooCommerce: taksen
+							- Instellen via WooCommerce -> settings -> Tax
+							- "Enable automated taxes" staat standaard ingesteld en is goede keuze
+							- Je kan ook alles manueel opzetten
+							- Hierdoor kan WooCommerce in zowat elk land worden gebruikt
+							- Tarieven kunnen gezet worden via dezelfde tab
+							- Belangrijk: met een boekhouder doorspreken indien je een echte store opent
+				</section>
+				<section>
+							## WooCommerce: taksen
+							- Wat kan je specificeren?
+								- Prijzen inclusief of exclusief taks
+								- Totaal aan taksen op de rekening
+								- ...
+				</section>
+				<section class="chapter">
+							## Google Analytics integratie
+				</section>
+				<section>
+							## Google Analytics integratie
+							- Gratis service om consumentengedrag in je webwinkel na te gaan
+							- Gratis plugin: WooCommerce Google analytics integration plugin
+							- Betalende premium plugin: WooCommerce Google Analytics Pro
+							- Gebouwd door het WooCommerce team zelf
+							- Instellen via WooCommerce -> settings -> Integration
+							- Nodig: Google Analytics ID
+				</section>
+				<section>
+							## Google Analytics integratie
+							- Interessante instellingen:
+								- "Enable Standard Tracking": ook voor de rest van uw site
+								- "Enable Universal Analytics": geeft je veel meer data
+								- "Purchase Transactions"
+								- "Add to Cart Events"
+								- "Enable Enhanced eCommerce"
+				</section>
+				<section class="chapter">
+							## Mailchimp integratie
+				</section>
+				<section>
+							## Mailchimp integratie
+							- Nieuwsbrieven sturen: https://mailchimp.com
+							- Er is een gratis plan indien er nog niet veel klanten zijn
+							- Beschikbare plugin: MailChimp for WooCommerce
+							- Activeren en API key toevoegen (die key krijg je via je Mailchimp account)
+							- 1 lijst per winkel / segmenteren kan dan via (aankoop-)gedrag
+							- Vraag gebruikers expliciet om toestemming (=opt-in, verplicht in Europa door GDPR)
+							- "Inschrijven op nieuwsbrief" bij checkout-proces
+				</section>
+				<section class="chapter">
+							## Facebook integratie
+				</section>
+				<section>
+							## Facebook integratie
+							-	Via gratis Plugin: Facebook for WooCommerce
+							- Kan zeer effectief zijn om verkopen te genereren of nieuwe klanten aan te trekken
+							- Je moet uiteraard een Facebook pagina hebben voor je winkel
+							- Je kunt op die manier adverteren bij mensen of zelfde publiek die ook naar je site komt
+				</section>
+				<section class="chapter">
+							## Overige functionaliteit
+				</section>
+				<section>
+							## Overige functionaliteit
+							-	Bekijk zeker ook het orderoverzicht, coupons en reports
+							- Bekijk ook de overige WooCommerce settings
+				</section>
+				<section class="chapter">
+							## Eindopdracht WMP3
+				</section>
+				<section>
+							## Maak een eigen webwinkel
+							- Deadline: 20 december
+							- Vierde site: je dient ook de adressen in van de overige 3 sites
+							- Je hebt dus nog tijd om die andere drie te vervolmaken
+							- Je winkel heeft een duidelijke identiteit en is perfect afgewerkt
+							- Doe het goed en respecteer de deadline: belangrijk voor een goede score voor dit vak
+				</section>
+				<section>
+							## Maak een eigen webwinkel
+							- Je winkel heeft minstens 12 producten
+							-	3 van die producten zijn zijn verkrijgbaar in verschillende kleuren (of een andere variant)
+							- Gebruik ook het Storefront thema
+							- Bijzonder aandacht voor shop page, welcome page en product page!
+							- Aangeraden om betalingen, google analytics, Mailchimp uit te proberen
+							- Je site heeft een aantal pagina's
+							- Je site heeft een blog met echte content (minstens 5 posts)
+							- Je gebruikt Elementor voor het opmaken van de pagina's/posts
+				</section>
+				<section>
+							## WMP3 - WP - WooCommerce
+				</section>
+	</body>
+</html>
