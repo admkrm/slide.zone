@@ -38,7 +38,7 @@
 				<section>
 							## Wat is Responsive web design?
 							- Aanpak die toelaat dat een website goed weergegeven wordt op alle toestellen/schermafmetingen
-							- Alle toestellen krijgen zelfde html
+							- html schrijf je éénmaal en geldt voor alle schermen
 							- De CSS wordt gedeeltelijk aangepast aan de afmetingen van de viewport
 							- Responsive web sites werken goed op smartphones, tablet en desktop
 							- Belangrijk: ze zien er ook goed voortreffelijk uit op élke schermbreedte daar tussenin
@@ -48,8 +48,8 @@
 							- Mobiele revolutie (iPhone vanaf 2007) zorgde voor een veelheid aan schermen
 							- Vandaag heeft de smartphone de desktop voorbij gestoken qua marktaandeel
 							- e-commerce-winkels zien meer klanten binnenkomen via smartphone en tablet dan via desktop
-							- Voor moderne web designers als ons is "responsive design" gewoon web design. We hebben geen keuze
-							- Het is de standaard manier geworden om de realiteit van de verschillende toestellen te omarmen
+							- Voor web designers vandaag is "responsive design" gewoon web design. We hebben geen keuze
+							- Het is de standaard manier geworden om met de realiteit van de verschillende toestellen om te gaan
 				</section>
 				<section>
 							## The old days: 1024x768px
@@ -135,15 +135,15 @@
 				</section>
 				<section>
 							## Media queries
-							- We kunnen met media queries in alle vrijheid aanpassingen maken aan onze designers
-							- Een voorbeeld hier is het opdelen van content in meerdere kolom naarmate de schermbreedte toeneemt
+							- We kunnen met media queries in alle vrijheid aanpassingen maken aan onze designs
+							- Een voorbeeld hier is het opdelen van content in meerdere kolommen naarmate de schermbreedte toeneemt
 							- Je schrijft ze zoals op onderstaand voorbeeld. Let op dat je jezelf niet verliest in de vele accolades. Met correcte en heldere insprongen werken helpt
 
 							```
 							body {
 								background-color: tomato;}
 
-							@media (min-width: 80rem) {
+							@media (min-width: 800px) {
 									body {
 										background-color: limegreen;}
 							}
@@ -157,7 +157,7 @@
 							- Je kan dit dus rustig weglaten maar weet wat het betekent als je er eentje ziet
 
 							```
-							@media screen and (min-width: 80rem) {
+							@media screen and (min-width: 800px) {
 									body {
 										background-color: limegreen;}
 							}
@@ -177,7 +177,7 @@
 							body {
 								background-color: tomato;}
 
-							@media (min-width: 80rem) {
+							@media (min-width: 800px) {
 									body {
 										background-color: limegreen;}
 							}
@@ -190,7 +190,6 @@
 							- Op deze manier kunnen we eerst de algemene stijlregels schrijven
 							- Wordt vervolgens voldaan aan de criteria van de media query dan wordt extra CSS toegepast
 							- Eén css bestand kan meerdere media queries bevatten
-							- Herinner je dat we in onze stylesheet ook een @supports-query zullen hebben die nagaat of de browser van de bezoeker grid layout ondersteunt
 				</section>
 				<section>
 							## Hoe media queries gebruiken?
@@ -199,17 +198,17 @@
 							body {
 								background-color: tomato;}
 
-							@media (min-width: 80rem) {
+							@media (min-width: 800px) {
 									body {
 										background-color: limegreen;}
 							}
 
-							@media (min-width: 120rem) {
+							@media (min-width: 1200px) {
 									body {
 										background-color: purple;}
 							}
 
-							@media (min-width: 140rem) {
+							@media (min-width: 1400px) {
 									body {
 										background-color: magenta;}
 							}
@@ -217,13 +216,10 @@
 							```
 				</section>
 				<section>
-							## Mobile first
-							- Wij gaan altijd beginnen met designen voor het kleinste scherm
-							- Mobile first is de naam van deze design strategie
+							## Mobile first als design strategie
 							- Je begint hierbij eerst na te denken over de mobiele versie van je webpagina
 							- Gaandeweg breid je uit naar de bredere schermversies
 							- Designvoordeel: je concentreert je eerst op de kleinste schermen. Er is minder ruimte dus de essentiële features van je applicatie komen naar de voorgrond
-							- Voordeel voor ons is ook dat dit goed samengaat met onze strategie voor browsers die grid layout niet ondersteunen. We geven ze dan een veredelde mobiele versie van onze site
 				</section>
 				<section>
 							## Breekpunten kiezen
@@ -233,37 +229,18 @@
 				</section>
 				<section>
 							## Rem-gebaseerde breekpunten
-							- We zetten onze breekpunten met een min-width media query en werken steeds met rem-waarden
+							- We zetten onze breekpunten met een min-width media query en werken steeds met pixel-waarden
 
 							```
 							body {
 								background-color: tomato;}
 
-							@media (min-width: 80rem) {
+							@media (min-width: 800px) {
 									body {
 										background-color: limegreen;}
 							}
 							```
 				</section>
-				<section>
-							## Onze strategie
-
-							```
-							body {max-width:100rem;}
-
-							@supports (grid-area: auto) {
-
-								body {max-width:none;}
-
-								@media (min-width: 80rem) {
-									main {
-										display: grid;
-										grid-template-columns: 1fr 1fr;}
-								}
-							}
-							```
-				</section>
-
 				<section class="chapter">
 							## Positioning
 				</section>
@@ -394,7 +371,6 @@
 				</section>
 				<section>
 							## IT1 - Responsive Web design - Positioning
-							### Vragen?
 							#### kristof.michiels01@ap.be
 				</section>
 	</body>
