@@ -77,6 +77,7 @@
 								if (i % 3 === 0) {
 									somVanAlleGetallenDeelbaarDoorDrie += i;
 								}
+								i++;
 							}
 							console.log(somVanAlleGetallenDeelbaarDoorDrie);
 							```
@@ -675,10 +676,10 @@
 							let mijnDivs = document.querySelectorAll("div");
 							let i = 0;
 							while (i &lt; mijnDivs.length) {
-								mijnElement[i].addEventListener("mouseover", function(){
+								mijnDivs[i].addEventListener("mouseover", function(){
 									this.style.backgroundColor = "blue";
 								});
-								mijnElement[i].addEventListener("mouseout", function(){
+								mijnDivs[i].addEventListener("mouseout", function(){
 									this.style.backgroundColor = "white";
 								});
 								i++;
