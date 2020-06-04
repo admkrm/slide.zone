@@ -67,7 +67,7 @@ em {
 /*  -------------------  */
 
 section {
-      border-bottom: 1px solid #222222;
+      /*border-bottom: 1px solid #222222;*/
 }
 
 section:first-child, section:last-child {
