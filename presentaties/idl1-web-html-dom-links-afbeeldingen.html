@@ -1,0 +1,397 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IDL1-web: Introductie tot HTML deel 2</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Interface Design Lab 1 - Web
+							## HTML: DOM, Links en Afbeeldingen
+							### Links en afbeeldingen
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In deze presentatie
+							- DOM of Document Object Model
+							- Links (a element)
+								- Naar externe pagina's
+								- Naar documenten binnen je website
+								- Naar een specifiek punt binnen een webpagina
+								- Een nieuw venster openen
+							- Afbeeldingen (img element)
+								- juist verwijzen naar locatie afbeelding
+								- breedte en hoogte toevoegen
+				</section>
+				<section class="chapter">
+							## De DOM: Document Object Model
+				</section>
+				<section>
+							## Nog even herhalen
+							- We schrijven al onze html binnen het body-element in onderstaande basisstructuur
+							- HTML-elementen zitten verweven in elkaar
+							- Wij geven dit voor onszelf weer door met tabinsprongen te werken
+
+							```
+							&lt;!DOCTYPE html&gt;
+							&lt;html&gt;
+								&lt;head&gt;
+									<meta charset="utf-8">
+									<title>Titel komt hier</title>
+								&lt;/head&gt;
+								&lt;body&gt;
+									Alle informatie op de pagina komt hier
+								&lt;/body&gt;
+							&lt;/html&gt;
+							```
+				</section>
+				<section>
+							## De DOM
+							- HTML tags definiëren een hiërarchische structuur die het Document Object Model wordt genoemd, kortweg de DOM
+							- Met de DOM kan geïnterageerd worden met een scripting taal als JavaScript of met CSS
+							- HTML elementen definiëren DOM-elementen. Dit zijn entiteiten die leven binnen de DOM
+							- vertaalt zich in een boomdiagram van de DOM... We spreken over:
+								- afstammelingen (descendants)
+								- kind-ouderrelaties (parents-children)
+				</section>
+				<section>
+							## DOM
+
+							```
+								&lt;body&gt;
+									  <h1>Hallo, Wereld!</h1>
+	 							 	<div>
+	 							 		<ol>
+	 							 			<li>List Item</li>
+	 							 			<li>List Item</li>
+	 							 			<li>List Item</li>
+	 							 		</ol>
+	 							 		<p>Dit is een paragraaf.</p>
+	 							 		<p>En dit een <span>tweede</span>.</p>
+	 							 	</div>
+	 							 	<ul>
+	 							 		<li>List Item <span>1</span></li>
+	 							 		<li>List Item <span>2</span></li>
+	 							 		<li>List Item <span>3</span></li>
+	 							 	</ul>
+								&lt;/body&gt;
+							```
+				</section>
+				<section>
+							## DOM
+							![DOM](../img/dom.jpg)
+							##### The DOM als boomstructuur
+				</section>
+				<section class="chapter">
+							## Link elementen
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							- "Anchor" of anker-elementen
+							- Hypertext links
+							- Zijn de essentie van het web
+							- 1 verplicht attribuut: href
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							Een voorbeeld:
+							- het href-attribuut wijst naar de site die moet worden geopend als op de link wordt geklikt
+							- Tussen &lt;a&gt; en &lt;/a&gt; schrijf je de content die aanklikbaar moet worden
+
+							```
+							<a href="http://google.com" >Ga naar de Google site</a>
+							```
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							- Om van een afbeelding een link te maken zet je de afbeelding tussen &lt;a&gt; en &lt;/a&gt;
+							- Op deze manier kan je van elk HTML content element (of groep elementen) een link maken
+
+							```
+							<a href="http://google.com" ><img src="googlelogo.gif" alt="Google Logo"></a>
+							```
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							Een voorbeeld:
+
+							```
+							<ul>
+								<li>
+									<a href="http://google.com">
+										<h2>De Google website</h2>
+										<p>Op de Google website zoek je met behulp van zoektermen.</p>
+									</a>
+								</li>
+								<li>...</li>
+								<li>...</li>
+							</ul>
+							```
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							- Browser geeft standaard weer in het blauw en onderlijnd
+							- Reeds bezochte links: paarse kleur
+							- Behoort tot vormgeving die wij gaan bepalen in CSS
+				</section>
+				<section>
+							## Het href attribuut
+
+							```
+							<a href="url">Gelinkte content</a>
+							```
+
+							- URL staat voor _Uniform Resource Locator_
+							- Aangeklikte url wordt ingeladen in hetzelfde browservenster
+							- We kunnen linken naar absolute URLs of naar relatieve URLs
+				</section>
+				<section>
+							## Absolute URLs
+
+							- Bevatten de volledige URL voor het document (inclusief http:// of https://), de domeinnaam en de padnaam (indien nodig)
+							- Je gebruikt een absolute URL indien je linkt naar een document buiten de eigen website
+							- Kan soms heel lang en intimiderend zijn
+							- Laat je hierdoor niet van de wijs brengen: het is slechts één attribuut met een ingevulde waarde
+
+							```
+							href="https://www.ap.be/opleiding/crossmedia-ontwerp"
+							```
+				</section>
+				<section>
+							## Relatieve URLs
+
+							- Beschrijven een padnaam relatief ten opzichte van het huidige document
+							- Om te linken naar documenten op je eigen site (op dezelfde webserver)
+							- Geen http of https nodig
+
+							```
+							href="contact/index.html"
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken binnen dezelfde folder
+
+							- Mag je doen door gewoon naar de bestandsnaam te wijzen
+
+							```
+							<a href="contact.html">Contacteer ons</a>
+
+							<a href="over.html">Over deze site</a>
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken naar dieper gelegen folder
+
+							- Doe je door te verwijzen naar de folder gevolgd door een slash
+							- Indien meerdere niveau's diep, dit herhalen
+
+							```
+							<a href="recepten/spaghetti.html">Spaghetti maken</a>
+
+							<a href="recepten/pastas/spaghetti.html">Spaghetti maken</a>
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken naar een hoger gelegen folder
+
+							- Hiervoor gebruik je de dot-dot-slash notatie ("../")
+							- Hiermee zeg je: ga één niveau hoger dan de huidige folder
+							- ../ staat dan voor de hoger gelegen folder en deze moet niet bij naam worden genoemd
+
+							```
+							<p><a href ="../index.html">Terug naar de homepagina</a></p>
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken naar een hoger gelegen folder
+
+							Verwijzen naar 2 niveau's hoger?
+
+							```
+							<p><a href ="../../index.html">Terug naar de homepagina</a></p>
+							```
+				</section>
+				<section>
+							## Linken met _Site Root_ -relatieve padnamen
+
+							- Starten in de root folder en van daaruit alle subfolders opsommen
+							- Begint met een slash ("/") die de rootfolder symboliseert
+							- Je hoeft die rootfolder dus niet mee te benoemen, enkel de eventuele subfolders
+							- Werken enkel indien je bestanden op een webserver staan
+
+							```
+							<a href="/recepten/spaghetti.html">Spaghetti maken</a>
+
+							<a href="/recepten/pastas/spaghetti.html">Spaghetti maken</a>
+							```
+				</section>
+				<section>
+							## Padnamen voor afbeeldingen
+							- Het src-attribuut werkt op net dezelfde manier als het href-attribuut
+							- Met het verschil dat deze laatsten naar afbeeldingen verwijzen
+
+							```
+							<img src="afbeeldingen/spaghetti.gif" alt="Spaghetti-gerecht">
+
+							<img src="../afbeeldingen/spaghetti.gif" alt="Spaghetti-gerecht">
+							```
+				</section>
+				<section>
+							## Linken naar een specifieke plek op de pagina
+
+							- Je kan ook linken binnen een pagina
+							- Vaak gebruikt om shortcuts te voorzien naar specifieke plaatsen op lange informatierijke pagina's
+							- Twee stappen:
+								- eerst ga je de bestemming identificeren (van een id voorzien)
+								- daarna ga je een link aanmaken naar deze bestemming
+
+							```
+							<a href="#mijnbestemming">Link naar ondergelegen gedeelte</a>
+							...
+							<h2 id="mijnbestemming">
+							<p>...</p>
+							```
+				</section>
+				<section>
+							## Linken naar een specifieke plek op de pagina
+
+							- Je kan deze techniek ook gebruiken om te linken van beneden naar bovenaan de webpagina
+							- Je kan ook linken naar een specifieke plek op een andere pagina
+
+							```
+							<header id="hoofding">...</header>
+							...
+							<footer><a href="#hoofding">Terug naar boven</a></footer>
+							```
+
+							```
+							<a href="/recepten/spaghetti.html#bereidingstijd">Op andere pagina</a>
+							```
+				</section>
+				<section>
+							## Openen in een nieuw browservenster
+
+							- Browser zal nieuw venster/tabblad openen
+							- Zeer spaarzaam gebruiken. Vaak geen goed idee op vlak gebruiksvriendelijkheid
+
+							```
+							<a href="https://www.ap.be" target ="_blank" >Artesis Plantijn Hogeschool</a>
+							```
+				</section>
+				<section>
+							## Mail-links
+
+							- Browser zal mail-client openen en een nieuwe mail aanmaken naar mailto-adres
+							- Enkel indien browser geconfigureerd, werkt dus niet 100% van de tijd
+
+							```
+							<a href="mailto:kristof.michiels01@ap.be">Contacteer Kristof Michiels</a>
+							```
+				</section>
+				<section class="chapter">
+							## Afbeeldingen
+				</section>
+				<section>
+							## Het img element
+
+							- Afbeeldingen plaats je met een img element
+							- Is zoals reeds gezegd een inline element
+							- Een img heeft geen afsluittag
+							- Heeft wel 2 verplichte attributen: src en alt
+
+							```
+							<p>Deze avond heb ik zin in een lekkere <img src="spaghetti.jpg" alt="spaghetti" >.
+							Heerlijk!</p>
+							```
+				</section>
+				<section>
+							## Het img element
+
+							- Telkens de browser een img element tegenkomt, zal het dit element proberen te vertalen naar een afbeelding
+							- src en alt zijn verplicht
+							- src bevat de locatie van de afbeelding
+							- alt voorziet in een tekstuele beschrijving van de afbeelding
+				</section>
+				<section>
+							## Het img element: src
+
+							- De onderkant van de afbeelding zal zich uitlijnen op de regel waarin de afbeelding is geplaatst
+							- Linken naar bestanden op een andere server (hotlinken): af te raden
+							- Downloaden (indien je rechten respecteert) en vanuit je eigen folders gebruiken krijgt onze voorkeur
+				</section>
+				<section>
+							## Het img element: alt
+
+							- Het alt attribuut: is dus verplicht en belangrijk voor o.m. zoekmachines en schermlezers
+							- Zeker invullen wanneer:
+								- een afbeelding deel uitmaakt van de content op de site
+								- wanneer je een afbeelding gebruikt binnen een a-element
+							- Als een afbeelding niet bijdraagt tot de content op de pagina (meer eerder de vormgeving ondersteunt) dan mag je alt openlaten (alt="")
+				</section>
+				<section>
+							## Het img element: breedte en hoogte
+							- Je kan afmetingen meegeven met afbeeldingen met de attributen width en height
+							- We zullen dit met CSS kunnen perfectioneren
+							- De getallen drukken de waarde uit in pixel (je mag ook px toevoegen aan getal)
+							- Hoogte én breedte meegeven kan een afbeelding vervormen
+							- Ga voor de exacte afmetingen, of volg de juiste verhouding, of geef slechts één waarde mee (ofwel width, ofwel height)
+
+							```
+							width="getal"
+							height="getal"
+
+							<img src="spaghetti.jpg" alt="Spaghetti" width="250" height="250">
+							```
+				</section>
+				<section>
+							## Het img element
+							- Is dus inline
+							- Je kan het in een block-element stoppen
+							- Je zal het ook block kunnen maken met CSS (display: block;)
+
+							```
+							<p><img src="spaghetti.jpg" alt="Spaghetti"></p>
+							```
+				</section>
+				<section class="chapter">
+							## One more thing
+				</section>
+				<section>
+							## Commentaar toevoegen
+							- Handige manier om HTML te annoteren
+							- Steeds nuttig om de meer complexe stukken opmaak te voorzien van commentaar
+							- Goed voor anderen die de code moeten interpreteren, of voor jezelf later zodat men/je begrijpt waarom een bepaalde keuze werd gemaakt
+
+							```
+							<h1>Hallo, Wereld!</h1>
+							<!-- Onderstaande tekst wordt nog aangepast -->
+							<p>Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit, sed do eiusmod tempor incididunt
+							ut labore et dolore magna aliqua. Ut enim ad minim
+							veniam, quis nostrud exercitation ullamco laboris
+							nisi ut aliquip ex ea commodo consequat.</p>
+							```
+				</section>
+				<section>
+							## Interface Design Lab 1 - Web: DOM, links en afbeeldingen
+							### Vragen?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
