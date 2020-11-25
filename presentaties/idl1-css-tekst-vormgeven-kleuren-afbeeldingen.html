@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IDL1-web: CSS - Tekst vormgeven - kleuren - afbeeldingen</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Interface Design Lab 1 - Web
+							## Cascading Style Sheets
+							### Tekst vormgeven
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In deze presentatie
+							- Lettertypes kiezen en vormgeven
+							- Web fonts
+							- Tekstregels
+							- Kleuren/achtergronden
+							- Selectors: descendant, ID, class, andere contextuele selectors + pseudo-class selectors
+							- Specificiteit
+							- Lijsten
+				</section>
+				<section class="chapter">
+							## Lettertypes kiezen en vormgeven
+				</section>
+				<section>
+							## Lettertypes kiezen en vormgeven: font-family
+							- Het lettertype kies je met font-family
+							- Je kan er een lijst van lettertypes aan koppelen (de font stack)
+							- Waarom een lijstje? Browsers hebben maar toegang tot standaardset lettertypes
+							- Indien eentje afwezig is gaat de browser verder zoeken in de lijst
+							- Standaard lettertypes: Arial, Helvetica, Times New Roman, Times, Courier New, Courier, Verdana, Georgia, Palatina, Garamond...
+							- Wil je iets anders: webfonts
+							- Je kan deze zelf downloaden (https://fonts.com) of uit de cloud gebruiken (bvb https://fonts.adobe.com)
+				</section>
+				<section>
+							## Lettertypes kiezen en vormgeven
+							<p data-height="500" data-theme-id="35252" data-slug-hash="YRMeLv" data-default-tab="html,css" data-user="admkrm" data-pen-title="Tekst vormgeven" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/YRMeLv
+				</section>
+				<section>
+							## Google fonts
+							![Google Fonts](../img/googlefonts1.jpg)
+							##### https://fonts.google.com/
+				</section>
+				<section>
+							## Google fonts toevoegen aan je webpagina
+							![Google Fonts](../img/googlefonts2.jpg)
+							##### https://fonts.google.com/
+				</section>
+				<section>
+							## Lettertypes downloaden en gebruiken
+
+							```
+							@font-face {
+    						font-family: myFirstFont;
+    						src: url(sansation_light.woff);
+							}
+
+							p {
+								font-family: myFirstFont;
+							}
+							```
+				</section>
+				<section class="chapter">
+							## Tekstregels
+				</section>
+				<section>
+							## Lettergrootte: font-size
+							- Stel je in met font-size
+							- Je kan als waarde een lengte eenheid of percentage kiezen maar kunnen ook: xx-small, x-small, small, medium, large, x-large, xx-large, smaller, larger
+							- Let erop bij het ingeven van lengtematen: de naam van de eenheid moet onmiddellijk volgen op het getal. Dus 2rem en geen 2 rem
+							- Onze voorkeur zal uitgaan naar __rem__, em en %
+				</section>
+				<section>
+							## Lettertypes kiezen en vormgeven
+							<p data-height="500" data-theme-id="35252" data-slug-hash="ZmZxrr" data-default-tab="html,css" data-user="admkrm" data-pen-title="Lettergrootte" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/ZmZxrr
+				</section>
+				<section>
+							## Lettergewicht: font-weight
+							- Als je tekst in het vet wil weergeven gebruik je font-weight
+							- Als waarden kan je gebruiken: normal, bold, bolder, 100, 200, 300, 400, 500, 600, 700, 800, 900
+							- Wij gaan de getallen gebruiken
+							- Gaan vaak samen met de lettertypes (op bvb Google fonts)
+				</section>
+				<section>
+							## Recht of schuin: font-style
+							- Als je tekst in het italic wil weergeven gebruik je font-style
+							- Als waarden kan je gebruiken: normal, italic, oblique
+							- Gaan vaak samen met de lettertypes (op bvb Google fonts)
+				</section>
+				<section>
+							## font-style, font-weight en letter-spacing
+							<p data-height="500" data-theme-id="35252" data-slug-hash="NEmYZv" data-default-tab="html,css" data-user="admkrm" data-pen-title="Font-weight, font-style, letter-spacing" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/NEmYZv
+				</section>
+				<section>
+							## Regelhoogte: line-height
+							- Bepaalt de regelhoogte
+							- Waarden: een lengte eenheid
+				</section>
+				<section>
+							## Horizontaal uitlijnen: text-align
+							- Laat toe een tekst horizontaal uit te lijnen
+							- Waarden: left, right, center, justify, start, end
+				</section>
+				<section>
+							## Onderlijnen en andere decoraties: text-decoration
+							- Laat toe een tekst horizontaal uit te lijnen
+							- Waarden: none, underline, overline, line-through
+				</section>
+				<section>
+							## Hoofdletters/kleine letters: text-transform
+							- Verandere de kapitalisatie met text-transform
+							- Waarden: none, capitalize, lowercase, uppercase, full-width
+				</section>
+				<section>
+							## Stretchen met letter-spacing en word-spacing
+							- Als je tekst wil uitrekken of samenpersen gebruik je letter-spacing
+							- Als waarden kan je rem gebruiken
+							- Samenpersen doe je met een negatieve waarde
+							- Mee opletten en jezelf vraag stellen: oogt het resultaat goed?
+				</section>
+				<section>
+							## Schaduw met text-shadow
+							- Voegt een schaduw aan onderaan de tekst
+							- Waarden: 'horizontal offset' 'vertical offset' 'blur radius' 'color', none
+				</section>
+				<section>
+							## Line-height, text-align, text-decoratie, text-transform, letter-spacing, word-spacing, text-shadow
+
+							<p data-height="500" data-theme-id="35252" data-slug-hash="zMXLmJ" data-default-tab="html,css" data-user="admkrm" data-pen-title="Line-height, text-align" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/zMXLmJ
+				</section>
+				<section class="chapter">
+							## Kleuren/achtergronden
+				</section>
+				<section>
+							## Tekstkleur wijzigen: color
+							- Doen we met de color eigenschap
+							- Waarden kunnen kleurnamen zijn, of numerieke kleurwaarden
+							- Handig: een colorpicker appje!
+							- De beste kleurtools voor vormgevers: http://bit.ly/2E0UlWc
+				</section>
+				<section>
+							## Handig: lijst met kleurnamen
+							![Neil Orangepeel](../img/neilorangepeel.jpg)
+							##### http://colors.neilorangepeel.com/
+				</section>
+				<section>
+							## Handig: Coolors kleurengenerator
+							![Coolors](../img/coolors.jpg)
+							##### https://coolors.co/
+				</section>
+				<section>
+							## Tekstkleur wijzigen: color
+							<p data-height="500" data-theme-id="35252" data-slug-hash="MzRGGx" data-default-tab="html,css" data-user="admkrm" data-pen-title="Kleur wijzigen met color" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/MzRGGx
+				</section>
+				<section>
+							## Achtergrondkleur: background-color
+							- Wijzigt de achtegrondkleur van een element
+							- Waarden: kleur | transparent
+				</section>
+				<section>
+							## Doorschijnend maken: opacity
+							- Maakt een volledig element doorschijnend
+							- Waarden: tussen 0 en 1
+							- Nadeel: alles wordt doorschijnend. Soms beter te werken met rgba-waarde!
+				</section>
+				<section>
+							## Background-color, opacity
+							<p data-height="500" data-theme-id="35252" data-slug-hash="jQRvjd" data-default-tab="html,css" data-user="admkrm" data-pen-title="Background-color" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+							https://codepen.io/admkrm/pen/jQRvjd
+				</section>
+				<section>
+							## Achtergrondafbeeldingen
+							- Voeg je toe aan elementen met de background-image eigenschap
+							- Waarden: url(locatie van de afbeelding) | none
+							- Je kan de afbeeldingen "stapelen" met background-repeat
+							- Waarden: repeat | no-repeat | repeat-x | repeat-y | space | round
+							- Je kan de achtergrond positioneren met background-position
+							- Waarden: lengte eenheid | left | center | right | top | bottom
+							- Je kan de grootte van de afbeelding bepalen met background-size
+							- Waarden: lengte eenheid | auto | cover | contain
+				</section>
+				<section>
+							## Achtergrondafbeeldingen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="RqOeYe" data-default-tab="html,css" data-user="admkrm" data-pen-title="Achtergrondafbeeldingen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/RqOeYe
+				</section>
+
+				<section class="chapter">
+							## Nieuwe selector-kracht
+				</section>
+				<section>
+							## Nieuwe selector-kracht
+							- We zagen eerder:
+								- element selectors (bvb p)
+								- ID selector (bvb #mijnid)
+								- gegroepeerde selectors (bvb h1, h3, p)
+				</section>
+				<section>
+							## Nieuwe selector-kracht: Descendant selectors
+
+							- Wanneer je elementen wil vormgeven die zich binnen een bepaald element bevinden
+							- Het aantal niveau's tussen de elementen maakt niet uit
+							- Vb: enkel een em die in een li zit zal deze kleur krijgen
+
+							```
+							li em {
+								color: cadetblue;}
+
+							h1 em, h2 em, h3 em {
+								color: red;}
+
+							ol a em {
+								color: #000;}
+							```
+
+				</section>
+				<section>
+							## Nieuwe selector-kracht: ID
+
+							```
+							<li id="mijnid">Een eenvoudig lijstelement</li>
+
+							<div id="bronnen"><a href="#">Mijn link</a></div>
+							```
+
+							```
+							#mijnid {color: red;}
+
+							li#mijnid {color: orange;}
+
+							#bronnen a {font-style: italic;}
+							```
+				</section>
+				<section>
+							## Nieuwe selector-kracht: Class
+
+							```
+							<p class="speciaal">Een eenvoudige paragraaf</p>
+							```
+
+							```
+							.speciaal {color: red;}
+
+							p.speciaal {color: orange;}
+							```
+				</section>
+				<section>
+							## Nieuwe selector-kracht: de universele selector
+
+							```
+							* {
+								font-weight: bold;} /* ELK element! */
+
+							header * {
+								color: orange;} /* elk element binnen het header element */
+							```
+				</section>
+				<section>
+							## Nieuwe selector-kracht: andere contextuele selectors
+
+							<p data-height="500" data-theme-id="35252" data-slug-hash="YRMvRO" data-default-tab="html,css" data-user="admkrm" data-pen-title="Andere contextuele selectors" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/YRMvRO
+				</section>
+				<section>
+							## Specificiteit
+							Deze lijst rangschikt selector types van meest naar minst specifiek. Zo hanteert CSS de volgorde van belangrijkheid en gewicht
+
+							- Inline style met het style attribuut
+							- ID selectors
+							- Class selectors
+							- Individuele element selectors
+
+							De realiteit is iets complexer maar voor nu is bovenstaande volgorde voldoende
+				</section>
+				<section>
+							## Pseudo-Class selectors
+
+							<p data-height="500" data-theme-id="35252" data-slug-hash="NEmOjm" data-default-tab="html,css" data-user="admkrm" data-pen-title="Pseudo-class selectors" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/NEmOjm
+				</section>
+				<section>
+							## Andere pseudo-Class selectors
+
+							- :root
+							- :first-child
+							- :last-child
+							- :only-child
+							- :first-of-type
+							- :last-of-type
+							- :only-of-type
+							- :nth-child()
+							- ...
+				</section>
+
+				<section class="chapter">
+							## Lijsten vormgeven
+				</section>
+				<section>
+							## Lijsten: bullets en getallen vormgeven
+							- Doen we met list-style-type
+							- Waarden: none | disc | circle | square | decimal | decimal-leading-zero | lower-alpha | upper-alpha | lower-latin | upper-latin | lower-roman | upper-roman | lower-greek
+							- De positie van de marker pakken we aan met list-style-position
+							- Waarden: inside | outside | hanging
+							- Je eigen bullets kan je maken met list-style-image
+							- vb list-style-image: url(/ images/ rainbow.gif);
+				</section>
+				<section>
+							## Lijsten: bullets en getallen vormgeven
+
+							<p data-height="500" data-theme-id="35252" data-slug-hash="NEmLgy" data-default-tab="html,css" data-user="admkrm" data-pen-title="Lijsten: bullets en getallen vormgeven" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/NEmLgy
+				</section>
+				<section>
+							## Interface Design Lab 1 - Web - CSS - Tekst vormgeven
+							### Vragen?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
