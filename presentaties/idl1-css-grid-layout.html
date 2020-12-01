@@ -1,0 +1,398 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IDL1-web: CSS - Grid Layout</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Interface Design Lab 1 - Web
+							## Cascading Style Sheets
+							### Grid Layout
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In deze presentatie
+							- Grid Layout gebruiken
+							- Basisvoorbeeld
+							- Ruimte tussen de elementen met gap
+							- Positioneren op de grid
+							- Werken met _named areas_
+							- _Grid-template-rows_
+							- Grid-elementen uitlijnen
+							- Grid strategie
+				</section>
+				<section class="chapter">
+							## CSS Grid Layout gebruiken
+				</section>
+				<section>
+							## CSS Grid Layout
+							- Grid layout is de nieuwste CSS specificatie voor layouts
+							- Eigenlijk eerste specificatie die __gericht__ ontwikkeld is om te lay outen
+							- Voorheen gebruikten we hiervoor floats en positioning
+							- Bovenstaande technieken komen nog aan bod. Ze zijn nog bruikbaar voor specifiekere zaken
+							- Grid Layout doet exact wat de naam suggereert: je maakt er rooster-layouts mee in CSS :-)
+							- Het gaat hier om 2-dimensionele layouts: een raster dat bestaat uit rijen en kolommen
+				</section>
+				<section>
+							## Grid Layout is nieuw!
+							- Officieel bruikbaar sinds april 2017
+							- Momenteel ondersteuning bij ca 95% van de webgebruikers wereldwijd
+							- We weten dit via de site http://caniuse.com
+				</section>
+				<section>
+							## Can i use Grid Layout?
+							![Can I use grid layout](../img/caniusegrid.jpg)
+							##### https://caniuse.com/
+				</section>
+				<section class="chapter">
+							## Grid Layout basisvoorbeeld
+				</section>
+				<section>
+							## Grid layout basisvoorbeeld
+							![Grid layout basisvoorbeeld](../img/glbasis.jpg)
+							##### https://codepen.io/admkrm/pen/bONOzb
+				</section>
+				<section>
+							## Grid Layout basisvoorbeeld
+							- Het element waarvan je een grid wenst te maken noemen we de grid container
+							- We vertrekken in ons voorbeeld van een ul met vijf li-elementen
+							- Deze ul zal in dit voorbeeld onze gridcontainer worden
+							- Deze ul draagt in ons voorbeeld de klasse-naam "elementen"
+							- Je maakt er een container van binnen CSS met _display: grid;_ (zie verdere slide)
+				</section>
+				<section>
+							## Grid Layout basisvoorbeeld
+							- We verdelen onze grid in ons voorbeeld in drie kolommen
+							- We doen dit met de _grid-template-columns_ eigenschap
+							- We geven als waardes voor elk van de kolommen die we willen, gescheiden door een spatie, hun breedte
+							- Deze breedte kan met rem, %, vw-vh, px, ... worden weergegeven
+							- Er is voor Grid Layout ook een nieuwe ﬂexibele lengte-eenheid gecreëerd: de fr
+							- fr staat voor een “fraction” van de beschikbare ruimte in de grid container
+							- Met 3x 1fr wordt in ons voorbeeld de beschikbare ruimte evenredig gedeeld door 3
+				</section>
+				<section>
+							## Basisvoorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="bONOzb" data-default-tab="html,css" data-user="admkrm" data-pen-title="Grid Layout basisvoorbeeld" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/bONOzb
+				</section>
+				<section>
+							## Conclusie basisvoorbeeld
+							- Dit is alles wat we moeten doen om de rechtstreekse kinderen van de grid container te laten omvormen tot grid-elementen
+							- Dit gebeurt automatisch. Er moeten geen extra CSS regels worden toegevoegd
+							- Er moet zelfs geen _width_ op de grid-elementen worden gezet
+				</section>
+				<section class="chapter">
+							## Ruimte tussen de elementen met gap
+				</section>
+				<section>
+							## De grid-gap eigenschap
+							- CSS Grid Layout geeft ons ook een grid-gap eigenschap om ruimte te creëren tussen de elementen
+							- Deze eigenschap is een verkorte notatie van grid-column-gap en grid-row-gap
+							- Deze twee laatsten kunnen ook afzonderlijk worden gebruikt
+
+							```
+							.elementen {
+								margin: 0;
+								padding: 0;
+								display: grid;
+								grid-template-columns: 1fr 1fr 1fr;
+								grid-gap: 1.5rem;}
+							```
+				</section>
+				<section>
+							## Van grid-gap naar gap
+							- De CSS speciﬁcatieschrijvers het volgende beslist:
+								- grid-gap wordt gap
+								- grid-column-gap wordt column-gap
+								- grid-row-gap wordt row-gap
+							- Lijkt al te werken in de browser. Browsers zullen wellicht ook grid-gap blijven ondersteunen
+
+							```
+							.elementen {
+								margin: 0;
+								padding: 0;
+								display: grid;
+								grid-template-columns: 1fr 1fr 1fr;
+								gap: 1.5rem;}
+							```
+				</section>
+				<section class="chapter">
+							## Positioneren op de grid
+				</section>
+				<section>
+							## Positioneren op de grid
+							![Positioneren op de grid](../img/gridlines.jpg)
+							##### Werken met gridlijnen
+				</section>
+				<section>
+							## Positioneren op de grid
+							- We zagen in het basisvoorbeeld de werking van de natuurlijke flow van elementen op de grid
+							- We kunnen grid-elementen ook gericht gaan positioneren
+							- Merk op dat de plek binnen de html van een grid-element niet uitmaakt
+							- Zolang het element maar een direct kind is van de grid-container
+							- We kunnen hiervoor gebruik maken van gridlijn-nummers waaruit elke grid bestaat
+				</section>
+				<section>
+							## Positioneren op de grid
+							- Gridlijnen starten bij 1 voor zowel de rijen als de kolommen
+							- Ze beginnen (bij westerse talen) van links naar rechts en van boven naar onder
+							- Dat is anders bij sommige niet-westerse talen
+				</section>
+				<section>
+							## Voorbeeld van positioneren
+							![Grid layout met positioneren](../img/gridpositioning.jpg)
+							##### https://codepen.io/admkrm/pen/OrPqyp
+				</section>
+				<section>
+							## Voorbeeld van positioneren
+							<p data-height="500" data-theme-id="35252" data-slug-hash="OrPqyp" data-default-tab="html,css" data-user="admkrm" data-pen-title="Positioneren op de grid" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/OrPqyp
+				</section>
+				<section>
+							## Voorbeeld van positioneren
+							- Je kan in deze code onmiddellijk de kracht van Grid Layout zien
+							- De li-elementen hebben hier een klassenaam gekregen om ze te kunnen plaatsen op de grid
+							- We kunnen onze elementen spreiden over kolommen én rijen
+							- Hier gaven we alle grid-elementen een positie, maar dat is in feite zelfs niet nodig: alle niet gepositioneerde elementen nemen gewoon een geschikte plaats in
+							- We zien in het eindresultaat dat de achtergrond de gehele cel (of cellen) vult, zelfs al is de content binnen het element korter en is die ruimte niet echt nodig
+				</section>
+				<section>
+							## Positioneren op de grid
+							- We kunnen zelfs witruimte creëren op onze grid
+							- Verander bvb. de startlijn van .element3 naar rijlijn 3 zoals hier staat weergegeven
+
+							```
+							.element3 {
+								grid-column: 1;
+								grid-row: 3 / 4; /* komt van 2 / 4 */
+							}
+							```
+				</section>
+				<section>
+							## Voorbeeld van positioneren
+							<p data-height="500" data-theme-id="35252" data-slug-hash="zyxbLO" data-default-tab="css,result" data-user="admkrm" data-pen-title="Positioneren op de grid (met ruimte)" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/zyxbLO
+				</section>
+				<section class="chapter">
+							## Werken met _named areas_
+				</section>
+				<section>
+							## Werken met _named areas_
+							- Een andere manier voor het positioneren van elementen op een grid is het gebruiken van _named areas_
+							- Hiermee kan je de layout gewoon beschrijven in je CSS
+							- In ons voorbeeld geven we eerst elk element een naam met de grid-area eigenschap. We gebruiken de letters a t.e.m. e.
+							- Vervolgens voeg je de grid-template-areas eigenschap toe aan de grid container
+							- Daarin beschrijf je de grid met behulp van de namen
+				</section>
+				<section>
+							## Werken met _named areas_
+							<p data-height="500" data-theme-id="35252" data-slug-hash="OrPGPE" data-default-tab="html,css" data-user="admkrm" data-pen-title="Werken met named areas" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/OrPGPE
+				</section>
+				<section>
+							## Werken met _named areas_
+							- Om de elementen te spreiden over verschillende cellen herhalen we de naam van het element
+							- In ons voorbeeld hebben we verschillende elementen herhaald
+							- De gebieden die we met deze manier creëeren moeten rechthoekig zijn
+								- We kunnen op dit moment bvb nog geen L-vormige gebieden maken
+				</section>
+				<section>
+							## Werken met _named areas_
+							Om witruimte te laten (een lege cel), gebruik je een punt, zoals in onderstaand voorbeeld:
+
+							```
+							.elementen {
+								display: grid;
+								grid-template-columns: 1fr 1fr 1fr;
+								grid-gap: 2rem;
+								grid-template-areas:
+								    "a a b"
+								    ". d d"
+								    "c e e";
+							}
+							```
+				</section>
+				<section>
+							## Werken met _named areas_
+							Als je grid-area-namen langer zijn dan één karakter, probeer dan toch de grid visueel uit te lijnen. Verschillende spaties kunnen hier geen kwaad.
+
+							```
+							.elementen {
+								display: grid;
+								grid-template-columns: 1fr 1fr 1fr;
+								grid-gap: 2rem;
+								grid-template-areas:
+								    "element-a   element-a   element-b"
+								    ".           element-d   element-d"
+								    "element-c   element-e   element-e";
+							}
+							```
+				</section>
+				<section class="chapter">
+							## Grid-template-rows
+				</section>
+				<section>
+							## Grid-template-rows
+							- Net zoals grid-template-columns kan je ook grid-template-rows gaan beschrijven
+							- Is zoals met height bij het box-model: je hoeft dit niet steeds te doen, maar het kan
+							- Ook hier kan je de verschillende meeteenheden gebruiken (ook fr)
+							- https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
+
+							```
+							.elementen {
+								display: grid;
+								grid-template-columns: 1fr 1fr 1fr 1fr;
+								grid-template-rows: 25rem 25rem 25rem;
+								grid-gap: 2rem; }
+							```
+				</section>
+				<section>
+							## De repeat()-functie
+							- Indien je dat wil kan je voor de eigenschappen grid-template-columns en grid-template-rows gebruik maken van de repeat()-functie
+							- Hiermee kan je de notatie verkorten
+							- De code hieronder gebruikt de repeat()-functie om hetzelfde te schrijven als op de vorige slide
+							- Meer info: https://developer.mozilla.org/enUS/docs/Web/CSS/repeat
+
+							```
+							.elementen {
+								display: grid;
+								grid-template-columns: repeat(4,1fr); /* kan ook: 0.5fr repeat(2,1fr) 0.75fr */
+								grid-template-rows: repeat(3,25rem);
+								grid-gap: 2rem; }
+							```
+				</section>
+				<section class="chapter">
+							## Grid-elementen uitlijnen
+				</section>
+				<section>
+							## Grid-elementen uitlijnen op de kolommen-as
+							- We kunnen de elementen binnen een grid op verschillende manieren gaan uitlijnen op de kolommen-as
+							- Om uit te lijnen gebruiken we de eigenschap align-items
+							- De standaardwaarde voor deze eigenschap is stretch (element neemt __alle hoogte__ in)
+							- start: neem __enkel de natuurlijke hoogte in__ en plaats jezelf bovenaan
+							- Andere waarden: end, center, ...
+							- https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
+				</section>
+				<section>
+							## Grid-elementen uitlijnen op de kolommen-as
+							<p data-height="500" data-theme-id="35252" data-slug-hash="xmbeyX" data-default-tab="css,result" data-user="admkrm" data-pen-title="Grid-elementen uitlijnen op de kolommen-as" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/xmbeyX
+				</section>
+				<section>
+							## Grid-elementen uitlijnen op de kolommen-as
+							We kunnen de align-self eigenschap gebruiken om voor individuele elementen de align-items eigenschap te overtroeven.
+
+							```
+							.een {
+								grid-area: a;
+								align-self: start;}
+							.twee {
+								grid-area: b;
+								align-self: stretch;}
+							.drie {
+								grid-area: c;
+								align-self: end;}
+							.vier {
+								grid-area: d;
+								align-self: center;}
+							```
+				</section>
+				<section>
+							## Grid-elementen uitlijnen op de rijen-as
+							- We kunnen de elementen binnen een grid ook gaan uitlijnen op de rijen-as
+							- Om uit te lijnen gebruiken we de eigenschap justify-items
+							- De standaardwaarde voor deze eigenschap is stretch (element neemt __alle breedte__ in)
+							- start: neem __enkel de natuurlijke breedte in__ en plaats jezelf links
+							- Andere waarden: end, center, ...
+							- https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
+				</section>
+				<section>
+							## Grid-elementen uitlijnen op de rijen-as
+							<p data-height="500" data-theme-id="35252" data-slug-hash="MZYdem" data-default-tab="css,result" data-user="admkrm" data-pen-title="Grid-elementen uitlijnen op de rijen-as" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/MZYdem
+				</section>
+				<section>
+							## Grid-elementen uitlijnen op de rijen-as
+							We kunnen de justify-self eigenschap gebruiken om voor individuele elementen de justify-items eigenschap te overtroeven.
+
+							```
+							.een {
+								grid-area: a;
+								justify-self: start;}
+							.twee {
+								grid-area: b;
+								justify-self: stretch;}
+							.drie {
+								grid-area: c;
+								justify-self: end;}
+							.vier {
+								grid-area: d;
+								justify-self: center;}
+							```
+				</section>
+				<section class="chapter">
+							## Grid strategie
+				</section>
+				<section>
+							## Grid strategie
+							- Je kan zonder problemen een layout maken waarin meerdere grids gebruikt worden.
+							- Deze grids kunnen naast elkaar staan
+							- Maar het is ook mogelijk dat een grid element van één grid tevens ook tot een grid container wordt uitgebouwd
+							- We spreken dan over geneste grids. De CSS grid layout speciﬁcatie beschrijft ook subgrids, maar deze zijn op dit moment niet bruikbaar
+				</section>
+				<section>
+							## Grid strategie
+							<p data-height="500" data-theme-id="35252" data-slug-hash="PXwrNW" data-default-tab="html,result" data-user="admkrm" data-pen-title="Grid strategie" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/PXwrNW
+				</section>
+				<section>
+							## Grid strategie
+							- Wanneer je een pagina gaat vormgeven, dan ga je op basis van je ideeën en (eenvoudige) schetsen bepalen waar je één of meerdere grids wil gaan gebruiken
+							- Het is zeker niet de bedoeling om van je pagina één grote grid te maken
+							- Je kan dat doen werken, maar dit is nodeloos complex
+							- Beter is het om vanuit de paginabehoeftes te werken met meerdere, eenvoudiger te beheren grids
+				</section>
+				<section>
+							## In deze presentatie
+							- Grid Layout gebruiken
+							- Basisvoorbeeld
+							- Ruimte tussen de elementen met gap
+							- Positioneren op de grid
+							- Werken met _named areas_
+							- _Grid-template-rows_
+							- Grid-elementen uitlijnen
+							- Grid strategie
+				</section>
+				<section>
+							## Interface Design Lab 1 - Web - CSS - Grid Layout
+							### Vragen?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
