@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IDL1-web: Formulieren</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Interface Design Lab 1 - Web
+							## HTML + CSS: Formulieren
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Forms maken in HTML
+				</section>
+				<section>
+							## Formulieren (of forms)
+							- Hoe forms werken
+							- Form elementen
+							- Toegankelijkheid
+				</section>
+				<section>
+							## Een form
+							![Form](../img/form.jpg)
+							##### Forms zijn overal: inloggen, rating, like, survey, settings,...
+				</section>
+				<section>
+							## Hoe forms werken
+
+							- Er zijn twee gedeelten aan een werkende form
+							- Het eerste is wat je ziet op de pagina zelf, gemaakt in HTML
+							- Forms zijn gemaakt van buttons, input velden, drop down menus
+							- We noemen deze **form controls**
+							- Forms kunnen ook tekst en andere HTML-elementen bevatten
+							- Het tweede gedeelte zijn scripts om de form-data te verwerken: geen onderwerp van dit lab
+				</section>
+				<section>
+							## Het form element: &lt;form&gt;
+
+							- Forms worden toegevoegd aan een webpagina met het form element
+							- Alle form-informatie staat binnen dit element
+							- Het geeft 2 attributen: action en method
+							- Het action attribuut verwijst naar de locatie van het script (wij: #)
+							- De method attribuut: POST of GET (standaard). Mag weggelaten worden
+							- Een form element mag geen ander form element bevatten
+
+							```
+							<form action="#" method="POST">...</form>
+							```
+				</section>
+				<section>
+							## Een eenvoudig voorbeeld van een form
+							<p data-height="500" data-theme-id="35252" data-slug-hash="zMLQxQ" data-default-tab="html,result" data-user="admkrm" data-pen-title="Eenvoudige form" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Form elementen en hun karakteristieken
+
+							- Er zijn verschillende form elementen die een designer hoort te kennen
+							- Elk hebben ze hun kenmerken en attributen. Sommigen komen bij elk element terug, anderen zijn specifiek voor een bepaald form element
+
+							```
+							<textarea name="bericht" rows="4" cols="15" placeholder="Post bericht"></textarea>
+							```
+				</section>
+				<section>
+							## Het name attribuut
+
+							- Geeft een variabelenaam aan het element die naderhand door het script kan worden gebruikt om de formdata te verwerken
+							- Wij zorgen dat het attribuut er steeds staat, maar gebruiken het voorlopig verder niet
+							- De naam die je geeft hoort steeds uniek te zijn binnen de form
+
+							```
+							<textarea name="bericht" rows="4" cols="15" placeholder="Post bericht"></textarea>
+							```
+				</section>
+				<section>
+							## Form elementen (ook controls genoemd)
+
+							- (gespecialiseerde) Elementen voor tekstinvoer
+							- Submit knoppen (buttons)
+							- Radio en checkbox knoppen
+							- Dropdown keuzemenu's
+							- Elementen om met bestanden te werken
+							- Verborgen controls
+							- Datum- en tijd elementen
+							- Cijfer controls
+							- Kleurkeuze elementen
+				</section>
+				<section>
+							## Elementen voor tekstinvoer
+							<p data-height="500" data-theme-id="35252" data-slug-hash="aQjgbB" data-default-tab="html,result" data-user="admkrm" data-pen-title="Elementen voor tekstinvoer" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Gespecialiseerde elementen voor tekstinvoer
+							<p data-height="560" data-theme-id="35252" data-slug-hash="KrBjmw" data-default-tab="html,result" data-user="admkrm" data-pen-title="Gespecialiseerde elementen voor tekstinvoer" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Submit en reset knoppen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="rQrEZm" data-default-tab="html,result" data-user="admkrm" data-pen-title="Submit en reset knoppen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Radio en checkbox knoppen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="VVBJJq" data-default-tab="html,result" data-user="admkrm" data-pen-title="Radio en checkbox knoppen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Dropdown keuzemenu's
+							<p data-height="500" data-theme-id="35252" data-slug-hash="pQZMbw" data-default-tab="html,result" data-user="admkrm" data-pen-title="Dropdown keuzemenu's" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Scrollmenu's
+							<p data-height="500" data-theme-id="35252" data-slug-hash="dQjxZB" data-default-tab="html,result" data-user="admkrm" data-pen-title="Scrollmenu's" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Menu's groeperen
+							<p data-height="500" data-theme-id="35252" data-slug-hash="pQZMKp" data-default-tab="html,result" data-user="admkrm" data-pen-title="Menu's groeperen" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Andere controls
+							<p data-height="500" data-theme-id="35252" data-slug-hash="RqBXEr" data-default-tab="html,result" data-user="admkrm" data-pen-title="Andere controls" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+							## Toegankelijkheid met labels, fieldset en legend
+							<p data-height="500" data-theme-id="35252" data-slug-hash="GwXKpW" data-default-tab="html,result" data-user="admkrm" data-pen-title="Forms: toegankelijkheid met labels" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section class="chapter">
+							## Forms vormgeven in CSS
+				</section>
+				<section>
+							## Forms
+							- Met CSS kunnen we ze mooi vormgeven en efficiënter maken naar onze gebruikers toe
+							- Er zijn niet echt "speciale" CSS-eigenschappen om forms te stylen
+							- We gaan reeds gekende eigenschappen inzetten: color, background, font, border, margin, padding, ...
+				</section>
+				<section>
+							## De input elementen
+							- Van het type text, password, email, search, url, tel
+							-	Je kan de stijl van het invoerveld aanpassen met volgende eigenschappen:
+								-	width, height, background-color, background-image, border, border-radius,margin, padding, box-shadow
+							- Je kan daarnaast ook de tekst binnen het input-veld vormgeven:
+								-	met de color-eigenschap en de verschillende font-eigenschappen
+				</section>
+				<section>
+							## Het textarea element
+							- Kan worden vormgegeven op dezelfde manier als de input elementen
+							- Krijgen standaard een monospace lettertype toegewezen: je zal dit willen aanpassen
+							- Ook de line-height kan je aanpassen
+							- Sommige browsers laten toe dat de gebruiker de veldgrootte kan aanpassen
+								- Dit kan je uitzetten met resize: none
+							- Zijn standaard display: inline-block, maar je kan dit wijzigen naar display: block
+				</section>
+				<section>
+							## Knoppen
+							- Dit zijn input elementen van het type button, submit of reset
+							- Je kan hier alle box-eigenschappen toepassen
+								- width, height, padding, border, margin, background en box-shadow
+							-	Krijgen standaard box-sizing: border-box toegewezen door de browser
+							- Je kan daarnaast ook de tekst binnenin vormgeven:
+								-	met de color-eigenschap en de verschillende font-eigenschappen
+				</section>
+				<section>
+							## Radio en checkbox knoppen
+							- _Best practice_ hier is ze niet te wijzigen
+							- De tekst errond kan je uiteraard wel aanpakken
+				</section>
+				<section>
+							## Dropdown en select menus (select)
+							- Je kan de width en de height van een select element wijzigen
+							- Net als bij knoppen gaat de browser standaard box-sizing: border-box toepassen
+							- Sommige browsers laten wijzigingen toe voor color, background-color en font-eigenschappen
+							- Omdat niet alle browsers en besturingssystemen dit toelaten ga je hier beter niet te ver in
+				</section>
+				<section>
+							## Fieldsets
+							- Je kan een fieldset behandelen als elke andere element box en werken met:
+								- padding, border, margin, background
+							- Je kan de standaard rand neutraliseren met border: none; of border: 0
+							- Onze reset doet dat standaard voor ons
+				</section>
+				<section>
+							## Legends
+							- Standaard staan legend elementen boven de bovenste border-rand
+							- Legends zijn in sommige browsers nogal moeilijk te stylen (niet in Chrome)
+							- Daarom worden ze soms in een span element gewikkeld (en als span benaderd)
+							- Of soms volledig verborgen, tenzij voor schermlezers
+								- legend {width:1px;height:1px;overflow:hidden;}
+				</section>
+				<section>
+							## Overeenstemmende lettertypes
+							- Standaard kunnen browsers verschillende lettertypes toepassen voor de diverse form elementen
+							- Een _best practice_ is om volgende stijlregels toe te passen:
+
+							```
+							button, input, select, textarea {
+								font-family: inherit;
+								font-size: 100%;
+							}
+							```
+				</section>
+				<section>
+							## Basisvoorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="pqVWdW" data-default-tab="html,css" data-user="admkrm" data-pen-title="Formulier" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/pqVWdW
+				</section>
+				<section>
+							## Voorbeeld styling form
+							<p data-height="500" data-theme-id="35252" data-slug-hash="bwaWbO" data-default-tab="html,css" data-user="admkrm" data-pen-title="IT1 - forms - eindvoorbeeld 1" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/bwaWbO
+				</section>
+				<section>
+							## Ander voorbeeld styling form
+							<p data-height="500" data-theme-id="35252" data-slug-hash="XVXzWX" data-default-tab="html,css" data-user="admkrm" data-pen-title="IT1 - forms - eindvoorbeeld 2" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/XVXzWX
+				</section>
+				<section>
+							## Interface Design Lab 1 - Web - Formulieren
+							### Vragen?
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
