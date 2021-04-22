@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IS: CSS - filters - mix-blend-mode</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Interface Software
+							## CSS - filters & mix-blend-mode
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## CSS filters
+				</section>
+				<section>
+							## Wat zijn CSS Filters?
+							- Krachtig instrument om visuele effecten te bereiken
+							- Als Photoshop filters voor de browser
+							- Effecten worden gezet op het element vooraleer het wordt getoond
+							- Filters kunnen worden gezet op een afbeelding, een achtergrond, een border, een element...
+							- Er zijn gepredefinieerde filters en we kunnen ook custom-svg filters toevoegen
+							- We kunnen één of meerdere filters toevoegen
+				</section>
+				<section>
+							## Voorbeelden
+
+							```CSS
+							.blurren {
+  							filter: blur(5px);
+							}
+							```
+
+							```css
+							.meerdere-dingen {
+  							filter: blur(5px) grayscale(20%);
+							}
+							```
+
+							Meerdere functies kunnen gebruikt worden, gescheiden door een spatie
+				</section>
+				<section>
+							## CSS Filters
+							![MDN Web docs filter](../img/mdn-filter.png)
+							##### https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+				</section>
+				<section>
+							## Mogelijke filter-functies
+							- blur()
+							- brightness()
+							- contrast()
+							- drop-shadow()
+							- grayscale()
+							- hue-rotate()
+				</section>
+				<section>
+							## Mogelijke filter-functies (2)
+							- invert()
+							- opacity()
+							- saturate()
+							- sepia()
+							- url() - om SVG-filters toe te passen
+							- none
+				</section>
+				<section>
+							## Custom svg filters
+							- Alle daarnet geziene filters zijn eigenlijk svg filters die zijn ingebouwd in de browser
+							- Daarnaast kan je je eigen svg filters toevoegen
+							- Je maakt ofwel je eigen filters in bvb Adobe Illustrators of gebruikt een online tool (zie volgende slide)
+							- Je voegt de filter toe in een svg op je html-pagina
+							- Daarna link je de filter in je CSS: img {filter: url(#filter_id);}
+				</section>
+				<section>
+							## Custom svg filters
+							![SVG filter](../img/is-svg-filter.png)
+							##### https://yoksel.github.io/svg-gradient-map/
+				</section>
+				<section>
+							## Waarden voor de filter-functies
+							- Werk met de juiste eenheden
+							- %
+							- deg
+							- enkel getallen
+				</section>
+				<section>
+							## Enkele voorbeelden
+							```CSS
+							img {
+  							filter: grayscale(40%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: sepia(20%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: saturate(9);
+							}
+							```
+				</section>
+				<section>
+							## Enkele voorbeelden
+							```CSS
+							img {
+  							filter: hue-rotate(120deg);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: invert(80%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: opacity(0%);
+							}
+							```
+				</section>
+				<section>
+							## Enkele voorbeelden
+							```CSS
+							img {
+  							filter: brightness(45%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: contrast(200%);
+							}
+							```
+
+							```CSS
+							img {
+  							filter: blur(5px);
+							}
+							```
+				</section>
+				<section>
+							## Het goede aan filters?
+							- Filter is een animatable propertie!
+							- Met andere woorden: je kan je filters animeren
+				</section>
+				<section class="chapter">
+							## CSS mix-blend-mode
+				</section>
+				<section>
+							## Mix-blend-mode
+							- "Bepaalt hoe de content van een element moet blenden met de inhoud van het moederelement en de achtergrond van het element"
+ 							- = het mixen van afbeelding met wat er achter gepositioneerd is
+							- Kan een afbeelding zijn die je mixt met een achtergrondkleur
+							- Kan een afbeelding zijn die je mixt met een andere afbeelding
+							- Experimenteren loont!
+				</section>
+				<section>
+							## CSS mix-blend-mode
+							![MDN Web docs mix-blend-mode](../img/mdn-mix-blend-mode.png)
+							##### https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+				</section>
+				<section>
+							## Mix-blend-mode
+							- mix-blend-mode: normal;
+							- mix-blend-mode: multiply;
+							- mix-blend-mode: screen;
+							- mix-blend-mode: overlay;
+							- mix-blend-mode: darken;
+							- mix-blend-mode: lighten;
+							- mix-blend-mode: color-dodge;
+							- mix-blend-mode: color-burn;
+				</section>
+				<section>
+							## Mix-blend-mode
+							- mix-blend-mode: hard-light;
+							- mix-blend-mode: soft-light;
+							- mix-blend-mode: difference;
+							- mix-blend-mode: exclusion;
+							- mix-blend-mode: hue;
+							- mix-blend-mode: saturation;
+							- mix-blend-mode: color;
+							- mix-blend-mode: luminosity;
+				</section>
+				<section>
+							## background-blend-mode
+							- "Bepaalt hoe de achtergrond-afbeeldingen van een element met elkaar moeten blenden en met de achtergrondkleur van dat element"
+				</section>
+				<section>
+							## CSS background-blend-mode
+							![MDN Web docs background-blend-mode](../img/mdn-background-blend-mode.png)
+							##### https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
+				</section>
+				<section>
+							## IS - CSS - filters & mix-blend-mode
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
