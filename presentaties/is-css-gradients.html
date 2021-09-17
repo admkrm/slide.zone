@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IS: CSS - Gradients</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Interface Software
+							## CSS Gradients
+							#### Kristof Michiels
+				</section>
+				<section>
+							## CSS Gradients
+							- Nederlandse vertaling: kleurverloop, overgangen
+							- Een gradient beschrijft de overgang van één kleur naar de andere
+							- Deze overgang kan verlopen over meerdere tussenkleuren
+							- We maken gradients met CSS notaties. De browser zet deze om tot een afbeelding
+							- Afmetingen en verhoudingen nemen ze over van het element waarop de gradient wordt toegepast
+							- We zetten ze op **background-image**
+							- Twee soorten: _linear_ (lijn) en _radial_ (vanuit cirkel/ellips) gradients
+				</section>
+				<section class="chapter">
+							## Linear gradients
+				</section>
+				<section>
+							## Basisvoorbeeld
+							<p class="codepen" data-height="500" data-theme-id="35252" data-default-tab="css,result" data-user="admkrm" data-slug-hash="WBbeQa" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Instagram Gradient"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/WBbeQa
+				</section>
+				<section>
+							## linear-gradient()
+							- De kleurovergang volgt een lijn waarvan je de hoek kan bepalen
+								- 0deg = opwaarts
+								- 90deg = naar rechts
+								- 180deg = neerwaarts
+								- Ook gebruik van keywords is toegelaten: to top, to right, to bottom, to left, to top right, ...
+							- De overgang kan indien gewenst lopen over meerdere tussenkleuren (_color stops_)
+							- Alle kleurnotaties (inclusief transparantie) mogen worden gebruikt: red, #ffffff, rgba(254, 137, 2, 1.000), ...
+				</section>
+				<section>
+						## linear-gradient()
+						- In het 2de voorbeeld verschijnt tussenkleur oranje op 25%
+						- Je kan % gebruiken, maar ook elke andere lengtemaat (bvb rem)
+						- Eerst en laatste kleur hebben geen % nodig (= 0% en 100%)
+
+						```CSS
+						div {
+								background-image: linear-gradient(90deg, yellow, purple);
+						}
+						```
+
+						```CSS
+						div {
+								background-image: linear-gradient(90deg, yellow, orange 25%, purple);
+						}
+						```
+				</section>
+				<section>
+							## Voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="WBbeGY" data-default-tab="css,result" data-user="admkrm" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/WBbeGY
+				</section>
+				<section>
+						## linear-gradient()
+						- De helling hoeft geen rechte hoek te zijn
+						- Je mag zoveel kleuren meegeven als je wil
+						- Indien er geen % wordt meegegeven worden de kleuren evenredig verdeeld
+						- Als je zoals hier eindigt op 50% zal de laatstgenoemde kleur de resterende 50% voor zijn rekening nemen
+
+						```CSS
+						div {
+								background-image: linear-gradient(54deg,red,orange,yellow,green,blue 50%);
+						}
+						```
+				</section>
+				<section>
+						## linear-gradient()
+						- De aanpak in dit voorbeeld zorgt voor een subtiele gradient op een button die voor een 3D-effect zorgt
+
+						```CSS
+						a {
+								background-image: linear-gradient(0deg,#e2e2e2 0%,#dbdbdb 50%,
+								#d1d1d1 51%,#fefefe 100%);
+						}
+						```
+				</section>
+				<section>
+							## Voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="yWyBQN" data-default-tab="css,result" data-user="admkrm" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/yWyBQN
+				</section>
+				<section class="chapter">
+							## Radial gradients
+				</section>
+				<section>
+							## radial-gradient()
+							- Vertrekt vanaf een punt volgens een cirkel- of ellipspatroon
+							- Standaard bevindt dat punt zich in het midden van het element
+							- Deze gradient volgt een ellipspatroon als het bevattende element een rechthoek is
+							- Is het bevattende element een vierkant dan volgt de gradient een cirkelpatroon
+							- De notatie laat nog toe bijkomende zaken mee te geven: vorm, grootte en positie van de gradient
+
+							```css
+							div {
+								background-image: radial-gradient(yellow,limegreen);
+							}
+							```
+				</section>
+				<section>
+							## Basisvoorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="WBbNee" data-default-tab="css,result" data-user="admkrm" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/WBbNee
+				</section>
+				<section>
+							## radial-gradient(): shape
+							- De vorm van het element: _circle_ of _ellipse_
+							- Geef je bvb _circle_ mee, dan vormt de gradient een cirkel
+							- Zelfs indien het bevattende element een rechthoek is
+
+							```css
+							div {
+								background-image: radial-gradient(circle, yellow,limegreen);
+							}
+							```
+				</section>
+				<section>
+							## radial-gradient(): size
+							- In lengte eenheden of percentages
+							- Slaan op de straal van de gradient
+							- 1 waarde meegegeven = gebruikt voor breedte en hoogte (= cirkel)
+							- 2 waardes meegegeven = eerste is de horizontale, tweede is verticale
+
+							```css
+							div {
+								background-image: radial-gradient(20rem 8rem, aqua, green);
+							}
+							```
+				</section>
+				<section>
+							## radial-gradient(): position
+							- Bepaalt de positie van het centrale startpunt
+							- Standaard = center center
+							- Zelfde waardes als bij background-position, maar voorafgegaan door "at"
+							- at top left, at right bottom, at center left, ...
+
+							```css
+							div {
+								background-image: radial-gradient(at top left, yellow, orange 50%, purple);
+							}
+							```
+				</section>
+				<section>
+							## Voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="Jqojyv" data-default-tab="css,result" data-user="admkrm" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/Jqojyv
+				</section>
+				<section class="chapter">
+							## Repetitieve gradients
+				</section>
+				<section>
+							## Repetitieve gradients
+							- Als je van je gradients repetitieve patronen wenst te maken
+							- Bvb voor streepjespatronen
+							- Je gebruikt hiervoor de notaties repeating-linear-gradient() en repeating-radial-gradient()
+
+							```css
+							div {
+								background-image: repeating-linear-gradient(180deg, white, silver 3rem);
+							}
+							```
+
+							```css
+							div {
+								background-image: repeating-linear-gradient(45deg, orange, orange 1.2rem,
+								white 1.2rem, white 2.4rem);
+							}
+							```
+				</section>
+				<section>
+							## Voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="zQxYRR" data-default-tab="css,result" data-user="admkrm" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/zQxYRR
+				</section>
+				<section>
+							## Voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="GagRdV" data-default-tab="css,result" data-user="admkrm" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/GagRdV
+				</section>
+				<section class="chapter">
+							## Tools en verdere info voor het maken van gradients
+				</section>
+				<section>
+							## Tools
+							- Je kan een online gradient-tool gebruiken:
+								- https://uigradients.com
+								- Patterns gallery Lea Verou: https://leaverou.github.io/css3patterns/
+				</section>
+				<section>
+							## UI Gradients
+							![UI Gradients](../img/lea.png)
+							##### https://uigradients.com
+			  </section>
+				<section>
+							## CSS3 Patterns Gallery
+							![CSS3 Patterns Gallery](../img/leav.png)
+							##### https://leaverou.github.io/css3patterns/
+			  </section>
+				<section>
+							## Voorbeeld
+							<p data-height="500" data-theme-id="35252" data-slug-hash="MdYdwL" data-default-tab="css,result" data-user="admkrm" data-editable="true" class="codepen"></p>
+							<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+							https://codepen.io/admkrm/pen/MdYdwL
+				</section>
+				<section>
+							## Verdere info
+							- CSS Gradients door Chris Coyier: [css-tricks.com/css3-gradients](https://css-tricks.com/css3-gradients/)
+							- "Using CSS Gradients" op MDN Web Docs: [developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Using_CSS_gradients](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Using_CSS_gradients)
+				</section>
+				<section>
+							## Interface Software - CSS Gradients
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IS: Transitions - Transforms</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Interface Software
+							## Transitions & Transforms
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Transitions & Transforms
+							- Overgangen (transitions): zorgen ervoor dat een element vloeiend en gradueel overgaat van de ene staat naar de andere
+							- Transformaties (transforms): bewegen of veranderen het uitzicht van een element
+							- Beiden staan op zichzelf maar werken heel goed samen en laten toe om (eenvoudige) animaties te maken
+							- Geven waardevolle interactie en visuele feedback aan je gebruikers
+							- Belangrijk: overdrijf niet en hou het eenvoudig, subtiel en consistent
+				</section>
+				<section class="chapter">
+							## Transitions
+				</section>
+				<section>
+							## Transitions
+							- Zorgen ervoor dat een element vloeiend en gradueel overgaat van de startsituatie naar de andere (bvb. hover)
+							- Zonder transition verandert een element onmiddellijk van staat
+							- Voeg je echter een transition toe, dan neem je controle over de verandering
+				</section>
+				<section>
+							## Transitions
+							- Een transition heeft 2 verplichte eigenschappen:
+								- transition-property (eigenschap)
+								- transition-duration (duurtijd)
+
+							```css
+							.mijndiv {
+								transition-property: background-color;
+								transition-duration: 0.2s;
+							}
+							```
+				</section>
+				<section>
+							## transition-property
+							- De transition-property specificeert de CSS-eigenschap waarop de transitie zal toegepast worden
+							- Is verplicht
+							- Je kan verwijzen naar één specifieke eigenschap (e.g., background-color of transform) of naar alle eigenschappen
+
+							```CSS
+							.mijndiv {
+								transition-property: all;
+							}
+
+							.mijnanderediv {
+								transition-property: transform;
+							}
+							```
+				</section>
+				<section>
+							## transition-duration
+							- Is eveneens verplicht
+							- Bepaalt de duurtijd van de transitie
+
+							```CSS
+							.mijndiv {
+								transition-property: all;
+								transition-duration: 1s;
+							}
+
+							.mijnanderediv {
+								transition-property: transform;
+								transition-duration: 0.5s;
+							}
+							```
+				</section>
+				<section>
+							## transition-timing-function
+							- Optioneel. Laat toe een patroon te kiezen voor de transitie
+							- Standaard keuze is ease: start traag, wordt sneller, om dan weer te vertragen naar het einde toe
+							- Andere timing opties zijn: ease, linear, ease-in, ease-out, ease-in-out, step-start, step-end, steps, cubic-bezier(#,#,#,#)
+							- Subtiele verschillen, maar de moeite waard om mee te experimenteren
+
+							```CSS
+							.mijndiv {
+								transition-property: all;
+								transition-duration: 1s;
+								transition-timing-function: linear;
+							}
+							```
+				</section>
+				<section>
+							## Transition delay
+							- Optioneel. Met deze eigenschap geef je aan wanneer je wenst te starten
+							- Standaard: starten van zodra het event wordt getriggerd
+							- Met transition delay kan je de start-timing echt zelf gaan bepalen
+
+							```CSS
+							.mijndiv {
+								transition-property: all;
+								transition-duration: 1s;
+								transition-timing-function: linear;
+								transition-delay: 5s;
+							}
+							```
+				</section>
+				<section>
+							## Verkorte notatie (alles op 1 regel)
+
+							```CSS
+							div {
+ 								transition: all 3s;
+							}
+
+							div {
+ 								transition: all 3s ease-in-out;
+							}
+
+							div {
+ 								transition: all 3s ease-in-out 1s;
+							}
+ 							```
+				</section>
+				<section class="chapter">
+							## Transforms
+				</section>
+				<section>
+							## Transforms
+							- Transformaties: bewegen of veranderen het uitzicht van een element
+							- We behandelen hier enkel 2D-transformaties. Maar er bestaan ook 3D-transformaties.
+							- Kunnen gebeuren wanneer een element van staat verandert: bvb een hover
+							- Je kan het ook gewoon gebruiken op de CSS-startsituatie van een element
+				</section>
+				<section>
+							## Scale
+							- Met scale kan je de omvang van een element groter of kleiner maken
+							- Waarde 2 maakt een element 2 keer zo groot als de	oorspronkelijke grootte: scale(2)
+							- Waarde 0.5 doet een element met de helft kleiner worden: scale(0.5)
+							- Je kan ook enkel doen uitzetten/inkrimpen in breedte of hoogte: scaleX(2) of scaleY(5)
+							- Je kan dit ook verkort noteren als volgt: scale(2,5)
+
+							```css
+							div:hover {
+ 								transform: scale(2);
+							}
+ 							```
+				</section>
+				<section>
+							## Rotate
+							- Met rotate draait een element aantal graden mee of tegen de klok in
+							- Positieve waarde, bvb 90deg = met de klok mee
+							- Negative waarde, bvb -90deg = tegen de klok in
+							- 1080deg = 3 volledige rotaties
+
+							```CSS
+							div {
+ 								transition: transform 1s;
+							}
+
+							div:hover {
+ 								transform: rotate(1080deg);
+							}
+ 							```
+				</section>
+				<section>
+							## Translate
+							- Translate beweegt een element naar links/rechts en naar boven/onder
+							- Beweging wordt gebaseerd op parameters gegeven voor X-(horizontaal) en Y-(verticaal) assen
+							- Een positive waarde beweegt naar rechts en onder
+							- Een negative waarde beweegt naar links en boven
+
+							```CSS
+							div {
+ 								transition: transform 1s;
+							}
+
+							div:hover {
+ 								transform: translate(20px, 20px);
+							}
+ 							```
+				</section>
+				<section>
+							## Skew
+							- Skew kantelt of trekt een element scheef in de richting van de X- en/of de Y-as
+							- Een positieve X-waarde kantelt naar links, een negatieve X-waarde kantelt naar rechts
+							- Een positieve Y-waarde kantelt het element naar onder, een negatieve Y-waarde kantelt naar boven
+							- Met een verkorte notatie geef je in één keer X en Y-waarden mee
+							- Skewing doet ook de kinderen van een element mee kantelen. Je kan dit tegengaan door de kinderen de tegenovergestelde waarden mee te geven
+				</section>
+				<section>
+							## Skew
+							```css
+							div {
+							 transform: skewX(25deg);
+							 transform: skewY(10deg);
+							 transform: skew(25deg, 10deg);
+							}
+							```
+							```css
+							div {
+							 transition: transform 1s;
+							}
+							div:hover {
+							 transform: skewX(-10deg);
+							}
+							```
+				</section>
+				<section>
+							## transform-origin
+							- Transform-origin werkt in tandem met de transformeigenschap en voeg je toe aan parent selector
+							- Je zet er het punt mee van waaruit de transform begint. Is standaard midden van het element (center)
+							- Om het punt te verplaatsen naar linksboven gebruik je 0% 0% of left top
+							- Rechtsonder: 0% 100% of right bottom, enz...
+
+							```css
+							div {
+								transform-origin: left top;
+							}
+
+							div:hover {
+							 	transform: rotate(720deg);
+							}
+ 							```
+				</section>
+				<section>
+							## transforms combineren
+							- Doe je door ze na elkaar te benoemen
+
+							```CSS
+							div {
+								transform: rotate(90deg) scale(2) translateY(-50%) translateX(50%);
+							}
+ 							```
+				</section>
+				<section>
+							## IS - Transitions & Transforms
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
