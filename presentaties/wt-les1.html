@@ -1,0 +1,781 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web technology: les 1</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web technology
+							## Les 1: HTML
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Lesinhoud
+							- HTML-intro: 3 basis-elementen (p, h1...6, ul en ol)
+							- Een pagina structureren met header, main, footer en nav
+							- Inline en block-elementen (em en strong)
+							- Generieke elementen (div en span)
+							- Document Object Model (DOM)
+							- Link elementen
+							- Afbeeldingen
+							- Commentaar
+							- Id en class
+				</section>
+				<section class="chapter">
+							## Drie content-elementen: paragrafen, hoofdingen en lijsten
+				</section>
+				<section>
+							## Correct HTML schrijven
+							- Elk stukje informatie op een pagina moet in een html-element verpakt worden
+							- Anders spreken we over "naakte" of "anonieme" tekst. Je document is dan niet-correct opgemaakt
+							- Je dient je html-element **juist** te kiezen, volgens de betekenis van de ingesloten informatie
+							- Goed voor je lezers maar ook voor zoekmachines of <a href="https://nl.wikipedia.org/wiki/Schermlezer">schermlezers</a>
+							- Hoe het er uit zal zien is hierbij niet van belang. De vormgeving is het domein van CSS
+				</section>
+				<section>
+							## Paragrafen: &lt;p&gt;...&lt;/p&gt;
+
+							- Het paragraaf-element is zowat de belangrijkste bouwsteen van tekstdocument
+							- Het begint met de &lt;p&gt;-tag en eindigt met de &lt;/p&gt;-tag
+							- Het kan behalve tekst ook andere html-elementen bevatten (bvb. afbeeldingen)
+							- Hoofdingen, lijsten (we zien later dat dit block-elementen zijn) passen dan weer niet binnen een paragraaf
+
+							```
+							<p>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+								Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+								when an unknown printer took a galley of type and scrambled it to make a
+								type specimen book.
+							</p>
+							```
+				</section>
+				<section>
+							## Hoofdingen: &lt;h1&gt;, &lt;h2&gt;, ... , &lt;h6&gt;
+
+							- Met hoofdingen geef je titels en subtitels weer
+							- bvb. het h1-element begint met de &lt;h1&gt;-tag en eindigt met de &lt;/h1&gt;-tag
+							- HTML geeft ons 6 niveau's voor hoofdingen
+							- &lt;h1&gt; voor de belangrijkste hoofding. Van daaruit werk je verder met &lt;h2&gt;, &lt;h3&gt;...
+
+							```
+							<h1>Je belangrijkste titel</h1>
+							<h2>Een net iets minder belangrijke titel</h2>
+							<h3>Een ondertitel van het derde niveau</h3>
+							<h4>Een ondertitel van het vierde niveau</h4>
+							<h5>Een ondertitel van het vijfde niveau</h5>
+							<h6>Een ondertitel van het zesde niveau</h6>
+							```
+				</section>
+				<section>
+							## Hoofdingen: &lt;h1&gt;, &lt;h2&gt;, ... , &lt;h6&gt;
+
+							- **Regel**:  op elke pagina mag slechts één &lt;h1&gt;-element
+							- De overige h-elementen: zo vaak als nodig
+							- Je hoeft ze niet alle zes te gebruiken. Ook niet van &lt;h1&gt; tot &lt;h6&gt; voor elke volgende titel
+							- De structuur die je aanbrengt is zoals bij een boek: één titel (&lt;h1&gt;), hoofdstukken (allen &lt;h2&gt;), onderdelen van hoofdstukken (allen &lt;h3&gt;) enz...
+
+							```
+							<h1>Mijn blog</h1>
+							<h2>Mijn eerste post</h2>
+							<p>Blogtekst komt hier.</p>
+							<h2>Mijn tweede post</h2>
+							<p>Blogtekst komt hier.</p>
+							```
+				</section>
+				<section>
+							## Lijsten: &lt;ul&gt; en &lt;ol&gt;
+
+							- Worden heel vaak gebruikt, veel méér dan voor "lijstjes"
+							- Links, afbeeldingen, tekstuele opsommingen: alles wat meer dan één keer voorkomt kan je in lijst vatten
+							- HTML geeft ons verschillende manieren om lijsten te maken: we zien er vandaag twee
+				</section>
+				<section>
+							## Niet-geordende lijsten: &lt;ul&gt;...&lt;/ul&gt;
+
+							- Voor een opsomming zonder volgorde gebruiken we het ul-element
+							- Het element begint met de &lt;ul&gt;-tag en eindigt met de &lt;/ul&gt;-tag
+							- Een lijst is binnenin opgebouwd uit lijstelementen. Deze worden geplaatst binnen li-tags (zie voorbeeld)
+							- De browser plaatst standaard een _bullet_ voor elk list item (aanpasbaar met CSS)
+
+							```
+							<ul>
+								<li>Times New Roman</li>
+								<li>Courier</li>
+								<li>Comic Sans</li>
+							</ul>
+							```
+				</section>
+				<section>
+							## Niet-geordende lijsten: &lt;ul&gt;...&lt;/ul&gt;
+
+							- Binnen de lijstelementen kan je vrij andere elementen gebruiken (zie het voorbeeld)
+							- Merk op hoe we inspringen om alles leesbaar te houden. Insprongen maak je met tabs of spaties
+							- Html-elementen die in elkaar genest zitten: we spreken over _ouders_ en _kinderen_
+
+							```
+							<ul>
+							    <li>
+							        <h3>Een titel</h3>
+							        <p>Quisque rhoncus euismod pulvinar. Nulla non arcu at lectus.</p>
+							    </li>
+							    <li>
+							        <h3>Een andere titel</h3>
+							        <p>Quisque rhoncus euismod pulvinar. Nulla non arcu at lectus.</p>
+							    </li>
+							</ul>
+							```
+				</section>
+				<section>
+							## Geordende lijsten: &lt;ol&gt;...&lt;/ol&gt;
+
+							- Gebruik je wanneer de volgorde wél belangrijk is
+							- Het element begint met de &lt;ol&gt;-tag en eindigt met de &lt;/ol&gt;-tag
+							- Voor de rest werken ze op gelijkaardige manier als niet-geordende lijsten
+							- Ook deze lijst is binnenin opgebouwd uit lijstelementen
+							- De browser kent standaard een nummering toe (aanpasbaar met CSS)
+
+							```
+							<ol>
+								<li>Helvetica</li>
+								<li>Garamond</li>
+								<li>Times New Roman</li>
+							</ol>
+							```
+				</section>
+				<section>
+							## Geordende lijsten: &lt;ol&gt;...&lt;/ol&gt;
+
+							- Met het start-attribuut kan je de nummering aanpassen
+							- Attributen komen vaak voor en hebben steeds dezelfde vorm: naam + "=" en daarna tussen aanhalingstekens de waarde
+							- Bij het schrijven van een attribuut gebruik je best geen spaties
+							- Hier mag je het attribuut weglaten, sommige elementen (bvb het img-element) hebben verplichte attributen
+
+							```
+							<ol start="5">
+								<li>Helvetica</li>
+								<li>Garamond</li>
+								<li>Times New Roman</li>
+							</ol>
+							```
+				</section>
+				<section>
+							## De list-style-type eigenschap
+
+							- Hiermee lopen we even vooruit: CSS geeft je controle over de manier waarop lijsten worden voorgesteld
+							- De _bullet_ bij niet-geordende lijsten kan worden weggelaten, een vierkant of open cirkel worden, ...
+							- Bij geordende lijsten kan gekozen worden voor Romeinse cijfers, letters, ...
+
+							```
+							ul {
+								list-style-type: disc;
+							}
+
+							ol {
+								list-style-type: lower-roman;
+							}
+							```
+				</section>
+				<section>
+							## Lijst-elementen in elkaar vlechten
+
+							- We kunnen lijsten in elkaar vervlechten. De browser zal automatisch inspringen en de bullets aanpassen
+							- Je ziet: html schrijven is je hoofd erbij houden. Denk aan de insprongen
+
+							```
+							<ol>
+								<li>Helvetica</li>
+								<li>
+									<ul>
+										<li>Helvetica Neue</li>
+										<li>Akzidenz Grotesk</li>
+										<li>Neue Haas Grotesk</li>
+									</ul>
+								</li>
+							</ol>
+							```
+				</section>
+				<section class="chapter">
+							## Informatie organiseren: header, main, footer en nav
+				</section>
+				<section>
+							## Informatie organiseren
+
+							- Elementen als &lt;h1&gt;, &lt;p&gt;, &lt;ul&gt; slaan op specifieke en kleinere stukjes informatie
+							- Er zijn ook elementen die betekenis geven aan een bepaald deel van een webpagina
+							- Het zijn stuk voor stuk verzamel-elementen die andere HTML-elementen gaan bevatten
+							- Hier de juiste keuzes maken is een skill die je langzaam onder de knie zal krijgen
+				</section>
+				<section>
+							## Het main-element: &lt;main&gt;...&lt;/main&gt;
+
+							- Hiermee identificeer je het belangrijkste deel van je webpagina
+							- Je trekt hiermee een cirkel rond de belangrijkste en unieke informatie op de pagina
+							- M.a.w. headers en footers, die we in de volgende slides zullen zien horen hier niet bij: zij bevatten informatie die terugkomt op andere pagina's
+
+							```
+							<main>
+								<h1>Mat Mania or Exciting Hour</h1>
+								<h2>Introduction</h2>
+								<p>Is a 1985 Japanese <em>pro wrestling-themed</em> arcade game developed by
+								Technōs Japan and published by Taito. It is a spiritual successor to the 1983
+								arcade game Tag-Team Wrestling, also developed by Technōs Japan, but published
+								by Data East. It was also ported to the PS4 console in 2015.</p>
+							</main>
+							```
+				</section>
+				<section>
+							## Het header-element: &lt;header&gt;...&lt;/header&gt;
+
+							- Voor een verzameling elementen bovenaan webpagina's, een sectie of artikel (zie verder)
+							- Geen vaste ingrediënten voor wat een header hoort te bevatten: jij kiest
+							- Bevat vaak een h1-element, een logo-afbeelding, een nav-element met links (komen verder nog aan bod)
+
+							```
+							<header>
+								<img src="mijnlogo.jpg" alt="het Taito-logo">
+								<h1>Taito Japan</h1>
+								<nav>
+									<ul>
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Over ons</a></li>
+									</ul>
+								</nav>
+							</header>
+							```
+				</section>
+				<section>
+							## Het footer-element: &lt;footer&gt;...&lt;/footer&gt;
+
+							- Gebruikt voor verzameling elementen onderaan een pagina, sectie of artikel
+							- Geen vaste ingrediënten voor wat een footer hoort te bevatten: jij kiest
+							- Bevat vaak auteursinformatie, copyright-informatie, verwante documenten of pagina's, sitenavigatie ...
+
+							```
+							<footer>
+								<p>Deze site werd gemaakt door Kristof Michiels te Antwerpen in 2021</p>
+								<nav>
+									<ul>
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Over ons</a></li>
+									</ul>
+								</nav>
+							</footer>
+							```
+				</section>
+				<section>
+							## Het nav-element: &lt;nav&gt;...&lt;/nav&gt;
+
+							- Gebruikt om de belangrijkste navigatie-gedeeltes te benoemen
+							- Denk aan de navigatiebalk op de sites die je bezoekt: links naar andere pagina's op de site
+							- Je gaat deze links omwille van het lijst-aspect vaak in een ul-element plaatsen
+
+							```
+							<nav>
+								<ul>
+									<li><a href="#">Home</a></li>
+									<li><a href="#">Over ons</a></li>
+								</ul>
+							</nav>
+							```
+				</section>
+				<section class="chapter">
+							## Inline en block-elementen
+				</section>
+				<section>
+							## Block-elementen
+
+							- Alle HTML-elementen zijn ofwel van het type **block** of **inline**
+							- Alle elementen die we tot hiertoe hebben gezien zijn van het type block
+							- Dit betekent dat ze beginnen na en eindigen voor een eigen witte regel
+							- Truukje: ze gebruiken "ellebogen" om de omliggende elementen naar een nieuwe lijn te duwen
+				</section>
+				<section>
+							## Inline-elementen
+							- Inline elementen hebben die kracht niet!
+							- Ze zitten ook zo goed als steeds binnen een ander element
+							- Ze worden met name gebruikt om bepaalde accenten te leggen binnen een tekst
+							- Met CSS zullen we het "karakter" van een element kunnen aanpassen: van block naar inline of omgekeerd
+							- We gaan nu enkele inline elementen overlopen
+				</section>
+				<section>
+							## Tekst benadrukken met em: &lt;em&gt;...&lt;/em&gt;
+
+							- em staat voor emphasized
+							- We benadrukken hiermee één of meerdere woorden in de tekst
+							- We willen hiermee hun _belang in de zin_ onderstrepen
+							- De browser drukt dit standaard schuin gedrukt af, maar we zullen leren aan te passen vanuit CSS
+
+							```
+							<em>Benadrukte tekst</em>
+
+							<p>Grotere context met <em>Benadrukte tekst</em></p>
+							```
+
+				</section>
+				<section>
+							## Tekst benadrukken met strong: &lt;strong&gt;...&lt;/strong&gt;
+
+							- Ook met strong benadrukken we één of meerdere woorden in de tekst
+							- Verschil met em is subtiel. De woorden in strong springen als het ware uit de tekst, je kent aan hen een speciaal belang toe in de grotere context van de pagina
+							- De browser drukt dit standaard vet gedrukt af, maar we zullen leren aan te passen vanuit CSS
+
+							```
+							<strong>Benadrukte tekst</strong>
+
+							<p>Grotere context met <strong>Benadrukte tekst</strong></p>
+							```
+				</section>
+				<section class="chapter">
+							## Generieke elementen
+				</section>
+				<section>
+							## Generieke HTML-elementen: &lt;div&gt; en &lt;span&gt;
+
+							- Generiek = merkloos (bvb bij generische medicijnen)
+							- We zagen eerder elementen als : main, header, footer, nav
+							- Dit zijn verzamelelementen, met een extra betekenis: bvb "hoofding" voor header
+							- Wat nu als geen enkel van deze genoemde elementen past bij een verzameling die je wil maken?
+							- Dan gebruik je div en span :-)
+				</section>
+				<section>
+							## Het div-element: &lt;div&gt;...&lt;/div&gt;
+							- Div staat voor _division_
+							- Het is een block-element
+							- Te gebruiken als een verzamel-element als er geen beter passend element bestaat
+
+							```
+							<div>
+								<img src="mijnlogo.jpg" alt="het Taito-logo">
+								<h1>Taito Japan</h1>
+								<nav>
+									<ul>
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Over ons</a></li>
+									</ul>
+								</nav>
+							</div>
+							```
+				</section>
+				<section>
+							## Het span-element: &lt;span&gt;...&lt;/span&gt;
+
+							- Span staat voor span (=omspannen)
+							- Het is een inline element
+							- Je gebruikt het bvb. binnen een tekst om een extra accent te leggen met CSS/JS
+
+							```
+							<p>Mijn broer heeft <span>blauwe</span> ogen.</p>
+							```
+				</section>
+				<section class="chapter">
+							## De DOM: Document Object Model
+				</section>
+				<section>
+							## Nog even herhalen
+							- We schrijven al onze html binnen het body-element in onderstaande basisstructuur
+							- HTML-elementen zitten verweven in elkaar
+							- Wij geven dit voor onszelf weer door met tabinsprongen te werken
+
+							```
+							&lt;!DOCTYPE html&gt;
+							&lt;html&gt;
+								&lt;head&gt;
+									<meta charset="utf-8">
+									<title>Titel komt hier</title>
+								&lt;/head&gt;
+								&lt;body&gt;
+									Alle informatie op de pagina komt hier
+								&lt;/body&gt;
+							&lt;/html&gt;
+							```
+				</section>
+				<section>
+							## De DOM
+							- HTML tags definiëren een hiërarchische structuur die het Document Object Model wordt genoemd, kortweg de DOM
+							- Met de DOM kan geïnterageerd worden met een scripting taal als JavaScript of met CSS
+							- HTML elementen definiëren DOM-elementen. Dit zijn entiteiten die leven binnen de DOM
+							- vertaalt zich in een boomdiagram van de DOM... We spreken over:
+								- afstammelingen (descendants)
+								- kind-ouderrelaties (parents-children)
+				</section>
+				<section>
+							## DOM
+
+							```
+								&lt;body&gt;
+									  <h1>Hallo, Wereld!</h1>
+	 							 	<div>
+	 							 		<ol>
+	 							 			<li>List Item</li>
+	 							 			<li>List Item</li>
+	 							 			<li>List Item</li>
+	 							 		</ol>
+	 							 		<p>Dit is een paragraaf.</p>
+	 							 		<p>En dit een <span>tweede</span>.</p>
+	 							 	</div>
+	 							 	<ul>
+	 							 		<li>List Item <span>1</span></li>
+	 							 		<li>List Item <span>2</span></li>
+	 							 		<li>List Item <span>3</span></li>
+	 							 	</ul>
+								&lt;/body&gt;
+							```
+				</section>
+				<section>
+							## DOM
+							![DOM](../img/dom.jpg)
+							##### The DOM als boomstructuur
+				</section>
+				<section class="chapter">
+							## Link elementen
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							- "Anchor" of anker-elementen
+							- Hypertext links
+							- Zijn de essentie van het web
+							- 1 verplicht attribuut: href
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							Een voorbeeld:
+							- het href-attribuut wijst naar de site die moet worden geopend als op de link wordt geklikt
+							- Tussen &lt;a&gt; en &lt;/a&gt; schrijf je de content die aanklikbaar moet worden
+
+							```
+							<a href="http://google.com" >Ga naar de Google site</a>
+							```
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							- Om van een afbeelding een link te maken zet je de afbeelding tussen &lt;a&gt; en &lt;/a&gt;
+							- Op deze manier kan je van elk HTML content element (of groep elementen) een link maken
+
+							```
+							<a href="http://google.com" ><img src="googlelogo.gif" alt="Google Logo"></a>
+							```
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							Een voorbeeld:
+
+							```
+							<ul>
+								<li>
+									<a href="http://google.com">
+										<h2>De Google website</h2>
+										<p>Op de Google website zoek je met behulp van zoektermen.</p>
+									</a>
+								</li>
+								<li>...</li>
+								<li>...</li>
+							</ul>
+							```
+				</section>
+				<section>
+							## Link elementen:  &lt;a&gt;...&lt;/a&gt;
+
+							- Browser geeft standaard weer in het blauw en onderlijnd
+							- Reeds bezochte links: paarse kleur
+							- Behoort tot vormgeving die wij gaan bepalen in CSS
+				</section>
+				<section>
+							## Het href attribuut
+
+							```
+							<a href="url">Gelinkte content</a>
+							```
+
+							- URL staat voor _Uniform Resource Locator_
+							- Aangeklikte url wordt ingeladen in hetzelfde browservenster
+							- We kunnen linken naar absolute URLs of naar relatieve URLs
+				</section>
+				<section>
+							## Absolute URLs
+
+							- Bevatten de volledige URL voor het document (inclusief http:// of https://), de domeinnaam en de padnaam (indien nodig)
+							- Je gebruikt een absolute URL indien je linkt naar een document buiten de eigen website
+							- Kan soms heel lang en intimiderend zijn
+							- Laat je hierdoor niet van de wijs brengen: het is slechts één attribuut met een ingevulde waarde
+
+							```
+							href="https://www.ap.be/opleiding/crossmedia-ontwerp"
+							```
+				</section>
+				<section>
+							## Relatieve URLs
+
+							- Beschrijven een padnaam relatief ten opzichte van het huidige document
+							- Om te linken naar documenten op je eigen site (op dezelfde webserver)
+							- Geen http of https nodig
+
+							```
+							href="contact/index.html"
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken binnen dezelfde folder
+
+							- Mag je doen door gewoon naar de bestandsnaam te wijzen
+
+							```
+							<a href="contact.html">Contacteer ons</a>
+
+							<a href="over.html">Over deze site</a>
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken naar dieper gelegen folder
+
+							- Doe je door te verwijzen naar de folder gevolgd door een slash
+							- Indien meerdere niveau's diep, dit herhalen
+
+							```
+							<a href="recepten/spaghetti.html">Spaghetti maken</a>
+
+							<a href="recepten/pastas/spaghetti.html">Spaghetti maken</a>
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken naar een hoger gelegen folder
+
+							- Hiervoor gebruik je de dot-dot-slash notatie ("../")
+							- Hiermee zeg je: ga één niveau hoger dan de huidige folder
+							- ../ staat dan voor de hoger gelegen folder en deze moet niet bij naam worden genoemd
+
+							```
+							<p><a href ="../index.html">Terug naar de homepagina</a></p>
+							```
+				</section>
+				<section>
+							## Relatieve URLs: linken naar een hoger gelegen folder
+
+							Verwijzen naar 2 niveau's hoger?
+
+							```
+							<p><a href ="../../index.html">Terug naar de homepagina</a></p>
+							```
+				</section>
+				<section>
+							## Linken met _Site Root_ -relatieve padnamen
+
+							- Starten in de root folder en van daaruit alle subfolders opsommen
+							- Begint met een slash ("/") die de rootfolder symboliseert
+							- Je hoeft die rootfolder dus niet mee te benoemen, enkel de eventuele subfolders
+							- Werken enkel indien je bestanden op een webserver staan
+
+							```
+							<a href="/recepten/spaghetti.html">Spaghetti maken</a>
+
+							<a href="/recepten/pastas/spaghetti.html">Spaghetti maken</a>
+							```
+				</section>
+				<section>
+							## Padnamen voor afbeeldingen
+							- Het src-attribuut werkt op net dezelfde manier als het href-attribuut
+							- Met het verschil dat deze laatsten naar afbeeldingen verwijzen
+
+							```
+							<img src="afbeeldingen/spaghetti.gif" alt="Spaghetti-gerecht">
+
+							<img src="../afbeeldingen/spaghetti.gif" alt="Spaghetti-gerecht">
+							```
+				</section>
+				<section>
+							## Linken naar een specifieke plek op de pagina
+
+							- Je kan ook linken binnen een pagina
+							- Vaak gebruikt om shortcuts te voorzien naar specifieke plaatsen op lange informatierijke pagina's
+							- Twee stappen:
+								- eerst ga je de bestemming identificeren (van een id voorzien)
+								- daarna ga je een link aanmaken naar deze bestemming
+
+							```
+							<a href="#mijnbestemming">Link naar ondergelegen gedeelte</a>
+							...
+							<h2 id="mijnbestemming">
+							<p>...</p>
+							```
+				</section>
+				<section>
+							## Linken naar een specifieke plek op de pagina
+
+							- Je kan deze techniek ook gebruiken om te linken van beneden naar bovenaan de webpagina
+							- Je kan ook linken naar een specifieke plek op een andere pagina
+
+							```
+							<header id="hoofding">...</header>
+							...
+							<footer><a href="#hoofding">Terug naar boven</a></footer>
+							```
+
+							```
+							<a href="/recepten/spaghetti.html#bereidingstijd">Op andere pagina</a>
+							```
+				</section>
+				<section>
+							## Openen in een nieuw browservenster
+
+							- Browser zal nieuw venster/tabblad openen
+							- Zeer spaarzaam gebruiken. Vaak geen goed idee op vlak gebruiksvriendelijkheid
+
+							```
+							<a href="https://www.ap.be" target ="_blank" >Artesis Plantijn Hogeschool</a>
+							```
+				</section>
+				<section>
+							## Mail-links
+
+							- Browser zal mail-client openen en een nieuwe mail aanmaken naar mailto-adres
+							- Enkel indien browser geconfigureerd, werkt dus niet 100% van de tijd
+
+							```
+							<a href="mailto:kristof.michiels01@ap.be">Contacteer Kristof Michiels</a>
+							```
+				</section>
+				<section class="chapter">
+							## Afbeeldingen
+				</section>
+				<section>
+							## Het img element
+
+							- Afbeeldingen plaats je met een img element
+							- Is zoals reeds gezegd een inline element
+							- Een img heeft geen afsluittag
+							- Heeft wel 2 verplichte attributen: src en alt
+
+							```
+							<p>Deze avond heb ik zin in een lekkere <img src="spaghetti.jpg" alt="spaghetti" >.
+							Heerlijk!</p>
+							```
+				</section>
+				<section>
+							## Het img element
+
+							- Telkens de browser een img element tegenkomt, zal het dit element proberen te vertalen naar een afbeelding
+							- src en alt zijn verplicht
+							- src bevat de locatie van de afbeelding
+							- alt voorziet in een tekstuele beschrijving van de afbeelding
+				</section>
+				<section>
+							## Het img element: src
+
+							- De onderkant van de afbeelding zal zich uitlijnen op de regel waarin de afbeelding is geplaatst
+							- Linken naar bestanden op een andere server (hotlinken): af te raden
+							- Downloaden (indien je rechten respecteert) en vanuit je eigen folders gebruiken krijgt onze voorkeur
+				</section>
+				<section>
+							## Het img element: alt
+
+							- Het alt attribuut: is dus verplicht en belangrijk voor o.m. zoekmachines en schermlezers
+							- Zeker invullen wanneer:
+								- een afbeelding deel uitmaakt van de content op de site
+								- wanneer je een afbeelding gebruikt binnen een a-element
+							- Als een afbeelding niet bijdraagt tot de content op de pagina (meer eerder de vormgeving ondersteunt) dan mag je alt openlaten (alt="")
+				</section>
+				<section>
+							## Het img element: breedte en hoogte
+							- Je kan afmetingen meegeven met afbeeldingen met de attributen width en height
+							- We zullen dit met CSS kunnen perfectioneren
+							- De getallen drukken de waarde uit in pixel (je mag ook px toevoegen aan getal)
+							- Hoogte én breedte meegeven kan een afbeelding vervormen
+							- Ga voor de exacte afmetingen, of volg de juiste verhouding, of geef slechts één waarde mee (ofwel width, ofwel height)
+
+							```
+							width="getal"
+							height="getal"
+
+							<img src="spaghetti.jpg" alt="Spaghetti" width="250" height="250">
+							```
+				</section>
+				<section>
+							## Het img element
+							- Is dus inline
+							- Je kan het in een block-element stoppen
+							- Je zal het ook block kunnen maken met CSS (display: block;)
+
+							```
+							<p><img src="spaghetti.jpg" alt="Spaghetti"></p>
+							```
+				</section>
+				<section class="chapter">
+							## Commentaar
+				</section>
+				<section>
+							## Commentaar toevoegen
+							- Handige manier om HTML te annoteren
+							- Steeds nuttig om de meer complexe stukken opmaak te voorzien van commentaar
+							- Goed voor anderen die de code moeten interpreteren, of voor jezelf later zodat men/je begrijpt waarom een bepaalde keuze werd gemaakt
+
+							```
+							<h1>Hallo, Wereld!</h1>
+							<!-- Onderstaande tekst wordt nog aangepast -->
+							<p>Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit, sed do eiusmod tempor incididunt
+							ut labore et dolore magna aliqua. Ut enim ad minim
+							veniam, quis nostrud exercitation ullamco laboris
+							nisi ut aliquip ex ea commodo consequat.</p>
+							```
+				</section>
+				<section class="chapter">
+							## id en class
+				</section>
+				<section>
+							## Identificatie en classificatie met id en class
+							- We kwamen eerder al attributen tegen (weet je nog dewelke?)
+							- id en class zijn twee attributen waarmee je je elementen van een naam voorziet
+							- Die naam kan dan gebruikt worden vanuit CSS/JavaScript om iets met dat/die element(en) te doen
+							- Wordt vaak geassocieerd met div en span, maar je kan een id of class toevoegen aan alle html-elementen
+							- Het zijn wat we noemen globale attributen
+				</section>
+				<section>
+							## Identificatie met id
+							- Gebruik id om te identificeren
+							- Een id is uniek: de waarde "hoofding" mag op deze pagina slechts één keer gebruikt worden
+							- Een id moet bestaan uit minstens 1 karakter. Gebruik als eerste karakter steed een letter
+							- Mag "a", "x", ... zijn. Mijn advies: probeer een betekenisvolle naam te geven
+
+							```
+							<div id="hoofding">
+								<h2>Mijn hoofding</h2>
+								<p>Mijn paragraaf</p>
+							</div>
+							```
+
+				</section>
+				<section>
+							## Classificatie met class
+
+							- Gebruik class om te classificeren
+							- De class-naam mag gedeeld zijn door meerdere elementen
+							- Door een klassenaam te gebruiken kunnen je CSS-stijlen toepassen op alle elementen die dezelfde klassenaam delen
+							- Elementen kunnen zowel een klassenaam en een id-naam hebben
+
+							```
+							<p class="beschrijving">Mijn paragraaf</p>
+							<p class="beschrijving">Mijn paragraaf</p>
+							```
+				</section>
+				<section>
+							## Web technology - Les 1: HTML
+							### Bedankt voor je aandacht - Tot in de labo-les!
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
