@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Programming: Les 5</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## User input
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Lesinhoud
+                </section>
+				<section>
+							## Lesinhoud
+							Most programs are written to solve an end user’s problem. To do so, you usually need to get some information from the user. For a simple example, let’s say someone wants to find out whether they’re old enough to vote. If you write a program to answer this question, you need to know the user’s age before you can provide an answer. The program will need to ask the user to enter, or input, their age; once the program has this input, it can compare it to the voting age to determine if the user is old enough and then report the result.
+							In this chapter you’ll learn how to accept user input so your program can then work with it. When your program needs a name, you’ll be able to prompt the user for a name. When your program needs a list of names, you’ll be able to prompt the user for a series of names. To do this, you’ll use the input() function.
+							You’ll also learn how to keep programs running as long as users want them to, so they can enter as much information as they need to; then, your program can work with that information. You’ll use Python’s while loop to keep programs running as long as certain conditions remain true.
+				</section>
+				<section>
+							## How the input() Function Works
+
+							The input() function pauses your program and waits for the user to enter some text. Once Python receives the user’s input, it assigns that input to a variable to make it convenient for you to work with.
+
+							```Python
+							message = input("Tell me something, and I will repeat it back to you: ") print(message)
+							```
+
+							The input() function takes one argument: the prompt, or instructions, that we want to display to the user so they know what to do.
+							The response is assigned to the variable message.
+				</section>
+				<section>
+							## Writing Clear Prompts
+
+							Each time you use the input() function, you should include a clear, easy-tofollow prompt that tells the user exactly what kind of information you’re looking for.
+
+							Add a space at the end of your prompts (after the colon in the preceding example) to separate the prompt from the user’s response and to make it clear to your user where to enter their text.
+
+							Sometimes you’ll want to write a prompt that’s longer than one line. For example, you might want to tell the user why you’re asking for certain input. You can assign your prompt to a variable and pass that variable to the input() function. This allows you to build your prompt over several lines, then write a clean input() statement.
+
+							```Python
+							prompt = "If you tell us who you are, we can personalize the messages you see." 
+							prompt += "\nWhat is your first name? "
+							name = input(prompt) print(f"\nHello, {name}!")
+							```
+				</section>
+				<section>
+							## Using int() to Accept Numerical Input
+
+							When you use numerical input to do calculations and comparisons, be sure to convert the input value to a numerical representation first.
+
+							When you use the input() function, Python interprets everything the user enters as a string.
+
+							We can resolve this issue by using the int() function, which tells Python to treat the input as a numerical value. The int() function converts a string representation of a number to a numerical representation
+
+							How do you use the int() function in an actual program? 
+
+							```Python
+							height = input("How tall are you, in inches? ") 
+							height = int(height)
+							if height >= 48:
+								print("\nYou're tall enough to ride!") 
+							else:
+								print("\nYou'll be able to ride when you're a little older.")
+							```
+				</section>
+				<section>
+							## The Modulo Operator
+
+							A useful tool for working with numerical information is the modulo operator (%), which divides one number by another number and returns the remainder:
+							The modulo operator doesn’t tell you how many times one number fits into another; it just tells you what the remainder is.
+							When one number is divisible by another number, the remainder is 0, so the modulo operator always returns 0. You can use this fact to determine if a number is even or odd:
+
+							```Python
+							number = input("Enter a number, and I'll tell you if it's even or odd: ") number = int(number)
+							if number % 2 == 0:
+							print(f"\nThe number {number} is even.") else:
+							print(f"\nThe number {number} is odd.")
+							```
+				</section>
+				<section>
+							## Letting the User Choose When to Quit
+
+							We can make the parrot.py program run as long as the user wants by putting most of the program inside a while loop. We’ll define a quit value and then keep the program running as long as the user has not entered the quit value:
+
+							```Python
+							prompt = "\nTell me something, and I will repeat it back to you:"
+							prompt += "\nEnter 'quit' to end the program. "
+							message = "" 
+
+							while message != 'quit':
+								message = input(prompt) 
+								
+								if message != 'quit':
+									print(message)
+							```
+
+				</section>
+
+				
+
+				<section>
+							## Python Programming - les 5 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

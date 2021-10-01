@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Programming: Les 3</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## If statements
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Lesinhoud
+                </section>
+				<section>
+							## Lesinhoud
+
+							- Conditional tests
+							- If statements
+
+							Programming often involves examining a set of conditions and deciding which action to take based on those conditions.
+							In this chapter you learned how to write conditional tests, which always evaluate to True or False. You learned to write simple if statements, if- else chains, and if- elif- else chains. You began using these structures to identify particular conditions you needed to test and to know when those conditions have been met in your programs. You learned to handle certain items in a list differently than all other items while continuing to utilize the efficiency of a for loop. You also revisited Python’s style recommendations to ensure that your increasingly complex programs are still relatively easy to read and understand.
+				</section>
+				<section class="chapter">
+							## Conditional tests
+				</section>
+				<section>
+							## Een beetje vooruitlopen met een eenvoudig voorbeeld
+							The following short example shows how if tests let you respond to special situations correctly. I
+
+							```Python
+							cars = ['audi', 'bmw', 'subaru', 'toyota']
+
+							for car in cars:
+								if car == 'bmw':
+									print(car.upper())
+								else:
+									print(car.title())
+							```
+
+							The loop in this example first checks if the current value of car is 'bmw' u. If it is, the value is printed in uppercase. If the value of car is anything other than 'bmw', it’s printed in title case:
+				</section>
+				<section>
+							## Conditional tests
+							At the heart of every if statement is an expression that can be evaluated as True or False and is called a conditional test. Python uses the values True and False to decide whether the code in an if statement should be executed. If a conditional test evaluates to True, Python executes the code following the if statement. If the test evaluates to False, Python ignores the code following the if statement.
+
+							equality operator returns True if the values on the left and right side of the operator match, and False if they don’t match.
+
+							A single equal sign is really a statement; you might read the code at u as “Set the value of car equal to 'audi'.” On the other hand, a double equal sign, like the one at v, asks a question: “Is the value of car equal to 'bmw'? ”
+				</section>
+				<section>
+							## Ignoring Case When Checking for Equality
+
+							Testing for equality is case sensitive in Python. 
+
+							```Python
+							car = 'Audi'
+							car.lower() == 'audi'
+							True
+							```
+				</section>
+				<section>
+							## Checking for Inequality
+
+							Most of the conditional expressions you write will test for equality, but sometimes you’ll find it more efficient to test for inequality.
+							When you want to determine whether two values are not equal, you can combine an exclamation point and an equal sign (!=). The exclamation point represents not, as it does in many programming languages.
+
+							```Python
+							requested_topping = 'mushrooms'
+							if requested_topping != 'anchovies':
+								print("Hold the anchovies!")
+							```
+				</section>
+				<section>
+							## Numerical Comparisons
+
+							Testing numerical values is pretty straightforward.
+
+							You can include various mathematical comparisons in your conditional statements as well, such as less than, less than or equal to, greater than, and greater than or equal to:
+
+							Each mathematical comparison can be used as part of an if statement, which can help you detect the exact conditions of interest.
+
+							```Python
+							age = 18
+							age == 18
+
+							answer = 17
+							if answer != 42:
+							print("That is not the correct answer. Please try again!")
+
+							age = 19
+							age < 21 
+							age <= 21
+							age > 21 
+							age >= 21
+							```
+				</section>
+				<section>
+							## Checking Multiple Conditions
+
+							You may want to check multiple conditions at the same time. For example, sometimes you might need two conditions to be True to take an action. Other times you might be satisfied with just one condition being True. The keywords and and or can help you in these situations.
+				</section>
+				<section>
+							## Using and to Check Multiple Conditions
+
+							To check whether two conditions are both True simultaneously, use the keyword and to combine the two conditional tests; if each test passes, the overall expression evaluates to True. If either test fails or if both tests fail, the expression evaluates to False.
+
+							To improve readability, you can use parentheses around the individual tests, but they are not required.
+
+							```Python
+							age_0 = 22
+							age_1 = 18
+							age_0 >= 21 and age_1 >= 21
+							age_1 = 22
+							age_0 >= 21 and age_1 >= 21
+							(age_0 >= 21) and (age_1 >= 21)
+							```
+				</section>
+				<section>
+							## Using or to Check Multiple Conditions
+
+							The keyword or allows you to check multiple conditions as well, but it passes when either or both of the individual tests pass. An or expression fails only when both individual tests fail.
+
+							```Python
+							age_0 = 22
+							age_1 = 18
+							age_0 >= 21 or age_1 >= 21 True
+							age_0 = 18
+							age_0 >= 21 or age_1 >= 21 False
+				</section>
+				<section>
+							## Checking Whether a Value Is in a List
+
+							Sometimes it’s important to check whether a list contains a certain value before taking an action. For example, you might want to check whether a new username already exists in a list of current usernames before completing someone’s registration on a website. In a mapping project, you might want to check whether a submitted location already exists in a list of known locations. To find out whether a particular value is already in a list, use the keyword in.
+							
+							```Python
+							available_toppings = ['mushrooms', 'olives', 'green peppers',
+												'pepperoni', 'pineapple', 'extra cheese']
+
+							requested_toppings = ['mushrooms', 'french fries', 'extra cheese']
+
+							for requested_topping in requested_toppings:
+								if requested_topping in available_toppings:
+									print(f"Adding {requested_topping}.")
+								else:
+									print(f"Sorry, we don't have {requested_topping}.")
+
+							print("\nFinished making your pizza!")
+							```
+				</section>
+				<section>
+							## Checking Whether a Value Is Not in a List
+
+							Other times, it’s important to know if a value does not appear in a list. You can use the keyword not in this situation. For example, consider a list of users who are banned from commenting in a forum. You can check whether a user has been banned before allowing that person to submit a comment:
+
+							```Python
+							banned_users = ['andrew', 'carolina', 'david']
+							user = 'marie'
+
+							if user not in banned_users:
+								print(f"{user.title()}, you can post a response if you wish.")
+							```
+				</section>
+				<section>
+							## Boolean Expressions
+
+							As you learn more about programming, you’ll hear the term Boolean expression at some point. A Boolean expression is just another name for a conditional test. A Boolean value is either True or False, just like the value of a conditional expression after it has been evaluated.
+
+							```Python
+							game_active = True 
+							can_edit = False
+							```
+
+							Boolean values provide an efficient way to track the state of a program or a particular condition that is important in your program.
+				</section>
+				<section class="chapter">
+							## If statements
+				</section>
+				<section>
+							## Simple if Statements
+
+							The simplest kind of if statement has one test and one action:
+							
+							if conditional_test: do something
+
+							You can put any conditional test in the first line and just about any action in the indented block following the test. If the conditional test evaluates to True, Python executes the code following the if statement. If the test evaluates to False, Python ignores the code following the if statement.
+
+							Styling Your if Statements: The only recommendation PEP 8 provides for styling conditional tests is to use a single space around comparison operators, such as ==, >=, <=
+
+							```Python
+							age = 17
+							if age >= 18:
+								print("You are old enough to vote!")
+								print("Have you registered to vote yet?")
+							```
+				</section>
+				<section>
+							## if-else Statements
+
+							Often, you’ll want to take one action when a conditional test passes and a different action in all other cases. Python’s if- else syntax makes this possible. An if- else block is similar to a simple if statement, but the else statement allows you to define an action or set of actions that are executed when the conditional test fails.
+
+							```Python
+							age = 17
+							if age >= 18:
+								print("You are old enough to vote!")
+								print("Have you registered to vote yet?")
+							else:
+								print("Sorry, you are too young to vote.")
+								print("Please register to vote as soon as you turn 18!")
+							```
+
+							In a simple if-else chain like this, one of the two actions will always be executed.
+				</section>
+				<section>
+							## The if-elif-else Chain
+
+							Often, you’ll need to test more than two possible situations, and to evaluate these you can use Python’s if- elif- else syntax. Python executes only one block in an if- elif- else chain. It runs each conditional test in order until one passes. When a test passes, the code following that test is executed and Python skips the rest of the tests.
+
+							```Python
+							age = 12
+
+							if age < 4:
+								price = 0
+							elif age < 18:
+								price = 25
+							else:
+								price = 40
+
+							print(f"Your admission cost is ${price}.")
+							```
+				</section>
+				<section>
+							## Using Multiple elif Blocks
+
+							You can use as many elif blocks in your code as you like. For example, if the amusement park were to implement a discount for seniors, you could add one more conditional test to the code to determine whether someone qualified for the senior discount. Let’s say that anyone 65 or older pays half the regular admission, or $20:
+
+							```Python
+							age = 12
+
+							if age < 4:
+								price = 0
+							elif age < 18:
+								price = 25
+							elif age < 65:
+								price = 40
+							else:
+								price = 20
+
+							print(f"Your admission cost is ${price}.")
+							```
+				</section>	
+				<section>
+							## Omitting the else Block
+
+							Python does not require an else block at the end of an if- elif chain. Some times an else block is useful; sometimes it is clearer to use an additional elif statement that catches the specific condition of interest:
+
+							The else block is a catchall statement. It matches any condition that wasn’t matched by a specific if or elif test, and that can sometimes include invalid or even malicious data. If you have a specific final condition you are testing for, consider using a final elif block and omit the else block. As a result, you’ll gain extra confidence that your code will run only under the correct conditions.
+
+							```Python
+							age = 12
+
+							if age < 4:
+								price = 0
+							elif age < 18:
+								price = 25
+							elif age < 65:
+								price = 40
+							elif age >= 65:
+								price = 20
+
+							print(f"Your admission cost is ${price}.")
+							```
+				</section>		
+				<section>
+							## Testing Multiple Conditions
+
+							The if- elif- else chain is powerful, but it’s only appropriate to use when you just need one test to pass. As soon as Python finds one test that passes, it skips the rest of the tests. This behavior is beneficial, because it’s efficient and allows you to test for one specific condition.
+							
+							However, sometimes it’s important to check all of the conditions of interest. In this case, you should use a series of simple if statements with no elif or else blocks. This technique makes sense when more than one condition could be True, and you want to act on every condition that is True.
+
+							In summary, if you want only one block of code to run, use an if- elifelse chain. If more than one block of code needs to run, use a series of independent if statements.
+
+							```Python
+							requested_toppings = ['mushrooms', 'french fries', 'extra cheese']
+							if 'mushrooms' in requested_toppings: 
+								print("Adding mushrooms.")
+							if 'pepperoni' in requested_toppings:
+								print("Adding pepperoni.")
+							if 'extra cheese' in requested_toppings:
+								print("Adding extra cheese.")
+							print("\nFinished making your pizza!")
+							```
+				</section>	
+				<section>
+							## Using if Statements with Lists
+
+							You can do some interesting work when you combine lists and if statements. You can watch for special values that need to be treated differently than other values in the list. You can manage changing conditions efficiently, such as the availability of certain items in a restaurant throughout a shift. You can also begin to prove that your code works as you expect it to in all possible situations.
+				</section>
+				<section>
+							## Checking for Special Items
+
+							Now that you have a basic understanding of conditional tests and if statements, let’s take a closer look at how you can watch for special values in a list and handle those values appropriately.
+
+							```Python
+							requested_toppings = ['mushrooms', 'french fries', 'extra cheese']
+							for requested_topping in requested_toppings:
+								print(f"Adding {requested_topping}.")
+
+							print("\nFinished making your pizza!")
+							```
+				</section>
+				<section>
+							## Checking for Special Items
+
+							But what if the pizzeria runs out of green peppers? An if statement inside the for loop can handle this situation appropriately:
+
+							```Python
+							requested_toppings = ['mushrooms', 'french fries', 'extra cheese']
+							for requested_topping in requested_toppings:
+								if requested_topping == 'green peppers':
+									print("Sorry, we are out of green peppers right now.") 
+								else:
+									print(f"Adding {requested_topping}.")
+
+							print("\nFinished making your pizza!")
+							```
+				</section>
+				<section>
+							## Checking That a List Is Not Empty
+
+							We’ve made a simple assumption about every list we’ve worked with so far; we’ve assumed that each list has at least one item in it. Soon we’ll let users provide the information that’s stored in a list, so we won’t be able to assume that a list has any items in it each time a loop is run. In this situation, it’s useful to check whether a list is empty before running a for loop.
+
+							```Python
+							requested_toppings = []
+							
+							if requested_toppings:
+								for requested_topping in requested_toppings:
+									print(f"Adding {requested_topping}.")
+								print("\nFinished making your pizza!")
+							else:
+								print("Are you sure you want a plain pizza?")
+							```
+				</section>
+				<section>
+							## Using Multiple Lists
+
+							People will ask for just about anything, especially when it comes to pizza toppings. What if a customer actually wants french fries on their pizza? You can use lists and if statements to make sure your input makes sense before you act on it.
+
+							```Python
+							available_toppings = ['mushrooms', 'olives', 'green peppers',
+												'pepperoni', 'pineapple', 'extra cheese']
+
+							requested_toppings = ['mushrooms', 'french fries', 'extra cheese']
+
+							for requested_topping in requested_toppings:
+								if requested_topping in available_toppings:
+									print(f"Adding {requested_topping}.")
+								else:
+									print(f"Sorry, we don't have {requested_topping}.")
+
+							print("\nFinished making your pizza!")
+							```
+
+
+				</section>
+
+				<section>
+							## Python Programming - les 3 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

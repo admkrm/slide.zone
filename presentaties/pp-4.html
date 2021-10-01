@@ -1,0 +1,394 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Programming: Les 4</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## Dictionaries
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Lesinhoud
+                </section>
+				<section>
+							## Lesinhoud
+							- Dictionaries
+							-you learned how to define a dictionary and how to work with the information stored in a dictionary. You learned how to access and modify individual elements in a dictionary, and how to loop through all of the information in a dictionary. You learned to loop through a dictionary’s key­value pairs, its keys, and its values. You also learned how to nest multiple dictionaries in a list, nest lists in a dictionary, and nest a dictionary inside a dictionary.
+							-dictionaries, which allow you to connect pieces of related information. You’ll learn how to access the information once it’s in a dictionary and how to modify that information. Because dictionaries can store an almost limitless amount of information, I’ll show you how to loop
+							through the data in a dictionary. Additionally, you’ll learn to nest dictionaries inside lists, lists inside dictionaries, and even dictionaries inside other dictionaries.
+							-Understanding dictionaries allows you to model a variety of real­world objects more accurately.
+				</section>
+				<section>
+							## Basisvoorbeeld
+
+							A dictionary in Python is a collection of key-value pairs. Each key is connected to a value, and you can use a key to access the value associated with that key. A key’s value can be a number, a string, a list, or even another dictionary. In fact, you can use any object that you can create in Python as a value in a dictionary. In Python, a dictionary is wrapped in braces, {}, with a series of keyvalue pairs inside the braces
+
+							A key-value pair is a set of values associated with each other. When you provide a key, Python returns the value associated with that key. Every key is connected to its value by a colon, and individual key­value pairs are separated by commas. You can store as many key­value pairs as you want in a dictionary.
+
+							```Python
+							alien_0 = {'color': 'green', 'points': 5}
+							print(alien_0['color']) 
+							print(alien_0['points'])
+							```
+				</section>
+				<section>
+							## Accessing Values in a Dictionary
+
+							To get the value associated with a key, give the name of the dictionary and then place the key inside a set of square brackets,
+
+							```Python
+							alien_0 = {'color': 'green', 'points': 5}
+							print(alien_0['color'])
+							new_points = alien_0['points']
+							print(f"You just earned {new_points} points!")
+							```
+				</section>
+				<section>
+							## Adding New Key-Value Pairs
+
+							Dictionaries are dynamic structures, and you can add new key­value pairs to a dictionary at any time. For example, to add a new key­value pair, you would give the name of the dictionary followed by the new key in square brackets along with the new value.
+							As of Python 3.7, dictionaries retain the order in which they were defined.
+
+							```Python
+							alien_0 = {'color': 'green', 'points': 5} print(alien_0)
+							alien_0['x_position'] = 0
+							alien_0['y_position'] = 25
+							print(alien_0)
+				</section>
+				<section>
+							## Starten met een lege dictionary
+
+							It’s sometimes convenient, or even necessary, to start with an empty dictionary and then add each new item to it.
+							Typically, you’ll use empty dictionaries when storing user­ supplied data in a dictionary or when you write code that generates a large number of key­value pairs automatically.
+
+							```Python
+							alien_0 = {}
+							alien_0['color'] = 'green'
+							alien_0['points'] = 5
+							print(alien_0)
+							```
+				</section>
+				<section>
+							## Modifying Values in a Dictionary
+
+							To modify a value in a dictionary, give the name of the dictionary with the key in square brackets and then the new value you want associated with that key.
+
+							```Python
+							alien_0 = {'color': 'green'}
+							print(f"The alien is {alien_0['color']}.")
+							alien_0['color'] = 'yellow'
+							print(f"The alien is now {alien_0['color']}.")
+							```
+				</section>
+				<section>
+							## Removing Key-Value Pairs
+
+							When you no longer need a piece of information that’s stored in a dictionary, you can use the del statement to completely remove a key­value pair. All del needs is the name of the dictionary and the key that you want to remove.
+
+							```Python
+							alien_0 = {'color': 'green', 'points': 5} 
+							print(alien_0)
+							del alien_0['points'] 
+							print(alien_0)
+							```
+				</section>
+				<section>
+							## A Dictionary of Similar Objects
+
+							The previous example involved storing different kinds of information about one object, an alien in a game. You can also use a dictionary to store one kind of information about many objects.
+
+							```Python
+							favorite_languages = { 
+								'jen': 'python', 
+								'sarah': 'c', 
+								'edward': 'ruby', 
+								'phil': 'python', 
+							}
+							language = favorite_languages['sarah'].title() print(f"Sarah's favorite language is {language}.")
+							```
+
+							When you know you’ll need more than one line to define a dictionary, press enTer after the opening brace. Then indent the next line one level (four spaces), and write the first key­value pair, followed by a comma. From this point forward when you press enTer, your text editor should automatically indent all subsequent key­value pairs to match the first key­value pair.
+
+							Once you’ve finished defining the dictionary, add a closing brace on a new line after the last key­value pair and indent it one level so it aligns with the keys in the dictionary. It’s good practice to include a comma after the last key­value pair as well, so you’re ready to add a new key­value pair on the next line.
+				</section>
+				<section>
+							## Using get() to Access Values
+
+							Using keys in square brackets to retrieve the value you’re interested in from a dictionary might cause one potential problem: if the key you ask for doesn’t exist, you’ll get an error.
+							
+							```Python
+							alien_0 = {'color': 'green', 'speed': 'slow'} 
+							print(alien_0['points'])
+							```
+
+							For dictionaries, specifically, you can use the get() method to set a default value that will be returned if the requested key doesn’t exist.
+
+							The get() method requires a key as a first argument. As a second optional argument, you can pass the value to be returned if the key doesn’t exist:
+
+							```Python
+							point_value = alien_0.get('points', 'No point value assigned.')
+							```
+
+							If you leave out the second argument in the call to get() and the key doesn’t exist, Python will return the value None. The special value None means “no value exists.”
+				</section>
+				<section>
+							## Looping Through a Dictionary
+
+							A single Python dictionary can contain just a few key­value pairs or millions of pairs. Because a dictionary can contain large amounts of data, Python lets you loop through a dictionary. Dictionaries can be used to store information in a variety of ways; therefore, several different ways exist to loop through them. You can loop through all of a dictionary’s key­value pairs, through its keys, or through its values.
+				</section>
+				<section>
+							## Looping Through All Key-Value Pairs
+
+							Before we explore the different approaches to looping, let’s consider a new dictionary designed to store information about a user on a website.
+
+							```Python
+							user_0 = {
+								'username': 'efermi',
+								'first': 'enrico',
+								'last': 'fermi',
+								}
+							
+							for key, value in user_0.items():
+								print(f"\nKey: {key}")
+								print(f"Value: {value}")
+							```
+
+							for k, v in user_0.items() -> would just work as well
+				</section>
+				<section>
+							## Looping through...
+							Looping through all key­value pairs works particularly well for dictionaries like the favorite_languages.py example on page 97, which stores the same kind of information for many different keys.
+							This type of looping would work just as well if our dictionary stored the results from polling a thousand or even a million people.
+
+							```Python
+							for name, language in favorite_languages.items():
+								print(f"{name.title()}'s favorite language is {language.title()}.")
+							```
+				</section>
+				<section>
+							## Looping Through All the Keys in a Dictionary
+
+							The keys() method is useful when you don’t need to work with all of the values in a dictionary. Let’s loop through the favorite_languages dictionary and print the names of everyone who took the poll:
+
+							```Python
+							for name in favorite_languages.keys():
+								print(name.title())
+							```
+
+							for name in favorite_languages: same output!
+				</section>
+				<section>
+							## ...
+
+							```Python
+							friends = ['phil', 'sarah']
+							for name in favorite_languages.keys():
+								print(f"Hi {name.title()}.")
+								
+								if name in friends:
+									language = favorite_languages[name].title() 
+									print(f"\t{name.title()}, I see you love {language}!")
+							```
+
+				</section>
+				<section>
+							## ...
+							You can also use the keys() method to find out if a particular person was polled. This time, let’s find out if Erin took the poll:
+
+							```Python
+							if 'erin' not in favorite_languages.keys():
+								print("Erin, please take our poll!")
+							````
+				</section>
+				<section>
+							## Looping Through a Dictionary’s Keys in a Particular Order
+
+							Starting in Python 3.7, looping through a dictionary returns the items in the same order they were inserted. Sometimes, though, you’ll want to loop through a dictionary in a different order.
+							
+							One way to do this is to sort the keys as they’re returned in the for loop. You can use the sorted() function to get a copy of the keys in order:
+
+							```Python
+							for name in sorted(favorite_languages.keys()):
+								print(f"{name.title()}, thank you for taking the poll.")
+							```
+				</section>
+				<section>
+							## Looping Through All Values in a Dictionary
+
+							If you are primarily interested in the values that a dictionary contains, you can use the values() method to return a list of values without any keys. For example, say we simply want a list of all languages chosen in our pro gramming language poll without the name of the person who chose each language:
+
+							```Python
+							print("The following languages have been mentioned:") 
+							for language in favorite_languages.values():
+								print(language.title())
+							```
+				</section>
+				<section>
+							## Without repetition
+
+							This approach pulls all the values from the dictionary without checking for repeats. That might work fine with a small number of values, but in a poll with a large number of respondents, this would result in a very repetitive list. To see each language chosen without repetition, we can use a set. A set is a collection in which each item must be unique:
+
+							```Python
+							for language in set(favorite_languages.values()):
+							```
+
+							When you wrap set() around a list that contains duplicate items, Python identifies the unique items in the list and builds a set from those items.
+
+							You can build a set directly using braces and separating the elements with commas:
+
+							```Python
+							languages = {'python', 'ruby', 'python', 'c'}
+							print(languages)
+							```
+
+							It’s easy to mistake sets for dictionaries because they’re both wrapped in braces. When you see braces but no key-value pairs, you’re probably looking at a set. Unlike lists and dictionaries, sets do not retain items in any specific order.
+				</section>
+				<section class="chapter">
+							## Nesting
+				</section>
+				<section>
+							## Nesting
+
+							Sometimes you’ll want to store multiple dictionaries in a list, or a list of items as a value in a dictionary. This is called nesting. You can nest dictionaries inside a list, a list of items inside a dictionary, or even a dictionary inside another dictionary. Nesting is a powerful feature, as the following examples will demonstrate.
+				</section>
+				<section>
+							## A List of Dictionaries
+
+							The alien_0 dictionary contains a variety of information about one alien, but it has no room to store information about a second alien, much less a screen full of aliens. How can you manage a fleet of aliens? One way is to make a list of aliens in which each alien is a dictionary of information about that alien.
+
+							```Python
+							alien_0 = {'color': 'green', 'points': 5} 
+							alien_1 = {'color': 'yellow', 'points': 10} 
+							alien_2 = {'color': 'red', 'points': 15}
+							aliens = [alien_0, alien_1, alien_2]
+							for alien in aliens: 
+								print(alien)
+							```
+				</section>
+				<section>
+							## A more realistic example
+
+							```Python
+							# Make an empty list for storing aliens.
+							aliens = []
+
+							# Make 30 green aliens.
+							for alien_number in range(30):
+								new_alien = {'color': 'green', 'points': 5, 'speed': 'slow'}
+								aliens.append(new_alien)
+
+							for alien in aliens[:3]:
+								if alien['color'] == 'green':
+									alien['color'] = 'yellow'
+									alien['speed'] = 'medium'
+									alien['points'] = 10
+								elif alien['color'] == 'yellow':
+									alien['color'] = 'red'
+									alien['speed'] = 'fast'
+									alien['points'] = 15
+
+							# Show the first 5 aliens.
+							for alien in aliens[:5]:
+								print(alien)
+							print("...")
+							```
+				</section>
+				<section>
+							## A List in a Dictionary
+
+							Rather than putting a dictionary inside a list, it’s sometimes useful to put a list inside a dictionary. For example, consider how you might describe a pizza that someone is ordering. If you were to use only a list, all you could really store is a list of the pizza’s toppings. With a dictionary, a list of top pings can be just one aspect of the pizza you’re describing.
+
+							```Python
+							# Store information about a pizza being ordered.
+							pizza = {
+								'crust': 'thick',
+								'toppings': ['mushrooms', 'extra cheese'],
+								}
+							
+							# Summarize the order.
+							print(f"You ordered a {pizza['crust']}-crust pizza "
+								"with the following toppings:")
+							
+							for topping in pizza['toppings']:
+								print("\t" + topping)
+							```							
+				</section>
+				<section>
+							## 
+
+							You can nest a list inside a dictionary any time you want more than one value to be associated with a single key in a dictionary.
+
+							```Python
+							favorite_languages = { 
+								'jen': ['python', 'ruby'], 
+								'sarah': ['c'], 
+								'edward': ['ruby', 'go'], 
+								'phil': ['python', 'haskell'], 
+							}
+
+							for name, languages in favorite_languages.items():
+								print(f"\n{name.title()}'s favorite languages are:") 
+								for language in languages: 
+									print(f"\t{language.title()}")
+							```
+
+							You should not nest lists and dictionaries too deeply. If you’re nesting items much deeper than what you see in the preceding examples or you’re working with someone else’s code with significant levels of nesting, most likely a simpler way to solve the problem exists.
+
+				</section>
+				<section>
+							## A Dictionary in a Dictionary
+
+							You can nest a dictionary inside another dictionary, but your code can get complicated quickly when you do. For example, if you have several users for a website, each with a unique username, you can use the usernames as the keys in a dictionary. You can then store information about each user by using a dictionary as the value associated with their username.
+
+							```Python
+							users = {
+								'aeinstein': {
+									'first': 'albert',
+									'last': 'einstein',
+									'location': 'princeton',
+									},
+							
+								'mcurie': {
+									'first': 'marie',
+									'last': 'curie',
+									'location': 'paris',
+									},
+							
+								}
+							
+							for username, user_info in users.items():
+								print(f"\nUsername: {username}")
+								full_name = f"{user_info['first']} {user_info['last']}"
+								location = user_info['location']
+							
+								print(f"\tFull name: {full_name.title()}")
+								print(f"\tLocation: {location.title()}")
+							```
+
+							Notice that the structure of each user’s dictionary is identical. Although not required by Python, this structure makes nested dictionaries easier to work with. If each user’s dictionary had different keys, the code inside the for loop would be more complicated.
+
+				</section>
+
+
+
+
+
+				<section>
+							## Python Programming - les 4 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

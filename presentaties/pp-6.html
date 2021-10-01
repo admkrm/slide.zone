@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Programming: Les 6</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## While loops
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Lesinhoud
+                </section>
+				<section>
+							## Lesinhoud
+							- ...
+				</section>
+				<section>
+							## Introducing while Loops
+
+							The for loop takes a collection of items and executes a block of code once for each item in the collection. In contrast, the while loop runs as long as, or while, a certain condition is true.
+
+							The programs you use every day most likely contain while loops. For example, a game needs a while loop to keep running as long as you want to keep playing, and so it can stop running as soon as you ask it to quit. Programs wouldn’t be fun to use if they stopped running before we told them to or kept running even after we wanted to quit, so while loops are quite useful.
+				</section>
+				<section>
+							## The while Loop in Action
+
+							You can use a while loop to count up through a series of numbers. For example, the following while loop counts from 1 to 5:
+
+							```Python
+							current_number = 1 
+							while current_number <= 5:
+								print(current_number)
+								current_number += 1
+							```
+				</section>
+				<section>
+							## Using a flag
+							For a program that should run only as long as many conditions are true, you can define one variable that determines whether or not the entire program is active. This variable, called a flag, acts as a signal to the program. We can write our programs so they run while the flag is set to True and stop running when any of several events sets the value of the flag to False.
+
+							When any of these events causes the active flag to become False, the main game loop will exit, a Game Over message can be displayed, and the player can be given the option to play again.
+
+							```Python
+							prompt = "\nTell me something, and I will repeat it back to you:" 
+							prompt += "\nEnter 'quit' to end the program. "
+							active = True
+							
+							while active:
+								message = input(prompt)
+
+								if message == 'quit':
+									active = False 
+								else:
+									print(message)
+				</section>
+				<section>
+							## Using break to Exit a Loop
+
+							To exit a while loop immediately without running any remaining code in the loop, regardless of the results of any conditional test, use the break statement. The break statement directs the flow of your program; you can use it to control which lines of code are executed and which aren’t, so the program only executes code that you want it to, when you want it to.
+
+							A loop that starts with while True u will run forever unless it reaches a break statement. The loop in this program continues asking the user to enter the names of cities they’ve been to until they enter 'quit'. When they enter 'quit', the break statement runs, causing Python to exit the loop:
+
+							You can use the break statement in any of Python’s loops. For example, you could use break to quit a for loop that’s working through a list or a dictionary.
+							
+							```Python
+							prompt = "\nPlease enter the name of a city you have visited:" 
+							prompt += "\n(Enter 'quit' when you are finished.) "
+
+							while True:
+								city = input(prompt)
+								
+								if city == 'quit':
+									break 
+								else:
+									print(f"I'd love to go to {city.title()}!")
+							```
+				</section>
+				<section>
+							## Using continue in a Loop
+
+							Rather than breaking out of a loop entirely without executing the rest of its code, you can use the continue statement to return to the beginning of the loop based on the result of a conditional test.
+
+							```Python
+							current_number = 0 
+							
+							while current_number < 10:
+								current_number += 1 
+								
+								if current_number % 2 == 0:
+									continue
+									
+								print(current_number)
+							```
+				</section>
+				<section>
+							## Avoiding Infinite Loops
+
+							Every while loop needs a way to stop running so it won’t continue to run forever.
+
+							if you accidentally omit the line x += 1 (as shown next), the loop will run forever:
+
+							```Python
+							# This loop runs forever!
+							x = 1	
+							while x <= 5:
+								print(x)
+				</section>
+				<section>
+							## Using a while Loop with Lists and Dictionaries
+
+							So far, we’ve worked with only one piece of user information at a time. We received the user’s input and then printed the input or a response to it. The next time through the while loop, we’d receive another input value and respond to that. But to keep track of many users and pieces of information, we’ll need to use lists and dictionaries with our while loops.
+							
+							A for loop is effective for looping through a list, but you shouldn’t modify a list inside a for loop because Python will have trouble keeping track of the items in the list. To modify a list as you work through it, use a while loop. Using while loops with lists and dictionaries allows you to collect, store, and organize lots of input to examine and report on later.
+				</section>
+				<section>
+							## Moving Items from One List to Another
+
+							Consider a list of newly registered but unverified users of a website. After we verify these users, how can we move them to a separate list of confirmed users? One way would be to use a while loop to pull users from the list of unconfirmed users as we verify them and then add them to a separate list of confirmed users.
+
+							```Python
+							unconfirmed_users = ['alice', 'brian', 'candace']
+							confirmed_users = []
+
+							while unconfirmed_users:
+								current_user = unconfirmed_users.pop()
+								print(f"Verifying user: {current_user.title()}")
+								confirmed_users.append(current_user)
+
+							print("\nThe following users have been confirmed:")
+							for confirmed_user in confirmed_users:
+								print(confirmed_user.title())
+							```
+				</section>
+				<section>
+							## Removing All Instances of Specific Values from a List
+
+							How to remove all instances of a value from a list?
+
+							```Python
+							pets = ['dog', 'cat', 'dog', 'goldfish', 'cat', 'rabbit', 'cat']
+							print(pets)
+
+							while 'cat' in pets:
+								pets.remove('cat')
+
+							print(pets)
+							```
+
+				</section>
+				<section>
+							## Filling a Dictionary with User Input
+
+							You can prompt for as much input as you need in each pass through a while loop. Let’s make a polling program in which each pass through the loop prompts for the participant’s name and response. We’ll store the data we gather in a dictionary, because we want to connect each response with a particular user:
+
+							```Python
+							responses = {}
+
+							polling_active = True
+
+							while polling_active:
+								# Prompt for the person's name and response.
+								name = input("\nWhat is your name? ")
+								response = input("Which mountain would you like to climb someday? ")
+
+								# Store the response in the dictionary.
+								responses[name] = response
+
+								# Find out if anyone else is going to take the poll.
+								repeat = input("Would you like to let another person respond? (yes/ no) ")
+								if repeat == 'no':
+									polling_active = False
+
+							# Polling is complete. Show the results.
+							print("\n--- Poll Results ---")
+							for name, response in responses.items():
+								print(f"{name} would like to climb {response}.")
+							```
+
+				</section>
+				
+
+				<section>
+							## Python Programming - les 6 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

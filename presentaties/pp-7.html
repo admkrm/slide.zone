@@ -1,0 +1,474 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Programming: Les 7</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## Functies
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Lesinhoud
+                </section>
+				<section>
+							## Lesinhoud
+							- Functies
+				</section>
+				<section>
+							## In een notedop
+
+							functions, which are named blocks of code that are designed to do one specific job.
+							When you want to perform a particular task that you’ve defined in a function, you call the function responsible for it. If you need to perform that task
+							multiple times throughout your program, you don’t need to type all the code for the same task again and again; you just call the function dedicated to handling that task, and the call tells Python to run the code inside the function. You’ll find that using functions makes your programs easier to write, read, test, and fix.
+							In this chapter you’ll also learn ways to pass information to functions. You’ll learn how to write certain functions whose primary job is to display information and other functions designed to process data and return a value or set of values. Finally, you’ll learn to store functions in separate files called modules to help organize your main program files.
+				</section>
+				<section>
+							## Defining a Function
+
+							Here’s a simple function named greet_user() that prints a greeting. This example shows the simplest structure of a function.
+							
+							```Python
+							def greet_user():
+								"""Display a simple greeting."""
+								print("Hello!")
+
+							greet_user()
+							```
+
+							The text at v is a comment called a docstring, which describes what the function does. Docstrings are enclosed in triple quotes, which Python looks for when it generates documentation for the functions in your programs.
+
+				</section>
+				<section>
+							## Passing Information to a Function
+
+							For the function to do this, you enter username in the parentheses of the function’s definition at def greet_user(). By adding username here you allow the function to accept any value of username you specify. The function now expects you to provide a value for username each time you call it. 
+
+							```Python
+							def greet_user(username):
+								"""Display a simple greeting.""" 
+								print(f"Hello, {username.title()}!")
+							
+							greet_user('jesse')
+							```
+
+							The variable username in the definition of greet_user() is an example of a parameter, a piece of information the function needs to do its job. The value 'jesse' in greet_user('jesse') is an example of an argument. An argument is a piece of information that’s passed from a function call to a function. When we call the function, we place the value we want the function to work with in parentheses. In this case the argument 'jesse' was passed to the function greet_user(), and the value was assigned to the parameter username.
+
+							! People sometimes speak of arguments and parameters interchangeably. Don’t be surprised if you see the variables in a function definition referred to as arguments or the variables in a function call referred to as parameters.
+
+				</section>
+				<section>
+							## Passing Arguments
+
+							Because a function definition can have multiple parameters, a function call may need multiple arguments. You can pass arguments to your functions in a number of ways. You can use positional arguments, which need to be in
+							the same order the parameters were written; keyword arguments, where each argument consists of a variable name and a value; and lists and dictionaries of values. Let’s look at each of these in turn.
+				</section>
+				<section>
+							## Positional Arguments
+
+							When you call a function, Python must match each argument in the function call with a parameter in the function definition. The simplest way to do this is based on the order of the arguments provided. Values matched up this way are called positional arguments.
+							Multiple function calls: You can call a function as many times as needed.
+
+							```Python
+							def describe_pet(animal_type, pet_name):
+								"""Display information about a pet.""" 
+								print(f"\nI have a {animal_type}.") 
+								print(f"My {animal_type}'s name is {pet_name.title()}.")
+								
+							describe_pet('hamster', 'harry')
+							describe_pet('dog', 'willie')
+							```
+				</section>
+				<section>
+							## Keyword Arguments
+
+							A keyword argument is a name-value pair that you pass to a function. You directly associate the name and the value within the argument, so when you pass the argument to the function, there’s no confusion. Keyword arguments free you from having to worry about correctly ordering your arguments in the function call, and they clarify the role of each value in the function call.
+							The function describe_pet() hasn’t changed. But when we call the function, we explicitly tell Python which parameter each argument should be matched with.
+
+							```Python
+							describe_pet(animal_type='hamster', pet_name='harry')
+							describe_pet(pet_name='harry', animal_type='hamster')
+							```
+				</section>
+				<section>
+							## Default Values
+
+							When writing a function, you can define a default value for each parameter. If an argument for a parameter is provided in the function call, Python uses the argument value. If not, it uses the parameter’s default value. So when you define a default value for a parameter, you can exclude the corresponding argument you’d usually write in the function call. Using default values can simplify your function calls and clarify the ways in which your functions are typically used.
+
+							```Python
+							def describe_pet(pet_name, animal_type='dog'):
+								"""Display information about a pet.""" 
+								print(f"\nI have a {animal_type}.") 
+								print(f"My {animal_type}'s name is {pet_name.title()}.")
+
+							describe_pet(pet_name='willie')
+							```
+
+							The simplest way to use this function now is to provide just a dog’s name in the function call: describe_pet('willie')
+
+							!When you use default values, any parameter with a default value needs to be listed after all the parameters that don’t have default values. This allows Python to continue interpreting positional arguments correctly.
+
+				</section>
+				<section>
+							## Return Values
+
+							A function doesn’t always have to display its output directly. Instead, it can process some data and then return a value or set of values. The value the function returns is called a return value. The return statement takes a value from inside a function and sends it back to the line that called the function. Return values allow you to move much of your program’s grunt work into functions, which can simplify the body of your program.
+				</section>
+				<section>
+							## Returning a Simple Value
+
+							Let’s look at a function that takes a first and last name, and returns a neatly formatted full name:
+
+							```Python
+							def get_formatted_name(first_name, last_name): 
+								"""Return a full name, neatly formatted."""
+								full_name = f"{first_name} {last_name}"
+								return full_name.title()
+							
+							musician = get_formatted_name('jimi', 'hendrix')
+							print(musician)
+							```
+
+							When you call a function that returns a value, you need to provide a variable that the return value can be assigned to.
+				</section>
+				<section>
+							## Making an Argument Optional
+
+							Sometimes it makes sense to make an argument optional so that people using the function can choose to provide extra information only if they want to. You can use default values to make an argument optional.
+
+							```Python
+							def get_formatted_name(first_name, last_name, middle_name=''):
+								"""Return a full name, neatly formatted."""
+								if middle_name:
+									full_name = f"{first_name} {middle_name} {last_name}"
+								else:
+									full_name = f"{first_name} {last_name}"
+								return full_name.title()
+
+
+							musician = get_formatted_name('jimi', 'hendrix')
+							print(musician)
+
+							musician = get_formatted_name('john', 'hooker', 'lee')
+							print(musician)
+							```
+
+							Calling this function with a first and last name is straightforward. If we’re using a middle name, however, we have to make sure the middle name is the last argument passed so Python will match up the positional arguments correctly
+
+							Optional values allow functions to handle a wide range of use cases while letting function calls remain as simple as possible.
+				</section>
+				<section>
+							## Returning a Dictionary
+
+							A function can return any kind of value you need it to, including more complicated data structures like lists and dictionaries. For example, the following function takes in parts of a name and returns a dictionary representing a person:
+
+							This function takes in simple textual information and puts it into a more meaningful data structure that lets you work with the information beyond just printing it. The strings 'jimi' and 'hendrix' are now labeled as a first name and last name. You can easily extend this function to accept optional values like a middle name, an age, an occupation, or any other information you want to store about a person.
+
+							We add a new optional parameter age to the function definition and assign the parameter the special value None, which is used when a variable has no specific value assigned to it. You can think of None as a placeholder value. In conditional tests, None evaluates to False.
+
+							```Python
+							def build_person(first_name, last_name, age=None):
+								"""Return a dictionary of information about a person."""
+								person = {'first': first_name, 'last': last_name}
+								if age:
+									person['age'] = age
+								return person
+
+							musician = build_person('jimi', 'hendrix', age=27)
+							print(musician)
+							```
+				</section>
+				<section>
+							## Using a Function with a while Loop
+
+							You can use functions with all the Python structures you’ve learned about so far. For example, let’s use the get_formatted_name() function with a while loop to greet users more formally. Here’s a first attempt at greeting people using their first and last names:
+
+							```Python
+							def get_formatted_name(first_name, last_name):
+								"""Return a full name, neatly formatted."""
+								full_name = f"{first_name} {last_name}"
+								return full_name.title()
+
+							# This is an infinite loop!
+							while True:
+								print("\nPlease tell me your name:")
+								print("(enter 'q' at any time to quit)")
+
+								f_name = input("First name: ")
+								if f_name == 'q':
+									break
+
+								l_name = input("Last name: ")
+								if l_name == 'q':
+									break
+								
+								formatted_name = get_formatted_name(f_name, l_name)
+								print(f"\nHello, {formatted_name}!")
+							```
+
+							For this example, we use a simple version of get_formatted_name() that doesn’t involve middle names. The while loop asks the user to enter their name, and we prompt for their first and last name separately
+
+							We want the user to be able to quit as easily as possible, so each prompt should offer a way to quit. The break statement offers a straightforward way to exit the loop at either prompt:
+
+							We add a message that informs the user how to quit, and then we break out of the loop if the user enters the quit value at either prompt. Now the program will continue greeting people until someone enters 'q' for either name:
+
+				</section>
+				<section>
+							## Passing a List
+
+							You’ll often find it useful to pass a list to a function, whether it’s a list of names, numbers, or more complex objects, such as dictionaries. When you pass a list to a function, the function gets direct access to the contents of the list. Let’s use functions to make working with lists more efficient.
+
+							```Python
+							def greet_users(names):
+								"""Print a simple greeting to each user in the list."""
+								for name in names:
+									msg = f"Hello, {name.title()}!"
+									print(msg)
+
+							usernames = ['hannah', 'ty', 'margot']
+							greet_users(usernames)
+							```
+
+				</section>
+				<section>
+							## Modifying a List in a Function
+
+							When you pass a list to a function, the function can modify the list. Any changes made to the list inside the function’s body are permanent, allowing you to work efficiently even when you’re dealing with large amounts of data.
+
+							```Python
+							def print_models(unprinted_designs, completed_models):
+								"""
+								Simulate printing each design, until none are left.
+								Move each design to completed_models after printing.
+								"""
+								while unprinted_designs:
+									current_design = unprinted_designs.pop()
+									print(f"Printing model: {current_design}")
+									completed_models.append(current_design)
+									
+							def show_completed_models(completed_models):
+								"""Show all the models that were printed."""
+								print("\nThe following models have been printed:")
+								for completed_model in completed_models:
+									print(completed_model)
+									
+							unprinted_designs = ['phone case', 'robot pendant', 'dodecahedron']
+							completed_models = []
+
+							print_models(unprinted_designs, completed_models)
+							show_completed_models(completed_models)
+							```
+				</section>
+				<section>
+							## Modifying a list in a function
+							This example also demonstrates the idea that every function should have one specific job. The first function prints each design, and the second displays the completed models. This is more beneficial than using one function to do both jobs. If you’re writing a function and notice the function is doing too many different tasks, try to split the code into two functions. Remember that you can always call a function from another function, which can be helpful when splitting a complex task into a series of steps.
+				</section>
+				<section>
+							## Preventing a Function from Modifying a List
+							In this case, you can address this issue by passing the function a copy of the list, not the original. Any changes the function makes to the list will affect only the copy, leaving the original list intact.
+							You can send a copy of a list to a function like this:
+
+							function_name(list_name[:])
+
+							Even though you can preserve the contents of a list by passing a copy of it to your functions, you should pass the original list to functions unless you have a specific reason to pass a copy. It’s more efficient for a function to work with an existing list to avoid using the time and memory needed to make a separate copy, especially when you’re working with large lists.
+				</section>
+				<section>
+							## Passing an Arbitrary Number of Arguments
+
+							Sometimes you won’t know ahead of time how many arguments a function needs to accept. Fortunately, Python allows a function to collect an arbitrary number of arguments from the calling statement.
+
+							The asterisk in the parameter name *toppings tells Python to make an empty tuple called toppings and pack whatever values it receives into this tuple.
+
+							```Python
+							def make_pizza(*toppings):
+								"""Summarize the pizza we are about to make.""" 
+								print("\nMaking a pizza with the following toppings:") 
+								for topping in toppings:
+									print(f"- {topping}")
+
+							make_pizza('pepperoni') 
+							make_pizza('mushrooms', 'green peppers', 'extra cheese')
+							```
+
+				</section>
+				<section>
+							## Mixing Positional and Arbitrary Arguments
+
+							If you want a function to accept several different kinds of arguments, the parameter that accepts an arbitrary number of arguments must be placed last in the function definition. Python matches positional and keyword arguments first and then collects any remaining arguments in the final parameter.
+
+							```Python
+							def make_pizza(size, *toppings):
+								"""Summarize the pizza we are about to make."""
+								print(f"\nMaking a {size}-inch pizza with the following toppings:")
+								for topping in toppings:
+									print(f"- {topping}")
+							
+							make_pizza(16, 'pepperoni') 
+							make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+							```
+
+							You’ll often see the generic parameter name *args, which collects arbitrary positional arguments like this.
+
+				</section>
+				<section>
+							## Using Arbitrary Keyword Arguments
+
+							Sometimes you’ll want to accept an arbitrary number of arguments, but you won’t know ahead of time what kind of information will be passed to the function. In this case, you can write functions that accept as many key-value pairs as the calling statement provides.
+
+							The double asterisks before the parameter **user_info cause Python to create an empty dictionary called user_info and pack whatever name-value pairs it receives into this dictionary. Within the function, you can access the keyvalue pairs in user_info just as you would for any dictionary.
+
+							You’ll often see the parameter name **kwargs used to collect non-specific keyword arguments.
+
+							```Python
+							def build_profile(first, last, **user_info):
+								"""Build a dictionary containing everything we know about a user."""
+								user_info['first_name'] = first
+								user_info['last_name'] = last
+								return user_info
+
+							user_profile = build_profile('albert', 'einstein',
+														location='princeton',
+														field='physics')
+							print(user_profile)
+							```
+
+				</section>
+				<section>
+							## Storing Your Functions in Modules
+
+							One advantage of functions is the way they separate blocks of code from your main program. By using descriptive names for your functions, your main program will be much easier to follow. You can go a step further by storing your functions in a separate file called a module and then importing that module into your main program. An import statement tells Python to make the code in a module available in the currently running program file.
+							
+							Storing your functions in a separate file allows you to hide the details of your program’s code and focus on its higher-level logic. It also allows you to reuse functions in many different programs. When you store your functions in separate files, you can share those files with other programmers without having to share your entire program. Knowing how to import functions also allows you to use libraries of functions that other programmers have written.
+							
+							There are several ways to import a module, and I’ll show you each of these briefly.
+				</section>
+				<section>
+							## Importing an Entire Module
+
+							To start importing functions, we first need to create a module. A module is a file ending in .py that contains the code you want to import into your
+
+							Now we’ll make a separate file called making_pizzas.py in the same directory as pizza.py. This file imports the module we just created and then makes two calls to make_pizza():
+
+							```Python
+							import pizza
+
+							pizza.make_pizza(16, 'pepperoni') 
+							pizza.make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+							```
+
+							any function defined in pizza.py will now be available in making_pizzas.py.
+
+							To call a function from an imported module, enter the name of the module you imported, pizza, followed by the name of the function, make_pizza(), separated by a dot
+
+							each function in the module is available through the following syntax:
+
+				</section>
+				<section>
+							## Importing Specific Functions
+
+							You can also import a specific function from a module. Here’s the general syntax for this approach:
+
+							```Python
+							from module_name import function_name
+
+							from module_name import function_0, function_1, function_2
+
+							from pizza import make_pizza
+
+							make_pizza(16, 'pepperoni') 
+							make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+							```
+
+				</section>
+				<section>
+							## Using as to Give a Function an Alias
+
+							If the name of a function you’re importing might conflict with an existing name in your program or if the function name is long, you can use a short, unique alias—an alternate name similar to a nickname for the function. You’ll give the function this special nickname when you import the function.
+
+							from module_name import function_name as fn
+
+							```Python
+							from pizza import make_pizza as mp
+
+							mp(16, 'pepperoni') 
+							mp(12, 'mushrooms', 'green peppers', 'extra cheese')
+							```
+				</section>
+				<section>
+							## Using as to Give a Module an Alias
+
+							You can also provide an alias for a module name. Giving a module a short alias, like p for pizza, allows you to call the module’s functions more quickly. Calling p.make_pizza() is more concise than calling pizza.make_pizza():
+
+							import module_name as mn
+
+							```Python
+							import pizza as p 
+							
+							p.make_pizza(16, 'pepperoni') 
+							p.make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+							```
+
+				</section>
+				<section>
+							## Importing All Functions in a Module
+
+							You can tell Python to import every function in a module by using the asterisk (*) operator:
+
+							```Python
+							from pizza import * 
+							
+							make_pizza(16, 'pepperoni') 
+							make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+							```
+
+							The best approach is to import the function or functions you want, or import the entire module and use the dot notation. This leads to clear code that’s easy to read and understand. I include this section so you’ll recognize import statements like the following when you see them in other people’s code:
+
+							from module_name import *
+				</section>
+				<section>
+							## Styling Functions
+
+							You need to keep a few details in mind when you’re styling functions. Functions should have descriptive names, and these names should use lowercase letters and underscores. Descriptive names help you and others understand what your code is trying to do. Module names should use these conventions as well.
+							
+							Every function should have a comment that explains concisely what the function does. This comment should appear immediately after the function definition and use the docstring format. In a well-documented function, other programmers can use the function by reading only the description in the docstring. They should be able to trust that the code works as described, and as long as they know the name of the function, the arguments it needs, and the kind of value it returns, they should be able to use it in their programs.
+							
+							If you specify a default value for a parameter, no spaces should be used on either side of the equal sign:
+							
+							def function_name(parameter_0, parameter_1='default value')
+							
+							The same convention should be used for keyword arguments in function calls:
+							
+							function_name(value_0, parameter_1='value')
+							
+							PEP 8 (https://www.python.org/dev/peps/pep-0008/ ) recommends that you limit lines of code to 79 characters so every line is visible in a reasonably sized editor window. If a set of parameters causes a function’s definition to be longer than 79 characters, press enTer after the opening parenthesis on the definition line. On the next line, press Ta B twice to separate the list of arguments from the body of the function, which will only be indented one level.
+							
+							Most editors automatically line up any additional lines of parameters to match the indentation you have established on the first line:
+							
+							def function_name(
+							
+							parameter_0, parameter_1, parameter_2, parameter_3, parameter_4, parameter_5): function body...
+							
+							If your program or module has more than one function, you can separate each by two blank lines to make it easier to see where one function ends and the next one begins.
+							
+							All import statements should be written at the beginning of a file. The only exception is if you use comments at the beginning of your file to describe the overall program.
+				</section>
+
+
+				<section>
+							## Python Programming - les 7 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
