@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OO Programming: Les 3</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OO Programming
+							## Les 3: oefeningen
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Oefening 1
+                </section>
+				<section>
+							## Oefening 1: Bolletjes ijs
+							- In deze oefening maak je een klasse aan en noemt ze Bolletje. Bolletje vertegenwoordigt een enkel bolletje ijs
+							- Elke bol heeft één enkel attribuut, smaak, een string die je kan initialiseren wanneer je een instance van Bolletje initialiseert
+							- Als je de klasse hebt gemaakt schrijf je een functie - maak_bolletjes - die drie instances van de Bolletje klasse aanmaakt. Elk met een verschillende smaak
+							- Deze drie instances stop je in een lijst met als naam bolletjes
+							- Vervolgens itereer je door deze lijst en druk je de smaak van elke bol ijs die je hebt gemaakt af
+				</section>
+				<section class="chapter">
+							## Oefening 1A
+				</section>
+				<section>
+						## Oefening 1A:
+							- Write a Beverage class whose instances will represent beverages. Each beverage should have two attributes: a name (describing the beverage) and a temperature.
+							- Create several beverages and check that their names and temperatures are all handled correctly.
+							- Modify the Beverage class, such that you can create a new instance specifying the name, and not the temperature. If you do this, then the temperature should have a default value of 75 degrees Celsius. Create several beverages and double-check that the temperature has this default when not specified.
+							- Create a new LogFile class that expects to be initialized with a filename. Inside of __init__, open the file for writing and assign it to an attribute, file, that sits on the instance. Check that it’s possible to write to the file via the file attribute.
+				</section>
+				<section class="chapter">
+							## Oefening 2
+				</section>
+				<section>
+							## Oefening 2
+							- In the previous exercise, we created a Scoop class that represents one scoop of ice cream. If we’re really going to model the real world, though, we should have another object into which we can put the scoops. I thus want you to create a Bowl class, representing a bowl into which we can put our ice cream (figure 9.7); for example
+							- A new instance of Bowl, with an empty list of scoops
+							- The result of running print(b) should be to display the three ice cream flavors in our bowl (figure 9.8). Note that it should be possible to add any number of scoops to the bowl using Bowl.add_scoops.
+				</section>
+				<section>
+							## Oefening 2
+							- The solution doesn’t involve any changes to our Scoop class. Rather, we create our Bowl such that it can contain any number of instances of Scoop.
+							- First of all, we define the attribute self.scoops on our object to be a list. We could theoretically use a dict or a set, but given that there aren’t any obvious candidates for keys, and that we might want to preserve the order of the scoops, I’d argue that a list is a more logical choice.
+							- Remember that we’re storing instances of Scoop in self.scoops. We aren’t just storing the string that describes the flavors. Each instance of Scoop will have its own flavor attribute, a string containing the current scoop’s flavor.
+							- We create the self.scoops attribute, as an empty list, in __init__.
+							- Then we need to define add_scoops, which can take any number of argumentswhich we’ll assume are instances of Scoop—and add them to the bowl. This means, almost by definition, that we’ll need to use the splat operator (*) when defining our *new_scoops parameter. As a result, new_scoops will be a tuple containing all of the arguments that were passed to add_scoops.
+							- We can then iterate over each element of scoops, adding it to the self.scoops attribute. We do this in a for loop, invoking list.append on each scoop.
+							- Finally, to print the scoops, we simply invoke print(b). This has the effect of calling the __repr__ method on our object, assuming that one is defined. Our __repr__ method does little more than invoke str.join on the strings that we extract from the flavors.
+				</section>
+				<section>
+							## Composition
+							- but a more important technique is composition, when one object contains another object.
+							- Calling it a technique in Python is a bit overblown, since everything is an object, and we can assign objects to attributes. So having one object owned by another object is just … well, it’s just the way that we connect objects together.
+							- That said, composition is also an important technique, because it lets us create larger objects out of smaller ones.
+							- Dividing a project up into smaller parts, defining classes that describe those parts, and then joining them together to create larger objects—that’s how object-oriented programming works.
+				</section>
+				<section>
+							## Oefening 2b
+							- Herschrijf de vorige klasses als dataclasses
+							- Notice that the type that we provide, List[int], has a capital “L”. This means that it’s distinct from the built-in list type. It comes from the typing module, which comes with Python and provides us with objects meant for use in type annotations. The List type, when used by itself, represents a list of any type. But when combined with square brackets, we can indicate that all elements of the list scoops will be objects of type Scoop.
+							- Normally, default values can just be assigned to their attributes. But because scoops is a list, and thus mutable, we need to get a little fancier. When we create a new instance of Bowl, we don’t want to get a reference to an existing object. Rather, we want to invoke list, returning a new instance of list and assigning it to scoops. To do this, we need to use default_factory, which tells dataclass that it shouldn’t reuse existing objects, but should rather create new ones.
+				</section>
+				<section>
+							## Oefening 2c
+							- Create a Book class that lets you create books with a title, author, and price. Then create a Shelf class, onto which you can place one or more books with an add_book method. Finally, add a total_price method to the Shelf class, which will total the prices of the books on the shelf.
+							- Write a method, Shelf.has_book, that takes a single string argument and returns True or False, depending on whether a book with the named title exists on the shelf. 
+							- Modify your Book class such that it adds another attribute, width. Then add a width attribute to each instance of Shelf. When add_book tries to add books whose combined widths will be too much for the shelf, raise an exception.
+				</section>
+				<section class="chapter">
+							## Oefening 3
+				</section>
+				<section>
+							## Oefening 3
+							- In this exercise, I want you to define a class attribute that will function like a constant, ensuring that we don’t need to hardcode any values in our class. / First, we need to define a class attribute on Bowl.
+							- Aanpassing aan oefening 2: you can put as many Scoop objects in a bowl as you like.
+							- capping the number of scoops in a bowl at three. That is, you can add as many scoops in each call to Bowl.add_scoops as you want, and you can call that method as many times as you want—but only the first three scoops will actually be added. Any additional scoops will be ignored.
+							- Second, we need to change Bowl.add_scoops, adding an if statement to make the addition of new scoops conditional on the current length of self.scoops and the value of Bowl.max_scoops.
+				</section>
+				<section>
+							## Oefening 3B
+							- Define a Person class, and a population class attribute that increases each time you create a new instance of Person. Double-check that after you’ve created five instances, named p1 through p5, Person.population and p1.population are both equal to 5. 
+							- Python provides a __del__ method that’s executed when an object is garbage collected. (In my experience, deleting a variable or assigning it to another object triggers the calling of __del__ pretty quickly.) Modify your Person class such that when a Person instance is deleted, the population count decrements by 1. If you aren’t sure what garbage collection is, or how it works in Python, take a look at this article: http://mng.bz/nP2a. 
+							- Define a Transaction class, in which each instance represents either a deposit or a withdrawal from a bank account. When creating a new instance of Transaction, you’ll need to specify an amount—positive for a deposit and negative for a withdrawal. Use a class attribute to keep track of the current balance, which should be equal to the sum of the amounts in all instances created to date.
+				</section>
+				<section class="chapter">
+							## Oefening 4
+				</section>
+				<section>
+							## Oefening 4
+							- Our company has thus started to offer a BigBowl product, which can take up to five scoops.
+							- Implement BigBowl for this exercise, such that the only difference between it and the Bowl class we created earlier is that it can have five scoops, rather than three. And yes, this means that you should use inheritance to achieve this goal.
+							- You can modify Scoop and Bowl if you must, but such changes should be minimal and justifiable.
+							- This is a tricky one. It forces you to understand how attributes work, and especially how they interact between instances, classes, and parent classes. If you really get the ICPO rule, then the solution should make sense.
+				</section>
+				<section>
+							## Oefening 4B
+							- Write an Envelope class, with two attributes, weight (a float, measuring grams) and was_sent (a Boolean, defaulting to False). There should be three methods: (1) send, which sends the letter, and changes was_sent to True, but only after the envelope has enough postage; (2) add_postage, which adds postage equal to its argument; and (3) postage_needed, which indicates how much postage the envelope needs total. The postage needed will be the weight of the envelope times 10. Now write a BigEnvelope class that works just like Envelope except that the postage is 15 times the weight, rather than 10. 
+							- Create a Phone class that represents a mobile phone. (Are there still nonmobile phones?) The phone should implement a dial method that dials a phone number (or simulates doing so). Implement a SmartPhone subclass that uses the Phone.dial method but implements its own run_app method. Now implement an iPhone subclass that implements not only a run_app method, but also its own dial method, which invokes the parent’s dial method but whose output is all in lowercase as a sign of its coolness. 
+							- Define a Bread class representing a loaf of bread. We should be able to invoke a get_nutrition method on the object, passing an integer representing the number of slices we want to eat. In return, we’ll receive a dict whose key-value pairs will represent calories, carbohydrates, sodium, sugar, and fat, indicating the nutritional statistics for that number of slices. Now implement two new classes that inherit from Bread, namely WholeWheatBread and RyeBread. Each class should implement the same get_nutrition method, but with different nutritional information where appropriate.
+				</section>
+				<section class="chapter">
+							## Oefening 5
+				</section>
+				<section>
+							## Oefening 5
+							- https://docs.python.org/3/tutorial/datastructures.html -> dict
+							- main point of inheritance is to take advantage of existing functionality. There are several ways to do this and reasons for doing this, and one of them is to create new behavior that’s similar to, but distinct from, an existing class. For example, Python comes not just with dict, but also with Counter and defaultdict. By inheriting from dict, those two classes can implement just those methods that differ from dict, relying on the original class for the majority of the functionality.
+							- In this exercise, we’ll also implement a subclass of dict, which I call FlexibleDict. Dict keys are Python objects, and as such are identified with a type. So if you use key 1 (an integer) to store a value, then you can’t use key '1' (a string) to retrieve that value. But FlexibleDict will allow for this. If it doesn’t find the user’s key, it will try to convert the key to both str and int before giving up; for example
+				</section>
+				<section>
+							## Oefening 5B
+							- With FlexibleDict, we allowed the user to use any key, but were then flexible with the retrieval. Implement StringKeyDict, which converts its keys into strings as part of the assignment. Thus, immediately after saying skd[1] = 10, you would be able to then say skd['1'] and get the value of 10 returned. This can come in handy if you’ll be reading keys from a file and won’t be able to distinguish between strings and integers. 
+							- The RecentDict class works just like a dict, except that it contains a userdefined number of key-value pairs, which are determined when the instance is created. In a RecentDict(5), only the five most recent key-value pairs are kept; if there are more than five pairs, then the oldest key is removed, along with its value. Note: your implementation could take into account the fact that modern dicts store their key-value pairs in chronological order. 
+							- The FlatList class inherits from list and overrides the append method. If append is passed an iterable, then it should add each element of the iterable separately. This means that fl.append([10, 20, 30]) would not add the list [10, 20, 30] to fl, but would rather add the individual integers 10, 20, and 30. You might want to use the built-in iter function (http://mng.bz/Qy2G) to determine whether the passed argument is indeed iterable.
+				</section>
+				<section class="chapter">
+							## Oefening 6
+				</section>
+				<section>
+							## Oefening 6
+							- For the final three exercises in this chapter, we’re going to create a set of classes that combine all of the ideas we’ve explored in this chapter: classes, methods, attributes, composition, and inheritance.
+							- For the purposes of these exercises, you are the director of IT at a zoo. The zoo contains several different kinds of animals, and for budget reasons, some of those animals have to be housed alongside other animals.
+							- We will represent the animals as Python objects, with each species defined as a distinct class. All objects of a particular class will have the same species and number of legs, but the color will vary from one instance to another. We can thus create a white sheep:
+							- I can similarly get information about the animal back from the object by retrieving its attributes (species, color, number_of_legs)
+							- If I convert the animal to a string (using str or print), I’ll get back a string combining all of these details: print(s) - Prints “White sheep, 4 legs”
+							- We’re going to assume that our zoo contains four different types of animals: sheep, wolves, snakes, and parrots.
+							- Create classes for each of these types, such that we can print each of them and get a report on their color, species, and number of legs.
+				</section>
+				<section>
+							## De soort?
+							- by calling super().__init__, we know that the right method will be called on the right object, and can just pass along the color and number_of_legs arguments.
+							- But wait, what about the species attribute? How can we set that without input from the user?
+							- My solution to this problem was to take advantage of the fact that Python classes are very similar to modules, with similar behavior. Just as a module has a __name__ attribute that reflects what module was loaded, so too classes have a __name__ attribute, which is a string containing the name of the current class. And thus, if I invoke self.__class__ on an object, I get its class—and if I invoke self.__class__.__name__, I get a string representation of the class.
+				</section>
+				<section>
+							## Oefening 6B
+							- Instead of each animal class inheriting directly, from Animal, define several new classes, ZeroLeggedAnimal, TwoLeggedAnimal, and FourLeggedAnimal, all of which inherit from Animal, and dictate the number of legs on each instance. Now modify Wolf, Sheep, Snake, and Parrot such that each class inherits from one of these new classes, rather than directly from Animal. How does this affect your method definitions?
+							- Instead of writing an __init__ method in each subclass, we could also have a class attribute, number_of_legs, in each subclass—similar to what we did earlier with Bowl and BigBowl. Implement the hierarchy that way. Do you even need an __init__ method in each subclass, or will Animal.__init__ suffice? 
+							- Let’s say that each class’s __repr__ method should print the animal’s sound, as well as the standard string we implemented previously. In other words, str(sheep) would be Baa—white sheep, 4 legs. How would you use inheritance to maximize code reuse?
+				</section>
+
+				<section class="chapter">
+							## Oefening 7
+				</section>
+				<section>
+							## Oefening 7
+							- Now that we’ve created some animals, it’s time to put them into cages. For this exercise, create a Cage class, into which you can put one or more animals, as follows:
+
+							c1 = Cage(1) c1.add_animals(wolf, sheep)
+							
+							c2 = Cage(2) c2.add_animals(snake, parrot)
+							When you create a new Cage, you’ll give it a unique ID number. (The uniqueness doesn’t need to be enforced, but it’ll help us to distinguish among the cages.) You’ll then be able to invoke add_animals on the new cage, passing any number of animals that will be put in the cage. I also want you to define a __repr__ method so that printing a cage prints not just the cage ID, but also each of the animals it contains.
+							Once again, we use the splat (*) operator to grab all arguments in a single tuple (animals). Although we could use list.extend to add all of the new animals to list.animals, I’ll still use a for loop here to add them one at a time. You can see how the Python Tutor depicts two animals in a cage in figure 9.14.
+
+							The most interesting part of our Cage definition, in my mind, is our use of __repr__ to produce a report. Given a cage c1, saying print(c1) will print the ID of the cage, followed by all of the animals in the cage, using their printed representations. We do this by first printing a basic header, which isn’t a huge deal. But then we take each animal in self.animals and use a generator expression (i.e., a lazy form of list comprehension) to return a sequence of strings. Each string in that sequence will consist of a tab followed by the printed representation of the animal. We then feed the result of our generator expression to str.join, which puts newline characters between each animal.
+				</section>
+				<section>
+							## Oefening 7B
+							- As you can see, there are no limits on how many animals can potentially be put into a cage. Just as we put a limit of three scoops in a Bowl and five in a BigBowl, you should similarly create Cage and BigCage classes that limit the number of animals that can be placed there. 
+							- It’s not very realistic to say that we would limit the number of animals in a cage. Rather, it makes more sense to describe how much space each animal needs and to ensure that the total amount of space needed per animal isn’t greater than the space in each cage. You should thus modify each of the Animal subclasses to include a space_required attribute. Then modify the Cage and BigCage classes to reflect how much space each one has. Adding more animals than the cage can contain should raise an exception. 
+							- Our zookeepers have a macabre sense of humor when it comes to placing animals together, in that they put wolves and sheep in the first cage, and snakes and birds in the other cage. (The good news is that with such a configuration, the zoo will be able to save on food for half of the animals.) Define a dict describing which animals can be with others. The keys in the dict will be classes, and the values will be lists of classes that can compatibly be housed with the keys. Then, when adding new animals to the current cage, you’ll check for compatibility. Trying to add an animal to a cage that already contains an incompatible animal will raise an exception.
+				</section>
+				<section class="chapter">
+							## Oefening 8
+				</section>
+				<section>
+							## Oefening 8
+							Finally, the time has come to create our Zoo object. It will contain cage objects, and they in turn will contain animals. Our Zoo class will need to support the following operations:
+
+ Given a zoo z, we should be able to print all of the cages (with their ID numbers) and the animals inside simply by invoking print(z).  We should be able to get the animals with a particular color by invoking the method z.animals_by_color. For example, we can get all of the black animals by invoking z.animals_by_color('black'). The result should be a list of Animal objects.  We should be able to get the animals with a particular number of legs by invoking the method z.animals_by_legs. For example, we can get all of the fourlegged animals by invoking z.animals_by_legs(4). The result should be a list of Animal objects.  Finally, we have a potential donor to our zoo who wants to provide socks for all of the animals. Thus, we need to be able to invoke z.number_of_legs() and get a count of the total number of legs for all animals in our zoo.
+
+The exercise is thus to create a Zoo class on which we can invoke the following:
+
+z = Zoo() z.add_cages(c1, c2)
+
+print(z) print(z.animals_by_color('white')) print(z.animals_by_legs(4)) print(z.number_of_legs())
+				</section>
+				<section>
+							## Oefening 8B
+							Modify animals_by_color such that it takes any number of colors. Animals having any of the listed colors should be returned. The method should raise an exception if no colors are passed.
+							- As things currently stand, we’re treating our Zoo class almost as if it’s a singleton object—that is, a class that has only one instance. What a sad world that would be, with only one zoo! Let’s assume, then, that we have two instances of Zoo, representing two different zoos, and that we would like to transfer an animal from one to the other. Implement a Zoo.transfer_animal method that takes a target_zoo and a subclass of Animal as arguments. The first animal of the specified type is removed from the zoo on which we’ve called the method and inserted into the first cage in the target zoo.
+							- Combine the animals_by_color and animals_by_legs methods into a single get_animals method, which uses kwargs to get names and values. The only valid names would be color and legs. The method would then use one or both of these keywords to assemble a query that returns those animals that match the passed criteria.
+				</section>
+				<section>
+							## Oefening 8
+							In some ways, our Zoo class here is quite similar to our Cage class. It has a list attribute, self.cages, in which we’ll store the cages. It has an add_cages method, which takes *args and thus takes any number of inputs. Even the __repr__ method is similar to what we did with Cage.__repr__. We’ll simply use str.join on the output from running str on each of the cages, just as the cages run str on each of the animals. We’ll similarly use a generator expression here, which will be slightly more efficient than a list comprehension.
+
+But then, when it comes to the three methods we needed to create, we’ll switch direction a little bit. In both animals_by_color and animals_by_legs, we want to get the animals with a certain color or a certain number of legs. Here, we take advantage of the fact that the zoo contains a list of cages, and that each cage contains a list of animals. We can thus use a nested list comprehension, getting a list of all of the animals.
+
+But of course, we don’t want all of the animals, so we have an if statement that filters out those that we don’t want. In the case of animals_by_color, we only include those animals that have the right color, and in animals_by_legs, we only keep those animals with the requested number of legs.
+
+But then we also have number_of_legs, which works a bit differently. There, we want to get an integer back, reflecting the number of legs that are in the entire zoo. Here, we can take advantage of the built-in sum method, handing it the generator expression that goes through each cage and retrieves the number of legs on each animal. The method will thus return an integer.
+
+Although the object-oriented and functional programming camps have been fighting for decades over which approach is superior, I think that the methods in this Zoo class show us that each has its strengths, and that our code can be short, elegant, and to the point if we combine the techniques. That said, I often get pushback from students who see this code and say that it’s a violation of the object-oriented principle of encapsulation, which ensures that we can’t (or shouldn’t) directly access the data in other objects.
+
+Whether this is right or wrong, such violations are also fairly common in the Python world. Because all data is public (i.e., there’s no private or protected), it’s considered a good and reasonable thing to just scoop the data out of objects. That said, this also means that whoever writes a class has a responsibility to document it, and to keep the API alive—or to document elements that may be deprecated or removed in the future.
+				</section>
+
+
+				<section>
+							## Python OO - les 3 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

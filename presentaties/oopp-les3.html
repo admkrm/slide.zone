@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OO Programming: Les 3</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OO Programming
+							## Les 3: oefeningen
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Oefening 1
+                </section>
+				<section>
+							## Oefening 1: Bolletjes ijs
+							- In deze oefening maak je een klasse aan en noemt ze Bolletje. Bolletje vertegenwoordigt één enkel bolletje ijs
+							- Elke bol heeft één enkel attribuut, smaak, een string die je kan initialiseren wanneer je een instance van Bolletje initialiseert
+							- Als je de klasse hebt gemaakt schrijf je een functie - maak_bolletjes - die drie instances van de Bolletje klasse aanmaakt. Elk met een verschillende smaak
+							- Deze drie instances stop je - binnen de functie - in een lijst met als naam bolletjes
+							- Vervolgens _loop_ je - binnen de functie - door deze lijst en print je de smaak van elke bol ijs die je hebt gemaakt af
+							- Tot slot roep je deze functie aan
+				</section>
+				<section class="chapter">
+							## Oefening 2
+				</section>
+				<section>
+							## Oefening 2: bolletjes ijs op een hoorntje
+							- We herbruiken onze klasse Bolletje, die één bol ijs vertegenwoordigt en maken een nieuwe klasse: Hoorntje, waarin we de bollen kunnen onderbrengen. We zullen dit doen met object compositie 
+							- Maak in Hoorntje een attribuut _bolletjes_ aan, met een lege list
+							- Maak in Hoorntje een method _bolletjes_toevoegen_ waarmee je - tegelijk - één of meerdere instances van Bolletje kan toevoegen aan Hoorntje (dus geen string met de smaak ;-))
+								- Dat betekent gebruik van de _splat operator_ (_*nieuwe_bolletjes_)
+								- We kunnen dan itereren (in een for loop) over elk element van *nieuwe_bolletjes en het telkens met list.append toevoegen aan self.bolletjes. 
+							- Tot slot print je de smaken af en je definieert hiervoor de \_\_repr__ method met daarin gebruik van een for loop door de smaken met str.join
+				</section>
+				<section class="chapter">
+							## Oefening 3
+				</section>
+				<section>
+							## Oefening 3
+							- We werken verder op de vorige oefening
+							- Je voegt hier een attribuut toe op het niveau van de klasse Hoorntje, _maximum_bolletjes_, zodat maximum drie bolletjes ijs aan een hoorntje kunnen worden toegevoegd
+							- Je zorgt ervoor dat in _bolletjes_toevoegen_ eens er drie bolletjes zijn toegevoegd elk volgend bolletje wordt genegeerd. We doen dat met een _if_ statement waarin we het huidige aantal bolletjes vergelijken met ons eerder aangemaakte klasse attribuut
+				</section>
+				<section class="chapter">
+							## Oefening 4
+				</section>
+				<section>
+							## Oefening 4
+							- Je werkt verder op de vorige oefening en gebruikt overerving om een nieuwe klasse Reuzehoorntje aan te maken
+							- Het enige verschil met hoorntje: dit hoorntje kan tot 5 bolletjes ijs aan
+							- Eventuele minimale aanpassingen in Bolletje() en of Hoorntje() zijn toegelaten
+				</section>
+				<section class="chapter">
+							## Oefening 5
+				</section>
+				<section>
+							## Oefening 5
+							- Voor de volgende drie oefeningen gaan we een reeks klassen definiëren die alles combineren: klassen, methods, attributen, compositie en overerving
+							- Je bent medewerker van een dierentuin. Deze dierentuin bevat verschillende diersoorten, waarvan sommigen met elkaar een kooi delen
+							- Elke soort krijgt zijn eigen klasse. Elk object van een bepaalde klasse deelt een _soort_ en _aantal_poten_ attribuut. Als attribuut kan je per dier ook nog een bepaalde kleur meegeven. Je kan dus een bepaalde kleur meegeven: oSchaap1 = Schaap('zwart')  
+							- Je maakt vier dierklassen aan: wolf, schaap, slang en papegaai
+							- Deze klassen erven van de klasse Dier waarin je zoveel mogelijk functionaliteit stopt
+				</section>
+				<section>
+							## Oefening 5
+							- Deze klasse bevat ook een \_\_repr__ functie waarmee je de details over het dier kunt rapporteren 
+							- Soort? self.soort = self.\_\_class__.\_\_name__ binnen de klasse Dier
+				</section>
+				<section class="chapter">
+							## Oefening 6
+				</section>
+				<section>
+							## Oefening 6
+							- We moeten onze dieren nog van kooien voorzien. Je werkt verder op de vorige oefening en voorziet nu ook een klasse Kooi
+							- Een kooi heeft een identificatienummer en je kan er zoveel dieren in stoppen als nodig (denk aan de ijsbolletjes en de splat operator)
+							- Maak een voeg_dieren_toe method aan waarmee je dierobjecten kunt toevoegen (compositie)
+							- Zorg ook voor een \_\_repr__ method
+				</section>
+				<section class="chapter">
+							## Oefening 7
+				</section>
+				<section>
+							## Oefening 7
+							- We werken verder op de vorige oefening en voegen nu ook een Dierentuin klasse toe. Deze klasse zal de volgende functionaliteiten ondersteunen:
+								- Een _voeg_kooien_toe_ method via dewelke je kooien kunt toevoegen aan de dierentuin (compositie). Je gebruikt hiervoor een attribuut _kooien_ (zoals in de voorgaande oefeningen)
+								- Een \_\_repr__ method via dewelke je de kooien kunt afdrukken en de dieren die erin zitten
+								- Een _dieren_met_kleur_ method via dewelke je op basis van een kleurkeuze alle dieren met een bepaalde kleur terugkrijgt
+								- Een _dieren_met_aantal_poten_ method via dewelke je op basis van een aantal poten alle dieren met dit aantal poten terugkrijgt
+								- Een _totaal_aantal_poten_ method via dewelke je het totaal aantal poten van alle dieren in je dierentuin terugkrijgt
+				</section>
+				<section>
+							## Python OO - les 3 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

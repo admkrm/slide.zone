@@ -27,6 +27,348 @@
 				<section>
 							## Lesinhoud
 							- Werken met bestanden
+							- In this chapter you’ll learn to work with files so your programs can quickly analyze lots of data.
+							- You’ll also learn about the json module, which allows you to save user data so it isn’t lost when your program stops running.
+							- Learning to work with files and save data will make your programs easier for people to use. Users will be able to choose what data to enter and when to enter it. People can run your program, do some work, and then close the program and pick up where they left off later.
+				</section>
+				<section class="chapter">
+							## Lezen van een bestand
+				</section>
+				<section>
+							## Lezen van een bestand
+
+							An incredible amount of data is available in text files. Text files can contain weather data, traffic data, socioeconomic data, literary works, and more. Reading from a file is particularly useful in data analysis applications, but it’s also applicable to any situation in which you want to analyze or modify information stored in a file. For example, you can write a program that reads in the contents of a text file and rewrites the file with formatting that allows a browser to display it.
+							
+							When you want to work with the information in a text file, the first step is to read the file into memory. You can read the entire contents of a file, or you can work through the file one line at a time.
+				</section>
+				<section>
+							## Reading an Entire File
+
+							To begin, we need a file with a few lines of text in it. Let’s start with a file that contains pi to 30 decimal places, with 10 decimal places per line: pi.txt. Save the file in the same directory where you’ll store this chapter’s programs.
+							Here’s a program that opens this file, reads it, and prints the contents of the file to the screen:
+							- you first need to open the file to access it. The open() function needs one argument: the name of the file you want to open.
+							- The open() function returns an object representing the file. Here, open('pi_digits.txt') returns an object representing pi_digits.txt. Python assigns this object to file_object,
+							- The keyword with closes the file once access to it is no longer needed.
+							- All you have to do is open the file and work with it as desired, trusting that Python will close it automatically when the with block finishes execution.
+							- we use the read() method in the second line of our program to read the entire contents of the file and store it as one long string in contents.
+							- If you want to remove the extra blank line, you can use rstrip() in the call to print():
+
+							```Python
+							with open('pi.txt') as file_object:
+								contents = file_object.read()
+							print(contents)
+							```
+				</section>
+				<section>
+							## File Paths
+
+							When you pass a simple filename like pi_digits.txt to the open() function, Python looks in the directory where the file that’s currently being executed (that is, your .py program file) is stored.
+							Sometimes, depending on how you organize your work, the file you want to open won’t be in the same directory as your program file.
+							```Python
+							with open('text_files/filename.txt') as file_object:
+							```
+							This line tells Python to look for the desired .txt file in the folder text_files and assumes that text_files is located inside python_work (which it is).
+
+							You can also tell Python exactly where the file is on your computer regardless of where the program that’s being executed is stored. This is called an absolute file path. You use an absolute path if a relative path doesn’t work. For instance, if you’ve put text_files in some folder other than python_work—say, a folder called other_files—then just passing open() the path 'text_files/filename.txt' won’t work because Python will only look for that location inside python_work. You’ll need to write out a full path to clarify where you want Python to look.
+
+							Absolute paths are usually longer than relative paths, so it’s helpful to assign them to a variable and then pass that variable to open():
+
+							```Python
+							file_path = '/home/ehmatthes/other_files/text_files/filename.txt'
+							with open(file_path) as file_object:
+							```
+
+							Using absolute paths, you can read files from any location on your system. For now it’s easiest to store files in the same directory as your program files or in a folder such as text_files within the directory that stores your program files.
+
+							If you need to use backslashes, you can escape each one in the path, like this: "C:\\path\\to\\file.txt".
+				</section>
+				<section>
+							## Reading Line by Line
+
+							When you’re reading a file, you’ll often want to examine each line of the file. You might be looking for certain information in the file, or you might want to modify the text in the file in some way. For example, you might want to read through a file of weather data and work with any line that includes the word sunny in the description of that day’s weather. In a news report, you might look for any line with the tag <headline> and rewrite that line with a specific kind of formatting.
+							
+							You can use a for loop on the file object to examine each line from a file one at a time:
+
+							```Python
+							filename = 'pi_digits.txt'
+							with open(filename) as file_object: 
+								for line in file_object:
+									print(line)
+							```
+							After we call open(), an object representing the file and its contents is assigned to the variable file_object v. We again use the with syntax to let Python open and close the file properly. To examine the file’s contents, we work through each line in the file by looping over the file object.
+							Using rstrip() on each line in the print() call eliminates these extra blank lines:	
+				</section>
+				<section>
+							## Making a List of Lines from a File
+
+							When you use with, the file object returned by open() is only available inside the with block that contains it. If you want to retain access to a file’s contents outside the with block, you can store the file’s lines in a list inside the block and then work with that list. You can process parts of the file immediately and postpone some processing for later in the program.
+
+							```Python
+							filename = 'pi.txt'
+							with open(filename) as file_object:
+								lines = file_object.readlines()
+							for line in lines:
+								print(line.rstrip())
+							```
+
+							At u the readlines() method takes each line from the file and stores it in a list. This list is then assigned to lines, which we can continue to work with after the with block ends. At v we use a simple for loop to print each line from lines. Because each item in lines corresponds to each line in the file, the output matches the contents of the file exactly.
+				</section>
+				<section>
+							## Working with a File’s Contents
+
+							After you’ve read a file into memory, you can do whatever you want with that data, so let’s briefly explore the digits of pi. First, we’ll attempt to build a single string containing all the digits in the file with no whitespace in it:
+
+							```Python
+							filename = 'pi.txt'
+							with open(filename) as file_object:
+								lines = file_object.readlines()
+							pi_string = ''
+							for line in lines:
+								pi_string += line.strip()
+							print(f"{pi_string[:52]}...")
+							print(len(pi_string))
+							```
+
+							When Python reads from a text file, it interprets all text in the file as a string. If you read in a number and want to work with that value in a numerical context, you’ll have to convert it to an integer using the int() function or convert it to a float using the float() function.
+				</section>
+				<section>
+							## Large Files: One Million Digits
+
+							So far we’ve focused on analyzing a text file that contains only three lines, but the code in these examples would work just as well on much larger files. If we start with a text file that contains pi to 1,000,000 decimal places instead of just 30, we can create a single string containing all these digits. We don’t need to change our program at all except to pass it a different file. We’ll also print just the first 50 decimal places, so we don’t have to watch a million digits scroll by in the terminal:
+
+							```Python
+							filename = 'pi_miljoen.txt'
+							with open(filename) as file_object:
+								lines = file_object.readlines()
+							pi_string = ''
+							for line in lines:
+								pi_string += line.strip()
+							print(f"{pi_string[:52]}...")
+							print(len(pi_string))
+							```
+
+							Python has no inherent limit to how much data you can work with; you can work with as much data as your system’s memory can handle.
+				</section>
+				<section>
+							## Is Your Birthday Contained in Pi?
+
+							I’ve always been curious to know if my birthday appears anywhere in the digits of pi. Let’s use the program we just wrote to find out if someone’s birthday appears anywhere in the first million digits of pi. We can do this by expressing each birthday as a string of digits and seeing if that string appears anywhere in pi_string:
+
+							```Python
+							birthday = input("Enter your birthday, in the form mmddyy: ")
+							if birthday in pi_string:
+								print("Your birthday appears in the first million digits of pi!") 
+							else:
+								print("Your birthday does not appear in the first million digits of pi")
+							```
+				</section>
+				<section class="chapter">
+							## Schrijven naar een bestand
+				</section>
+				<section>
+							## Naar een bestand schrijven
+
+							One of the simplest ways to save data is to write it to a file. When you write text to a file, the output will still be available after you close the terminal containing your program’s output. You can examine output after a program finishes running, and you can share the output files with others as well. You can also write programs that read the text back into memory and work with it again later.
+				</section>
+				<section>
+							## Naar een leeg bestand schrijven
+
+							To write text to a file, you need to call open() with a second argument telling Python that you want to write to the file. To see how this works, let’s write a simple message and store it in a file instead of printing it to the screen:
+
+							```Python
+							filename = 'programming.txt'
+							with open(filename, 'w') as file_object:
+								file_object.write("I love programming.")
+							```
+
+							The call to open() in this example has two arguments u. The first argument is still the name of the file we want to open. The second argument, 'w', tells Python that we want to open the file in write mode. You can open a file in read mode ('r'), write mode ('w'), append mode ('a'), or a mode that allows you to read and write to the file ('r+'). If you omit the mode argument, Python opens the file in read-only mode by default.
+
+							The open() function automatically creates the file you’re writing to if it doesn’t already exist. However, be careful opening a file in write mode ('w') because if the file does exist, Python will erase the contents of the file before returning the file object.
+
+							At v we use the write() method on the file object to write a string to the file.
+
+							This file behaves like any other file on your computer. You can open it, write new text in it, copy from it, paste to it, and so forth.
+
+							Python can only write strings to a text file. If you want to store numerical data in a text file, you’ll have to convert the data to string format first using the str() function.
+				</section>
+				<section>
+							## Writing Multiple Lines
+
+							The write() function doesn’t add any newlines to the text you write. So if you write more than one line without including newline characters, your file may not look the way you want it to:
+
+							```Python
+							filename = 'programming.txt'
+							with open(filename, 'w') as file_object:
+								file_object.write("I love programming.") 
+								file_object.write("I love creating new games.")
+							```
+
+							You can also use spaces, tab characters, and blank lines to format your output, just as you’ve been doing with terminal-based output.
+				</section>
+				<section>
+							## Appending to a File
+
+							If you want to add content to a file instead of writing over existing content, you can open the file in append mode. When you open a file in append mode, Python doesn’t erase the contents of the file before returning the file object. Any lines you write to the file will be added at the end of the file. If the file doesn’t exist yet, Python will create an empty file for you.
+							
+							Let’s modify write_message.py by adding some new reasons we love programming to the existing file programming.txt:
+
+							```Python
+							filename = 'programming.txt'
+							with open(filename, 'a') as file_object:
+								file_object.write("I also love finding meaning in large datasets.\n") file_object.write("I love creating apps that can run in a browser.\n")
+							```
+
+							At u we use the 'a' argument to open the file for appending rather than writing over the existing file. At v we write two new lines, which are added to programming.txt: We end up with the original contents of the file, followed by the new content we just added.
+
+				</section>
+				<section class="chapter">
+							## Storing data
+				</section>
+				<section>
+							## Storing Data
+
+							Many of your programs will ask users to input certain kinds of information. You might allow users to store preferences in a game or provide data for a visualization. Whatever the focus of your program is, you’ll store the information users provide in data structures such as lists and dictionaries. When users close a program, you’ll almost always want to save the information they entered. A simple way to do this involves storing your data using the json module.
+
+							The json module allows you to dump simple Python data structures into a file and load the data from that file the next time the program runs. You can also use json to share data between different Python programs. Even better, the JSON data format is not specific to Python, so you can share data you store in the JSON format with people who work in many other programming languages. It’s a useful and portable format, and it’s easy to learn.
+				</section>
+				<section>
+							## JSON
+							The JSON (JavaScript Object Notation) format was originally developed for JavaScript. However, it has since become a common format used by many languages, including Python.
+				</section>
+				<section>
+							## Using json.dump() and json.load()
+
+							Let’s write a short program that stores a set of numbers and another program that reads these numbers back into memory. The first program will use json.dump() to store the set of numbers, and the second program will use json.load().
+							
+							The json.dump() function takes two arguments: a piece of data to store and a file object it can use to store the data. Here’s how you can use json.dump() to store a list of numbers:
+
+							```Python
+							import json
+
+							numbers = [2, 3, 5, 7, 11, 13]
+							filename = 'getallen.json'
+							with open(filename, 'w') as f:
+								json.dump(numbers, f)
+							```
+
+							We first import the json module and then create a list of numbers to work with. At u we choose a filename in which to store the list of numbers. It’s customary to use the file extension .json to indicate that the data in the file is stored in the JSON format. Then we open the file in write mode, which allows json to write the data to the file v. At w we use the json.dump() function to store the list numbers in the file numbers.json.
+				</section>
+				<section>
+							## Using json.dump() and json.load()
+
+							Now we’ll write a program that uses json.load() to read the list back into memory:
+
+							```Python
+							import json
+
+							filename = 'getallen.json'
+							with open(filename) as f:
+								numbers = json.load(f)
+
+							print(numbers)
+							```
+
+							At u we make sure to read from the same file we wrote to. This time when we open the file, we open it in read mode because Python only needs to read from the file v. At w we use the json.load() function to load the information stored in numbers.json, and we assign it to the variable numbers.
+				</section>
+				<section>
+							## Saving and Reading User-Generated Data
+
+							Saving data with json is useful when you’re working with user-generated data, because if you don’t store your user’s information somehow, you’ll lose it when the program stops running. Let’s look at an example where we prompt the user for their name the first time they run a program and then remember their name when they run the program again.
+
+							```Python
+							import json
+
+							username = input("What is your name? ")
+							filename = 'username.json'
+							with open(filename, 'w') as f:
+								json.dump(username, f) 
+								print(f"We'll remember you when you come back, {username}!")
+							```
+
+							At u we prompt for a username to store. Next, we use json.dump(), passing it a username and a file object, to store the username in a file v.
+				</section>
+				<section>
+							## Saving and Reading UG Data
+
+							Now let’s write a new program that greets a user whose name has already been stored:
+
+							```Python
+							import json
+							filename = 'username.json'
+							with open(filename) as f:
+								username = json.load(f) 
+								print(f"Welcome back, {username}!")
+				</section>
+				<section>
+							## Saving and Reading UG Data
+
+							We need to combine these two programs into one file. When someone runs remember_me.py, we want to retrieve their username from memory if possible; therefore, we’ll start with a try block that attempts to recover the username. If the file username.json doesn’t exist, we’ll have the except block prompt for a username and store it in username.json for next time:
+
+							```Python
+							import json
+
+							filename = 'username.json'
+							try:
+								with open(filename) as f:
+									username = json.load(f)
+							except FileNotFoundError:
+								username = input("What is your name? ")
+								with open(filename, 'w') as f:
+									json.dump(username, f) 
+									print(f"We'll remember you when you come back, {username}!") 
+								else:
+									print(f"Welcome back, {username}!")
+							```
+
+							There’s no new code here; blocks of code from the last two examples are just combined into one file. At u we try to open the file username.json. If this file exists, we read the username back into memory v and print a message welcoming back the user in the else block. If this is the first time the user runs the program, username.json won’t exist and a FileNotFoundError will occur w. Python will move on to the except block where we prompt the user to enter their username x. We then use json.dump() to store the username and print a greeting y.
+
+				</section>
+				<section>
+							## Refactoring
+							We can refactor remember_me.py by moving the bulk of its logic into one or more functions. The focus of remember_me.py is on greeting the user, so let’s move all of our existing code into a function called greet_user():
+							This file is a little cleaner, but the function greet_user() is doing more than just greeting the user—it’s also retrieving a stored username if one exists and prompting for a new username if one doesn’t exist.
+							Let’s refactor greet_user() so it’s not doing so many different tasks. We’ll start by moving the code for retrieving a stored username to a separate function:
+							The new function get_stored_username() has a clear purpose, as stated in the docstring at u. This function retrieves a stored username and returns the username if it finds one. If the file username.json doesn’t exist, the function returns None v. This is good practice: a function should either return the value you’re expecting, or it should return None. This allows us to perform a simple test with the return value of the function. At w we print a welcome back message to the user if the attempt to retrieve a username was successful, and if it doesn’t, we prompt for a new username.
+
+							We should factor one more block of code out of greet_user(). If the username doesn’t exist, we should move the code that prompts for a new username to a function dedicated to that purpose:
+							Each function in this final version of remember_me.py has a single, clear purpose. We call greet_user(), and that function prints an appropriate message: it either welcomes back an existing user or greets a new user. It does this by calling get_stored_username(), which is responsible only for retrieving a stored username if one exists. Finally, greet_user() calls get_new_username() if necessary, which is responsible only for getting a new username and storing it. This compartmentalization of work is an essential part of writing clear code that will be easy to maintain and extend.
+				</section>
+				<section>
+							## Code
+
+							```Python
+							import json
+
+							def get_stored_username():
+								"""Get stored username if available."""
+								filename = 'username.json'
+								try:
+									with open(filename) as f:
+										username = json.load(f)
+								except FileNotFoundError:
+									return None
+								else:
+									return username
+
+							def get_new_username():
+								"""Prompt for a new username."""
+								username = input("What is your name? ")
+								filename = 'username.json'
+								with open(filename, 'w') as f:
+									json.dump(username, f)
+								return username
+
+							def greet_user():
+								"""Greet the user by name."""
+								username = get_stored_username()
+								if username:
+									print(f"Welcome back, {username}!")
+								else:
+									username = get_new_username()
+									print(f"We'll remember you when you come back, {username}!")
+
+							greet_user()
+							```
 				</section>
 
 				
