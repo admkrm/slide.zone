@@ -1,0 +1,515 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web technology: les 4</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web technology
+							## Les 4: CSS
+							## 	- Tekstopmaak
+							## 	- Kleuren/achtergronden
+							##	- Nieuwe selector-kracht
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In deze presentatie
+							- Lettertypes kiezen en vormgeven
+							- Web fonts
+							- Tekstregels
+							- Kleuren en achtergronden
+							- Nieuwe selector-kracht
+				</section>
+				<section class="chapter">
+							## Lettertypes kiezen en vormgeven
+				</section>
+				<section>
+							## Lettertypes kiezen en vormgeven: font-family
+							- Het lettertype kies je met font-family
+							- Je kan er een lijst van lettertypes aan koppelen (de font stack)
+							- Waarom een lijstje? Browsers hebben maar toegang tot standaardset lettertypes
+							- Indien eentje afwezig is gaat de browser verder zoeken in de lijst
+							- Standaard lettertypes: Arial, Helvetica, Times New Roman, Times, Courier New, Courier, Verdana, Georgia, Palatina, Garamond...
+							- Wil je iets anders: webfonts
+							- Je kan deze zelf downloaden (bvb https://fonts.com) of uit de cloud gebruiken (bvb https://fonts.google.com)
+				</section>
+				<section>
+							## Lettertypes kiezen en vormgeven
+
+							```
+							body {
+									font-family: Helvetica; sans-serif;
+							}
+							
+							h1 {
+									font-family: Arial;
+							}
+							
+							p {
+									font-family: "Courier New";
+							}
+							
+							#tweede_paragraaf {
+									font-family: 'Permanent Marker', cursive;
+							}
+							```
+
+				</section>
+				<section>
+							## Google fonts
+							![Google Fonts](../img/googlefonts1.jpg)
+							##### https://fonts.google.com/
+				</section>
+				<section>
+							## Google fonts toevoegen aan je webpagina
+							![Google Fonts](../img/googlefonts2.jpg)
+							##### https://fonts.google.com/
+				</section>
+				<section>
+							## Lettertypes downloaden en gebruiken
+
+							```
+							@font-face {
+    						font-family: myFirstFont;
+    						src: url(sansation_light.woff);
+							}
+
+							p {
+								font-family: myFirstFont;
+							}
+							```
+				</section>
+				<section class="chapter">
+							## Tekstregels
+				</section>
+				<section>
+							## Lettergrootte: font-size
+							- Stel je in met font-size
+							- Je kan als waarde een lengte eenheid of percentage kiezen maar kunnen ook: xx-small, x-small, small, medium, large, x-large, xx-large, smaller, larger
+							- Let erop bij het ingeven van lengtematen: de naam van de eenheid moet onmiddellijk volgen op het getal. Dus 2rem en geen 2 rem
+							- Onze voorkeur zal uitgaan naar __rem__, em en %
+							- Of naar __vw__, dan krijg je dynamische typografie en hangt de lettergrootte af van de schermbreedte
+				</section>
+				<section>
+							## Lettertypes kiezen en vormgeven
+
+							```
+							:root {
+									font-size: 62.5%;
+									font-family: Helvetica, sans-serif;
+							}
+							
+							h1 {
+									font-size: 4rem;
+							}
+							
+							p {
+									font-size: 2rem;
+							}
+							
+							#tweede_paragraaf {
+									font-size: 3vw;
+							}
+							```
+
+				</section>
+				<section>
+							## Lettergewicht: font-weight
+							- Als je tekst in het vet wil weergeven gebruik je font-weight
+							- Als waarden kan je gebruiken: normal, bold, bolder, 100, 200, 300, 400, 500, 600, 700, 800, 900
+							- Wij gaan de getallen gebruiken
+							- Gaan vaak samen met de lettertypes (op bvb Google fonts)
+				</section>
+				<section>
+							## Recht of schuin: font-style
+							- Als je tekst in het italic wil weergeven gebruik je font-style
+							- Als waarden kan je gebruiken: normal, italic, oblique
+							- Gaan vaak samen met de lettertypes (op bvb Google fonts)
+				</section>
+				<section>
+							## font-style, font-weight
+
+							```
+							body {
+									font-size: 2rem;
+									font-family: Helvetica;
+							}
+							
+							h1 {
+									font-weight: 900;
+									
+							}
+							
+							h2 {
+									font-style: italic;
+									
+							}
+							
+						  ```
+
+				</section>
+				<section>
+							## Regelhoogte: line-height
+							- Bepaalt de regelhoogte
+							- Waarden: een lengte eenheid
+
+							```
+							p {
+								font-size: 2rem;
+								line-height: 3rem;
+							}
+							```
+
+				</section>
+				<section>
+							## Horizontaal uitlijnen: text-align
+							- Laat toe een tekst horizontaal uit te lijnen
+							- Waarden: left, right, center, justify, start, end
+
+							```
+							main {
+								text-align: center;
+							}
+
+							p {
+								text-align: right;
+							}
+							```
+				</section>
+				<section>
+							## Onderlijnen en andere decoraties: text-decoration
+							- Laat toe een tekst horizontaal uit te lijnen
+							- Waarden: none, underline, overline, line-through
+
+							```
+							a {
+								text-decoration: none;
+							}
+							```
+				</section>
+				<section>
+							## Hoofdletters/kleine letters: text-transform
+							- Verandere de kapitalisatie met text-transform
+							- Waarden: none, capitalize, lowercase, uppercase, full-width
+
+							```
+							h1 {
+								text-transform: uppercase;
+							}
+
+							h4 {
+								text-transform: lowercase;
+							}
+							```
+				</section>
+				<section>
+							## Stretchen met letter-spacing en word-spacing
+							- Als je tekst wil uitrekken of samenpersen gebruik je letter-spacing
+							- Als waarden kan je rem gebruiken
+							- Samenpersen doe je met een negatieve waarde
+							- Mee opletten en jezelf vraag stellen: oogt het resultaat goed?
+
+							```
+							h1 {
+								letter-spacing: 0.2rem;
+							}
+
+							p {
+								letter-spacing: -0.1rem;
+								word-spacing: 0.5rem;
+							}
+							```
+
+				</section>
+				<section>
+							## Schaduw met text-shadow
+							- Voegt een schaduw aan onderaan de tekst
+							- Waarden: 'horizontal offset' 'vertical offset' 'blur radius' 'color', none
+
+							```
+							h1 {
+								font-family: arial, sans-serif;
+								font-size: 5rem;
+								padding: 3rem;
+								text-shadow: .1rem .1rem black;
+							}
+							```
+				</section>
+				<section class="chapter">
+							## Kleuren/achtergronden
+				</section>
+				<section>
+							## Tekstkleur wijzigen: color
+							- Doen we met de color eigenschap
+							- Waarden kunnen kleurnamen zijn, of numerieke kleurwaarden
+							- Handig: een colorpicker appje!
+				</section>
+				<section>
+							## Handig: lijst met kleurnamen
+							![Neil Orangepeel](../img/neilorangepeel.jpg)
+							##### http://colors.neilorangepeel.com/
+				</section>
+				<section>
+							## Handig: Coolors kleurengenerator
+							![Coolors](../img/coolors.jpg)
+							##### https://coolors.co/
+				</section>
+				<section>
+							## Tekstkleur wijzigen: color
+
+							```
+							:root {
+									font-size: 62.5%;}
+							body {
+									font-size: 3rem;
+									background-color: lightblue;
+									font-family: helvetica, sans-serif;}
+							h1 {
+									color: magenta;}
+							h2 {
+									color: #FE938C;}
+							h3 {
+									color: #666;}
+							h4 {
+									color: rgba(33,102,200,.3);}
+							```
+
+				</section>
+				<section>
+							## Achtergrondkleur: background-color
+							- Wijzigt de achtergrondkleur van een element
+							- Waarden: kleur | transparent
+
+							```
+							p {
+								background-color: green;
+							}
+							```
+				</section>
+				<section>
+							## Doorschijnend maken: opacity
+							- Maakt een volledig element doorschijnend
+							- Waarden: tussen 0 en 1
+							- Nadeel: alles wordt doorschijnend. Soms beter te werken met rgba-waarde!
+
+							```
+							p {
+								color: green;
+								border: .3rem dashed green;
+								opacity: 0.5;
+							}
+							```
+				</section>
+				<section>
+							## Achtergrondafbeeldingen
+							- Voeg je toe aan elementen met de background-image eigenschap
+							- Waarden: url(locatie van de afbeelding) | none
+							- Je kan de afbeeldingen "stapelen" met background-repeat
+							- Waarden: repeat | no-repeat | repeat-x | repeat-y | space | round
+							- Je kan de achtergrond positioneren met background-position
+							- Waarden: lengte eenheid | left | center | right | top | bottom
+							- Je kan de grootte van de afbeelding bepalen met background-size
+							- Waarden: lengte eenheid | auto | cover | contain
+				</section>
+				<section>
+							## Achtergrondafbeeldingen
+							```
+							p {
+								width: 60vw;
+								height: 60vh;
+								margin: 20vh auto;
+								background-image: url('mijnafbeelding.jpg');
+								background-repeat: no-repeat;
+								background-position: center; 
+								/* background-position: left bottom */
+								/* background-position: 250px 50px */
+								background-size: cover; 
+								/* cover contain stretch */
+								/* background-size: 600px 150px; */
+							}
+							```
+				</section>
+				<section>
+							## Achtergrondafbeeldingen
+							- Background-image: gaat samen met
+								- background-repeat
+								- background-position
+								- background-size
+				</section>
+
+				<section class="chapter">
+							## Nieuwe selector-kracht
+				</section>
+				<section>
+							## Nieuwe selector-kracht
+							- We zagen eerder:
+								- element selectors (bvb p)
+								- ID en class selectors (bvb #mijnid, .mijnklasse)
+								- gegroepeerde selectors (bvb h1, h3, p)
+				</section>
+				<section>
+							## Nieuwe selector-kracht: Descendant selectors
+
+							- Wanneer je elementen wil vormgeven die zich binnen een bepaald element bevinden
+							- Je somt ze op met een spatie tussen
+							- Het aantal niveau's tussen de elementen maakt niet uit
+							- Vb: enkel een em die in een li zit zal deze kleur krijgen
+
+							```
+							li em {
+								color: cadetblue;}
+
+							h1 em, h2 em, h3 em {
+								color: red;}
+
+							ol a em {
+								color: #000;}
+							```
+
+				</section>
+				<section>
+							## Nieuwe selector-kracht: element met id of class
+
+							```
+							<li id="mijnid">Een eenvoudig lijstelement</li>
+
+							<div id="bronnen"><a href="#">Mijn link</a></div>
+
+							<p class="speciaal">Een eenvoudige paragraaf</p>
+							```
+
+							```
+							#mijnid {color: red;}
+
+							li#mijnid {color: orange;}
+
+							#bronnen a {font-style: italic;}
+
+							.speciaal {color: red;}
+
+							p.speciaal {color: orange;}
+							```
+				</section>
+				<section>
+							## Nieuwe selector-kracht: de universele selector
+
+							```
+							* {
+								font-weight: bold;} /* ELK element! */
+
+							header * {
+								color: orange;} /* elk element binnen het header element */
+							```
+				</section>
+				<section>
+							## Nieuwe selector-kracht: child-selector
+
+							Enkel een em dat een direct kind is van de p zal gewijzigd worden
+
+							p &#62; em {
+								color: magenta;
+								font-weight: 900;
+							}
+				</section>
+				<section>
+							## Nieuwe selector-kracht: next sibling selector
+
+							Beide elementen delen eenzelfde ouder en het element dat gewijzigd volgt onmiddelijk op het eerste in de volgorde.
+
+							```
+							h1 + p {
+								color: green;
+							}
+							```
+				</section>
+				<section>
+							## Nieuwe selector-kracht: subsequent sibling selector
+
+							Beide elementen delen eenzelfde ouder en het element dat gewijzigd wordt komt na het eerste in de volgorde. Hoeft niet het eerstvolgende element te zijn. We noemen dit een tilde (bij mac: option+n)
+
+							```
+							em ~ a {color: orange;}
+							```
+				</section>
+				<section>
+							## Nog eens herhalen: specificiteit
+							Deze lijst rangschikt selector types van meest naar minst specifiek. Zo hanteert CSS de volgorde van belangrijkheid en gewicht
+
+							- ID selectors
+							- Class selectors
+							- Individuele element selectors
+
+							Daarbij geldt steeds: hoe specifieker (descendant selectors), hoe meer gewicht
+
+							(De realiteit is iets complexer maar voor nu is bovenstaande volgorde voldoende)
+				</section>
+				<section>
+							## Pseudo-Class selectors
+
+							Een pseudo-class selector is een speciale constructie, die het mogelijk maakt een stijl te koppelen aan een element op basis van andere kenmerken dan de naam van het element, de attributen, of de inhoud. Bvb bij links:
+
+							```
+							a:link { color: #0000FF; }
+							a:visited { color: #FF00FF; }
+							a:hover { color: #00CCFF; }
+							a:active { color: #FF0000; }
+							```
+				</section>
+				<section>
+							## Andere pseudo-Class selectors
+
+							- :root
+							- :first-child
+							- :last-child
+							- :only-child
+							- :first-of-type
+							- :last-of-type
+							- :only-of-type
+							- :nth-child()
+							- ...
+				</section>
+
+				<section class="chapter">
+							## Lijsten vormgeven
+				</section>
+				<section>
+							## Lijsten: bullets en getallen vormgeven
+							- Doen we met list-style-type
+							- Waarden: none | disc | circle | square | decimal | decimal-leading-zero | lower-alpha | upper-alpha | lower-latin | upper-latin | lower-roman | upper-roman | lower-greek
+							- De positie van de marker pakken we aan met list-style-position
+							- Waarden: inside | outside | hanging
+							- Je eigen bullets kan je maken met list-style-image
+							- vb list-style-image: url(/ images/ rainbow.gif);
+				</section>
+				<section>
+							## Lijsten: bullets en getallen vormgeven
+
+							```
+							ul {
+								list-style-type: square;
+								list-style-position: inside;
+								margin-bottom: 2rem;}
+							
+							ol {
+								list-style-type: upper-latin;
+								list-style-position: inside;
+							}
+							```
+				</section>
+				<section>
+							## Webtech - CSS - les4 - kristof.michiels01@ap.be
+		</section>
+	</body>
+</html>
