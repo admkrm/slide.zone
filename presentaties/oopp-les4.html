@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OO Programming: Les 4</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OO Programming
+							## Les 4: OO design patronen: overerving / compositie
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Topics
+				</section>
+				<section>
+							## Topics
+							- Opdracht: object georiënteerde-toepassing met zelfgekozen invalshoek
+							- OO patronen: gebruik van overerving / compositie
+							- UML
+							- Voorbeeldtoepassing
+				</section>
+				<section class="chapter">
+							## Opdracht: OO-toepassing met zelfgekozen invalshoek
+				</section>
+				<section>
+							## Opdracht: OO-toepassing met zelfgekozen invalshoek
+							- Labo: maak in 3 weken een eigen toepassing
+							- Toepassing mag command-line geörienteerd zijn en in de lijn liggen met de oefeningen die we de voorbije weken hebben gemaakt
+							- Af te werken en in te dienen tegen vrijdag 29/10 (deadline spreken we komende maandag verder af)
+							- Jullie hebben allemaal een onderwerp gekozen
+							- Belangrijk: implementatie dient object-geörienteerd te gebeuren
+							- Komende lessen: tijd voor vragen / jij werkt autonoom aan je project
+							- Parallel: voorbeeldtoepassingen worden ter inspiratie getoond
+				</section>
+
+				<section>
+							## Overerving vs Compositie
+							- Een OO-aanpak in een toepassing is vaak niet eenduidig
+							- Je kan het met andere woorden op verschillende manieren benaderen
+							- We leerden in de eerdere oefeningen werken met overerving en compositie
+							- Beiden hebben hun plaats binnen OO-development en in de meeste projecten worden ze samen gebruikt
+								- Waar we bij overerving van een "is een"-relatie bestaat en je afgeleide klassen definieert die specifieker zijn dan de basisklassen waar ze van erven
+								- Ga je bij compositie vaker een "heeft een of meerdere" relatie vorm geven
+								- Je werkt vanuit een los verband (de klasses hoeven elkaar niet te kennen) en gebruikt een component klasse als een niet-standaard data type
+				</section>
+				<section>
+							## Overerving vs Compositie
+							- Er bestaan een reeks patronen die kunnen gebruikt worden in het schrijven van OO-applicaties
+							- Aan de hand van voorbeelden zijn die het best te illustreren en dat is wat we de komende weken gaan bekijken
+				</section>
+				<section class="chapter">
+							## Unified Modeling Language (UML)
+				</section>
+				<section>
+							## Een applicatie op voorhand plannen
+							- Applicaties worden in de praktijk niet zonder voorafgaande planning ontwikkeld
+							- Een project plannen laat ons toe belangrijke design-beslissingen te nemen alvorens de code effectief te schrijven
+							- UML (= Unified Modeling Language) kan ons hierbij helpen
+							- Het biedt een gestandaardiseerde manier om software architecturen mee te ontwerpen en beschrijven
+							- UML ondersteunt overerving en compositie en wordt vaak gebruikt om klassen en hun onderlinge samenhang te beschrijven
+				</section>
+				<section>
+							## Een voorbeeld van een UML-diagram
+							![UML voorbeeld](../img/uml-stap2.png)
+				</section>
+				<section>
+							## UML-diagrammen
+							- Je kan heel eenvoudig online je eigen UML-diagrammen maken via https://app.diagrams.net/
+							- Doorheen de voorbeeldtoepassing zal je voorbeelden zien van UML-diagrammen
+							- Ik nodig jullie uit om ook voor je eigen applicatie een UML-diagram op te stellen 
+				</section>
+				<section>
+							## Een UML-klassebeschrijving
+							- Een klassebeschrijving bestaat uit de naam, de attributen, en de methods
+							- De diagrammen laten een + of - voorafgaan aan elk onderdeel van een klasse. Deze staan voor publieke of private toegangkelijkheid. 
+								- Bij Python is er niet zoiets als public of private. Je plaatst dus eigenlijk steeds een plus (we weten ondertussen dat je als developer met een underscore kunt aangeven of een attribuut buiten de klasse mag opgevraagd of aangepast worden)
+							- Je vermeldt steeds het data type bij de attributen
+							- Bij de methods vermeld je ook de argumenten met hun data types en tot slot ook het return data type
+				</section>
+				<section>
+							## Uitdrukken van overerving en compositie in UML
+							- Overerving
+								- Een witte pijl van de afgeleide klasse naar de basisklasse
+								- We vermelden daarbij het woord "Extends", waarmee we duidelijk maken dat het hier om overerving gaat
+							- Compositie	
+								- Een holle pijl die begint met een zwarte ruit
+								- Een getal geeft weer hoeveel geïnstantieerde componenten de samengestelde klasse kan bevatten
+								- Een * symbool ipv een getal verwijst naar een variabel aantal geïnstantieerde componenten
+								- Je kan via een range ook een bereik aan mogelijkheden weergeven: bvb (1..4) betekent tussen 1 en 4, (1..*) betekent minstens één 
+				</section>
+				<section>
+							## Beschrijven van interfaces in UML
+							- Een interface (niet te verwarren met een gebruikersinterface) beschrijft de kenmerken en het gedrag van een object
+							- In het geval van de methods: niet de implementatie maar de declaratie
+							- Sommige programmeertalen bieden effectief ondersteuning voor het beschrijven van interfaces. Python biedt die ondersteuning niet
+							- Voegen we interfaces toe aan onze UML-diagrammen dan denken we dus eerder conceptueel
+							- Om zich te conformeren aan een interface moet een klasse voorzien zijn van de in de interface beschreven attributen en methods  
+				</section>
+				<section>
+							## Onderdelen van een UML-diagram
+							![UML onderdelen](../img/basis-uml.jpg)
+				</section>
+				<section class="chapter">
+							## Voorbeeldtoepassing
+				</section>
+				<section>
+							## Voorbeeldtoepassing
+							- Deze Human Resources-toepassing toont een stapsgewijze implementatie van een klasse hiërarchie
+							- Het betreft een eenvoudige toepassing die door een bedrijf kan gebruikt worden om de lonen te berekenen en de productiviteit van de werknemers in kaart te brengen
+							- Er wordt zowel gebruik gemaakt van overerving als van object compositie
+							- Je zal de toepassing een aantal keren aangepast zien worden
+							- Aan de hand hiervan zal je een aantal OO-patronen gebruikt zien worden
+							- Het rustig bestuderen van de code kan je helpen om de juiste keuzes te maken in je eigen toepassingen
+				</section>
+				<section>
+							## Stap 1: het loonsysteem
+							- Een basisimplementatie met aantal klassen in afzonderlijke module die met overerving in elkaar verweven zitten
+							- Het loonsysteem berekent het loon van alle werknemers
+							- Klasse loonsysteem accepteert een list met werknemers als argument en drukt hun loon af
+							- Alle werknemers zijn geïnstantieerde objecten van de klassen Bediende, Arbeider of CommissieMedewerker.
+							- De twee eerste klassen erven van een basisklasse Werknemer, de CommissieMedewerker erft onrechtstreeks, via de klasse Bediende
+							- We laten CommissieMedewerker overerven van Bediende, omdat ze het krijgen van een maandloon gemeen hebben. Daarmee maken we van CommissieMedewerker een afgeleide klasse van de klasse Bediende
+				</section>
+				<section>
+							## UML-diagram (stap 1)
+							![UML Stap 1](../img/uml-stap1.jpg)
+				</section>
+				<section>
+							## Stap 1: het loonsysteem
+							- Werknemer is hier een abstracte basisklasse waardoor deze niet kan geïnstantieerd worden
+							- De aanwezigheid van de bereken_loonlijst-method wordt  afgedwongen van alle afgeleide klassen door de aanwezigheid van de @abstractmethod decorator 
+							- Elk van de afgeleide klassen beschikt dus over deze method, die wordt aangeroepen binnen de bereken_loonlijst-method van de LoonSysteem-klasse
+				</section>
+				<section>
+							## hrm.py
+
+							```Python
+							from abc import ABC, abstractmethod
+
+							class LoonSysteem:
+								def bereken_loonlijst(self, werknemers):
+									for werknemer in werknemers:
+										print(f'Loonlijst voor: {werknemer.id} - {werknemer.naam}')
+										print(f'- Netto bedrag: {werknemer.bereken_loonlijst()}')
+
+							class Werknemer(ABC):
+								def __init__(self, id, naam):
+									self.id = id
+									self.naam = naam
+
+								@abstractmethod
+								def bereken_loonlijst(self):
+									pass
+							```
+				</section>
+				<section>
+							## hrm.py (vervolg)
+
+							```Python
+							class Bediende(Werknemer):
+								def __init__(self, id, naam, maandloon):
+									super().__init__(id, naam)
+									self.maandloon = maandloon
+
+								def bereken_loonlijst(self):
+									return self.maandloon
+
+							class Arbeider(Werknemer):
+								def __init__(self, id, naam, uren_gewerkt, uurtarief):
+									super().__init__(id, naam)
+									self.uren_gewerkt = uren_gewerkt
+									self.uurtarief = uurtarief
+
+								def bereken_loonlijst(self):
+									return self.uren_gewerkt * self.uurtarief
+							```
+				</section>
+				<section>
+							## hrm.py (vervolg)
+
+							```Python
+							class CommissieMedewerker(Bediende): 
+								def __init__(self, id, naam, maandloon, commissie):
+									super().__init__(id, naam, maandloon)
+									self.commissie = commissie
+
+								def bereken_loonlijst(self):
+									vast = super().bereken_loonlijst()
+									return vast + self.commissie
+							```
+				</section>
+				<section>
+							## programma.py (het ingangspunt van onze toepassing)
+
+							```Python
+							import hrm
+
+							oBediende1 = hrm.Bediende(1, 'Ben Segers',2500)
+							oArbeider1 = hrm.Arbeider(2, 'Staf Peeters', 40, 20)
+							oCommissieMedewerker1 = hrm.CommissieMedewerker(3, 'Eva De Lange', 2000, 1500)
+
+							oLoonSysteem1 = hrm.LoonSysteem()
+							oLoonSysteem1.bereken_loonlijst([
+								oBediende1,
+								oArbeider1,
+								oCommissieMedewerker1
+							])
+							```
+				</section>
+				<section>
+							## Stap 1: het loonsysteem - merk op dat:
+							- We gebruiken de super() functie om de \_\_init__ method van Werknemer aan te spreken
+							- Deze wordt niet meer automatisch uitgevoerd omdat we deze method hebben overschreven in de afgeleide klasse
+							- In de CommissieMedewerker-klasse roepen we de method bereken_loonlijst bij de base-klasse bediende op via super().bereken_loonlijst()
+							- Waarom? Indien de berekening van het loon in de toekomst verandert, dan blijft onze afgeleide klasse correct functioneren
+				</section>
+				<section>
+							## Stap 2: het productiviteitssysteem
+							- We willen een productiviteitssysteem toevoegen aan onze applicatie
+							- We gaan deze productiviteit berekenen gebaseerd op een aantal als klassen gedefinieerde rollen: manager, secretaris, verkoper, fabrieksarbeider		
+				</section>
+				<section>
+							## Stap 2: het productiviteitssysteem - aanpak
+
+							- Volgt asap! Broncode staat online maar wordt nog verder aangevuld
+				</section>
+				<section>
+							## UML-diagram
+							![UML Stap 2](../img/uml-stap2.png)
+				</section>
+				<section>
+							## Python OO - les 4 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
