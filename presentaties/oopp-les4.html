@@ -229,16 +229,515 @@
 				<section>
 							## Stap 2: het productiviteitssysteem
 							- We willen een productiviteitssysteem toevoegen aan onze applicatie
-							- We gaan deze productiviteit berekenen gebaseerd op een aantal als klassen gedefinieerde rollen: manager, secretaris, verkoper, fabrieksarbeider		
+							- We gaan deze productiviteit berekenen gebaseerd op een aantal (4) als klassen gedefinieerde rollen: manager, secretaris, verkoper, fabrieksarbeider
+							- We verhuizen de werknemer-gerelateerde klassen naar een nieuw bestand: werknemers.py
+							- We voegen de 4 nieuwe klassen toe aan dit bestand
+							- Voor het productiviteitssysteem maken we eveneens een nieuw bestand aan: productiviteit.py
 				</section>
 				<section>
-							## Stap 2: het productiviteitssysteem - aanpak
+							## werknemers.py (gedeeltelijke code)
 
-							- Volgt asap! Broncode staat online maar wordt nog verder aangevuld
+							```Python
+							class Manager(Bediende):
+								# Geen __init__ => erft dus deze method van Bediende
+								def werk(self, uren):
+									print(f'{self.naam} leidt het team gedurende {uren} uur.')
+
+							class Secretaris(Bediende):
+								def werk(self, uren):
+									print(f'{self.naam} wijdt zich {uren} uren aan zijn administratieve taken.')
+
+							class Verkoper(CommissieMedewerker):
+								def werk(self, uren):
+									print(f'{self.naam} spendeert {uren} uren aan verkoopstaken.')
+
+							class Fabrieksarbeider(Arbeider):
+								def werk(self, uren):
+									print(f'{self.naam} assembleert producten voor {uren} uren.')
+							```
+				</section>
+				<section>
+							## productiveit.py
+
+							Gelijkaardig opgevat als het loonsysteem
+
+							```Python
+							class ProductiviteitsSysteem:
+								def volg(self, werknemers, uren):
+									print('Opvolgen Productiviteit van de werknemers')
+									print('=========================================')
+									for werknemer in werknemers:
+										werknemer.werk(uren)
+									print('')
+							```
+				</section>
+				<section>
+							## Stap 2: het productiviteitssysteem
+							- programma.py wordt aangepast:
+								- Importeren van de verschillende modules
+								- Aanpassen van de klasseverwijzingen
+								- Aanmaak productiviteitssysteem object en aanroepen van de werk-method
+								- De geïnstantieerde werknemer-gerelateerde klassen worden nu vervangen door de 4 nieuw gecreëerde rollen/klassen
+								- Deze erven van de eerder gecreëerde klassen dus alle functionaliteit blijft intact
+				</section>
+				<section>
+							## programma.py
+
+							```Python
+							import hrm
+							import werknemers
+							import productiviteit
+
+							oManager1 = werknemers.Manager(1, 'Ben De Vuyst', 2400)
+							oSecretaris1 = werknemers.Secretaris(2, 'Kenneth De Prins', 2100)
+							oVerkoper1 = werknemers.Verkoper(3, 'Kathy Kopers', 2300, 450)
+							oFabrieksArbeider1 = werknemers.Fabrieksarbeider(4, 'Piet Meesters', 40, 25)
+
+							werknemers = [oManager1,oSecretaris1,oVerkoper1, oFabrieksArbeider1]
+
+							oProductiviteitsSysteem1 = productiviteit.ProductiviteitsSysteem()
+							oProductiviteitsSysteem1.volg(werknemers, 40)
+
+							oLoonSysteem1 = hrm.LoonSysteem()
+							oLoonSysteem1.bereken_loonlijst(werknemers)
+							```
+				</section>
+				<section>
+							## Het UML-diagram voor stap 2
+							![UML Stap 2](../img/uml-stap2.png)
+				</section>
+				<section>
+							## Stap 2: het productiviteitssysteem
+							- Implementeren een nieuwe interface IWerker
+							- Een klasse die hier aan voldoet kan gevolgd worden in het productiviteitssysteem
+							- We bemerken hier al een probleem: als de vereisten veranderen, nieuwe features moeten worden toegevoegd, nieuwe rollen enz => complexiteit gaat snel toenemen
+				</section>
+				<section>
+							## Gebruik meervoudige overervering
+							- Tot nu toe erfde elke klasse van hooguit één andere klasse
+							- Python ondersteunt meervoudige overerving
+							- Beeldt je in: klasse TijdelijkeSecretaris die erft van Secretaris en Arbeider
+							- Welke __init__ method wordt uitgevoerd? Method resolution order (MRO)!
+							- Eigen __init__ en bereken_loonlijst methods
+								- Bypass MRO: we roepen hier zelfgekozen base klasse aan
+							- Complexiteit! Tijd om de klasses en hun onderlinge samenhang te herdenken
+							- Pleidooi om alles goed op voorhand uit te denken
+				</section>
+				<section>
+							## Gebruik meervoudige overerving
+
+							Gedeeltelijke code voor werknemers.py (zie code stap 2)
+
+							```Python
+							class TijdelijkeSecretaris(Secretaris, Arbeider):
+								def __init__(self, id, naam, uren_gewerkt, uurtarief):
+									Arbeider.__init__(self, id, naam, uren_gewerkt, uurtarief)
+
+								def bereken_loonlijst(self):
+									return Arbeider.bereken_loonlijst(self)
+							```
+				</section>
+				<section>
+							## Gebruik meervoudige overerving
+
+							Gedeeltelijke code voor programma.py (zie code stap 2)
+
+							```Python
+							print(werknemers.TijdelijkeSecretaris.__mro__)
+							oTijdelijkeSecretaris1 = werknemers.TijdelijkeSecretaris(5, 'Brent Willems', 40, 30)
+
+							werknemers = [
+								oManager1,
+								oSecretaris1,
+								oVerkoper1,
+								oFabrieksArbeider1,
+								oTijdelijkeSecretaris1
+							]
+							```
 				</section>
 				<section>
 							## UML-diagram
-							![UML Stap 2](../img/uml-stap2.png)
+							![UML Stap 2bis](../img/uml-stap2bis.png)
+				</section>
+				<section>
+							## Stap 3: herdenken van onze projectstructuur
+							- hrm.py: klassen voor loonlijstbeleid
+							- productiviteit.py: klassen voor rollen mbt werknemers
+							- werknemers.py: klassen voor elk type werknemer
+							- programma.py: start script, instantieert werknemers en systemen => blijft hetzelfde
+				</section>
+				<section>
+							## Stap 3: herdenken van onze projectstructuur
+							- Meervoudige overerving gebruikt om klassen los te koppelen van de verschillende systemen die ze gebruiken
+							- Alle code voor één systeem leeft nu in de betreffende module
+							- Allemaal vertrouwde code, maar op een nieuwe plaats
+							- Grootste wijziging: werknemers.py
+				</section>
+				<section>
+							## UML-diagram
+							![UML Stap 3](../img/uml-stap3.png)
+				</section>
+				<section>
+							## hrm.py (gedeeltelijke code)
+
+							```Python
+							class SalarisBeleid:
+								def __init__(self, maandloon):
+									self.maandloon = maandloon
+
+								def bereken_loonlijst(self):
+									return self.maandloon
+
+
+							class UurBeleid:
+								def __init__(self, uren_gewerkt, uurtarief):
+									self.uren_gewerkt = uren_gewerkt
+									self.uurtarief = uurtarief
+
+								def bereken_loonlijst(self):
+									return self.uren_gewerkt * self.uurtarief
+							```
+				</section>
+				<section>
+							## hrm.py (gedeeltelijke code)
+
+							```Python
+							class CommissieBeleid(SalarisBeleid):
+								def __init__(self, maandloon, commissie):
+									super().__init__(maandloon)
+									self.commissie = commissie
+
+								def bereken_loonlijst(self):
+									vast = super().bereken_loonlijst()
+									return vast + self.commissie
+							```
+				</section>
+				<section>
+							## productiviteit.py (gedeeltelijke code)
+
+							```Python
+							class ManagersRol:
+								def werk(self, uren):
+									return f'leidt het team gedurende {uren} uur.'
+
+							class SecretarisRol:
+								def werk(self, uren):
+									return f'wijdt zich {uren} uren aan zijn administratieve taken.'
+
+							class VerkopersRol:
+								def werk(self, uren):
+									return f'spendeert {uren} uren aan verkoopstaken.'
+
+							class FabrieksarbeidersRol:
+								def werk(self, uren):
+									return f'assembleert producten voor {uren} uren.'
+							```
+				</section>
+				<section>
+							## werknemers.py (gedeeltelijke code)
+
+							Maakt gebruik van meervoudige overerving!
+
+							```Python
+							class Secretaris(Werknemer, SecretarisRol, SalarisBeleid):
+								def __init__(self, id, naam, maandloon):
+									SalarisBeleid.__init__(self, maandloon)
+									super().__init__(id, naam)
+							
+							class TijdelijkeSecretaris(Werknemer, SecretarisRol, UurBeleid):
+								def __init__(self, id, naam, hours_worked, hour_rate):
+									UurBeleid.__init__(self, hours_worked, hour_rate)
+									super().__init__(id, naam)
+				</section>
+				<section>
+							## Stap 4: object compositie
+							- Object compositie is een OO design concept waarmee je een _heeft-een_ of _deel-van_ relatie uitdrukt
+							- Technisch gezien hebben we in ons voorbeeldproject al gebruik gemaakt van compositie
+								- Onze Werknemer-klasse bvb heeft 2 attributen: id en naam
+								- Deze worden geïnitialiseerd met integers en strings als data type
+							- Interessanter is het toevoegen van attributen met data types die we zelf creëren
+							- Object compositie is niets anders dan het creëren van nieuwe klasse die je als data type gebruikt binnen een andere klasse 
+				</section>
+				<section>
+							## Stap 4: object compositie
+							- We maken een nieuwe klasse Adres aan in contactgegevens.py
+							- Adres wordt dan gebruikt als een custom datatype in de Werknemer-klasse
+							- Adres wordt toegevoegd nadat object geïnstantieerd is
+							- Elke werknemer kan geen of 1 adres hebben
+							- Dus niet elke medewerker hoeft een adres te hebben 
+							- We spreken hier over een "loosely coupled" relatie
+				</section>
+				<section>
+							## contactgegevens.py
+
+							```Python
+							class Adres:
+								def __init__(self, straat, stad, postcode, straat2=''):
+									self.straat = straat
+									self.straat2 = straat2
+									self.stad = stad
+									self.postcode = postcode
+
+								def __str__(self):
+									regels = [self.straat]
+									if self.straat2:
+										regels.append(self.straat2)
+									regels.append(f'{self.postcode} {self.stad}')
+									return '\n'.join(regels)
+							```
+				</section>
+				<section>
+							## werknemers.py (gedeeltelijke code)
+
+							- We voegen een nieuw instance attribuut toe aan de klasse Werknemer
+							- Een adres wordt niet toegevoegd bij de instantiëring, maar achteraf via een method
+							- We hoeven op deze manier niet aan elke medewerker een adres toekennen
+
+							```Python
+							class Werknemer:
+								def __init__(self, id, naam):
+									self.id = id
+									self.naam = naam
+									# Een losse relatie: Werknemer hoeft niets te weten over Adres
+									self.adres = None
+							```
+				</section>
+				<section>
+							## UML-diagram
+							![UML Stap 4](../img/uml-stap4.jpg)
+				</section>
+				<section>
+							## programma.py + hrm.py (gedeeltelijke code)
+
+							```Python
+							import werknemers
+							import contactgegevens
+
+							oManager1 = werknemers.Manager(1, 'Ben De Vuyst', 2400)
+							oManager1.adres = contactgegevens.Adres('Kloosterstraat 15', 'Antwerpen', 2000)
+							```
+
+							```Python
+							class LoonSysteem:
+								...
+								for werknemer in werknemers:
+									...
+									if werknemer.adres:
+										print('Opsturen naar :')
+										print(werknemer.adres)
+									print('')
+							```
+				</section>
+				<section>
+							## Stap 5: flexibel ontwerpen met object compositie
+							- We kunnen meer doen met object compositie en gaan hiervoor verder aanpassen in ons voorbeeldproject
+							- We buigen ons eerst over de klasse ProductiviteitsSysteem en voegen daar twee extra methods toe 
+							- We gaan deze gebruiken om nieuwe rollen te instantiëren
+							- Merk op dat de method geef_rol() een instance teruggeeft van de gevraagde rol en geen object (zie de haakjes!)
+							- We maken ook een aanpassing in de volg()-method
+				</section>
+				<section>
+							## productiviteit.py (gedeeltelijke code)
+
+							```Python
+							class ProductiviteitsSysteem:
+								def __init__(self):
+									# _rollen: een dictionary type
+									self._rollen = {
+										'manager': ManagersRol,
+										'secretaris': SecretarisRol,
+										'verkoop': VerkopersRol,
+										'fabriek': FabrieksarbeidersRol
+									}
+
+								def geef_rol(self, rol_id):
+									# dictionary: get-method
+									rol_type = self._rollen.get(rol_id)
+									if not rol_type:\
+										raise ValueError('ongeldige rol_id')
+									# rol_type() verwijst naar één van onze klassen
+									return rol_type()
+							``` 
+				</section>
+				<section>
+							## productiviteit.py (gedeeltelijke code)
+
+							```Python
+								...
+								def volg(self, werknemers, uren):
+									print('Opvolgen Productiviteit van de werknemers')
+									print('=========================================')
+									for werknemer in werknemers:
+										werknemer.werk(uren)
+										#resultaat = werknemer.werk(uren)
+										#print(f'{werknemer.naam}: {resultaat}')
+									print('')
+							``` 
+				</section>
+				<section>
+							## Stap 5: flexibel ontwerpen met object compositie
+							- We maken vervolgens aanpassingen aan het loonsysteem
+							- We gaan een interne databank bijhouden met loonbeleid voor elke werknemer
+							- We mappen hiervoor voor elke medewerker een specifiek loonbeleid aan zijn/haar id
+							- We slaan hiervoor specifieke loonbeleid-objecten op, en niet hun klassen
+							- Returnwaarden hoeven dus niet geïnstantieerd worden
+				</section>
+				<section>
+							## hrm.py (gedeeltelijke code)
+
+							- We voegen een klasse LoonlijstBeleid toe die een base-klasse zal worden voor elke andere beleidsklasse
+							- Zal bijhouden hoeveel uren effectief werd gewerkt
+							- SalarisBeleid en UurBeleid laten we dan erven van deze base-klasse
+
+							```Python
+							class LoonlijstBeleid:
+								def __init__(self):
+									self.uren_gewerkt = 0
+
+								def volg_werk(self, uren):
+									self.uren_gewerkt += uren
+							```
+				</section>
+				<section>
+							## hrm.py (gedeeltelijke code)
+							- De CommissieBeleid klasse erft nu via SalarisBeleid ook van LoonlijstBeleid
+							- We zorgen nu voor een commissie_per_verkoop attribuut en een commissie-method
+
+							```Python
+							class CommissieBeleid(SalarisBeleid):
+								def __init__(self, maandloon, commissie_per_verkoop):
+									super().__init__(maandloon)
+									self.commissie_per_verkoop = commissie_per_verkoop
+
+								def commissie(self):
+									verkopen = self.uren_gewerkt / 5
+									return verkopen * self.commissie_per_verkoop
+
+								def bereken_loonlijst(self):
+									vast = super().bereken_loonlijst()
+									return vast + self.commissie()
+							```
+				</section>
+				<section>
+							## contactgegevens.py (gedeeltelijke code)
+							
+							- En, gelijkaardig aan wat we reeds gedaan hebben...
+
+							```Python
+							class AdresLijst:
+								def __init__(self):
+									self._werknemer_adressen = {
+										1: Adres('Lange Leemstraat 34', 'Antwerpen', 2018, 'Bus 202'),
+										2: Adres('Kloosterstraat 15', 'Antwerpen', 2000),
+										3: Adres('Grote Markt 4', 'Antwerpen', 2000),
+										4: Adres('Ellermanstraat 33', 'Antwerpen', 2060),
+										5: Adres('Esmoreitlaan 7', 'Antwerpen', 2050)
+									}
+
+								def geef_werknemer_adres(self, werknemer_id):
+									adres = self._werknemer_adressen.get(werknemer_id)
+									if not adres:
+										raise ValueError(werknemer_id)
+									return adres
+							```
+				</section>
+				<section>
+							## In werknemers.py
+							- Hier de grootste wijzigingen
+							- Aanmaak van een WerknemersDatabase klasse
+							- Een voorbeeld van gebruik van compositie
+							- _werknemers bevat een lijst van dictionaries, elke dictionary = een werknemer
+							- Deze klasse heeft ook instances nodig van het ProductiviteitsSysteem, LoonSysteem en AdresLijst.
+
+				</section>
+				<section>
+							## In werknemers.py
+
+							```Python
+							from productiviteit import ProductiviteitsSysteem
+							from hrm import LoonSysteem
+							from contactgegevens import AdresLijst
+
+							class WerknemersDatabase:
+								def __init__(self):
+									self._werknemers = [
+										{'id': 1,'naam': 'Ben De Vuyst','rol': 'manager'},
+										...
+									]
+									self.productiviteit = ProductiviteitsSysteem()
+									self.loonlijst = LoonSysteem()
+									self.werknemer_adressen = AdresLijst()
+
+							```
+				</section>
+				<section>
+							## In werknemers.py
+
+							- Vervolgens twee methods die voor ons een list van werknemer-objecten construeren
+							- Een voorbeeld van gebruik van compositie
+
+							```Python
+							def werknemers(self):
+								return [self._werknemer_aanmaken(**data) for data in self._werknemers]
+						
+							def _werknemer_aanmaken(self, id, naam, rol):
+								adres = self.werknemer_adressen.geef_werknemer_adres(id)
+								werknemer_rol = self.productiviteit.geef_rol(rol)
+								loonlijst_beleid = self.loonlijst.geef_beleid(id)
+								return Werknemer(id, naam, adres, werknemer_rol, loonlijst_beleid)
+							```
+				</section>
+				<section>
+							## In werknemers.py nog Werknemer-klasse aanpassen
+
+							```Python
+							class Werknemer:
+								def __init__(self, id, naam, adres, rol, loonlijst):
+									self.id = id
+									self.naam = naam
+									self.adres = adres
+									self.rol = rol
+									self.loonlijst = loonlijst
+
+								def werk(self, uren):
+									verplichtingen = self.rol.werk(uren)
+									print(f'Werknemer {self.id} - {self.naam}:')
+									print(f'- {verplichtingen}')
+									print('')
+									self.loonlijst.volg_werk(uren)
+
+								def bereken_loonlijst(self):
+									return self.loonlijst.bereken_loonlijst()
+							```
+				</section>
+				<section>
+							## Tot slot: programma.py aanpassen
+
+							```Python
+							from hrm import LoonSysteem
+							from productiviteit import ProductiviteitsSysteem
+							from werknemers import WerknemersDatabase
+
+							oProductiviteitssysteem1 = ProductiviteitsSysteem()
+							oLoonlijstsysteem1 = LoonSysteem()
+							oWerknemersdatabase1 = WerknemersDatabase()
+
+							werknemers = oWerknemersdatabase1.werknemers()
+							oProductiviteitssysteem1.volg(werknemers, 40)
+							oLoonlijstsysteem1.bereken_loonlijst(werknemers)
+							```
+				</section>
+				<section>
+							## Dit design noemen we een policy-based design
+							- Modules zijn samengesteld uit meerdere policies die belast zijn met het uitvoeren van het werk
+							- Andere klasses, zoals LoonSysteem nemen informatie in en passen de juiste policy toe
+							- Geeft flexibiliteit in geval dat vereisten veranderen in de toekomst => zie onder
+							- ! Moesten we beroep gedaan hebben op inheritance, dan hadden we nu een afzonderlijke klasse moeten creëren hebben
+
+							```Python 
+							manager = werknemers[0]
+							manager.loonlijst = UurBeleid(55)
+							```
 				</section>
 				<section>
 							## Python OO - les 4 - kristof.michiels01@ap.be
