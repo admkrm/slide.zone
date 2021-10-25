@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Programming: Les 1</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## Variabelen en basisgegeventypes
+							#### Kristof Michiels
+				</section>
+				<section>
+							## ! Disclaimer
+
+							- Dit is een alfa-versie van de cursus die zal gebruikt worden voor het vak Python Programming in semester 2 
+							- Deze informatie is dus mogelijk nog onvolledig en kan nog onzorgvuldigheden of zelfs fouten bevatten
+				</section>
+				<section class="chapter">
+							## Lesinhoud
+                </section>
+				<section>
+							## Lesinhoud
+							- Variabelen 
+								- Wat zijn ze?
+								- Naamgeving
+							- Basisgegeventypes
+								- Werken met tekst: strings en witruimte
+								- Werken met getallen: integers en floats
+							- Commentaar in je code
+				</section>
+				<section class="chapter">
+							## Variabelen
+				</section>
+				<section>
+							## Basisvoorbeeld variabelen
+
+							```Python
+							boodschap = "Welkom bij Python programming!"
+							print(boodschap)
+
+							boodschap = "Python leren programmeren behoort tot het mooiste wat er bestaat"
+							print(boodschap)
+							```
+							- We maken een variabele aan en noemen ze "_boodschap_"
+							- Elke variabele is verbonden met een waarde. Dit is de informatie die met de variabele wordt geassocieerd
+							- Je kan de waarde van een variabele op elk moment wijzigen wijzigen in je programma. Python zal steeds de huidige waarde van de variabele bijhouden en kunnen weergeven
+				</section>
+				<section>
+							## Basisvoorbeeld variabelen
+
+							```Python
+							boodschap = "Welkom bij Python programming!"
+							print(boodschap)
+
+							boodschap = "Python leren programmeren behoort tot het mooiste wat er bestaat"
+							print(boodschap)
+							```
+
+							- Variabelen zijn labels waaraan je een waarde kan toekennen
+							- Een variabele "verwijst" dan naar een bepaalde waarde, veeleer dan dat het een doosje is waarin je een bepaalde waarde opslaat
+				</section>
+				<section>
+							## Naamgeving variabelen
+							- Gebruik korte, beschrijvende namen
+							- Vermijd het gebruik van hoofdletters
+							- Namen van variabelen kunnen enkel bestaan uit letters, getallen en _underscores_ ("_")
+							- De naam mag starten met een _underscore_, maar niet met een getal
+							- Spaties zijn niet toegestaan. Maak eventueel gebruik van _underscores_ om woorden van elkaar te scheiden
+							- Vermijd het gebruik van Python _keywords_ als namen voor variabelen. Dit zijn gereserveerde woorden (zie volgende slide)
+				</section>
+				<section>
+							## Gereserveerde woorden in Python
+
+							```Python
+							help("keywords")
+							```
+
+							![Gereserveerde woorden in Python](../img/pp-gereserveerd.jpg)
+				</section>
+				<section>
+							## Meerdere toewijzigen
+
+							```Python
+							voornaam, familienaam, beroep = "Kristof", "Michiels", "Docent"
+							```
+
+							- Je kan waarden aan meerdere variabelen toekennen in één enkele statement
+							- Dit maakt je programma's korter en beter leesbaar
+							- Je scheidt hiervoor de namen van de variabelen met komma's en doet hetzelfde met de waarden
+							- Python kent dan de respectievelijke waarde toe aan elke genoemde variabele
+
+				</section>
+				<section>
+							## Constanten
+
+							```Python
+							STUDENTEN_PER_GROEP = 4
+							```
+
+							- Een constante is zoals een variabele, maar met een waarde die niet verandert tijdens de looptijd van je programma
+							- Python heeft geen ingebouwde ondersteuning voor constanten maar developers gebruiken een naam bestaande uit enkel hoofdletters om aan te geven dat het hier over een niet te veranderen constante gaat
+				</section>
+				<section>
+							## Commentaar
+							- Commentaar laat toe om zelfgeschreven notities toe te voegen aan je programma's
+							- In Python gebruiken we een hashtag ("#") aan het begin van een lijn commentaar om aan te geven dat we hiermee te maken hebben
+							- We geven hiermee aan de interpreter mee dat wat volgt niet hoeft geïnterpreteerd te worden
+							
+							```Python
+							# Een typisch "Hallo wereld"-voorbeeld
+							boodschap = "Welkom bij Python programming!"
+							print(boodschap)
+							```
+
+
+				</section>
+				<section class="chapter">
+							## Basisgevenstypes
+				</section>
+				<section>
+							## Werken met tekst: strings
+							- Een string bestaat uit een reeks tekst-karakters
+							- Alles binnen aanhalingstekens wordt beschouwd als een string
+							- Je mag gebruik maken van enkele of dubbele aanhalingstekens
+							- Deze flexibiliteit laat toe om aanhalings- en afkappingstekens te gebruiken in je strings
+							- Wees consistent in je keuzes
+
+
+							```Python
+							boodschap = "Dit is een string."
+							boodschap = 'Dit is ook een string.'
+							boodschap = 'Mijn vriend vroeg: "Programmeer jij ook in Python?" '
+							boodschap = "Ik hou van het schrijven van Python programma's"
+							```
+				</section>
+				<section>
+							## Hoofdlettergebruik wijzigen in een string
+
+							```Python
+							naam = "Guido van Rossum"
+							print(naam.title()) # Elk woord laten beginnen met een hoofdletter: Guido Van Rossum
+							print(naam.upper()) # Alles in hoofdletters: GUIDO VAN ROSSUM
+							print(naam.lower()) # Alles in kleine letters: guido van rossum
+							```
+							- We beschikken hiervoor over een aantal zgn. methods. Dit zijn acties die je op bepaalde data kan toepassen
+							- De dot-notatie (".") vertelt Python in het eerste vb. om de title-method uit te voeren op de variabele naam
+							- Elke method wordt gevolgd door haakjes, omdat methods vaak bijkomende informatie nodig hebben om hun werk te kunnen doen. Hier is dit evenwel niet het geval
+							- De lower()-method wordt vaak gebruikt om data op te slaan die door een gebruiker werd ingegeven
+
+				</section>
+				<section>
+							## Variabelen gebruiken in een string: f-strings
+
+							```Python
+							voornaam = "Guido"
+							familienaam = "van Rossum"
+							volledige_naam = f"{voornaam} {familienaam}"
+							boodschap = f"Bedankt voor Python, {volledige_naam.title()}!"
+							print(boodschap)
+							```
+
+							- Om variabelen te gebruiken binnen strings plaats je de letter f onmiddellijk voor het eerste aanhalingsteken
+							- Je omringt de variabelen die je in de string gebruikt met accolades
+							- Python vervangt elke variabele door de waarde
+							- De f in f-strings staat voor "format"
+				</section>
+
+				<section>
+							## Witruimte toevoegen aan strings
+
+							```Python
+							print("\tHelderheid")
+							print("Pythonisch programmeren:\nHelder\nGeloofwaardig\nEfficiënt")
+							print("Pythonisch programmeren:\n\tHelder\n\tGeloofwaardig\n\tEfficiënt")
+							```
+							
+							- Met witruimte doelen we op niet-afdrukbare tekens als spaties, tabs en einde-lijnsymbolen
+							- Je gebruikt ze om je output op een beter leesbare manier te organiseren
+							- Een tab-insprong toevoegen aan je tekst doe je met "\t"
+							- Een nieuwe regel voeg je toe met "\n"
+							- Combinaties zijn mogelijk: "\n\t" zorgt ervoor dat Python op een nieuwe regel begint, met een tabinsprong
+				</section>
+				<section>
+							## Witruimte elimineren binnen strings
+
+							```Python
+							boodschap = " Ik hou van Python "
+							print(boodschap.rstrip())
+							print(boodschap.lstrip())
+							print(boodschap.strip())
+							```
+
+							- Python maakt het eenvoudig om (eventueel) aanwezige witruimte te verwijderen
+							- Er kan een onderscheid worden gemaakt tussen witruimte links, rechts of aan beide zijden van een string
+							- Handig als je twee strings met elkaar wil vergelijken
+				</section>
+				<section>
+							## Werken met gehele getallen (integers)
+
+							```Python
+							getal1 = -2
+							getal2 = 3
+							print(getal1 + getal2) # 1
+							print(getal1 ** getal2) # -8
+							print((getal1 + getal2) * getal1) # -2
+							```
+
+							- Integers kunnen in Python opgeteld (+), afgetrokken (-), vermenigvuldigd (*) en gedeeld (/) worden
+							- Python gebruikt twee vermenigvuldigingssymbolen (**) om exponenten weer te geven
+							- Elke expressie kan meerdere bewerkingen bevatten. De volgorde van bewerkingen wordt gerespecteerd 
+							- Je mag gebruik maken van haakjes om deze volgorde aan te passen
+				</section>
+				<section>
+							## Werken met decimale getallen (floats)
+
+							```Python
+							getal1 = 0.4
+							getal2 = 0.2
+							print(getal1 + getal2) # 0.6000000000000001
+							print(getal1 * 2) # 0.8
+							```
+
+
+							- Python noemt elk kommagetal een float
+							- Deze term wordt in de meeste programmeertalen gebruikt en verwijst naar het feit dat een decimaalteken op elke positie in een getal kan voorkomen
+							- Houd er rekening mee dat je soms een willekeurig aantal decimalen in je antwoord kunt krijgen
+				</section>
+				<section>
+							## Gehele en decimale getallen
+
+							```Python
+							print(9 / 3) # 3.0
+							print(13 + 2.0) # 15.0
+							print(4 * 5.0) # 20.0
+							print(2.0 ** 3) # 8.0
+							totaal_aantal_aardbewoners = 7_902_193_151
+							print(totaal_aantal_aardbewoners) # 7902193151
+							```
+
+							- Wanneer je twee getallen deelt is het resultaat altijd een float
+							- Python gebruikt standaard een float als resultaat voor elke bewerking die een float bevat, zelfs als de uitvoer een geheel getal is
+							- Bij grote getallen kun je cijfers groeperen met underscores om ze leesbaarder te maken
+				</section>
+
+				<section>
+							## Python Programming - les 1 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
