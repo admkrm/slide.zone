@@ -78,7 +78,7 @@ var parseMarkdown = function() {
   if (document.querySelector("body").getAttribute("data-markdown") === "true") {
       i = 0;
       while (i < allSections.length) {
-        allSections[i].innerHTML = marked(allSections[i].innerHTML.replace(/\t{4,7}/g, ""));
+        allSections[i].innerHTML = marked.parse(allSections[i].innerHTML.replace(/\t{4,7}/g, ""));
         i++;
       }
   }

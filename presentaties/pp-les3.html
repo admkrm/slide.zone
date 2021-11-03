@@ -18,99 +18,103 @@
 	<body data-markdown="true">
 				<section>
 							# Python Programming
-							## If statements
+							## Conditionele statements
 							#### Kristof Michiels
 				</section>
+				<section>
+							## ! Disclaimer
+
+							- Dit is een alfa-versie van de cursus die zal gebruikt worden voor het vak Python Programming in semester 2 
+							- Deze informatie is dus mogelijk nog onvolledig en kan nog onzorgvuldigheden of zelfs fouten bevatten
+				</section>
 				<section class="chapter">
 							## Lesinhoud
-                </section>
+				</section>
 				<section>
 							## Lesinhoud
 
-							- Conditional tests
-							- If statements
-
-							Programming often involves examining a set of conditions and deciding which action to take based on those conditions.
-							In this chapter you learned how to write conditional tests, which always evaluate to True or False. You learned to write simple if statements, if- else chains, and if- elif- else chains. You began using these structures to identify particular conditions you needed to test and to know when those conditions have been met in your programs. You learned to handle certain items in a list differently than all other items while continuing to utilize the efficiency of a for loop. You also revisited Python’s style recommendations to ensure that your increasingly complex programs are still relatively easy to read and understand.
+							- Beslissingen
+							- If en else statement
 				</section>
 				<section class="chapter">
-							## Conditional tests
+							## Beslissingen
 				</section>
 				<section>
-							## Een beetje vooruitlopen met een eenvoudig voorbeeld
-							The following short example shows how if tests let you respond to special situations correctly. I
+							## Beslissingen
+							- Programmeren omvat vaak het onderzoeken van een reeks voorwaarden en beslissen welke acties te nemen op basis van die voorwaarden
+							- We bekijken in deze les het schrijven van conditionele tests
+							- Deze tests resulteren steeds in True of False 
+							- We gebruiken deze structuren om op bepaalde voorwaarden te testen en te weten wanneer aan die voorwaarden is voldaan
+							- We zullen eenvoudige if-statements, if-else-ketens en if-elif- elses-ketens schrijven
+				</section>
+				<section>
+							## Basisvoorbeeld
 
 							```Python
-							cars = ['audi', 'bmw', 'subaru', 'toyota']
+							weekdagen = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"]
 
-							for car in cars:
-								if car == 'bmw':
-									print(car.upper())
+							for dag in weekdagen:
+								if dag == 'vrijdag':
+									print(f"Thank god it's {dag}!")
 								else:
-									print(car.title())
+									print(dag.title())
 							```
-
-							The loop in this example first checks if the current value of car is 'bmw' u. If it is, the value is printed in uppercase. If the value of car is anything other than 'bmw', it’s printed in title case:
+							Binnen de for-loop gaan we na of de huidige dag "vrijdag" is. Indien _True_ drukken we een gepast zinnetje af. Voor elke andere dag drukken we gewoon de naam van de dag af.
 				</section>
 				<section>
-							## Conditional tests
-							At the heart of every if statement is an expression that can be evaluated as True or False and is called a conditional test. Python uses the values True and False to decide whether the code in an if statement should be executed. If a conditional test evaluates to True, Python executes the code following the if statement. If the test evaluates to False, Python ignores the code following the if statement.
-
-							equality operator returns True if the values on the left and right side of the operator match, and False if they don’t match.
-
-							A single equal sign is really a statement; you might read the code at u as “Set the value of car equal to 'audi'.” On the other hand, a double equal sign, like the one at v, asks a question: “Is the value of car equal to 'bmw'? ”
+							## Conditionele tests
+							- Centraal binnen elke if statement staat een uitdrukking die kan worden geëvalueerd als True of False
+							- Deze uitdrukking noemen we een voorwaardelijke test
+							- De gelijkheidsoperator geeft True terug als de waarden aan de linker- en rechterkant van de operator overeenkomen, en False als ze niet overeenkomen
+							- Indien deze test als True wordt geëvalueerd dan voert Python de code uit die volgt op het if-statement
+							- Indien False negeert Python de code die volgt op het if-statement 
 				</section>
 				<section>
-							## Ignoring Case When Checking for Equality
-
-							Testing for equality is case sensitive in Python. 
+							## Testen op gelijkheid is hoofdlettergevoelig
 
 							```Python
-							car = 'Audi'
-							car.lower() == 'audi'
-							True
+							print("Kristof" == "kristof") # False
+							print("Kristof".lower() == "kristof")  # True
+							opgeslagen_gebruikersnaam = "ADMKRM"
+							ingevoerde_gebruikersnaam = "admkrm"
+							print(opgeslagen_gebruikersnaam.lower() == ingevoerde_gebruikersnaam.lower()) # True
 							```
+
+							Gebruik de lower()-method om twee strings hoofdletteronafhankelijk met elkaar te vergelijken.
+
+
 				</section>
 				<section>
-							## Checking for Inequality
-
-							Most of the conditional expressions you write will test for equality, but sometimes you’ll find it more efficient to test for inequality.
-							When you want to determine whether two values are not equal, you can combine an exclamation point and an equal sign (!=). The exclamation point represents not, as it does in many programming languages.
+							## Testen op ongelijkheid
 
 							```Python
-							requested_topping = 'mushrooms'
-							if requested_topping != 'anchovies':
-								print("Hold the anchovies!")
+							favoriete_programmeertaal = "JavaScript"
+							if favoriete_programmeertaal != "Python":
+								print("Je favoriete programmeertaal is niet Python? Dat meen je niet?")
 							```
+
+							Soms zal het efficiënter zijn te testen op ongelijkheid. Hiervoor combineer je een uitroepteken met een gelijkheidsteken ("!="). Het uitroepteken staat voor "not", zoals in veel andere programmeertalen het geval
 				</section>
 				<section>
-							## Numerical Comparisons
-
-							Testing numerical values is pretty straightforward.
-
-							You can include various mathematical comparisons in your conditional statements as well, such as less than, less than or equal to, greater than, and greater than or equal to:
-
-							Each mathematical comparison can be used as part of an if statement, which can help you detect the exact conditions of interest.
+							## Numerieke vergelijkingen
 
 							```Python
-							age = 18
-							age == 18
+							examenscore = 17
+							print(examenscore == 18) # False
+							if examenscore != 20:
+								print("Geen maximumscore? Volgende keer beter! ;-)")
 
-							answer = 17
-							if answer != 42:
-							print("That is not the correct answer. Please try again!")
-
-							age = 19
-							age < 21 
-							age <= 21
-							age > 21 
-							age >= 21
+							print(examenscore < 10) # False
+							print(examenscore <= 17) # True 
+							print(examenscore > 17) # False
+							print(examenscore >= 10) # True
 							```
 				</section>
 				<section>
-							## Checking Multiple Conditions
+							## Meerdere condities testen met "and" en "or"
 
-							You may want to check multiple conditions at the same time. For example, sometimes you might need two conditions to be True to take an action. Other times you might be satisfied with just one condition being True. The keywords and and or can help you in these situations.
+							- In bepaalde gevallen zal je meerdere voorwaarden tegelijkertijd willen testen
+							- Bvb. meerdere condities die allen True moeten zijn om actie te ondernemen, of waarvan het volstaat dat één True is...
 				</section>
 				<section>
 							## Using and to Check Multiple Conditions
