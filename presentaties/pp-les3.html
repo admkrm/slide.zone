@@ -111,125 +111,116 @@
 							```
 				</section>
 				<section>
-							## Meerdere condities testen met "and" en "or"
+							## Meerdere condities testen met "and"
 
-							- In bepaalde gevallen zal je meerdere voorwaarden tegelijkertijd willen testen
-							- Bvb. meerdere condities die allen True moeten zijn om actie te ondernemen, of waarvan het volstaat dat één True is...
-				</section>
-				<section>
-							## Using and to Check Multiple Conditions
-
-							To check whether two conditions are both True simultaneously, use the keyword and to combine the two conditional tests; if each test passes, the overall expression evaluates to True. If either test fails or if both tests fail, the expression evaluates to False.
-
-							To improve readability, you can use parentheses around the individual tests, but they are not required.
+							- met het trefwoord "and" kan je meerdere voorwaarden combineren en tegelijkertijd testen
+							- Als alle voorwaarden True teruggeven dan is het gecombineerde resultaat van de uitdrukking True
+							- Als één van de voorwaarden False teruggeeft, dan is het gecombineerde resultaat van de uitdrukking False
+							- Plaats de voorwaarden tussen haakjes om de leesbaarheid te verhogen (niet verplicht)
 
 							```Python
-							age_0 = 22
-							age_1 = 18
-							age_0 >= 21 and age_1 >= 21
-							age_1 = 22
-							age_0 >= 21 and age_1 >= 21
-							(age_0 >= 21) and (age_1 >= 21)
+							getal1 = 37
+							getal2 = 28
+							getal1 >= 30 and getal2 >= 25 # True
+							getal1 >= 30 and getal2 >= 30 # False
+							(getal1 >= 30) and (getal2 >= 25) # True
 							```
 				</section>
 				<section>
-							## Using or to Check Multiple Conditions
+							## Meerdere condities testen met "or"
 
-							The keyword or allows you to check multiple conditions as well, but it passes when either or both of the individual tests pass. An or expression fails only when both individual tests fail.
+							- Als minstens één voorwaarde True terug geeft dan is het gecombineerde resultaat van de uitdrukking True
+							- Enkel als alle individuele condities False teruggeven is het gecombineerde resultaat ook False
 
 							```Python
-							age_0 = 22
-							age_1 = 18
-							age_0 >= 21 or age_1 >= 21 True
-							age_0 = 18
-							age_0 >= 21 or age_1 >= 21 False
+							getal1 = 37
+							getal2 = 28
+							getal1 >= 30 or getal2 >= 30 # True
+							getal1 >= 40 or getal2 >= 20 # False
+							(getal1 >= 30) or (getal2 >= 25) # True
+							```
 				</section>
 				<section>
-							## Checking Whether a Value Is in a List
+							## Nagaan of een waarde voorkomt in een list
 
-							Sometimes it’s important to check whether a list contains a certain value before taking an action. For example, you might want to check whether a new username already exists in a list of current usernames before completing someone’s registration on a website. In a mapping project, you might want to check whether a submitted location already exists in a list of known locations. To find out whether a particular value is already in a list, use the keyword in.
+							- Het kan soms nodig zijn om - vooraleer actie te nemen - na te kijken of een list een bepaalde waarde bevat
+							- Je doet dit met het trefwoord "in"
 							
 							```Python
-							available_toppings = ['mushrooms', 'olives', 'green peppers',
-												'pepperoni', 'pineapple', 'extra cheese']
+							aanwezig_op_meeting = ["Kristof", "Olivia", "Nina", "Bart"]
+							lijst_van_medewerkers = ["Claude", "Kristof", "Olivia", "Benny", "Nina", "Bart", \
+							"Jinnih", "Kamal"] 
 
-							requested_toppings = ['mushrooms', 'french fries', 'extra cheese']
-
-							for requested_topping in requested_toppings:
-								if requested_topping in available_toppings:
-									print(f"Adding {requested_topping}.")
+							for medewerker in lijst_van_medewerkers:
+								if medewerker in aanwezig_op_meeting:
+									print(f"{medewerker} was aanwezig op de meeting.")
 								else:
-									print(f"Sorry, we don't have {requested_topping}.")
-
-							print("\nFinished making your pizza!")
+									print(f"{medewerker} was niet aanwezig op de meeting")
 							```
 				</section>
 				<section>
-							## Checking Whether a Value Is Not in a List
+							## Nagaan of een waarde niet voorkomt in een list
 
-							Other times, it’s important to know if a value does not appear in a list. You can use the keyword not in this situation. For example, consider a list of users who are banned from commenting in a forum. You can check whether a user has been banned before allowing that person to submit a comment:
+							- Je doet dit met het trefwoord " not in"
 
 							```Python
-							banned_users = ['andrew', 'carolina', 'david']
-							user = 'marie'
+							aanwezig_op_meeting = ["Kristof", "Olivia", "Nina", "Bart"]
+							gebruiker = "Linde"
 
-							if user not in banned_users:
-								print(f"{user.title()}, you can post a response if you wish.")
+							if gebruiker not in aanwezig_op_meeting:
+								print(f"{gebruiker.title()} was niet aanezig op de bewuste meeting")
 							```
 				</section>
 				<section>
-							## Boolean Expressions
+							## Booleanse expressies
 
-							As you learn more about programming, you’ll hear the term Boolean expression at some point. A Boolean expression is just another name for a conditional test. A Boolean value is either True or False, just like the value of a conditional expression after it has been evaluated.
+							- Een booleaanse uitdrukking of expressie is een andere naam voor een conditionele test
+							- Een booleaanse waarde is ofwel True of False, net zoals de waarde van een conditionele expressie nadat deze geëvalueerd is
+							- Booleaanse waardes laten toe om de status van een programma of het resultaat van een voorwaarde bij te houden
 
 							```Python
-							game_active = True 
-							can_edit = False
+							gebruiker_is_aktief = True 
+							gebruiker_is_premium = False
 							```
-
-							Boolean values provide an efficient way to track the state of a program or a particular condition that is important in your program.
 				</section>
 				<section class="chapter">
 							## If statements
 				</section>
 				<section>
-							## Simple if Statements
+							## Enkelvoudige if statements
 
-							The simplest kind of if statement has one test and one action:
+							- De meest eenvoudige if statement heeft één test en één aktie
+							- Als de test in True resulteert voert Python de code uit die volgt op het if statement
+							- Indien de test een False oplevert dan wordt de code die volgt op het if statement genegeerd
+							- Qua code-opmaak beveelt [PEP 8](https://www.python.org/dev/peps/pep-0008/) het gebruik aan van een enkele spatie rond de vergelijkingsoperators
+	
+							```Python
+							leeftijd = 17
+							if leeftijd >= 18:
+								print("Je bent meerderjarig")
+							```
+				</section>
+				<section>
+							## if-else statements
+
+							- Ook wanneer een voorwaarde een False teruggeeft zal je in bepaalde omstandigheden een actie willen uitvoeren
+							- Pythons if-else syntax maakt dit mogelijk
+							- In het voorbeeld hieronder zal steeds één van beide mogelijke acties worden uitgevoerd
 							
-							if conditional_test: do something
-
-							You can put any conditional test in the first line and just about any action in the indented block following the test. If the conditional test evaluates to True, Python executes the code following the if statement. If the test evaluates to False, Python ignores the code following the if statement.
-
-							Styling Your if Statements: The only recommendation PEP 8 provides for styling conditional tests is to use a single space around comparison operators, such as ==, >=, <=
-
 							```Python
-							age = 17
-							if age >= 18:
-								print("You are old enough to vote!")
-								print("Have you registered to vote yet?")
-							```
-				</section>
-				<section>
-							## if-else Statements
-
-							Often, you’ll want to take one action when a conditional test passes and a different action in all other cases. Python’s if- else syntax makes this possible. An if- else block is similar to a simple if statement, but the else statement allows you to define an action or set of actions that are executed when the conditional test fails.
-
-							```Python
-							age = 17
-							if age >= 18:
-								print("You are old enough to vote!")
-								print("Have you registered to vote yet?")
+							leeftijd = 17
+							if leeftijd >= 18:
+								print("Je bent meerderjarig")
+								print("Denk eraan: 'leeftijd is maar een getal'")
 							else:
-								print("Sorry, you are too young to vote.")
-								print("Please register to vote as soon as you turn 18!")
+								print("Je bent minderjarig") 
+								print("Zij die het kunnen weten zeggen: 'jong zijn is plezant'")
 							```
-
-							In a simple if-else chain like this, one of the two actions will always be executed.
 				</section>
 				<section>
-							## The if-elif-else Chain
+							## if-elif-else statements
 
+							- Met if-eli
 							Often, you’ll need to test more than two possible situations, and to evaluate these you can use Python’s if- elif- else syntax. Python executes only one block in an if- elif- else chain. It runs each conditional test in order until one passes. When a test passes, the code following that test is executed and Python skips the rest of the tests.
 
 							```Python
