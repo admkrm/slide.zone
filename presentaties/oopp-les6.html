@@ -1,0 +1,343 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OO Programming: Les 6</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OO Programming
+							## Les 6: Inleiding tot Git en GitHub (voor Python)
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Git installeren
+				</section>
+				<section>
+							## Git installeren
+							- https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+							- https://git-scm.com/download
+							- https://git-scm.com/download/win
+							- https://desktop.github.com
+				</section>
+				<section class="chapter">
+							## Wat is Git?
+				</section>
+				<section>
+							## Git is een gedistribueerd versiebeheersysteem
+							- Een versiebeheersysteem:
+								- Een reeks instrumenten die de geschiedenis van een verzameling bestanden bijhouden
+								- Het opslaan van de status is vergelijkbaar met het maken van een reservekopie van uw werkmap
+								- In Git noemen we dit het maken van een "commit"
+								- Aan een commit wordt ook een bericht toegevoegd dat in brede termen beschrijft welke wijzigingen werden aangebracht
+								- Git stelt je ook in staat om bestanden tussen verschillende commits te vergelijken
+				</section>
+				<section>
+							## Git is een gedistribueerd versiebeheersysteem
+							- Gedistribueerd:
+								- Git heeft geen centrale server die een moederversie van het repository bevat
+								- Alle gebruikers beschikken lokaal over een volledige kopie van de repository
+								- Soms kunnen er conflicten ontstaan
+								- Voordeel: je kan offline werken; connecteren is enkel nodig om werk te delen
+								- Vaak wordt GitHub gebruikt als een centraal repository waarvan iedereen een "pull" moet doen: keuze, geen verplichting
+				</section>
+				<section class="chapter">
+							## Werken met Git: basiscommando's
+				</section>
+				<section>
+							## Werken met Git: git config
+
+							Om te werken met Git dien je je eerst kenbaar te maken. Dit hoeft maar één keer te gebeuren, je kan deze gegevens "globaal" instellen 
+	
+							```shell
+							$ git config --global user.name "Kristof Michiels"
+							$ git config --global user.email "kristof.michiels01@ap.be"
+							```
+				</section>
+				<section>
+							## Werken met Git: git config
+
+							Opvragen hoe deze gegevens ingesteld staan doe je als volgt:
+
+							```shell
+							$ git config user.name
+							$ git config user.email
+							```
+				</section>
+				<section>
+							## Werken met Git: nieuw repository aanmaken
+
+							Een directory aanmaken, in deze directory gaan en een Git repository aanmaken met "git init":
+
+							```shell
+							mkdir mijn-repository
+							$ cd mijn-repository
+							$ git init
+							```
+
+				</section>
+				<section>
+							## Werken met Git: git status
+
+							Eens je je repository hebt aangemaakt dan kan je er de status van opvragen. Dat doe je met "git status", misschien wel het commando dat je het meest zal gebruiken
+
+							```shell
+							$ git status
+							```
+
+							Dit commando leert je op welke branch je je bevindt (master) en dat er "nothing to commit" is (logisch: dit is een nieuw aangemaakt repository)
+				</section>
+				<section>
+							## Werken met Git: nieuw(e) bestand(en) toevoegen
+
+							Je kan één of meerdere bestanden toevoegen met "git add". Dit voegt de bestanden toe aan de "staging area" en betekent dat ze klaar zijn om "gecommit" te worden in het respository
+
+							```shell
+							$ git add hallowereld.py
+							$ git add bestand1.py bestand2.py bestand3.py
+							$ git add .
+							$ git status
+							```
+				</section>
+				<section>
+							## Werken met Git: wijzigingen committen
+							- Wanneer je wijzigingen vastlegt met het "commit"-commando, vertel je Git om een momentopname van deze status in de repository te maken
+							- De -m flag vraagt Git om een commit boodschap toe te voegen 
+							- Je krijgt ook een SHA-code terug van de commit
+							- Gebruik je daarna opnieuw het git status commando dan zie je dat je terug een schone werkdirectory hebt. Alle wijzigingen zijn gecommit
+
+							```shell
+							$ git commit -m "basisbestanden aangemaakt"
+							$ git status
+							```
+				</section>
+				<section>
+							## De SHA-code
+							- Telkens Git zaken opslaat in je repo, gebeurt dat op een complexe manier waarin een hash-functie wordt gebruikt
+							- In dit proces wordt een unieke ID gegenereerd die we "SHA" noemen. Deze is niet gegarandeerd uniek, maar in de praktijk bijna steeds
+							- Je kan deze SHA-code gebruiken om terug te gaan in de commits, en de regel hierbij is om genoeg karakters mee te geven zodat de SHA uniek is binnen je repo. Door de band zijn 7 karakters genoeg
+							- Elke keer je een commit doorvoert in het repository wordt een nieuwe SHA gecreëerd die die staat beschrijft
+				</section>
+				<section>
+							## De staging-area
+							- Met "git add" plaats je één of meerdere bestanden in de staging area
+							- Deze staging area bevat de bestanden met de exacte inhoud die ze hadden wanneer je "git add" uitvoerde
+							- Wijzig je hun inhoud opnieuw dan zullen de bestanden in kwestie zowel in de staged als unstaged gedeelten van de status output verschijnen
+				</section>
+				<section>
+							## .gitignore
+
+							- Er zijn een aantal bestanden die je buiten Git zal willen houden. Zoals bvb. __pycache__ directory als je een lokale module importeert
+							- Je kan dat doen door het aanmaken van een .gitignore bestand
+							- Er zijn zo een aantal bestanden en folders die we liever niet mee committen binnen een repository (env, venv)
+
+							```shell
+							$ git add .gitignore
+							```
+				</section>
+				<section>
+							## .gitignore
+
+							- Een voorbeeld van dergelijke bestanden voor Python development vind je hier: https://github.com/github/gitignore/blob/master/Python.gitignore
+							- Vuistregel: enkel broncode, geen gegenereerde bestanden, vermijdt binaire bestanden, grote bestanden, nooit gevoelige informatie
+
+							```shell
+							# .gitignore
+							__pycache__
+							venv
+							env
+							.pytest_cache
+							.coverage
+							```
+				</section>
+				<section class="chapter">
+					## git log en git checkout
+				</section>
+				<section>
+							## git log
+							- Ook een zeer frequent gebruikt commando
+							- Toont de geschiedenis van de commits die je reeds hebt gemaakt
+
+							```shell
+							$ git log
+							```
+				</section>
+				<section>
+							## Uitchecken van een bepaalde versie van je code
+
+							- Je vindt de SHA-code voor een bepaalde commit via git log
+
+							```shell
+							$ git checkout 5ff4ed01bd94ca92fa08863fc238e89b9c0b96c1
+							```
+
+							```shell
+							$ git checkout master
+							```
+				</section>
+				<section>
+							## Uitchecken van een bepaalde versie van je code
+
+							- HEAD is de naam die Git gebruikt voor de SHA die je op dat moment hebt uitgecheckt 
+							- Branches: zoals master/main of zelf aangemaakte branches. Je kan deze beschouwen als labels die aan een SHA-code zijn toegekend
+				</section>
+				<section class="chapter">
+							## Branches
+				</section>
+				<section>
+							## Branches
+
+							- Met branches (of takken) krijg je een instrument om verschillende ontwikkelingsstromen uit elkaar te houden
+							- Zeer handig bvb bij het werken aan een nieuwe versie van een product
+							- Zeer belangrijk onderdeel wanneer je in team aan een product werkt 
+							- In onderstaand voorbeeld gebruiken we de -b flag om git mee te geven dat we een nieuwe branch willen creëren
+
+							```shell
+							$ git checkout -b versie-2_0
+							$ git status
+							```
+				</section>
+				<section>
+							## git show-branch
+
+							Git voorziet met git show-branch in een manier om twee branches met elkaar te vergelijken
+
+							```shell
+							$ git show-branch versie-2_0 master
+							```
+				</section>
+				<section class="chapter">
+							## Mergen, rebasen en cherry-picking
+				</section>
+				<section >
+							## Mergen, rebasen en cherry picken
+							- Eens je klaar bent met een branch met verschillende commits: hoe krijg je de wijzigingen in de master/main branch?
+							- Er zijn 3 manieren: merging, rebasing en cherry-picking
+				</section>
+				<section>
+							## Merge
+
+							- Voegt de wijzigingen samen in de master
+
+							```shell
+							$ git checkout master
+							$ git merge versie-2_0
+							```
+				</section>
+				<section>
+							## Rebase
+
+							- Rebasen is verwant aan mergen
+							- Bij een merge als beide branches wijzigingen hebben dan wordt een nieuwe merge commit aangemaakt
+							- Bij rebasen zal Git enkele de commits van één branch nemen en hen één voor een uitvoeren bovenop deze van de andere branch
+				</section>
+				<section>
+							## Cherry picken
+
+							- Anders dan bij mergen en rebasen specifieer je bij cherry-picking exect welke commits je wil uitgevoerd zien 
+							- De eenvoudigste manier is om dit te doen aan de hand van de SHA-code(s)
+
+							```shell
+							git cherry-pick 4a4f4492ded256aa7b29bf5176a17f9eda66efbb
+							```
+				</section>
+				<section class="chapter">
+							## Werken met remote repositories
+				</section>
+				<section>
+							## Werken met remote repositories
+
+							- Alle commando's tot nu toe hebben betrekking op werken met een lokale repository
+							- Er zijn 4 belangrijke commando's voor communicatie met repos in de cloud. We noemen dit remote repos: clone, fetch, pull en push 
+				</section>
+				<section>
+							## Clone
+
+				</section>
+				<section>
+							## Fetch
+
+				</section>
+				<section>
+							## Pull
+
+				</section>
+				<section>
+							## Push
+
+				</section>
+				<section class="chapter">
+							## Gecombineerd: eenvoudige Git workflows
+				</section>
+				<section>
+							## Eenvoudige Git workflow
+
+							```shell
+							git status
+							git pull
+							git status
+							git add [bestanden]
+							git commit -m "boodschap" 
+							git push origin [branch-naam]
+							```
+				</section>
+				<section>
+							## Wanneer je een lokale repo aan github wil toevoegen
+
+							- Eerst maak je een repo aan in GitHub
+
+							```shell
+							git remote add origin git@github.com:admkrm/python-oo-test.git
+							git branch -M main
+							git push -u origin main
+							```
+				</section>
+				<section>
+							## Lokaal een repo aanmaken en dan syncen met online
+
+							```shell
+							git init
+							git add README.md
+							git commit -m "first commit"
+							git branch -M main
+							git remote add origin git@github.com:admkrm/python-oo-test.git
+							git push -u origin main
+							```
+				</section>
+				<section>
+							## Veilig toegang verkrijgen tot GitHub via SSH
+
+							```shell
+							git push -u origin main
+							git@github.com: Permission denied (publickey).
+							fatal: Could not read from remote repository.
+
+							Please make sure you have the correct access rights
+							and the repository exists.
+							```
+
+							https://github.com/settings/keys
+							
+							```
+							ssh-keygen -t rsa
+							Enter file in which to save the key (/home/gebruiker/.ssh/id_rsa):
+							```
+
+							zit in folder .ssh
+				</section>
+				<section>
+							## Python OO - les 6 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
