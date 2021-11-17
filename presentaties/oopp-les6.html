@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Python OO Programming: Les 6</title>
+		<title>Python OO Programming: Les 5</title>
 		<link rel="stylesheet" type="text/css" href="../css/reset.css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
@@ -26,39 +26,63 @@
 				</section>
 				<section>
 							## Git installeren
-							- https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-							- https://git-scm.com/download
-							- https://git-scm.com/download/win
-							- https://desktop.github.com
+
+							- Hier vind je de nodige richtlijnen: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+							- De downloadpagina: https://git-scm.com/download
+							- Zorg in elk geval dat git bash mee wordt geïnstalleerd (voor Windows gebruikers)
+							- Opdracht tegen maandag: git installeren en gebruiksklaar krijgen
 				</section>
 				<section class="chapter">
 							## Wat is Git?
 				</section>
 				<section>
 							## Git is een gedistribueerd versiebeheersysteem
-							- Een versiebeheersysteem:
+							- Een _versiebeheersysteem_:
 								- Een reeks instrumenten die de geschiedenis van een verzameling bestanden bijhouden
 								- Het opslaan van de status is vergelijkbaar met het maken van een reservekopie van uw werkmap
 								- In Git noemen we dit het maken van een "commit"
 								- Aan een commit wordt ook een bericht toegevoegd dat in brede termen beschrijft welke wijzigingen werden aangebracht
-								- Git stelt je ook in staat om bestanden tussen verschillende commits te vergelijken
+								- Git stelt je ook in staat om bestanden tussen verschillende commits te vergelijken en dus stapsgewijs terug te gaan in de versiegeschiedenis
 				</section>
 				<section>
 							## Git is een gedistribueerd versiebeheersysteem
-							- Gedistribueerd:
+							- _Gedistribueerd_:
 								- Git heeft geen centrale server die een moederversie van het repository bevat
 								- Alle gebruikers beschikken lokaal over een volledige kopie van de repository
-								- Soms kunnen er conflicten ontstaan
-								- Voordeel: je kan offline werken; connecteren is enkel nodig om werk te delen
-								- Vaak wordt GitHub gebruikt als een centraal repository waarvan iedereen een "pull" moet doen: keuze, geen verplichting
+								- Conflicten zijn niet onmogelijk en moeten dan worden opgelost
+								- De voordelen overwegen: je kan offline werken; connecteren is enkel nodig om werk te delen
+								- Vaak wordt GitHub (of een alternatief) gebruikt als een centraal repository waarvan iedereen een "pull" moet doen: keuze, geen verplichting
+				</section>
+				<section>
+							## Git is een gedistribueerd versiebeheersysteem
+							- Git is uitgebreid en complex: een oerwoud van commando's en flags waarin een kat haar jongen verliest
+							- Laat je niet intimideren maar smijt je erin: er kan eigenlijk weinig misgaan
+							- We gaan het vanaf nu integreren in de workflow van onze vakken
+							- Experimenteer ermee voor je tweede project
+							- Stel vragen tijdens de labo's
 				</section>
 				<section class="chapter">
 							## Werken met Git: basiscommando's
 				</section>
 				<section>
-							## Werken met Git: git config
+							## Een repository aanmaken met _git init_
 
-							Om te werken met Git dien je je eerst kenbaar te maken. Dit hoeft maar één keer te gebeuren, je kan deze gegevens "globaal" instellen 
+							- Een Git repository aanmaken doe je met "git init"
+							- Documentatie: https://git-scm.com/docs/git-init
+
+							```shell
+							$ mkdir mijn-repository
+							$ cd mijn-repository
+							$ git init
+							```
+
+				</section>
+				<section>
+							## Je repository configureren met _git config_
+
+							- Om te werken met Git dien je je eerst kenbaar te maken
+							- In een gedistribueerd systeem is het belangrijk om weten wie voor wat verantwoordelijk is
+							- Dit hoeft maar één keer te gebeuren, je kan deze gegevens "globaal" instellen, of per repository 
 	
 							```shell
 							$ git config --global user.name "Kristof Michiels"
@@ -66,74 +90,69 @@
 							```
 				</section>
 				<section>
-							## Werken met Git: git config
+							## Je repository configureren met _git config_
 
-							Opvragen hoe deze gegevens ingesteld staan doe je als volgt:
+							- Opvragen hoe deze gegevens ingesteld staan doe je als volgt:
 
 							```shell
 							$ git config user.name
 							$ git config user.email
 							```
+
+							- Documentatie: https://git-scm.com/docs/git-config
 				</section>
 				<section>
-							## Werken met Git: nieuw repository aanmaken
+							## Status van je repository opvragen met _git status_
 
-							Een directory aanmaken, in deze directory gaan en een Git repository aanmaken met "git init":
-
-							```shell
-							mkdir mijn-repository
-							$ cd mijn-repository
-							$ git init
-							```
-
-				</section>
-				<section>
-							## Werken met Git: git status
-
-							Eens je je repository hebt aangemaakt dan kan je er de status van opvragen. Dat doe je met "git status", misschien wel het commando dat je het meest zal gebruiken
+							- Eens je je repository hebt aangemaakt dan kan je er de status van opvragen
+							- Dat doe je met "git status"
 
 							```shell
 							$ git status
 							```
 
-							Dit commando leert je op welke branch je je bevindt (master) en dat er "nothing to commit" is (logisch: dit is een nieuw aangemaakt repository)
+							Dit commando leert je op welke branch je je bevindt (master) en dat er in ons voorbeeld "nothing to commit" is (logisch: dit is een nieuw aangemaakt repository). Als dat wel het geval zou zijn: git status vertelt het je.
 				</section>
 				<section>
-							## Werken met Git: nieuw(e) bestand(en) toevoegen
+							## Nieuw(e) bestand(en) toevoegen met _git add_
 
-							Je kan één of meerdere bestanden toevoegen met "git add". Dit voegt de bestanden toe aan de "staging area" en betekent dat ze klaar zijn om "gecommit" te worden in het respository
+							- Je kan één of meerdere bestanden toevoegen met "git add". Dit voegt de bestanden toe aan de "staging area" en betekent dat ze klaar zijn om "gecommit" te worden in het respository
+							- Wil je alle wijzigingen toevoegen aan de "staging area", gebruik dan git add .
 
 							```shell
 							$ git add hallowereld.py
 							$ git add bestand1.py bestand2.py bestand3.py
 							$ git add .
-							$ git status
 							```
-				</section>
-				<section>
-							## Werken met Git: wijzigingen committen
-							- Wanneer je wijzigingen vastlegt met het "commit"-commando, vertel je Git om een momentopname van deze status in de repository te maken
-							- De -m flag vraagt Git om een commit boodschap toe te voegen 
-							- Je krijgt ook een SHA-code terug van de commit
-							- Gebruik je daarna opnieuw het git status commando dan zie je dat je terug een schone werkdirectory hebt. Alle wijzigingen zijn gecommit
-
-							```shell
-							$ git commit -m "basisbestanden aangemaakt"
-							$ git status
-							```
-				</section>
-				<section>
-							## De SHA-code
-							- Telkens Git zaken opslaat in je repo, gebeurt dat op een complexe manier waarin een hash-functie wordt gebruikt
-							- In dit proces wordt een unieke ID gegenereerd die we "SHA" noemen. Deze is niet gegarandeerd uniek, maar in de praktijk bijna steeds
-							- Je kan deze SHA-code gebruiken om terug te gaan in de commits, en de regel hierbij is om genoeg karakters mee te geven zodat de SHA uniek is binnen je repo. Door de band zijn 7 karakters genoeg
-							- Elke keer je een commit doorvoert in het repository wordt een nieuwe SHA gecreëerd die die staat beschrijft
 				</section>
 				<section>
 							## De staging-area
 							- Met "git add" plaats je één of meerdere bestanden in de staging area
 							- Deze staging area bevat de bestanden met de exacte inhoud die ze hadden wanneer je "git add" uitvoerde
 							- Wijzig je hun inhoud opnieuw dan zullen de bestanden in kwestie zowel in de staged als unstaged gedeelten van de status output verschijnen
+				</section>
+				<section>
+							## Wijzigingen committen met _git commit_
+							- Wanneer je wijzigingen vastlegt met het "commit"-commando, vertel je Git om een momentopname van deze status in de repository te maken
+							- De -m flag vraagt Git om een commit boodschap toe te voegen 
+							- Je krijgt ook een SHA-code terug van de commit
+							- Gebruik je daarna opnieuw het git status commando dan zie je dat je terug een schone werkdirectory hebt
+
+							```shell
+							$ git commit -m "basisbestanden aangemaakt"
+							```
+				</section>
+				<section>
+							## Jouw opdracht (1):
+
+							- Maak zelf een lokale repository aan en oefen de workflow in die je hier net hebt gezien
+
+							```shell
+							git add .
+							git commit -m "je commitboodschap"
+							```
+
+							Hoe vaak maak je zo'n snapshot? De meningen lopen uiteen. Meestal om het half uur, of als je iets "tastbaars" hebt afgerond: een klasse aangemaakt, een functie geschreven, een module hebt toegevoegd. Jij beslist zelf, maar je hoeft zeker niet te wachten tot het einde van een "dag programmeren"
 				</section>
 				<section>
 							## .gitignore
@@ -161,22 +180,46 @@
 							.coverage
 							```
 				</section>
+				<section>
+							## Even opruimen met _git stash_
+							- Niet essentieel maar leuk om te weten :-) _Stashen_ = even opzij leggen
+							- _Stashen_ pakt de onafgewerkte status van je werk directory — dwz: je gewijzigde tracked bestanden en gestagede wijzigingen — en bewaart deze niet-gecommitte wijzigingen zodat je ze later terug kunt zetten
+							- Documentatie: https://git-scm.com/docs/git-stash
+							
+							```shell
+							$ git stash
+							$ git stash list
+							$ git stash apply
+							$ git stash apply stash@{2}
+							```
+				</section>
 				<section class="chapter">
-					## git log en git checkout
+							## git log, commit-geschiedenis, SHA-code en git checkout
 				</section>
 				<section>
-							## git log
+							## De commit-geschiedenis tonen met _git log_
 							- Ook een zeer frequent gebruikt commando
-							- Toont de geschiedenis van de commits die je reeds hebt gemaakt
+							- Toont de commit logs, dwz de geschiedenis van de commits die je reeds hebt gemaakt
+							- Merk op dat elke commit is voorzien van een code: we noemen dit de SHA
+							- Documentatie: https://git-scm.com/docs/git-log
 
 							```shell
 							$ git log
 							```
 				</section>
 				<section>
+							## De SHA-code
+							- Telkens Git zaken opslaat in je repo, gebeurt dat op een complexe maar zeer economische manier waarin een hash-functie wordt gebruikt
+							- In dit proces wordt een unieke ID gegenereerd die we "SHA" noemen. Deze is niet gegarandeerd uniek, maar in de praktijk zo goed als steeds
+							- Je kan deze SHA-code gebruiken om terug te gaan in de commits, en de regel hierbij is om genoeg karakters mee te geven zodat de SHA uniek is binnen je repo. Door de band zijn 7 karakters genoeg
+							- Elke keer je een commit doorvoert in het repository wordt een nieuwe SHA gecreëerd die die staat beschrijft
+				</section>
+				<section>
 							## Uitchecken van een bepaalde versie van je code
 
-							- Je vindt de SHA-code voor een bepaalde commit via git log
+							- HEAD is de naam die Git gebruikt voor de SHA die je op dat moment hebt uitgecheckt 
+							- Branches: zoals master/main of zelf aangemaakte branches. Je kan deze beschouwen als labels die aan een SHA-code zijn toegekend
+							- Documentatie: https://git-scm.com/docs/git-checkout
 
 							```shell
 							$ git checkout 5ff4ed01bd94ca92fa08863fc238e89b9c0b96c1
@@ -185,18 +228,16 @@
 							```shell
 							$ git checkout master
 							```
-				</section>
-				<section>
-							## Uitchecken van een bepaalde versie van je code
 
-							- HEAD is de naam die Git gebruikt voor de SHA die je op dat moment hebt uitgecheckt 
-							- Branches: zoals master/main of zelf aangemaakte branches. Je kan deze beschouwen als labels die aan een SHA-code zijn toegekend
+							```shell
+							$ git checkout versie-2_0
+							```
 				</section>
 				<section class="chapter">
 							## Branches
 				</section>
 				<section>
-							## Branches
+							## Branches met _git checkout_
 
 							- Met branches (of takken) krijg je een instrument om verschillende ontwikkelingsstromen uit elkaar te houden
 							- Zeer handig bvb bij het werken aan een nieuwe versie van een product
@@ -205,52 +246,94 @@
 
 							```shell
 							$ git checkout -b versie-2_0
-							$ git status
 							```
 				</section>
 				<section>
-							## git show-branch
+							## Branches met _git branch_
 
-							Git voorziet met git show-branch in een manier om twee branches met elkaar te vergelijken
+							- Met _git branch_ of _git branch --list_ krijg je een lijst van alle branches in je repo
+							- Met _git branch [naam]_ maak je een nieuwe branch aan
+							- Met _git branch -d [naam]_ verwijder je een branch 
+							- Dit gaat niet indien er unmerged changes zijn: forceren doe je met _git branch -D [naam]_
+							- Documentatie: https://git-scm.com/docs/git-branch
+
+							```shell
+							$ git branch
+							$ git branch --list
+							$ git branch mijn_nieuwe_branch
+							$ git branch -d mijn_nieuwe_branch
+							$ git branch -D mijn_nieuwe_branch
+							```
+				</section>
+				<section>
+							## Branches vergelijken met _git show-branch_
+
+							- Git voorziet met git show-branch in een manier om twee branches met elkaar te vergelijken
+							- https://git-scm.com/docs/git-show-branch
 
 							```shell
 							$ git show-branch versie-2_0 master
 							```
 				</section>
+				<section>
+							## Jouw opdracht (2):
+
+							- Eens je enkele commits hebt gemaakt experimenteer je met branches
+							- Je maakt er een aantal aan met git branch en switcht met git checkout van de ene naar de andere, ook via de SHA-code
+							- Met git log behoud je het overzicht van de situatie
+							- Je maakt voor je eigen repository een main branch aan (bij GitHub heet de master branch voortaan de main branch)
+							- Je herhaalt dit tot alles goed in de vingers zit
+				</section>
 				<section class="chapter">
-							## Mergen, rebasen en cherry-picking
+							## Merge, rebase en cherry-picking
 				</section>
 				<section >
-							## Mergen, rebasen en cherry picken
-							- Eens je klaar bent met een branch met verschillende commits: hoe krijg je de wijzigingen in de master/main branch?
-							- Er zijn 3 manieren: merging, rebasing en cherry-picking
+							## Merge, rebase en cherry-picking
+							- Eens je klaar bent met een branch met verschillende commits: hoe krijg je de wijzigingen terug in de master/main branch?
+							- In Git zijn er twee hoofdmanieren om wijzigingen te integreren van de ene branch in een andere: de merge en de rebase
+							- Tot slot heb je ook nog het minder gebruikte cherry-picking. We vernoemen het hier voor de volledigheid
 				</section>
 				<section>
-							## Merge
-
-							- Voegt de wijzigingen samen in de master
+							## _git merge_
+							- De meest gebruikte manier om de branches te integreren is het merge commando
+							- Het voert een drieweg-merge uit tussen de twee laatste snapshots van de branches, en de meest recente gezamenlijke voorouder van die twee, en maakt een nieuw snapshot (en commit)
+							- Onderstaand voorbeeld voegt de wijzigingen die zijn gemaakt in de branch "versie-2_0" toe aan de branch "main"
+							- Documentatie: https://git-scm.com/docs/git-merge
 
 							```shell
-							$ git checkout master
+							$ git checkout main
 							$ git merge versie-2_0
 							```
 				</section>
 				<section>
-							## Rebase
-
-							- Rebasen is verwant aan mergen
+							## _git rebase_
 							- Bij een merge als beide branches wijzigingen hebben dan wordt een nieuwe merge commit aangemaakt
-							- Bij rebasen zal Git enkele de commits van één branch nemen en hen één voor een uitvoeren bovenop deze van de andere branch
+							- Bij rebasen zal Git enkel de commits van één branch nemen en hen één voor een uitvoeren bovenop deze van de andere branch
+							- Documentatie: https://git-scm.com/docs/git-rebase
+							
+							```shell
+							$ git checkout versie-2_0
+							$ git rebase main
+							```
 				</section>
 				<section>
-							## Cherry picken
+							## Cherry-picking
 
 							- Anders dan bij mergen en rebasen specifieer je bij cherry-picking exect welke commits je wil uitgevoerd zien 
 							- De eenvoudigste manier is om dit te doen aan de hand van de SHA-code(s)
+							- Documentatie: https://git-scm.com/docs/git-cherry-pick
 
 							```shell
-							git cherry-pick 4a4f4492ded256aa7b29bf5176a17f9eda66efbb
+							$ git checkout main
+							$ git cherry-pick 4a4f4492ded256aa7b29bf5176a17f9eda66efbb
 							```
+				</section>
+				<section>
+							## Jouw opdracht (3):
+
+							- Je probeert met behulp van git merge en git rebase branches te mergen
+							- Naderhand verwijder je ook een branch die niet meer nodig is
+							- Je herhaalt dit tot alles goed in je vingers zit
 				</section>
 				<section class="chapter">
 							## Werken met remote repositories
@@ -258,86 +341,127 @@
 				<section>
 							## Werken met remote repositories
 
-							- Alle commando's tot nu toe hebben betrekking op werken met een lokale repository
-							- Er zijn 4 belangrijke commando's voor communicatie met repos in de cloud. We noemen dit remote repos: clone, fetch, pull en push 
-				</section>
-				<section>
-							## Clone
-
-				</section>
-				<section>
-							## Fetch
-
-				</section>
-				<section>
-							## Pull
-
-				</section>
-				<section>
-							## Push
-
-				</section>
-				<section class="chapter">
-							## Gecombineerd: eenvoudige Git workflows
-				</section>
-				<section>
-							## Eenvoudige Git workflow
-
-							```shell
-							git status
-							git pull
-							git status
-							git add [bestanden]
-							git commit -m "boodschap" 
-							git push origin [branch-naam]
-							```
-				</section>
-				<section>
-							## Wanneer je een lokale repo aan github wil toevoegen
-
-							- Eerst maak je een repo aan in GitHub
-
-							```shell
-							git remote add origin git@github.com:admkrm/python-oo-test.git
-							git branch -M main
-							git push -u origin main
-							```
-				</section>
-				<section>
-							## Lokaal een repo aanmaken en dan syncen met online
-
-							```shell
-							git init
-							git add README.md
-							git commit -m "first commit"
-							git branch -M main
-							git remote add origin git@github.com:admkrm/python-oo-test.git
-							git push -u origin main
-							```
+							- Een remote URL = "de plaats waar je code wordt bewaard in de cloud"
+							- Deze URL kan een eigen repository op GitHub zijn (of elders), kan een iemand anders repository zijn of fork
+							- Er zijn twee soorten URL adressen:
+								- Een HTTPS URL genre https://github.com/user/repo.git
+								- Een SSH URL, zoals git@github.com:user/repo.git
+							- Git associeert een remote URL met een naam en voor de default remote is het gebruikelijk om origin als naam te nemen
 				</section>
 				<section>
 							## Veilig toegang verkrijgen tot GitHub via SSH
-
-							```shell
-							git push -u origin main
-							git@github.com: Permission denied (publickey).
-							fatal: Could not read from remote repository.
-
-							Please make sure you have the correct access rights
-							and the repository exists.
-							```
-
-							https://github.com/settings/keys
 							
-							```
-							ssh-keygen -t rsa
-							Enter file in which to save the key (/home/gebruiker/.ssh/id_rsa):
-							```
-
-							zit in folder .ssh
+							- Vroeger was het mogelijk om bij het werken met GitHub gebruik te maken van je user account en paswoord, maar dat is niet langer het geval
+							- Vandaag maak je ofwel gebruik van een PAT (Personal Access Token) of connecteer je via SSH
+							- Deze laatste manier draagt onze voorkeur weg en je vindt alle nodige informatie hier: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+							- Wil je werken met een PAT, dan kan je volgende resource gebruiken: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token 
 				</section>
 				<section>
-							## Python OO - les 6 - kristof.michiels01@ap.be
+							## Een remote repository aanmaken
+							- Doe je met het commando "git remote add"
+							- In onderstaand voorbeeld associeer je de naam origin met de REMOTE_URL
+							- met "git remote set-url" kan je de naam van de REMOTE-URL wijzigen
+							- Documentatie: https://git-scm.com/docs/git-remote
+
+							```shell
+							$ git remote add origin git@github.com:admkrm/python-oo-repo.git
+							```
+
+				</section>
+				<section>
+							## Kopie van een bestaande repository met "git clone"
+
+							- Je gebruikt git clone wanneer je het adres hebt van een bestaand repository en je een lokale kopie wenst te maken
+							- Git ontvangt dan een volledige kopie van vrijwel alle data die de server ter beschikking heeft voor dit repository
+							- Documentatie: https://git-scm.com/docs/git-clone
+
+							```shell
+							$ git clone https://github.com/libgit2/libgit2
+							```
+				</section>
+				<section>
+							## "git clone" en remote branches
+
+							- Git maakt met "git clone" geen lokale branches aan, behalve voor de main/master 
+							- Git creëert wel een referentie naar de branches op de server en maakt hiervoor een reeks branches aan die starten met remotes/origin/[branchnaam]
+							- Wanneer je een nieuwe branch aanmaakt met een naam die voorkomt op de server, dan zal Git de lokale branch beschouwen als één die geassocieerd is met de remote branch
+				</section>
+				<section>
+							## Een specifieke commit clonen
+
+							- Doe je door het repository te clonen en dan met git checkout een specifieke branch of sha-code te selecteren
+							- Verwijzing: https://coderwall.com/p/xyuoza/git-cloning-specific-commits
+
+							```shell
+							$ git clone -n <repo_name>
+							$ git checkout -b <new_branch> <commit_sha>
+							```
+				</section>
+				<section>
+							## Externe wijzigingen ophalen met "git fetch"
+
+							- Wanneer je de opdracht git fetch gebruikt, kies je eenvoudigweg om de aangebrachte wijzigingen in de externe repository op te halen en op te slaan in je lokale computer
+							- Met fetch haal je meestal branches of tags (hier verder buiten beschouwing gelaten) op
+							- Zo blijf je op de hoogte van je mede-ontwikkelaars en waar ze aan werken
+							- Het integreert de wijzigingen echter niet in uw lokale repository	
+							- Documentatie: https://git-scm.com/docs/git-fetch
+
+							```shell
+							$ git fetch origin
+							```
+				</section>
+				<section>
+							## Externe wijzigingen integreren met "git pull"
+							- Git pull brengt eenvoudig gezegd de wijzigingen in de externe repository waarin u uw eigen code bewaart
+							- Pull is eigenlijk git fetch gevolgd door een git merge
+								- Met fetch worden eerst de remotes/origin branches geüpdatet
+								- Daarna, als de branch waarin je zit de remote branch trackt dan gebeurt er een git merge om de overeenkomstige remote/origin branch met je lokale branch te mergen
+							- Documentatie: https://git-scm.com/docs/git-pull
+
+							```shell
+							$ git checkout versie-2_0
+							$ git pull origin
+							```
+
+				</section>
+				<section>
+							## "git pull" met rebase ipv merge
+							- Met de flag --rebase kan je een rebase doen ipv een merge
+
+							```shell
+							$ git checkout main
+							$ git pull --rebase origin
+							```
+				</section>
+				<section>
+							## "git push"
+
+							- Met "git push" stuur je de info over de branch die je pusht naar de remote
+							- Je vraagt aan de remote om zijn versie van de branch aan te passen aan die van jou
+							- In de praktijk betekent dit dat je lokale wijzigingen beschikbaar maakt op de server
+							- Documentatie: https://git-scm.com/docs/git-push
+
+							```shell
+							$ git push origin main
+							```
+				</section>
+				<section>
+							## Jouw opdracht (4):
+
+							- Je maakt een repo aan op GitHub
+							- Je voegt het toe als remote aan je eigen lokale repo
+							- Je pusht de lokale code naar GitHub
+							- Je verandert in GitHub aan de code
+							- Je experimenteert met fetch en pull
+							- Je kloont een remote repo en checkt een bepaalde commit uit
+				</section>
+				<section>
+							## Jouw opdrachten:
+
+							Met Git en GitHub is het zoals met alles: practicing makes perfect :-)
+				</section>
+				<section>
+							## Python OO - les 5 - kristof.michiels01@ap.be
 				</section>
 	</body>
 </html>
