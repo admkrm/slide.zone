@@ -1,0 +1,357 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web technology: les 9</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web technology
+							## Les 9: CSS - flexbox - tabellen
+							#### Kristof Michiels
+				</section>
+
+				<section>
+							## In deze presentatie
+							- CSS flexbox
+							- Werken met tabellen
+				</section>
+				<section class="chapter">
+							## CSS flexbox
+				</section>
+				<section>
+							## Flexbox
+							- Module heet voluit CSS Flexible box layout module
+							- Zorgt voor controle over het plaatsen van elementen op één as (horizontaal of verticaal)
+							- Geschikt voor menubalken en andere navigatie, produktlijstjes, afbeeldingsgalerijen, ...
+				</section>
+				<section>
+							## Flexbox
+							- Elementen kunnen uitrekken of krimpen binnen hun containers
+							- Zo verhinderen we teveel of te weinig ruimte: super voor responsive web design
+							- Andere mogelijkheden:
+								- Alle elementen zelfde hoogte te geven
+								- Eenvoudig horizontaal of verticaal centreren
+								- Volgorde van de elementen te veranderen (los van HTML-volgorde)
+				</section>
+				<section>
+							## Een flexbox container aanmaken
+							- Flexbox is - net als inline, block en grid - een layout mode
+							- Een flexbox container aanmaken doe je dus met _display:flex_
+							- Op de volgende slide staat een basisvoorbeeld:
+								- Standaard worden de divs als block elementen onder elkaar geplaatst
+								- Als we de flexbox aanzetten gaan ze automatisch horizontaal in één rij staan
+								- De elementen worden standaard in een rij van links naar rechts geplaatst
+				</section>
+				<section>
+							## Een flexbox container
+
+							```html
+							<div class="een">1</div>
+							<div class="twee">2</div>
+							<div class="drie">3</div>
+							<div class="vier">4</div>
+							<div class="vijf">5</div>
+							```
+
+							```css
+							body {
+								display: flex;
+							}
+							```
+				</section>
+				<section>
+							## De "flow" controleren met _flex-direction_
+							- Je kan binnen een flex-container controleren op welke manier de binnenste elementen geplaatst worden
+							- De opties die we hier hebben worden aangestuurd door de _flex-direction_ eigenschap
+							- De waarden die we kunnen gebruiken: row (standaard) | column | row-reverse | column-reverse
+							- Bij _row_ is de as horizontaal, bij _column_ is de as verticaal
+
+							```css
+							body {
+								display: flex;
+								flex-direction: column;
+								}
+							```
+				</section>
+				<section>
+							## Uitsmeren over meerdere lijnen met _flex-wrap_
+							- Met _flex-wrap_ bepaal je of de flexbox zich over meerdere lijnen mag uitstrekken
+							- De waarden die we kunnen gebruiken: nowrap (standaard) | wrap | wrap-reverse
+							- Standaard wordt alles op één lijn gezet
+
+							```css
+							body {
+								display: flex;
+								flex-direction: row;
+								flex-wrap: wrap;
+							}
+							```
+				</section>
+				<section>
+							## _Flex-direction_ en _flex-wrap_ verkort...
+							- Doe je met flex-flow
+							- Waarden: flex-direction flex-wrap
+
+							```
+							div.mijndiv {
+								display: flex;
+								height: 35rem;
+								flex-flow: column wrap;
+							}
+							```
+				</section>
+				<section>
+							## Uitlijnen van elementen in de flexbox container
+							- Uitlijnen op de hoofdas doen we met _justify-content_
+							- Je past het toe op de flex-container
+							- Waarden: flex-start (standaard) | flex-end | center | space-between | space-around
+
+							```
+							div.mijndiv {
+								display: flex;
+								justify-content: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Uitlijnen op de kruis-as
+							- Hiermee bedoelen we in de hoogte (bij row) en links/rechts (bij column)
+							- Uitlijnen op de kruis-as doen we met _align-items_
+							- Je past het toe op de flex-container
+							- Waarden: stretch (standaard) | flex-start | flex-end | center | baseline
+
+							```
+							div.mijndiv {
+								display: flex;
+								align-items: center;
+							}
+							```
+				</section>
+				<section>
+							## Individuele elementen uitlijnen
+							- Doe je op de kruis-as met _align-self_
+							- Waarden: flex-start | flex-end | center | baseline | stretch (standaard)
+
+							```
+							div {
+								align-self: flex-start;
+							}
+							```
+				</section>
+				<section>
+							## Meerdere flexlijnen uitlijnen
+							- Doe je met align-content
+							- Je bepaalt hiermee hoe je meerdere flexlijnen uitspreid over de kruis-as
+							- Waarden: flex-start | flex-end | center | space-around | space-between | stretch (standaard)
+
+							```
+							body {
+								display: flex;
+								flex-direction: row;
+								height: 60vh;
+								align-content: center;
+								flex-wrap: wrap;
+								border: 0.1rem solid grey;}
+							```
+				</section>
+				<section>
+							## Flexbox op de navigatiebalk
+
+							```html
+							<nav>
+								<ul>
+									  <li class="logo">My logo</li>
+									  <li><a href="#">Navigation 1</a></li>
+									  <li><a href="#">Navigation 2</a></li>
+									  <li><a href="#">Navigation 3</a></li>
+								</ul>
+							</nav>
+							```
+				</section>
+				<section>
+							## Flexbox op de navigatiebalk
+
+							```css
+							ul {
+								display: flex;
+								align-items: center;
+								background-color: teal; 
+								padding: .5em; 
+								margin: 0;
+								color: white;
+								height: 3rem;}
+							li {
+								margin: 0 1rem;}
+							li.logo {
+								margin-right: auto;}
+							```
+				</section>
+				<section>
+							## Bepalen hoe elementen "flexen" in de container
+							- We kunnen hiermee automatisch elementen laten groeien en krimpen
+							- Doen we met de flex-eigenschap
+							- Deze eigenschap wordt op de elementen gezet, niet op de container (kan individueel)
+							- Waarden: none | 'flex-grow flex-shrink flex-basis'
+							- Standaard: 0 1 auto;
+							- 1 staat voor "zet aan", 0 voor "zet uit"
+							- De flex-basis: zet de startafmeting. Je kan dit ook gebruiken om de width te zetten
+							- Je kan bepaalde elementen grotere waarden meegeven
+				</section>
+				<section>
+							## Shortcuts voor de flex eigenschap
+							- _flex:initial_ : zelfde als flex: 0 1 auto; Elementen zullen niet automatisch groeien, maar wel krimpen
+							- _flex: auto_ : zelfde als flex: 1 1 auto; Elementen zullen groeien en krimpen
+							- _flex: none_ : zelfde als flex: 0 0 auto; Niet krimpen en niet groeien
+							- _flex: getal_ : zelfde als flex: getal 1 0px; Absolute flex. Getal bepaalt hoeveel vrije ruimte het element krijgt
+				</section>
+				<section>
+							## De volgorde van flex elementen aanpassen met order
+							- Soms handig bij responsive web design
+							- Vooral nuttig indien je flexbox gebruikt voor layout en wij gaan dat zelden doen
+							- Je gebruikt hiervoor de eigenschap order
+							- Werkt op zelfde manier als z-index bij positioning
+							- Elk element heeft standaard 0. Je kiest getal zelf. Negatief getal kan ook
+
+							```css
+							.een {order: 2;}
+							.twee {order: 1;}
+							.drie {order: 3;}
+							.vier {order: 5;}
+							.vijf {order: 4;}
+							```
+				</section>
+				<section class="chapter">
+							## Werken met tabellen
+				</section>
+				<section>
+							## Een tabel
+							![Tabel](../img/tabel.jpg)
+							##### Geduld! Met CSS maak je ook deze tabel nog veel mooier
+				</section>
+				<section>
+							## Wanneer/waarom tabellen gebruiken?
+							- HTML tabellen zijn gecreëerd om informatie geordend in rijen en kolommen te kunnen toevoegen aan webpagina's
+							- Vbn: statistieken, schema's, produktvergelijkingen,...
+							- Tabellen kunnen van alles bevatten: getalinformatie, maar ook teksten, afbeeldingen, ... elke andere vorm van HTML!
+							- Vroeger: tabellen gebruikt om layouts te maken...
+				</section>
+				<section>
+							## Minimale tabelstructuur
+
+							De elementen waarmee we een tabel gaan vormen:
+
+							```
+							&lt;table&gt;...&lt;/table&gt; <!-- De tabel zelf (rijen en kolommen)-->
+							&lt;tr&gt;...&lt;/tr&gt; <!-- Een tabel-rij -->
+							&lt;th&gt;...&lt;/th&gt; <!-- Een tabel-hoofding -->
+							&lt;td&gt;...&lt;/td&gt; <!-- Een tabel-cel-data -->
+							```
+				</section>
+				<section>
+							## Een eenvoudige tabel
+
+							- Elke tabel bestaat uit een table-element
+							- Daarin ga je met tr-elementen rijen definiëren
+							- Binnen die rijen ga je telkens de kolommen beschrijven
+							- Je zorgt er hierbij voor dat elke rij evenveel kolommen bevat
+				</section>
+				<section>
+							## Table headers: &lt;th&gt;
+							- Worden anders weergegeven dan &lt;td&gt; elementen
+							- Belangrijk omdat ze informatie bevatten over de elementen die eronder worden weergegeven
+							- Maken een tabel "toegankelijk"
+							- Niet verplicht maar gebruik ze altijd!
+				</section>
+				<section>
+							## Cellen samenvoegen/uitsmeren
+							-	Ook _cell spanning_ genoemd. Dwz dat je een cel _uitsmeert_ over meerdere rijen of kolommen
+							- Je kunt er je tabelstructuren complexer en gesofisticeerder mee maken
+							- Je opmaak wordt er iets minder gemakkelijk te lezen door
+							- Je kan een cel uitsmeren door gebruik te maken van de **colspan** en **rowspan** attributen
+				</section>
+				<section>
+							## Colspans
+							- Gebruik je in het td of th element
+							- Je smeert er cellen mee uit naar rechts
+							- colspan="2" betekent dat het element dan 2 kolommen plaats inneemt
+							- Jij moet er op toe zien dat het totaal aantal kolommen steeds klopt
+							- Je hebt in dit geval dan één kolom minder nodig voor deze rij
+				</section>
+				<section>
+							## Rowspans
+							- Werken op dezelfde manier als colspans
+							- Maar ze smeren de cel naar beneden uit over meerdere rijen
+							- rowspan="3" betekent dat het element dan 3 rijen plaats inneemt
+							- Jij moet er op toe zien dat het totaal aantal rijen steeds klopt
+							- Je hebt in dit geval dan twee rijen minder nodig voor deze kolom
+				</section>
+				<section>
+							## Tabellen en toegankelijkheid
+							- We voorzien hiervoor een tabelbeschrijving met &lt;caption&gt;
+							- _Captions_ worden meestal boven de tabel getoond (al kan dit met CSS aangepast worden: caption-side: bottom)
+							- Beschrijft de informatie in de tabel en kan ook verwijzen naar de structuur van de tabel
+							- Wanneer aanwezig: eerste element binnen de tabel
+							- https://www.w3schools.com/tags/tag_caption.asp
+				</section>
+				<section>
+							## Headers met cellen verbinden: scope
+							- Om aan te geven op welke data de header-beschrijving slaat
+							- Toegankelijkheidsexperten raden aan dat elk th element een scope attribuut heeft
+							- Waarden: row, column
+							- https://www.w3schools.com/tags/att_th_scope.asp
+				</section>
+				<section>
+							## Content groeperen in een table: thead, tbody en tfoot
+
+							- https://www.w3schools.com/tags/tag_thead.asp
+				</section>
+				<section>
+							## Kolommen groeperen: colgroup, col
+							- Je kan kolommen beschrijven met class en id met een colgroup element
+							- Kolomgroepen worden beschreven aan het begin van een tabel, net onder de caption
+							- Ze bevatten geen informatie, ze beschrijven enkel hoe de kolommen geschikt zijn binnen tabel
+							- https://www.w3schools.com/tags/tag_colgroup.asp
+				</section>
+				<section>
+							## Tabellen vormgeven
+							- Wat de vormgeving betreft kunnen we beroep doen op onze bestaande CSS skills
+
+							```
+							table, th, td {
+								border: .1rem solid black;
+								padding: .5rem;
+								text-align: center;}
+
+							th {
+								background: blue;
+								color: white;
+								width: 12.5rem;}
+
+							tr:nth-child(even) {
+								background: lightgrey;}
+							```
+				</section>
+				<section>
+							## Tabellen vormgeven
+							- Zoals elk tekstelement op een html-pagina kunnen we de inhoud van tabellen vormgeven:
+								-	met de font, text en background-eigenschappen
+							- Om de ruimte binnen een cel aan te passen gebruik je padding op het td of th-element
+							- Om de width van een individuele kolom aan te passen gebruik je een class-naam of werk je met nth-child
+				</section>
+				<section>
+							## Webtech - CSS - les9 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
