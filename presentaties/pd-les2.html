@@ -1,0 +1,345 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Development: Les 2</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Development
+							## If statements en loops
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- De code die we tot nog toe hebben gezien was volledig sequentiëel: de statements worden uitgevoerd van boven naar onder, één voor één
+							- In deze les zien we twee belangrijke technieken voor controle van de flow: if- statements en loops
+							- Deze bepalen of en onder welke voorwaarden (welke) code al dan niet mag worden uitgevoerd 
+				</section>
+				<section class="chapter">
+							## If-statements
+				</section>
+				<section>
+							## Basisvoorbeeld
+
+							```Python
+							weekdagen = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"]
+
+							for dag in weekdagen:
+							    if dag == "vrijdag":
+							        print(f"Thank god it's {dag}!")
+							    else:
+							        print(dag.title())
+							```
+							
+							- We lopen hier een beetje vooruit: met een for-loop doorlopen we een lijst. Beiden komen heel snel aan bod
+							- Wat ons nu aanbelangt is het if-statement binnen de loop. We gaan ermee na of de huidige dag "vrijdag" is. Indien _True_ drukken we een gepaste zin af. In elk ander geval drukken we gewoon de naam van de dag af
+							- Een beslissing dus! Let op het dubbelpunt na if en else en op de 4 spaties bij de statements die erop volgen
+				</section>
+				<section>
+							## if-statements
+
+							- Een if-statement bevat een voorwaarde en een reeks statements die mogelijk kunnen worden uitgevoerd. Deze statements worden voorafgegaan door insprongen om aan te geven dat ze tot het if-statement horen
+							- De voorwaarde wordt geëvalueerd en indien _True_ worden de statements effectief uitgevoerd; indien _False_ worden deze statements overgeslagen
+							- Vervolgens gaat het programma verder met de instructies onder het if-statement
+
+							```python
+							getal = 24
+							if getal % 2 == 0:
+							    print(f"Het getal {getal} is deelbaar door 2")
+								# hier kunnen nog extra statements staan
+							print("En het programma loopt door...")
+							```
+				</section>
+				<section>
+							## De voorwaarde binnen een if-statement
+							De voorwaarde die kan gaan van eenvoudig tot complex evalueert in _True_ of _False_. We noemen die voorwaarde een Booleaanse expressie, genoemd naar wiskundige [George Boole](https://nl.wikipedia.org/wiki/George_Boole). Ze bevat meestal een relationele operator die twee waarden, variabelen of complexe expressies vergelijkt. De operatoren kunnen de volgende zijn:
+				
+							- < Kleiner dan
+							- <= Kleiner dan of gelijk aan
+							- > Groter dan
+							- >= Groter dan of gelijk aan 
+							- == Gelijk aan
+							- != Niet gelijk aan
+				</section>	
+				<section>
+							## Meerdere if-statements
+
+							```Python
+							getal = int(input("Geef een geheel getal aub: "))
+							if getal > 0:
+							    boodschap = "groter dan 0"
+							if getal <= 0:
+							    boodschap = "kleiner dan of gelijk aan 0"
+							print(f"Het getal is {boodschap}")
+							```
+
+							- Bovenstaand voorbeeld vraagt een geheel getal aan de gebruiker en gebruikt twee if-statements om na te gaan of dat getal groter of kleiner/gelijk is aan 0. Vervolgens worden de bevindingen terug gerapporteerd aan de gebruiker
+							- We maken hier tweemaal gebruik van een if-statement met twee voorwaarden die elkaar uitsluiten. Dit is toegelaten, maar het kan efficiënter, namelijk met een if-else statement... 
+				</section>
+				<section>
+							## If-else-statements
+
+							- Een if-else-statement heeft een extra else-gedeelte (zonder voorwaarde!) met eigen blok instructies
+							- Wanneer de if-voorwaarde wordt geëvalueerd zal bij _True_ de eerste blok code worden uitgevoerd, en bij _False_ de tweede. Er zal steeds één en enkel één blok code worden uitgevoerd
+							- Je gebruikt een if-else-statement ipv 2 if-statements als de voorwaarden elkaar uitsluiten. Dit is efficiënter: slechts één voorwaarde moet worden gecontroleerd 
+
+							```Python
+							getal = int(input("Geef een geheel getal aub: "))
+							if getal > 0:
+							    boodschap = "groter dan 0"
+							else:
+							    boodschap = "kleiner dan of gelijk aan 0"
+							print(f"Het getal is {boodschap}")
+							```
+				</section>
+				<section>
+							## Meerdere if-statements
+
+							- Let op! Meerdere if-statements kunnen perfect ok zijn indien de voorwaarden elkaar niet uitsluiten
+
+							```Python
+							requested_toppings = ['mushrooms', 'extra cheese']
+
+							if 'mushrooms' in requested_toppings: 
+							    print("Adding mushrooms.")
+							if 'pepperoni' in requested_toppings:
+							    print("Adding pepperoni.")
+							if 'extra cheese' in requested_toppings:
+							    print("Adding extra cheese.")
+							print("\nFinished making your pizza!")
+							```
+				</section>
+				<section>
+							## If-elif-else-statements
+
+							```Python
+							getal = int(input("Geef een geheel getal aub: "))
+							if getal > 0:
+							    boodschap = "groter dan 0"
+							elif getal < 0:
+							    boodschap = "kleiner dan 0"
+							else:
+							    boodschap = "gelijk aan 0"
+							print(f"Het getal is {boodschap}")
+							```
+
+							- Gebruik if-elif-else wanneer je meer dan twee mogelijkheden wil bieden
+							- Begint met een if-gedeelte gevolgd door één of meer elif-gedeeltes, gevolgd door een else (zonder voorwaarde). Elk gedeelte beschikt over een door 4 spaties voorafgegaan codeblok 
+				</section>
+				<section>
+							## If-elif-else-statements
+
+							```Python
+							leeftijd = 16
+							if leeftijd < 4:
+							    ticketprijs = 2
+							elif leeftijd < 12:
+								ticketprijs = 10
+							elif leeftijd < 26:
+								ticketprijs = 18
+							else:
+								ticketprijs = 26
+							print(f"Jouw toegang tot de zoo kost ${ticketprijs}.")
+							```
+ 
+							- De voorwaarden worden van boven naar onder één voor één geëvalueerd: van zodra een _True_ is gevonden wordt de betreffende codeblok uitgevoerd en wordt de rest van het statement overgeslagen
+							- Indien geen _True_ wordt gevonden voert de interpreter de code van het else-blok uit
+				</section>
+				<section>
+							## If-elif-statements
+
+							```Python
+							leeftijd = 16
+							if leeftijd < 4:
+							    ticketprijs = 2 
+							elif leeftijd < 12:
+								ticketprijs = 10
+							elif leeftijd < 26:
+								ticketprijs = 18
+							print(f"Jouw toegang tot de zoo kost ${ticketprijs}.")
+							```
+
+							- Het else-gedeelte op het einde mag worden weggelaten
+							- Het is dan mogelijk dan van alle codeblokken geen enkele wordt uitgevoerd, omdat geen enkele voorwaarde in _True_ resulteert
+							- Bovenstaand voorbeeld is ok, maar wat met een bezoeker van 26 of ouder?
+
+				</section>
+				<section>
+							## Geneste if-instructies
+
+							```python
+							leeftijd, sociaal_tarief  = 45, True
+							if leeftijd < 4:
+								ticketprijs = 0 
+							elif leeftijd < 12:
+								ticketprijs = 10
+							elif leeftijd < 26:
+								ticketprijs = 18
+							else:
+								if sociaal_tarief:
+									ticketprijs = 12
+								else: 
+									ticketprijs = 24
+							```
+
+							De codeblokken binnen de if-*-statements kunnen (zo goed als) elke Python-code bevatten. Dat kunnen ook andere if, if-else, if-elif of if-elif-else statements zijn. We noemen dit geneste if-instructies.
+				</section>
+				<section>
+							## Booleaanse operatoren
+							- Een Booleaanse expressie is een uitdrukking die in _True_ of _False_ resulteert. Deze kunnen bevatten: 
+								- True, False, relationele operatoren, functie-aanroepen die True of False teruggeven
+								- Python kent ook 3 Booleaanse operatoren: not, and en or
+									- __not__ keert de waarde van een Booleaanse expressie om: True wordt False en False wordt True
+									- __and__ en __or__ combineren Booleaanse waarden tot een Booleaans resultaat 
+										- Bij and moeten alle onderdelen True zijn om in True te resulteren: True and True => True; False and True => False; False and False and True => True
+										- Bij or moet minstens één onderdeel True zijn om in True te resulteren: False and True => True; False and False and True => True; False and False => False
+				</section>
+				<section>
+							## Booleanse logica: een voorbeeld
+
+							```Python
+							naam = input("Geef je naam in aub: ")
+							leeftijd = int(input("Geef je leeftijd in aub: "))
+							if naam == "Kristof" or naam == "Bart":
+							    print("Leuk, je bent een Kristof of een Bart!")
+							elif naam == "David" and leeftijd == 28:
+								print("Wat een toeval: een 28-jarige David!")
+							else:
+							    print(f"Welkom {naam}")
+							```
+
+				</section>
+				<section class="chapter">
+							## Loops
+				</section>
+				<section>
+							## Herhalen met een while- of for-loop
+
+							- Indien je een bepaalde taak meerdere keren wil uitvoeren dan kan je gebruik maken van één van Pythons beschikbare loop-constructies: een __while-loop__ of een __for-loop__
+							- Beiden laten toe dezelfde groep statements meerdere keren uit te voeren
+							- Gebruik je ze efficiënt dan kan je complexe zaken uitvoeren (zoals berekeningen) in slechts een zeer beperkt aantal statements 
+				</section>
+				<section>
+							## De while-loop: basisvoorbeeld
+
+							```python
+							getal = 1 
+							while getal <= 5:
+							    print(getal)
+							    getal += 1
+							```
+
+							Beschrijving...
+
+				</section>
+				<section>
+							## De while-loop: basisvoorbeeld
+							```python
+							getal = int(input("Geef een geheel getal aub (0 om de app te verlaten): "))
+							while getal != 0:
+							    if x > 0:
+							        print("Dat is een positief getal")
+							    else:
+							        print("Dat is een negatief getal") 
+								getal = int(input("Geef een geheel getal aub (0 om de app te verlaten): "))
+							```
+
+							Beschrijving...
+				</section>
+				<section>
+							## De while-loop
+							- Zoals je hebt kunnen vaststellen laat een while-loop een codeblok (indentatie met 4 spaties) uitvoeren zo lang een voorwaarde resulteert in _True_
+							- Wanneer de laatste regel van de codeblok is bereikt wordt teruggekeerd naar het begin van de loop en wordt de voorwaarde opnieuw geëvalueerd, en indien _True_, de codeblok opnieuw uitgevoerd 
+							- Dit duurt tot de loop-voorwaarde resulteert in _False_. Als dit gebeurt wordt de codeblok niet meer uitgevoerd en gaat het programma verder met het eerste statement na de loop
+							- De loop-voorwaarde kan wijzigen door gebruikersinput of door code binnen de loop-codeblok. Zorg er elk geval voor dat de voorwaarde ooit _False_ teruggeeft, anders belandt je programma in een _infinite loop_
+				</section>
+				<section>
+							## For-loops
+
+							- [For-loops](https://en.wikipedia.org/wiki/For_loop) zorgen er net als while-loops voor dat een bepaalde codeblok verschillende keren na elkaar kan worden uitgevoerd 
+							- Het mechanisme dat de loop bepaalt is evenwel verschillend: een for-loop in Python wordt uitgevoerd voor elk item in een collectie
+							- Deze collectie kan een range van gehele getallen zijn, de letters in een string, of zoals we later zullen zien: de waarden opgeslagen in een datastructuur zoals een list
+				</section>
+				<section>
+							## De for-loop: basisvoorbeelden
+
+							```python
+							for getal in range(5):  
+							    print(getal)
+							```
+
+							```python
+							a = ['foo', 'bar', 'baz']
+							for i in a:
+							    print(i)
+							```
+
+							```Python
+							limit = int(input("Enter an integer: "))
+							print("The multiples of 3 up to and including", limit, "are:")
+							for i in range(3, limit + 1, 3):
+							    print(i)
+							```
+
+				</section>
+				<section>
+							## For-loops
+
+							- de codeblok (met indentatie van 4 spaties) binnen de for-loop bevat statements die meerdere keren uitgevoerd kunnen worden, meer bepaald voor elk item in de collectie
+							- Elk element in de collectie wordt gekopieerd naar een variabele vooraleer de loop de codeblok uitvoert voor dit element
+							- De variabele kan gebruikt worden in de codeblok zoals elke andere variabele
+				</section>
+				<section>
+							## Range()
+
+							- Een collectie van integers can geconstrueerd worden door aanroepen van de range()-functie
+								- Roep je deze functie aan met 1 argument dan start de range met 0 en eindigt met het argument -1
+								- Wanneer twee argumenten zijn meegegeven dan start de range met het eerste argument en eindigt met het tweede argument -1. range(2,5) bvb geeft een range terug van 2, 3 en 4
+								- Een lege range wordt teruggegeven als het eerste argument groter is dan het tweede. De codeblok in de loop wordt in dit geval nooit uitgevoerd
+								- Range() kent ook nog een derde argument, de step (een geheel getal). Is deze groter dan 0 dan begint de range bij het eerste argument en loopt tot argument2 - 1, telkens in sprongen gelijk aan de stepwaarde
+								- Een negatieve stepwaarde zorgt ervoor dat een collectie van afnemende waarden ontstaat. range(0, -4, -1) geeft een range terug die bestaat uit 0, −1, −2 en −3. 
+				</section>
+				<section>
+							## Geneste loops
+
+							- De statements binnen de codeblok van een loop kunnen op hun beurt een loop bevatten. We noemen dit geneste loops
+							- Elk type loop kan genest zitten binnen een ander type buitenloop
+
+							```Python
+							message = input("Enter a message (blank to quit): ")
+							while message != "":
+							n = int(input("How many times should it be repeated? "))
+							for i in range(n):
+								print(message)
+							message = input("Enter a message (blank to quit): ")
+							```
+				</section>
+				<section class="chapter">
+							## Labo-voorbereidende oefeningen
+				</section>
+				<section>
+							## Oefening 1
+				</section>
+				<section>
+							## Oefening 2
+				</section>
+				<section>
+							## Oefening 3
+				</section>
+				<section>
+							## Python Development - les 2 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
