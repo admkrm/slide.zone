@@ -187,8 +187,8 @@
 								- Python kent ook 3 Booleaanse operatoren: not, and en or
 									- __not__ keert de waarde van een Booleaanse expressie om: True wordt False en False wordt True
 									- __and__ en __or__ combineren Booleaanse waarden tot een Booleaans resultaat 
-										- Bij and moeten alle onderdelen True zijn om in True te resulteren: True and True => True; False and True => False; False and False and True => True
-										- Bij or moet minstens één onderdeel True zijn om in True te resulteren: False and True => True; False and False and True => True; False and False => False
+										- Bij and moeten alle onderdelen True zijn om in True te resulteren: True and True => True; False and True => False; False and False and True => False
+										- Bij or moet minstens één onderdeel True zijn om in True te resulteren: False or True => True; False or False or True => True; False or False => False
 				</section>
 				<section>
 							## Booleanse logica: een voorbeeld
@@ -231,7 +231,7 @@
 							```python
 							getal = int(input("Geef een geheel getal aub (0 om de app te verlaten): "))
 							while getal != 0:
-							    if x > 0:
+							    if getal > 0:
 							        print("Dat is een positief getal")
 							    else:
 							        print("Dat is een negatief getal") 
@@ -257,8 +257,8 @@
 							## De for-loop: basisvoorbeelden
 
 							```python
-							for getal in range(5):  
-							    print(getal)
+							for i in range(5):  
+							    print(i)
 							```
 
 							```python
@@ -269,7 +269,7 @@
 
 							```Python
 							getal = int(input("Geef een geheel getal: "))
-							print("De veelvouden van 3 tot en met", getal, "zijn:")
+							print(f"De veelvouden van 3 tot en met {getal} zijn:")
 							for i in range(3, getal + 1, 3):
 							    print(i)
 							```
@@ -285,12 +285,12 @@
 				<section>
 							## Range()
 
-							- Een collectie van integers can geconstrueerd worden door aanroepen van de range()-functie
+							- Een collectie van integers kan geconstrueerd worden door aanroepen van de range()-functie
 								- Roep je deze functie aan met 1 argument dan start de range met 0 en eindigt met het argument -1
 								- Wanneer twee argumenten zijn meegegeven dan start de range met het eerste argument en eindigt met het tweede argument -1. range(2,5) bvb geeft een range terug van 2, 3 en 4
 								- Een lege range wordt teruggegeven als het eerste argument groter is dan het tweede. De codeblok in de loop wordt in dit geval nooit uitgevoerd
 								- Range() kent ook nog een derde argument, de step (een geheel getal). Is deze groter dan 0 dan begint de range bij het eerste argument en loopt tot argument2 - 1, telkens in sprongen gelijk aan de stepwaarde
-								- Een negatieve stepwaarde zorgt ervoor dat een collectie van afnemende waarden ontstaat. range(0, -4, -1) geeft een range terug die bestaat uit 0, −1, −2 en −3. 
+								- Een negatieve stepwaarde zorgt ervoor dat een collectie van afnemende waarden ontstaat. range(0, -4, -1) geeft een range terug die bestaat uit 0, −1, −2 en −3 
 				</section>
 				<section>
 							## Geneste loops

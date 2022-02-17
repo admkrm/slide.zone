@@ -85,8 +85,9 @@
 							print(f"Het getal is {boodschap}")
 							```
 
-							- Bovenstaand voorbeeld vraagt een geheel getal aan de gebruiker en gebruikt twee if-statements om na te gaan of dat getal groter of kleiner/gelijk is aan 0. Vervolgens worden de bevindingen terug gerapporteerd aan de gebruiker
+							- Bovenstaand voorbeeld vraagt een geheel getal aan de gebruiker en gebruikt twee if-statements om na te gaan of dat getal groter of kleiner/gelijk is aan 0
 							- We maken hier tweemaal gebruik van een if-statement met twee voorwaarden die elkaar uitsluiten. Dit is toegelaten, maar het kan efficiënter, namelijk met een if-else statement... 
+							- Let op! Meerdere if-statements kunnen perfect ok zijn indien de voorwaarden elkaar niet uitsluiten
 				</section>
 				<section>
 							## If-else-statements
@@ -102,23 +103,6 @@
 							else:
 							    boodschap = "kleiner dan of gelijk aan 0"
 							print(f"Het getal is {boodschap}")
-							```
-				</section>
-				<section>
-							## Meerdere if-statements
-
-							- Let op! Meerdere if-statements kunnen perfect ok zijn indien de voorwaarden elkaar niet uitsluiten
-
-							```Python
-							requested_toppings = ['mushrooms', 'extra cheese']
-
-							if 'mushrooms' in requested_toppings: 
-							    print("Adding mushrooms.")
-							if 'pepperoni' in requested_toppings:
-							    print("Adding pepperoni.")
-							if 'extra cheese' in requested_toppings:
-							    print("Adding extra cheese.")
-							print("\nFinished making your pizza!")
 							```
 				</section>
 				<section>
@@ -203,8 +187,8 @@
 								- Python kent ook 3 Booleaanse operatoren: not, and en or
 									- __not__ keert de waarde van een Booleaanse expressie om: True wordt False en False wordt True
 									- __and__ en __or__ combineren Booleaanse waarden tot een Booleaans resultaat 
-										- Bij and moeten alle onderdelen True zijn om in True te resulteren: True and True => True; False and True => False; False and False and True => True
-										- Bij or moet minstens één onderdeel True zijn om in True te resulteren: False and True => True; False and False and True => True; False and False => False
+										- Bij and moeten alle onderdelen True zijn om in True te resulteren: True and True => True; False and True => False; False and False and True => False
+										- Bij or moet minstens één onderdeel True zijn om in True te resulteren: False or True => True; False or False or True => True; False or False => False
 				</section>
 				<section>
 							## Booleanse logica: een voorbeeld
@@ -247,7 +231,7 @@
 							```python
 							getal = int(input("Geef een geheel getal aub (0 om de app te verlaten): "))
 							while getal != 0:
-							    if x > 0:
+							    if getal > 0:
 							        print("Dat is een positief getal")
 							    else:
 							        print("Dat is een negatief getal") 
@@ -273,20 +257,20 @@
 							## De for-loop: basisvoorbeelden
 
 							```python
-							for getal in range(5):  
-							    print(getal)
+							for i in range(5):  
+							    print(i)
 							```
 
 							```python
-							a = ['foo', 'bar', 'baz']
-							for i in a:
+							lijst = ['aap', 'noot', 'peer']
+							for i in lijst:
 							    print(i)
 							```
 
 							```Python
-							limit = int(input("Enter an integer: "))
-							print("The multiples of 3 up to and including", limit, "are:")
-							for i in range(3, limit + 1, 3):
+							getal = int(input("Geef een geheel getal: "))
+							print(f"De veelvouden van 3 tot en met {getal} zijn:")
+							for i in range(3, getal + 1, 3):
 							    print(i)
 							```
 
@@ -301,12 +285,12 @@
 				<section>
 							## Range()
 
-							- Een collectie van integers can geconstrueerd worden door aanroepen van de range()-functie
+							- Een collectie van integers kan geconstrueerd worden door aanroepen van de range()-functie
 								- Roep je deze functie aan met 1 argument dan start de range met 0 en eindigt met het argument -1
 								- Wanneer twee argumenten zijn meegegeven dan start de range met het eerste argument en eindigt met het tweede argument -1. range(2,5) bvb geeft een range terug van 2, 3 en 4
 								- Een lege range wordt teruggegeven als het eerste argument groter is dan het tweede. De codeblok in de loop wordt in dit geval nooit uitgevoerd
 								- Range() kent ook nog een derde argument, de step (een geheel getal). Is deze groter dan 0 dan begint de range bij het eerste argument en loopt tot argument2 - 1, telkens in sprongen gelijk aan de stepwaarde
-								- Een negatieve stepwaarde zorgt ervoor dat een collectie van afnemende waarden ontstaat. range(0, -4, -1) geeft een range terug die bestaat uit 0, −1, −2 en −3. 
+								- Een negatieve stepwaarde zorgt ervoor dat een collectie van afnemende waarden ontstaat. range(0, -4, -1) geeft een range terug die bestaat uit 0, −1, −2 en −3 
 				</section>
 				<section>
 							## Geneste loops
@@ -315,12 +299,12 @@
 							- Elk type loop kan genest zitten binnen een ander type buitenloop
 
 							```Python
-							message = input("Enter a message (blank to quit): ")
-							while message != "":
-							n = int(input("How many times should it be repeated? "))
-							for i in range(n):
-								print(message)
-							message = input("Enter a message (blank to quit): ")
+							boodschap = input("Geef een boodschap (laat leeg om te stoppen): ")
+							while boodschap != "":
+							    aantal = int(input("Hoe vaak moet dit herhaald worden? "))
+							    for i in range(aantal):
+								    print(boodschap)
+							    boodschap = input("Geef een boodschap (laat leeg om te stoppen): ")
 							```
 				</section>
 				<section>
