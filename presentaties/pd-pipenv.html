@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Development: Pipenv</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Development
+							## Werken met Pipenv
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Wat is Pipenv?
+				</section>
+				<section>
+							## Wat is Pipenv?
+
+							- Managing multiple Python projects with their own third-party packages can get complicated. It is best practice to use a virtual environment to sandbox the requirements for each of your projects. 
+							- Enter pipenv, the official recommended package management tool for Python
+							- It handles both installation and virtual environments to help you manage your Python dependencies.
+				</section>
+				<section>
+							## Wat is Pipenv?
+							- Python comes with all sorts of things built-in, but:
+							- There are a huge amount of third-party packages
+							- Python ships with pip to install packages, but:							
+							- Everything is installed into the interpreter’s domain
+							- Virtual environments are a best practice
+							- pipenv combines pip and virtualenv to help you control your package space
+				</section>
+				<section class="chapter">
+							## Packages installeren met pip
+				</section>
+				<section>
+							## Packages installeren met pip
+							- Python has a long history of package management with several different
+							tools
+							- Current built-in mechanism is pip
+							- Unless you're using a virtual environment, packages are installed to a
+							common place associated with your interpreter
+				</section>
+				<section>
+							## PyPi
+
+							Screenshot van Pypi
+				</section>
+				<section>
+							## Pip
+
+							```
+							pip3.10 install colorama
+							pip3.10 install colorama==0.3.3
+							pip3.10 freeze
+							pip3.10 uninstall colorama
+							pip3.10 install requests
+							pip3.10 freeze > requirements.txt
+							pip3.10 install -r requirements.txt
+							```
+
+							Laatste versie wordt verwijderd!
+							Dependencies worden mee geïnstalleerd
+		
+				</section>
+				<section>
+							## Problemen met pip
+							- Need a virtual env
+							- Using requirements.txt:
+								- If you only include the parent packages your build isn't deterministic
+								- If you pin everything, you have to manage sub-dependency upgrades manually
+								- No easy way to have multiple environments
+							- pipenv addresses many of these issues
+							- Uses pip and virtualenv underneath to manage your packages
+				</section>
+				<section class="chapter">
+							## pipenv gebruiken
+				</section>
+				<section>
+							## pipenv
+
+							```
+							mkdir using-pipenv
+							cd using-pipenv
+							pip3.10 install pipenv
+							pipenv shell
+							pipenv install requests
+							exit
+
+
+							```
+
+							pipenv is a third-party package
+							pipenv shell creates a venv if it doesn't find One
+							Pipfile en Pipfile.lock = replacement for requirements.txt
+							exit to get out of the shell
+
+
+
+				</section>
+				<section>
+							## More pipenv tools
+
+							```
+							pipenv open colorama
+							pipenv graph
+							pipenv check
+							pipenv run pipenv check (run command as if you are in the shell)
+							pipenv install --dev colorama
+							pipenv uninstall --all-dev
+							pipenv uninstall --all
+							pipenv --venv (shows where your virtual environment lives)
+							pipenv --where (show where the root of your project is)
+
+							```
+
+							open opens the package in your editor. Behavior will be editor dependent
+				</section>
+				<section>
+							## Environment variables
+
+							pipenv will automatically source a .env file in your top level dir
+							Useful for storing specific environment variables
+
+							```
+							SOME_ENV_CONFIG=some_value 
+							SOME_OTHER_ENV_CONFIG=some_other_value 
+
+				</section>
+				<section>
+							## Distributing your code
+
+							If you aren't using a package
+							- Replace requirements.txt witt Pipfile
+							- Running pipenv shell in a dir with a requirements.txt file will automatically convert the file
+							- careful with fully pinned dependencies
+							- Install from the lockfile: pipenv install --ignore-pipfile
+							- install dev packages: pipenv install --dev
+							If you are using a package
+							- Use setup.py and install_requires keyword for minimumm requirements
+							- Include pipfile with your distro
+							- Pipfile will contain same thing as install_requires
+							- Can install minimum: pipenv install -e
+							- Include Pipfile.lock with your distro for fully reproducable environment
+
+
+				</section>
+				<section>
+							## Python Development - Werken met Pipenv - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
