@@ -1,1 +1,86 @@
-LISTS!
+<!doctype html>
+<html>
+	<head>
+		<title>Python Development: Les 4</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Development
+							## Lists en dictionaries
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Lists
+							- Dictionaries
+				</section>
+				<section class="chapter">
+							## Lists
+				</section>
+				<section>
+							## Lists
+				</section>
+				<section class="chapter">
+							## Dictionaries
+				</section>
+				<section>
+							## Dictionaries: veel overeenkomsten met lists
+							- Laten net als lists toe om verschillende (soms heel veel) waarden toe te kennen aan één variabele
+							- Elk element in een list heeft uniek integer indexgetal dat ermee geassocieerd is
+							- each value in a dictionary has a unique key associated with it, but a dictionary's keys are more flexible than a list’s indices
+							- A dictionary's keys can be integers. They can also be floating-point numbers or strings
+							- All of the keys in a dictionary must be distinct just as all of the indices in a list are distinct
+							- When the keys are numeric they do not have to start from zero, nor do they have to be sequential. When the keys are strings they can be any combination of characters, including the empty string
+				</section>
+				<section>
+							## Dictionaries
+							- Every key in a dictionary must have a value associated with it. The value associated with a key can be an integer, a floating-point number, a string or a Boolean value. It can also be a list, or even another dictionary
+							- A dictionary key and it’s corresponding value are often referred to as a key-value pair
+							- While the keys in a dictionary must be distinct there is no parallel restriction on the values. Consequently, the same value can be associated with multiple keys
+							- Starting in Python 3.7, the key-value pairs in a dictionary are always stored in the order in which they were added to the dictionary. Each time a new key-value pair is added to the dictionary it is added to the end of the existing collection
+							- There is no mechanism for inserting a key-value pair in the middle of an existing dictionary
+							- Removing a key-value pair from the dictionary does not change the order of the remaining key-value pairs in the dictionary
+				</section>
+				<section>
+				
+							## Dictionaries
+							- A variable that holds a dictionary is created using an assignment statement. The empty dictionary, which does not contain any key-value pairs, is denoted by {} (an open brace immediately followed by a close brace)
+							- A non-empty dictionary can be created by including a comma separated collection of key-value pairs inside the braces
+							- A colon is used to separate the key from its value in each key-value pair
+				</section>
+				<section>
+							## Dictionaries: basisvoorbeeld
+
+							```python
+							constants = {"pi": 3.14, "e": 2.71, "root 2": 1.41}
+							print(constants)
+							```
+
+							the following program creates a dictionary with three key-value pairs where the keys are strings and the values are floating-point numbers. Each key-value pair associates the name of a common mathematical constant to its value. 
+
+				</section>
+				<section class="chapter">
+							## Accessing, Modifying and Adding Values
+				</section>
+				<section>
+							## Accessing, Modifying and Adding Values
+							- When the index of a value in a list is known, we can use the name of the list and the index enclosed in square brackets to access the value at that location.
+				</section>
+				<section>
+
+							## Python Development - les 4 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
