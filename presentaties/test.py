@@ -1,6 +1,0 @@
-lievelingskleuren = ["oranje", "groen", "rood", "paars"]
-print(lievelingskleuren[0:3]) #['oranje', 'groen', 'rood']
-print(lievelingskleuren[1:4]) #['groen', 'rood', 'paars']
-print(lievelingskleuren[:4]) #['oranje', 'groen', 'rood', 'paars']
-print(lievelingskleuren[2:]) #['rood', 'paars']
-print(lievelingskleuren[-3:]) #['groen', 'rood', 'paars']
