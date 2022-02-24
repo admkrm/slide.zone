@@ -22,19 +22,24 @@
 							#### Kristof Michiels
 				</section>
 				<section class="chapter">
-							## Flask?
+							## Flask API's
 				</section>
 				<section>
-							## Flask?
-							- ...
+							## Flask API's
+							- Vorige week hebben we gezien dat Flask een veelzijdig micro framework is om webtoepassingen te maken
+							- Met Flask kan je ook snel en veilig API's bouwen
+							- We bekijken dit vandaag aan de hand van een voorbeeldtoepassing
+							- Web en API kunnen gecombineerd worden in één en dezelfde toepassing...
+							- Ook kan er geopteerd worden om de zaken volledig te scheiden
 				</section>
 				<section class="chapter">
 							## Een eerste API-toepassing
 				</section>
 				<section>
 							## Een eerste API-toepassing
-							- We bouwen enkel een application programming interface, geen user interface
-							- Verschillende types van toepassingen kunnen er dan mee interfacen, zodat de API-laag volledig gescheiden blijft van de presentatie
+							- Onze app heet Webfaves API: een API die interessante weblinks verzamelt
+							- ! We bouwen hier enkel een application programming interface, geen user interface
+							- Verschillende types van toepassingen kunnen er dan in een latere fase mee interfacen, zodat de API-laag volledig gescheiden blijft van de presentatie
 				</section>
 				<section>
 							## Features
@@ -46,14 +51,14 @@
 							- Webfaves verwijderen wanneer nodig
 				</section>
 				<section>
-							## Applicatie aanmaken
-							- Door nieuw Flask project aan te maken in Pycharm
-							- Enkel professionele versie van Pycharm heeft deze feature (gratis voor studenten)
+							## De appplicatie aanmaken
+							- Door een nieuw Flask project aan te maken in Pycharm
+							- Enkel professionele versie van Pycharm heeft deze handige feature (gratis voor studenten)
 							- Zoals de app van vorige week => Pycharm doet het werk voor ons
-							- Zet de applicatie in Debug mode (automatisch herladen bij wijzigingen)
+							- Eventueel: de applicatie in Debug mode (automatisch herladen bij wijzigingen)
 				</section>
 				<section>
-							## Applicatie aanmaken
+							## De applicatie aanmaken
 
 							```Python
 							from flask import Flask
@@ -77,12 +82,13 @@
 							- We gaan 4 soorten requests gebruiken: GET, POST, PUT en DELETE
 							- GET is eenvoudig met de browser te testen, voor de andere hebben we een tool nodig
 							- Beste tool om API's te testen is Postman: https://www.postman.com/downloads/
+							- Download Postman zodat je calls kunt maken naar je lokale machine
 							- Test je eerste requests met Postman
 							- Bekijk ook de run window in Pycharm
 				</section>
 				<section>
 							## JSON teruggeven
-							- [Werken met JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON): deze resource goed doornemen!
+							- [Werken met JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON): deze resource goed doornemen als opdracht!
 							- Key-value-paren
 							- jsonify-functie gebruiken
 
@@ -96,8 +102,8 @@
 				</section>
 				<section>
 							## HTTP Status Codes
-							- Herinner je het request-response mechanisme uit de eerste les 
-							- Requests en responses hebben headers met meta-data. Ze bevatten o.m. een status code, bvb 200 OK, 404 Not found
+							- Herinner je het request-response mechanisme uit de eerste les?
+							- Requests en responses hebben headers met meta-data. Ze bevatten o.m. een status code, bvb 200 OK, 404 Not found, 401 Unauthorized
 
 							```Python
 							@app.route("/api")
@@ -108,7 +114,7 @@
 				<section>
 							## URL parameters
 
-							Laten ons toe om dynamische content te presenteren op basis van de URL-parameters die werden meegegeven. Hier een voorbeeld met querystrings...
+							Laten ons toe om dynamische content te presenteren op basis van de URL-parameters die werden meegegeven. Hier een voorbeeld met querystrings zoals we ook vorige week hebben gezien
 
 							```Python
 							from flask import Flask, jsonify, request
@@ -138,23 +144,26 @@
 									return jsonify(message="We hebben eigenlijk al genoeg van deze resources. 
 									Just kidding ;-)"), 401
 							```
+
+							Clean URLs zijn belangrijk: https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/
 				</section>
 				<section class="chapter">
-							## Persistent maken van onze data
+							## Onze data vasthouden
 				</section>
 				<section>
-							## Persistent maken van onze data
+							## Onze data vasthouden
 							- We moeten data die onze API genereert of ontsluit ergens kunnen vasthouden
-							- We hebben gezien in het web-voorbeeld van vorige week hoe we een eenvoudige file-datastore kunnen bouwen in de vorm van een json-bestand
-							- Deze week werken we met SQLite, een zgn file-based databank
-							- We gaan ook een ORM gebruiken (Een object-relational mapper): SQLAlchemy (https://www.sqlalchemy.org/)
+							- We hebben in het web-voorbeeld van vorige week gezien hoe we een eenvoudige file-datastore kunnen bouwen in de vorm van een json-bestand
+							- Deze week werken we met SQLite, een file-gebaseerde databank
+							- We gaan ook een object-relational mapper (ORM) gebruiken: [SQLAlchemy](https://www.sqlalchemy.org/)
 							- Werkt met Python objecten, geen SQL
 							- Je beheert je database vanuit je code
-							- Heel eenvoudig om in latere fase van databank te veranderen. Ondersteunt heel wat databanken
-							- Flask-SQLAlchemy package installeren (2.5.1)
 				</section>
 				<section>
 							## SQLAlchemy configuratie
+
+							- Heel eenvoudig om in latere fase van databank te veranderen. Ondersteunt heel wat databanken
+							- Flask-SQLAlchemy package installeren (2.5.1)
 							
 							```Python
 							from flask_sqlalchemy import SQLAlchemy
@@ -169,6 +178,8 @@
 				</section>
 				<section>
 							## ORM models klasses
+
+							Je beschrijft je databank tabellen als klasses. Wij hebben 2 tabellen: users en webfaves
 
 							```Python
 							class User(db.Model):
@@ -199,7 +210,7 @@
 				<section>
 							## Database aanmaken en voorzien van data
 
-							We maken hiervoor 3 scripts aan...
+							We maken hiervoor met Flask CLI 3 scripts aan, allemaal binnen onze toepassing:
 
 							```Python
 							db = SQLAlchemy(app)
@@ -270,7 +281,7 @@
 				<section>
 							## Marshmallow
 							- We gebruiken Marshmallow om objecten te (de-)serializeren 
-							- https://flask-marshmallow.readthedocs.io/en/latest/: doornemen
+							- https://flask-marshmallow.readthedocs.io/en/latest/: deze resource goed doornemen als opdracht!
 							- Integreert met SQLAlchemy
 							- Package flask-marshmallow installeren: 0.14.0
 							- We moeten Marshmallow toevoegen aan onze app en vertellen welke velden het moet zoeken
@@ -298,13 +309,15 @@
 						
 							user_schema = UserSchema()
 							users_schema = UserSchema(many=True)
-						
-							webfave_schema = WebfaveSchema()
-							webfaves_schema = WebfaveSchema(many=True)
 							```
 				</section>
 				<section>
 							## Marshmallow
+
+							```Python
+							webfave_schema = WebfaveSchema()
+							webfaves_schema = WebfaveSchema(many=True)
+							```
 
 							```Python
 							@app.route("/webfaves", methods=["GET"])
@@ -320,7 +333,7 @@
 				<section>
 							## API: beveiliging met JWT
 
-							- JSON Web Tokens: https://jwt.io
+							- JSON Web Tokens: https://jwt.io: bekijk dit!
 							- Flask-Login, Flask-User: web toepassingen, sessies
 							- Flask-JWT-Extended package installeren: 4.3.1
 							- Decorators toevoegen aan de routes die je wil beveiligen 
@@ -343,7 +356,7 @@
 									db.session.add(user)
 									db.session.commit()
 									return jsonify(message="Gebruiker met succes aangemaakt"), 201
-								```
+							```
 				</section>
 				<section>
 							## Gebruikers laten inloggen
@@ -472,6 +485,13 @@
 									webfave.moeilijkheidsgraad = float(request.form["moeilijkheidsgraad"])
 									webfave.originaliteit = float(request.form["originaliteit"])
 
+							```
+
+				</section>
+				<section>
+							## Een bestaande webfave wijzigen (PUT)
+
+							```python
 									db.session.commit()
 									return jsonify(message="Je hebt een webfave aangepast"), 202
 								else:
@@ -494,6 +514,21 @@
 								else:
 									return jsonify(message="De webfave die je wilde verwijderen bestaat niet")
 							```
+				</section>
+				<section class="chapter">
+							## Labo
+				</section>
+				<section>
+							## Labo 3
+
+							- Je exploreert de mogelijkheden van Flask voor API's zoals ze hier zijn meegegeven
+							- Je bestudeert de bronnen die bij de slides staan vermeld
+							- Je maakt een eigen API-toepassing, met voldoende uitdaging
+							- Het thema kies je zelf en je vult het zelf in
+							- Zorg voor beveiliging met JWT
+							- Zorg voor een achterliggende SQLite databank
+							- Je documenteert je toepassing via de resource "/home"
+							- Je test je endpoints met behulp van Postman
 				</section>
 				<section>
 							## Web Services Python - les 3 - kristof.michiels01@ap.be
