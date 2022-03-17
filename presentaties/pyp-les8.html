@@ -1,0 +1,532 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Programming: Les 7</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## Werken met strings en getallen
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Werken met strings
+							- Werken met getallen
+							- Math
+							- Random
+				</section>
+                <section class="chapter">
+							## Werken met strings 
+                 </section>
+				<section>
+							## Werken met strings
+							- We hebben in onze eerste les strings reeds kort behandeld en gaan ons hier concentreren op zaken die toen niet aan bod zijn gekomen
+							- Strings - letterlijk tekstreeksen - bestaan uit een opeenvolging van karakters
+							- We zagen eerder dat strings in Python onveranderlijk of immutable zijn. Dit betekent dat we ze niet kunnen wijzigen, maar wel (gedeeltes) kunnen kopiëren naar een andere string om hetzelfde effect te bekomen
+				</section>
+				<section>
+							## Strings maken met aanhalingstekens
+							- We zagen reeds dat we strings wikkelen in enkele of dubbele aanhalingstekens
+							- We mogen ook gebruik maken van driedubbele aanhalingstekens
+							- Wordt vaak gebruikt voor strings die meerdere regels bestrijken
+							- Bij dergelijke strings worden zowel de einde-regelkarakters (\n) als andere spaties behouden en in acht genomen
+
+							```Python
+							lorem_ipsum = '''Lorem Ipsum is slechts een proeftekst uit het 
+								drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst 
+								in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een 
+								zethaak met letters nam en ze door elkaar husselde om een 
+								font-catalogus te maken.'''
+							```
+				</section>
+				<section>
+							## Strings maken met str()
+							- Je kan vanuit een ander datatype een string maken door gebruik te maken van de str()-functie
+							- Python gebruikt deze functie intern wanneer je de print()-functie uitvoert op niet-string objecten of wanneer je strings formatteert
+
+							```Python
+							mijn_list = [str(98.6), str(1.0e4), str(True)]
+							for element in mijn_list:
+							    print(type(element))
+							```
+				</section>
+				<section>
+							## Escapen met \
+							- Plaats je een backslash (&#8726;) voor sommige karakters, dan krijgen deze een speciale betekenis
+							- De meest bekende (die we eerder tegenkwamen) is \n, die ervoor zorgt dat wat volgt op een nieuwe regel begint 
+							- We zagen eerder ook al \t, wat staat voor een tab-insprong
+
+							```Python
+							palindroom_zin = "Baas, \nneem een racecar, \nneem een Saab."
+							```
+				</section>
+				<section>
+							## Escapen met \
+							- Je kan ook &#8726;' or &#8726;" gebruiken om mee te geven dat je letterlijk een aanhalingsteken wil aangeven
+							- Of zelfs letterlijk een backslash: dan gebruik je er twee (\\) waarbij de eerste de tweede escaped
+
+							```Python
+							krantenkop = "Koning sprak ons dit jaar vijf keer toe: \"Het geeft me houvast\""
+							```
+				</section>
+				<section>
+							## r-strings of raw-strings
+
+							Een raw-string geeft de escapes letterlijk weer
+
+							```Python
+							krantenkop = r"Koning sprak ons dit jaar vijf keer toe: \"Het geeft me houvast\""
+							palindroom_zin = r"Baas, \nneem een racecar, \nneem een Saab."
+							```
+				</section>
+				<section>
+							## Combineren met +
+							- Niet te verwarren met de f-strings die we eerder hebben gezien
+							- Je kan strings combineren met string variabelen door gebruik van de + operator
+							- Je kan letterlijke strings (geen string variabelen) ook combineren door ze gewoon achter elkaar te plaatsen
+							- Overspant de combinatie meerdere regels dan kan je ze wikkelen in haakjes
+							
+							```Python
+							print("aap" + "noot" + "mies")
+							print("aap" "noot" "mies")
+							woordjes = ( "aap" "noot" 
+							"mies")
+							```
+				</section>
+				<section>
+							## Dupliceren met *
+
+							Je kan de *-operator gebruiken om een string te dupliceren
+
+							```Python
+							duplicaat = "noot" * 4 + '\n'
+							print(duplicaat)
+							```
+				</section>
+				<section>
+							## Een karakter opvragen met [ ]
+							- Om een enkel karakter uit een string op te vragen kan je werken met het index-getal
+							- Een string is een tekstreeks en kan op dat vlak behandeld worden zoals een list: je kan erdoor loopen en je kan elementen opvragen (niet vergeten dat een string wel immutable is)
+							- Eerste karakter: indexgetal is 0
+							- Laatste karakter: als indexgetal kan je -1 gebruiken. Voor het voorlaatste -2 enz... 
+
+							```Python
+							letters = 'abcdefghijklmnopqrstuvwxyz'
+							print(letters[0])
+							```
+				</section>
+				<section>
+							## Een gedeelte van een string bekomen met slice
+							- [:] splitst de volledige string af van begin tot einde
+							- [ start :] splitst af van karakter "start" tot het einde van de string
+							- [: einde ] splitst af van begin van de string tot aan karakter "einde" - 1
+							- [ start : einde ] splitst af van karakter "start" tot aan karakter "einde" - 1
+							- [ start : einde : step ] splitst af van karakter "start" tot aan karakter "einde" - 1, met sprongetjes met als grootte "step"
+				</section>
+				<section>
+							## Een gedeelte van een string bekomen met slice
+
+							Probeer zelf uit!
+
+							```Python
+							alfabet = "abcdefghijklmnopqrstuvwxyz"
+							print(alfabet[:])
+							print(alfabet[10:])
+							print(alfabet[10:15])
+							print(alfabet[-5:])
+							print(alfabet[12:-2])
+							print(alfabet[-10:-5])
+							print(alfabet[::5])
+							print(alfabet[2:10:3])
+							print(alfabet[10::4])
+							print(alfabet[:20:5])
+							```
+				</section>
+				<section>
+							## Een gedeelte van een string bekomen met slice
+
+							Probeer zelf uit!
+
+							```Python
+							alfabet = "abcdefghijklmnopqrstuvwxyz"
+							print(alfabet[-1::-1])
+							print(alfabet[::-1])
+							print(alfabet[-40:])
+							print(alfabet[-60:-50])
+							print(alfabet[:100])
+							print(alfabet[80:85])
+							```
+				</section>
+				<section>
+							## Lengte van een string verkrijgen met len()
+							De len() functie geeft je het aantal karakters in een string
+
+							```Python
+							alfabet = "abcdefghijklmnopqrstuvwxyz"
+							print(len(alfabet))
+							```
+				</section>
+				<section>
+							## Splitsen met split()
+							- Je kan de split()-functie gebruiken om een string op te breken in een aantal kleinere onderdelen
+							- De splitsing gebeurt op basis van een scheidingsteken, ook "separator" genoemd 
+							- Dat scheidingsteken geef je mee aan de functie. Bij afwezigheid gebruikt split() elke reeks spaties, tabs, einde-regel (\n) om te splitsen
+							- De gesplitste strings komen terug als elementen in een list
+
+							```Python
+							woorden = "aap, noot, mies, muis, poes"
+							print(woorden.split(","))
+							# ['aap', ' noot', ' mies', ' muis', ' poes']
+							print(woorden.split())
+							# ['aap,', 'noot,', 'mies,', 'muis,', 'poes']
+							```
+				</section>
+				<section>
+							## Samenvoegen met join()
+							- De join()-functie biedt het tegenovergestelde van split(): het zet een list met strings om naar één enkele string
+							- Eerst geef je de string die alle elementen gaat verbinden
+							- Als argument van de join()-functie geef je de list mee die je wil omzetten
+
+							```Python
+							lijst_van_superhelden = ["Ant-Man", "Batwoman", "The Atom", "The Avengers"]
+							string_van_superhelden = ", ".join(lijst_van_superhelden)
+							print(string_van_superhelden)
+							nieuwe_regel_string_van_superhelden = "\n".join(lijst_van_superhelden) 
+							print(nieuwe_regel_string_van_superhelden)
+							# zal elk element op nieuwe regel laten beginnen
+							```
+				</section>
+				<section>
+							## Vervangen met replace()
+							- Je gebruikt de replace()-functie om elementen in je string te vervangen
+							- Eerste argument is de oude string die je wil veranderen
+							- Tweede argument is de string waarmee je de oude string wil veranderen
+							- Optioneel derde argument is het aantal keer dat je een string wil veranderen door de nieuwe. Laat je het weg dan wordt elke keer de oude string voorkomt deze vervangen door de nieuwe 
+
+							```Python
+							mijn_string = "een zin als een ander"
+							mijn_string.replace("een", "geen", 1)
+							print(mijn_string) #Eerste "een" wordt vervangen
+							mijn_string.replace("een", "geen") # alle "een"-en worden vervangen door "geen"
+							```
+				</section>
+				<section>
+							## Vervangen met replace()
+							- In sommige gevallen wil je complexere string-patronen herkennen en vervangen 
+							- Bvb dat het patroon een vrijstaand woord is, of dat het zich bevindt aan het begin of einde van een string....
+							- We hebben hiervoor een uiterst krachtig instrument, namelijk regular expressions. We komen hierop later nog terug!
+				</section>
+				<section>
+							## Strippen met strip()
+							- Werkt - indien aanwezig - witruimte-karakters (" ", "\t", "\n") weg links, rechts of langs beide kanten van een string
+							- strip() werkt links en rechts deze karakters weg
+							- lstrip() werkt links deze karakters weg
+							- rstrip() werkt rechts deze karakters weg
+							- Je kan aan strip ook andere karakters meegeven die mogen verwijderd worden
+
+							```Python
+							mijn_string = "    Teveel ruimte ? . !    "
+							print(mijn_string.strip())
+							print(mijn_string.strip("!?. "))
+							```
+				</section>
+				<section>
+							## Zoeken en selecteren met find() en index()
+							- Python heeft twee methods, find() en index() om een string in een string te localiseren
+							- Van elks zijn er twee versies: starten van het begin, of starten van het einde van de string
+							- Beiden werken op dezelfde manier als de substring effectief gevonden wordt
+							- Als er geen gevonden wordt geeft find() -1 terug, en index() creëert een exception
+
+							```Python
+							woorden = "aap, noot, mies, muis, poes, noot"
+							woorden.find("noot") # 5
+							woorden.index("noot") # 5
+							woorden.rfind("noot") # 29
+							woorden.rindex("noot") # 29
+							```
+				</section>
+				<section>
+							## count() en isalnum()
+							- Met count() tel je het aantal keer dat een substring voorkomt in een andere string
+							- Met isalnum() ga je na of de string bestaat uit enkel letters of cijfers
+
+							```Python
+							woorden = "aap, noot, mies, muis, poes, noot"
+							woorden.count("noot") # 2
+							woorden.count("oranje") # 0
+							woorden.count("mies") # 1
+							woorden.isalnum() # False, er zitten komma's in
+							```
+				</section>
+				<section>
+							## startswith() en endswith()
+
+							Gaan na of een string met een bepaalde string starten of eindigen, en geven True of False terug
+
+							```Python
+							mijn_zin = '''Git comes with built-in GUI tools (git-gui, gitk), 
+							but there are several third-party tools for users looking for a platform-specific 
+							experience.'''
+							mijn_zin.startswith("Git") # True
+							mijn_zin.endswith("experience.") # True
+							mijn_zin.endswith("experience") # False
+							```
+				</section>
+				<section>
+							## Hoofd- en kleine letters
+
+							- capitalize() zal van het eerste letter van de string een hoofdletter maken
+							- title() zal alle woorden een hoofletter geven
+							- upper() zal alle karakters in hoofdletters weergeven
+							- lower() zal alle karakters in kleine letters weergeven
+							- swapcase() wisselt kleine in hoofdletters en omgekeerd
+
+							```Python
+							tura_zin = "mooi het leven is mooi :-)"
+							print(tura_zin.capitalize()) # Mooi het leven is mooi :-)
+							print(tura_zin.title()) # Mooi Het Leven Is Mooi :-)
+							print(tura_zin.upper()) # MOOI HET LEVEN IS MOOI :-)
+							print(tura_zin.lower()) # mooi het leven is mooi :-)
+							print("Hallo".swapcase()) # 'hALLO'
+							```
+				</section>
+				<section>
+							## Uitlijning
+							- center(): centreert de string in een aantal karakters
+							- ljust(): lijnt links uit in een aantal karakters
+							- rjust(): lijnt rechts uit in een aantal karakters
+
+							```Python
+							tura_zin = "mooi het leven is mooi :-)"
+							print(tura_zin.center(30)) # "  mooi het leven is mooi :-)  "
+							print(tura_zin.ljust(30)) # "mooi het leven is mooi :-)    "
+							print(tura_zin.rjust(30)) # "    mooi het leven is mooi :-)"
+							```
+				</section>
+
+				<section class="chapter">
+							## Werken met getallen
+				</section>
+				<section>
+							## Werken met getallen
+
+							looking at Python’s simplest built-in data types:
+							- Booleans (which have the value True or False
+							- Integers (whole numbers such as 42 and 100000000)
+							- Floats (numbers with decimal points such as 3.14159, or sometimes exponents like 1.0e8, which means one times ten to the eighth power, or 100000000.0)
+				</section>
+				<section>
+							## Booleans
+							In Python, the only values for the boolean data type are True and False. Sometimes, you’ll use these directly; other times you’ll evaluate the “truthiness” of other types from their values. The special Python function bool() can convert any Python data type to a boolean.
+							bool() function takes any value as its argument and returns the boolean equivalent.
+
+							Nonzero numbers are considered True:
+
+>>> bool(True) True
+
+>>> bool(1) True
+
+>>> bool(45) True
+
+>>> bool(-45) True
+
+And zero-valued ones are considered False:
+
+>>> bool(False) False
+
+>>> bool(0) False
+
+>>> bool(0.0) False
+				</section>
+				<section>
+							## Gehele getallen aka integers
+
+							an int can be any size—even greater than 64 bits. You can play with big numbers like a googol (one followed by a hundred zeroes, named in 1920 by a nine-year-old boy):
+
+							Division is a little more interesting because it comes in two flavors:
+
+• / carries out floating-point (decimal) division
+
+• // performs integer (truncating) division
+				</section>
+				<section>
+							## Integers en variabelen
+
+							a = a - 3
+
+							a = 95
+							temp = a - 3
+							a = temp
+
+							You can combine the arithmetic operators with assignment by putting the operator before the =
+							a -= 3
+							a += 8
+							a *= 2
+
+							a = 200
+							a /= 3
+
+							a //= 4
+
+							The % character has multiple uses in Python. When it’s between two numbers, it produces the remainder when the first number is divided by the second:
+
+>>> 9 % 5 4
+
+Here’s how to get both the (truncated) quotient and remainder at once:
+
+>>> divmod(9,5) (1, 4)
+				</section>
+				<section>
+							## Bases
+
+							? p. 44-45
+				</section>
+				<section>
+							## Type conversies
+
+							>>> int(True) 1
+
+>>> int(False) 0
+
+>>> bool(1) True
+
+>>> bool(0) False
+
+>>> int(98.6) 98
+
+>>> int(1.0e4) 10000
+
+>>> bool(1.0) True
+
+>>> bool(0.0) False
+
+>>> int('99') 99
+
+>>> int('-23')
+
+-23
+
+>>> int('+12') 12
+
+>>> int('1_000_000') 1000000
+
+>>> int('10', 2) # binary 2
+
+>>> int('10', 8) # octal 8
+
+>>> int('10', 16) # hexadecimal 16
+
+>>> int('10', 22) # chesterdigital 22
+
+The boolean value False is treated as 0 or 0.0 when mixed with integers or floats, and True is treated as 1 or 1.0:
+
+>>> True + 2 3
+
+>>> False + 5.0 5.0
+				</section>
+				<section>
+							## Floats
+
+							but floating-point numbers (called floats in Python) have decimal points:
+
+							Floats are handled similarly to integers: you can use the operators (+, –, *, /, //, **, and %) and the divmod() function.
+
+To convert other types to floats, you use the float() function. As before, booleans act like tiny integers:
+
+>>> float(True)
+
+1.0
+
+>>> float(False)
+
+0.0
+
+Converting an integer to a float just makes it the proud possessor of a decimal point:
+
+>>> float(98)
+
+98.0
+
+>>> float('99')
+
+99.0
+
+>>> 43 + 2. 45.0
+
+>>> False + 0 0
+
+>>> False + 0.
+
+0.0
+
+>>> True + 0 1
+
+>>> True + 0. 1.0
+				</section>
+				<section class="chapter">
+							## Math functies
+				</section>
+				<section>
+							## Math functies
+
+							Math Functions
+
+Python has a menagerie of math functions in the standard math library. Just type import math to access them from your programs.
+
+It has a few constants such as pi and e:
+
+>>> import math
+
+>>> math.pi
+
+>>> 3.141592653589793
+
+>>> math.e
+
+2.718281828459045
+				</section>
+				<section>
+							## fabs()
+				</section>
+				<section>
+							## floor() en ceil()
+				</section>
+				<section>
+							## pow()
+				</section>
+				<section>
+							## sqrt()
+				</section>
+				<section>
+							## Ook nog...
+							sin(), cos(), tan(), asin(), acos(), atan(), and atan2().
+				</section>
+				<section>
+							## Calculate Accurate Floating Point with decimal
+				</section>
+				<section class="chapter">
+							## Random
+				</section>
+				<section>
+							## Random
+
+							p 214-215
+				</section>
+				<section>
+							## Python Programming - les 7 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
