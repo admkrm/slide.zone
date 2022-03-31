@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Development: Les 10</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Development
+							## Objecten en klassen (1)
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Wat zijn objecten en hoe maken we ze?
+							- Overerving
+							- Toegang tot attributen
+							- Soorten methods
+				</section>
+				<section class="chapter">
+							## Wat zijn objecten en hoe maken we ze?
+				</section>
+				<section>
+							## Wat zijn objecten?
+							- In Python is alles een object. Dat wordt door Python achter de schermen geregeld
+							- Je krijgt met objecten zelf te maken wanneer je je eigen objecten wil maken of wanneer je het gedrag van bestaande wil wijzigen
+							- Onder object verstaan we een aangepaste datastructuur die zowel data (variabelen, noemen we attributen) en code (functies, noemen we methods) bevat 
+							- Een object vertegenwoordigt een uniek exemplaar van een concreet ding. Zie objecten als zelfstandige naamwoorden en hun methoden als werkwoorden. Een object vertegenwoordigt een individueel ding, en zijn methoden bepalen hoe het interageert met andere dingen
+				</section>
+				<section>
+							## Klassen maken met class
+							- Objecten worden geïnstantieerd - tot leven gebracht - uit een klasse-definitie
+							- Je kan ze beschouwen als blauwdrukken die beschrijven wat een object allemaal bevat 
+							- We gebruiken class om een klasse te beschrijven
+							- Voor de klassenaam is het gebruikelijk met een hoofdletter te beginnen
+							- Je creëert een object door de klasse aan te roepen zoals je een functie aanroept
+
+							```Python
+							class Kunstwerk():
+							    pass
+
+							kunstwerk_a = Kunstwerk()
+							kunstwerk_b = Kunstwerk()
+							```
+				</section>
+				<section>
+							## Object-attributen
+
+							- Een attribuut is een variabele binnen een klasse of object
+							- Je kan attributen toevoegen als een object is gecreëerd, maar ook nog daarna
+							- Een attribuut kan elk ander object zijn
+
+							```Python
+							kunstwerk_a.bewaarplaats = "Parijs, Louvre"
+							kunstwerk_a.gemaakt_in = 1503
+							kunstwerk_a.hangt_naast = kunstwerk_b
+							```
+				</section>
+				<section>
+							## Klasse-attributen
+
+							- Met attributen worden meestal object-attributen bedoeld
+							- Er bestaan ook klasse-attributen: deze en hun waarden worden gedeeld door alle geïnstantieerde objecten
+							- Als je de waarde verandert in een object dan heeft het geen impact op het klasse-attribuut
+
+							```Python
+							class Kunstwerk:
+								soort = "schilderij"
+							
+							david_van_michelangelo = Kunstwerk()
+							print(Kunstwerk.soort) # schilderij
+							print(david_van_michelangelo.soort) # schilderij
+							david_van_michelangelo.soort = "beeld"
+							print(david_van_michelangelo.soort) # beeld
+							print(Kunstwerk.soort) # schilderij
+							```
+				</section>
+				<section>
+							## Klasse-attributen	
+
+							- Pas je de waarde van het klasse-attribuut aan dan heeft dit geen effect op de bestaande objecten
+							- Wel bij nieuwe objecten
+
+							```Python
+							Kunstwerk.soort = "gravure"
+							print(Kunstwerk.soort) # gravure
+							print(david_van_michelangelo.soort) # beeld
+							mona_lisa_van_leonardo = Kunstwerk()
+							print(mona_lisa_van_leonardo.soort) # gravure
+							```
+				</section>
+				<section>
+							## Methods
+
+							- Een method is een functie binnen een klasse of object
+							- Een method ziet eruit als elke andere functie maar kan op meer specifieke manieren worden gebruikt (zien we verder in deze les)
+
+							```Python
+							class Kunstwerk:
+								def vertel(self):
+									print("Wat kan ik vertellen? Ik ben een kunstwerk, dat staat vast!")
+							```
+				</section>
+				<section>
+							## Initialisatie
+
+							- Als je object-attributen wil toekennen wanneer een object wordt gecreëerd dan gebruik je de speciale Python object-initialisatie-method \_\_init\_\_()
+							- btw: de dubbele underscores noemen we dunder ;-) We spreken van dunder-methods
+							- \_\_init\_\_() initialiseert een individueel object uit de klasse-definitie: het bevat alles om het ene object te onderscheiden van het andere
+							- De eerste parameter is altijd self: het verwijst naar het individuele object 
+
+							```Python
+							class Kunstwerk:
+							    def __init__(self):
+								    pass
+							```
+
+				</section>
+				<section>
+							## Initialisatie
+
+							- Hier voegen we een parameter naam toe aan de \_\_init\_\_-method
+							- Wanneer we nu een object instantiëren moeten we een string meegeven voor de parameter "naam"
+							
+							```Python
+							class Kunstwerk:
+							    def __init__(self, naam, kunstenaar):
+								    self.naam = naam
+									self.kunstenaar = kunstenaar
+							
+							mona_lisa_van_leonardo = Kunstwerk("Mona Lisa", "Leonardo da Vinci")
+							```
+
+				</section>
+				<section>
+							## Wat gebeurt hier bij de instantiëring?
+
+							- De beschrijving van de Kunstwerk klasse wordt opgezocht
+							- Een nieuw object wordt in het geheugen geïnstantieerd/gecreëerd
+							- De \_\_init\_\_-method wordt aangeroepen: het nieuwe object wordt als self meegegeven, alsook de andere argumenten naam en kunstenaar
+							- De waarden van naam en kunstenaar worden opgeslagen in het object
+							- Het nieuwe object wordt teruggegeven en toegekend aan de variabele mona_lisa_van_leonardo
+							- Binnen de klasse-definitie verwijs je naar de attributen als self.attribuutnaam
+							- Het nieuwe object is zoals elk ander object in Python
+				</section>
+				<section>
+							## Het self-argument
+
+							Python gebruikt self om de juiste attributen en methods te kunnen vinden 
+
+							```Python
+							class Kunstwerk:
+								def vertel(self):
+									print("Wat kan ik vertellen? Ik ben een kunstwerk, dat staat vast!")
+							
+							een_kunstwerk = Kunstwerk()
+							een_kunstwerk.vertel() # Wat kan ik vertellen? Ik ben een kunstwerk, dat staat vast!
+							```
+
+							Achter de schermen gebeurt het volgende:
+
+							```Python
+							Kunstwerk.vertel(een_kunstwerk)
+							```
+				</section>
+				<section class="chapter">
+							## Overerving
+				</section>	
+				<section>
+							## Overerving
+
+							- Bij het coden zal je vaak beroep kunnen doen op een bestaande klasse die objecten creëert op een manier die benadert wat je zelf nodig hebt
+							- Je kan de klasse aanpassen, of een nieuwe creëren met dezelfde code maar dat is niet duurzaam en efficiënt
+							- Een oplossing is overerving: een nieuwe klasse creëren afgeleid van een andere, maar met enkele toevoegingen of wijzigingen: een goede manier om code te herbruiken
+
+							```Python
+							class AangepasteFout(Exception):
+							    pass
+
+							raise AangepasteFout
+							```
+				</section>
+				<section>
+							## Erven van een basis-klasse
+
+							- In je afgeleide klasse definieer je enkel wat je wenst toe te voegen of te wijzigen. Dit heft (in het Engels: overrides) het gedrag van de basis-klasse op
+							- Voor de originele klasse hebben we verschillende namen: parent, superclass of base klasse. Idem voor de afgeleide klasse: child, subclass of derived klasse
+
+							```Python
+							class Dier():
+							    pass
+
+							class Aap(Dier): 
+							    pass
+
+							een_dier = Dier()
+							een_aapje = Aap()
+							```
+				</section>
+				<section>
+							## Erven van een basis-klasse
+
+							- Een afgeleide klasse is een gespecialiseerde versie van een basis-klasse
+							- De relatie tussen beiden is er één van "IS EEN": een Aap is-een Dier
+							- Je kan checken of een klasse een afgeleide klasse is door gebruik van de issubclass()-functie
+
+							```Python
+							print(issubclass(Aap, Dier)) # True
+							```
+				</section>
+				<section>
+							## Erven van een basis-klasse
+
+							Een afgeleide klasse erft alle functionaliteit van de basis-klasse
+
+							```Python
+							class Dier():
+							    def spreek(self):
+									print("Ik ben een dier")
+
+							class Aap(Dier): 
+							    pass
+
+							een_dier = Dier()
+							een_aapje = Aap()
+							een_dier.spreek() # Ik ben een dier
+							een_aapje.spreek() # Ik ben een dier
+							```
+				</section>
+				<section>
+							## Gedrag opheffen of overriden
+							We kunnen elke method overriden, ook de \_\_init\_\_()-method
+
+
+							```Python
+							class Dier():
+								def __init__(self, naam):
+        					        self.naam = naam
+							    def spreek(self):
+									print("Ik ben een dier")
+
+							class Aap(Dier):
+							    def __init__(self, naam):
+							        self.naam = "Meneer " + naam 
+								def spreek(self):
+									print("Ik ben een aapje")
+							```
+
+
+				</section>
+				<section>
+							## Methods toevoegen aan een afgeleide klasse
+
+							Een afgeleide klasse kan ook één of meerdere nieuwe methods toevoegen
+
+							```Python
+							class Dier():
+								def __init__(self, naam):
+        					        self.naam = naam
+							    def spreek(self):
+									print("Ik ben een dier")
+
+							class Aap(Dier):
+							    def __init__(self, naam):
+							        self.naam = "Meneer " + naam 
+								def spreek(self):
+									print("Ik ben een aapje")
+								def vlooien(self):
+									print("Vlooien, zo ontspannend, mmmm")
+							```
+
+
+				</section>
+				<section>
+							## super()
+
+							Gebruik super() wanneer de afgeleide klasse iets nieuws doet (bvb een method overschrijft) maar toch iets nodig heeft van de base-klasse
+
+							```Python
+							class Dier():
+							    def __init__(self, naam):
+								    self.naam = naam
+
+							class Aap(Dier):
+							    def __init__(self, naam, verwantschap_mens):
+								    super().__init__(naam)
+									self.verwantschap_mens = verwantschap_mens
+							```
+				</section>
+				<section>
+							## Meervoudige overerving en de mro
+
+							- Objecten kunnen erven van meerdere base-klassen
+							- Wanneer je klasse verwijst naar een method of attribuut dat de afgeleide klasse niet heeft, dan zal Python zoeken in alle base-klassen
+							- Python volgt daarbij een "method resolution order"
+							- Elke klasse heeft een mro()-method die een list teruggeeft met daarin alle klassen - in volgorde - die zullen doorzocht worden naar een method of attribuut. De eerste die wordt gevonden wint
+							- Er is een gelijkaardig attribuut \_\_mro\_\_ die dezelfde list teruggeeft
+				</section>
+				<section>
+							## Meervoudige overerving en de mro
+
+							```Python
+							class A():
+    						    def toonA(self):
+        					        print('Je bent in klasse A')
+
+							class B():
+    						    def toonB(self):
+        					        print('Je bent in klasse B')
+							
+							class C(A, B):
+    						    def toonC(self):
+        					        print('Je bent in klasse C')
+
+							klasse_c = C()
+							klasse_c.mro()
+							```
+				</section>
+				<section>
+							## Mixins
+
+							- Je kan zonder problemen een extra basis-klasse toevoegen aan je klasse-beschrijven, die enkel als helper-klasse zal functioneren: bvb logging is een goed voorbeeld
+							- Deze klasse deelt dan geen gemeenschappelijk methods met de eventuele andere basis-klassen
+							- Dergelijke basis-klassen worden vaak mixin-klassen genoemd
+
+							```Python
+							class MijnMixin():
+								def loggen(self):
+									import pprint
+									pprint.pprint(vars(self))
+							
+							class MijnKlasse(MijnMixin):
+								pass
+							```
+				</section>
+				<section class="chapter">
+							## Toegang tot attributen
+				</section>	
+				<section>
+							## Directe toegang tot attributen
+
+							Object attributen en methods zijn in Python (normaal gesproken) publiek. Guido Van Rossum daarover: "we zijn allemaal volwassen"
+
+							```Python
+							class Kunstwerk():
+							    def __init__(self, invoer_naam):
+								    self.naam = invoer_naam
+								
+							mona_lisa_van_leonardo = Kunstwerk("Mona Lisa")
+							print(mona_lisa_van_leonardo.naam) # Mona Lisa 
+							mona_lisa_van_leonardo.naam = "Mano Lasi"
+							print(mona_lisa_van_leonardo.naam) # Mano Lasi
+							```
+				</section>
+				<section>
+							## Getter- en setter-methods
+							- Programmeertalen ondersteunen vaak private attributen die niet van buitenaf kunnen benaderd of gewijzigd worden. Developers moeten in dat geval getter- en setter-methods schrijven 
+							- Python heeft geen private attributen, maar je kan wel getters en setters schrijven met aangepaste attributen-namen om wat veiligheid in te bouwen
+
+							```Python
+							class Kunstwerk():
+							    def __init__(self, invoer_naam):
+								    self.verborgen_naam = invoer_naam
+							    def get_naam(self):
+									return self.verborgen_naam
+							    def set_naam(self, invoer_naam):
+									self.verborgen_naam = invoer_naam
+							```
+				</section>
+				<section>
+							## Toegang tot attributen via properties
+
+							De beste manier om toegang te regelen tot attributen is via properties. Het kan op 2 manieren:
+
+							```Python
+							class Kunstwerk():
+							    def __init__(self, invoer_naam):
+								    self.verborgen_naam = invoer_naam
+							    def get_naam(self):
+									return self.verborgen_naam
+							    def set_naam(self, invoer_naam):
+									self.verborgen_naam = invoer_naam
+								naam = property(get_naam, set_naam)
+
+							mona_lisa_van_leonardo = Kunstwerk("Mona Lisa")
+							print(mona_lisa_van_leonardo.naam) # Mona Lisa 
+							mona_lisa_van_leonardo.naam = "Mano Lasi"
+							print(mona_lisa_van_leonardo.naam) # Mano Lasi
+							```
+				</section>
+				<section>
+							## Toegang tot attributen via properties
+
+							De tweede manier is door gebruik van decorators en door het vervangen van de method-namen get_naam en set_naam door naam:
+
+							```Python
+							class Kunstwerk():
+							    def __init__(self, invoer_naam):
+								    self.verborgen_naam = invoer_naam
+								@property
+							    def naam(self):
+									return self.verborgen_naam
+								@naam.setter
+							    def naam(self, invoer_naam):
+									self.verborgen_naam = invoer_naam
+							```
+				</section>
+
+				<section>
+							## Properties voor berekende waarden
+							- Een property kan ook een berekende waarde (een computed value) teruggeven
+							- Geef je geen setter-property mee, dan kan je de property niet veranderen (handig voor read-only attributen)
+
+							```Python
+							class Rechthoek():
+							    def __init__(self, basis, hoogte):
+								    self.basis = basis
+									self_hoogte = hoogte
+								@property
+								def oppervlakte(self):
+								    return self.basis * self.hoogte
+							
+							mijn_rechthoek = Rechthoek(4,6)
+							print(mijn_rechthoek.oppervlakte) # 24
+							```
+				</section>
+				<section>
+							## Naamaanpassing voor meer privacy
+							- Python heeft een conventie voor attributen die niet zichtbaar horen te zijn buiten hun klasse definitie
+							- Je laat ze beginnen met 2 underscores: \_\_
+							- Biedt geen perfecte bescherming, maar overtredingen zullen altijd zo bedoeld zijn :-)
+
+							```Python
+							class Kunstwerk():
+							    def __init__(self, invoer_naam):
+								    self.__naam = invoer_naam
+								@property
+							    def naam(self):
+									return self.__naam
+								@naam.setter
+							    def naam(self, invoer_naam):
+									self.__naam = invoer_naam
+							```
+				</section>
+				<section class="chapter">
+							## Soorten methods
+				</section>
+				<section>
+							## Soorten methods
+
+							- Methods kunnen onderdeel van de klasse zelf zijn, terwijl andere onderdeel zijn van de objecten die uit die klasse worden geïnstantieerd (instance methods). Nog andere zijn geen van bovenstaande
+							- Indien de method niet wordt voorafgegaan door een decorator (@...) is het een __instance method__ met als eerste argument self (deze hebben we tot nu toe gezien)
+							- Indien de method wordt voorafgegaan door de @classmethod decorator is het een __class method__ met als eerste argument cls 
+							- Indien de method wordt voorafgegan door de @staticmethod decorator is het een __static method__: het eerste argument is dan geen object of klasse
+				</section>
+				<section>
+							## Class methods
+
+							- Een class method heeft betrekking op de klasse in zijn geheel
+							- Elke wijziging die je maakt aan de klasse beïnvloedt alle geïnstantieerde objecten
+							- Een voorafgaande @classmethod decorator geeft aan dat de functie die volgt een class method is
+							- De eerste parameter is de klasse zelf. Conventie is om deze parameter cls te noemen
+				</section>
+				<section>
+							## Class methods
+
+							```Python
+							class Kunstwerk():
+								teller = 0
+							    def __init__(self, invoer_naam):
+								    self.__naam = invoer_naam
+									Kunstwerk.teller += 1
+								@classmethod
+								def aantal(cls):
+								    print("Kunstwerk heeft", cls.teller, "prachtige kunstwerken."
+							
+							kunstwerk_a = Kunstwerk("Mona Lisa")
+							kunstwerk_b = Kunstwerk("David")
+							print(Kunstwerk.aantal) # Kunstwerk heeft 2 prachtige kunstwerken 
+							```
+				</section>
+				<section>
+							## Static methods
+
+							- Static methods hebben geen invloed op de klasse of de geïnstantieerde objecten
+							- We gebruiken ze voor ons gemak en bundelen ze in de klasse voor organisatorische redenen
+							- We geven het aan met de @staticmethod decorator en gebruiken geen self of cls parameter
+							- We hoeven ook geen object te instantiëren om de method te gebruiken
+
+							```Python
+							class Museum():
+							    @staticmethod
+								def open_op_zondag():
+								    print('Het museum is open op zondag')
+							
+							print(Museum.open_op_zondag()
+							```
+				</section>
+				<section>
+							## Python Development - les 10 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
