@@ -236,7 +236,7 @@ You can avoid this issue by using a .pth file. In this case, the directory or di
 							- Per projectfolder een privé-kopie maken van de interpreter en gebruikte dependencies
 							- Dependencies zijn alle software-componenten (zoals externe libraries) die nodig zijn om je project succesvol te kunnen runnen
 							- Op deze manier zijn meerdere projecten op je systeem mogelijk, elk met eigen Python-versie en componenten
-							- Wij gebruiken hier venv: https://docs.python.org/3/library/venv.html. Weet dat er alternatieven zijn.
+							- Wij gebruiken hier venv: https://docs.python.org/3/library/venv.html. Weet dat er verschillende alternatieven zijn.
                 </section>
 				<section>
 							## Een virtuele omgeving opzetten
@@ -262,6 +262,8 @@ You can avoid this issue by using a .pth file. In this case, the directory or di
 							# windows:
 							venv\Scripts\activate
 							```
+
+							Windows + powershell: "Venv won't activate on this system" => https://dev.to/shriekdj/python-venv-or-virtualenv-wont-activate-on-windows-3e2
 				</section>
 				<section>
 							## Een virtuele omgeving de-activeren
@@ -284,6 +286,16 @@ You can avoid this issue by using a .pth file. In this case, the directory or di
 							```Bash
 							pip install requests
 							```
+				</section>
+				<section>
+							## Doorgeven of deployen van een virtual environment
+
+							- Dumpen naar een bestand:
+								- pip freeze > requirements.txt
+							
+							- Omgeving aanmaken op basis van een bestand:
+								- pip install -r requirements.txt
+
 				</section>
 				<section class="chapter">
 							## De Python interactieve shell

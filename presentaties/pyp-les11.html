@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Python Programming: Les 10</title>
+		<title>Python Programming: Les 11</title>
 		<link rel="stylesheet" type="text/css" href="../css/reset.css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
@@ -18,716 +18,451 @@
 	<body data-markdown="true">
 				<section>
 							# Python Programming
-							## Objecten en klassen
+							## Objecten en klassen (2)
 							#### Kristof Michiels
 				</section>
 				<section>
 							## Inhoud
-							- Wat zijn objecten en hoe maken we ze?
-							- Overerving
-							- Toegang tot attributen
-							- Soorten methods
-							- Duck-typing
-							- Magic methods
+							- Objectgeoriënteerd programmeren
 							- Compositie en aggregatie
+							- Magische methods
+							- Abstracte basisklassen
 				</section>
 				<section class="chapter">
-							## Wat zijn objecten en hoe maken we ze?
+							## Objectgeoriënteerd programmeren
 				</section>
 				<section>
-							## Wat zijn objecten?
-							- In Python is alles een object. Dat wordt door Python achter de schermen geregeld
-							- Je krijgt met objecten zelf te maken wanneer je je eigen objecten wil maken of wanneer je het gedrag van bestaande wil wijzigen
-							- Onder object verstaan we een aangepaste datastructuur die zowel data (variabelen, noemen we attributen) en code (functies, noemen we methods) bevat 
-							- Een object vertegenwoordigt een uniek exemplaar van een concreet ding. Zie objecten als zelfstandige naamwoorden en hun methoden als werkwoorden. Een object vertegenwoordigt een individueel ding, en zijn methoden bepalen hoe het interageert met andere dingen
+							## Objectgeoriënteerd programmeren
+							- Techniek die mogelijk maakt om variabelen en functies te groeperen
+							- Dat groeperen gebeurt binnen een data type dat we een klasse noemen
+							- Je bouwt een systeem dat bestaat uit objecten
+							- Door je code te organiseren binnen klasses kan je je programma opdelen in kleinere onderdelen die eenvoudiger te begrijpen en te debuggen zijn
 				</section>
 				<section>
-							## Klassen maken met class
-							- Objecten worden geïnstantieerd - tot leven gebracht - uit een klasse-definitie
-							- Je kan ze beschouwen als blauwdrukken die beschrijven wat een object allemaal bevat 
-							- We gebruiken class om een klasse te beschrijven
-							- Voor de klassenaam is het gebruikelijk met een hoofdletter te beginnen
-							- Je creëert een object door de klasse aan te roepen zoals je een functie aanroept
+							## Objectgeoriënteerd programmeren
+							- Voor kleinere programma's: weinig organisatiewinst, meer werk en complexiteit
+							- OOP (bij Python) is optioneel
+							- Python core developer Jack Diederich's PyCon 2012: “Stop Writing Classes” (https://youtu.be/o9pEzgHorH0/ )
+							- In sommige gevallen werkt een eenvoudige functie of module beter
+							- Desalniettemin: terecht populaire keuze en vaak de efficientste manier
+				</section>
+				<section>
+							## Software modellen bouwen van fysieke objecten
+							- Als we fysieke objecten beschrijven verwijzen we vaak naar hun eigenschappen
+								- Een auto: kleur, afmetingen, merk, aantal deuren ...
+							- Sommige objecten hebben eigenschappen die slaan op hen en niet op andere objecten
+								- Een doos: afgesloten, open, leeg, vol. Niet van toepassing op bvb een fiets
+							- Sommige objecten zijn in staat om acties te vervullen. 
+								- Een auto kan vooruit gaan, achteruit, links en rechts
+				</section>
+				<section>
+							## Software modellen bouwen van fysieke objecten
+							- Als we objecten uit ons leven willen modelleren in code: beslissen welke eigenschappen het object zullen representeren en welke operaties het object kan vervullen
+							- Dit noemt men de _state_ (data) en _behavior_ (gedrag of acties) van een object
+				</section>
+				<section>
+							## State en behavior: een procedureel voorbeeld
+							``` python
+							def zetAan():
+								global schakelaarIsAan
+								schakelaarIsAan = True
+
+							def zetUit():
+								global schakelaarIsAan
+								schakelaarIsAan = False
+
+							schakelaarIsAan = False
+							print(schakelaarIsAan)
+							zetAan()
+							print(schakelaarIsAan)
+							zetUit()
+							print(schakelaarIsAan)
+							zetUit()
+							print(schakelaarIsAan)
+							```
+				</section>
+				<section>
+							## _State_ en _behavior_: een procedureel voorbeeld
+							- De schakelaar kan in 2 posities zijn: aan of uit
+							- Om de _state_ te modelleren hebben we hier een Booleaanse variabele nodig
+								- We noemen hem schakelaarIsAan: True betekent aan, False betekent uit
+								- Initieel staat de schakelaar op uit
+							- _Behavior_: de schakelaar kan twee acties uitvoeren, "zet aan" en "zet uit"
+								- Hiervoor bouwen we 2 functies, zetAan() en zetUit()
+								- Deze zetten de waarde van de variabele op respectievelijk aan en uit
+							- Op het einde is er wat testcode toegevoegd die wat met de schakelaar "speelt" 
+				</section>
+				<section>
+							## Richting OO...
+							- Voorgaande is een zeer eenvoudig voorbeeld
+							- Je botst snel op de limieten van deze aanpak wanneer je een tweede schakelaar wil aanmaken
+							- De code is niet erg herbruikbaar, terwijl dit net het doel is van functies
+							- Zondigt tegen het [DRY principe](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) 
+							- We gaan deze code opnieuw schrijven volgens de OO principes
+				</section>
+				<section>
+							## Het procedureel voorbeeld herschreven
+
+							```python
+							class LichtSchakelaar():
+								def __init__(self):
+									self.schakelaarIsAan = False
+									
+								def zetAan(self):
+									# zet de schakelaar aan
+									self.schakelaarIsAan = True
+									
+								def zetUit(self):
+									# zet de schakelaar uit
+									self.schakelaarIsAan = False
+
+							schakelaar1 = LichtSchakelaar()
+							print(schakelaar1.schakelaarIsAan)
+							schakelaar1.zetAan()
+							print(schakelaar1.schakelaarIsAan)
+							```
+				</section>
+				<section>
+							## Het procedureel voorbeeld herschreven
+							- De klasse definieert een enkele variabele, schakelaarIsAan. Deze wordt geïnitialiseerd in een functie.
+							- Ze bevat nog twee andere functies voor het gedrag: zetAan() en zetUit()
+							- Net zoals functies moeten aangeroepen worden dien je Python expliciet te vertellen om een object van de klasse te maken
+								- In onze code dragen we op om de klasse te vinden
+								- Er een object uit te creëren (of instantiëren)
+								- En het resulterende object toe te kennen aan de variabele schakelaar1
+				</section>
+				<section>
+							## Klassen onderbrengen in modules...
+							
+							```Python
+							#module.py
+							class Boek():
+								def __init__(self, titel):
+									self.titel = titel
+							```
 
 							```Python
+							import module
+
+							boek1 = module.Boek("Brave New World")
+							boek2 = module.Boek("World War Z")
+
+							print(boek1)
+							print(boek1.titel)
+							```
+
+							Doe je op dezelfde manier als met functies. Het houdt je code georganiseerd en gestructureerd.
+				</section>
+				<section class="chapter">
+							## Compositie en aggregatie
+				</section>
+				<section>
+							## Compositie en aggregatie
+							
+							- Overerving is een zeer bruikbare techniek om een systeem van klassen uit te bouwen
+								- Het is handig wanneer klassenfunctionaleit kunnen delen vanuit een base klasse (een "is een"-relatie)
+								- Maar het kan uitnodigen tot de vorming van zeer complexe hiërarchieën 
+				</section>
+				<section>
+							## Compositie en aggregatie
+							
+							- Vaak zijn compositie en aggregatie nuttiger om een systeem van klassen te vormen
+								- Dit is het bouwen van complexe objecten uit andere meer eenvoudige objecten
+								- Bij compositie is één object een deel van een ander object (een "heeft-een"-relatie)
+								- Aggregatie drukt ook een "heeft-een" relatie uit, maar deze is iets losser: een object gebruikt een ander object, maar ze kunnen los van elkaar bestaan
+							- Verschillende ideeën kunnen geïsoleerd worden en in hun eigen klassen geplaatst
+							- En uiteraard: overerving en compositie kunnen gecombineerd worden
+				</section>
+				<section>
+							## Compositie en aggregatie: basisvoorbeeld
+
+							```Python
+							class Soort():
+								def __init__(self, naam):
+									self.naam = naam
+							
+							class Kunstenaar():
+								def __init__(self, naam):
+									self.naam = naam
+							
 							class Kunstwerk():
-							    pass
-
-							kunstwerk_a = Kunstwerk()
-							kunstwerk_b = Kunstwerk()
-							```
-				</section>
-				<section>
-							## Object-attributen
-
-							- Een attribuut is een variabele binnen een klasse of object
-							- Je kan attributen toevoegen als een object is gecreëerd, maar ook nog daarna
-							- Een attribuut kan elk ander object zijn
-
-							```Python
-							kunstwerk_a.bewaarplaats = "Parijs, Louvre"
-							kunstwerk_a.gemaakt_in = 1503
-							kunstwerk_a.hangt_naast = kunstwerk_b
-							```
-				</section>
-				<section>
-							## Klasse-attributen
-
-							- Met attributen worden meestal object-attributen bedoeld
-							- Er bestaan ook klasse-attributen: deze en hun waarden worden gedeeld door alle geïnstantieerde objecten
-							- Als je de waarde verandert in een object dan heeft het geen impact op het klasse-attribuut
-
-							```Python
-							class Kunstwerk:
-								soort = "schilderij"
-							
-							david_van_michelangelo = Kunstwerk()
-							print(Kunstwerk.soort) # schilderij
-							print(david_van_michelangelo.soort) # schilderij
-							david_van_michelangelo.soort = "beeld"
-							print(david_van_michelangelo.soort) # beeld
-							print(Kunstwerk.soort) # schilderij
-							```
-				</section>
-				<section>
-							## Klasse-attributen	
-
-							- Pas je de waarde van het klasse-attribuut aan dan heeft dit geen effect op de bestaande objecten
-							- Wel bij nieuwe objecten
-
-							```Python
-							Kunstwerk.soort = "gravure"
-							print(Kunstwerk.soort) # gravure
-							print(david_van_michelangelo.soort) # beeld
-							mona_lisa_van_leonardo = Kunstwerk()
-							print(mona_lisa_van_leonardo.soort) # gravure
-							```
-				</section>
-				<section>
-							## Methods
-
-							- Een method is een functie binnen een klasse of object
-							- Een method ziet eruit als elke andere functie maar kan op meer specifieke manieren worden gebruikt (zien we verder in deze les)
-
-							```Python
-							class Kunstwerk:
-								def vertel(self):
-									print("Wat kan ik vertellen? Ik ben een kunstwerk, dat staat vast!")
-							```
-				</section>
-				<section>
-							## Initialisatie
-
-							- Als je object-attributen wil toekennen wanneer een object wordt gecreëerd dan gebruik je de speciale Python object-initialisatie-method \_\_init\_\_()
-							- btw: de dubbele underscores noemen we dunder ;-) We spreken van dunder-methods
-							- \_\_init\_\_() initialiseert een individueel object uit de klasse-definitie: het bevat alles om het ene object te onderscheiden van het andere
-							- De eerste parameter is altijd self: het verwijst naar het individuele object 
-
-							```Python
-							class Kunstwerk:
-							    def __init__(self):
-								    pass
-							```
-
-				</section>
-				<section>
-							## Initialisatie
-
-							- Hier voegen we een parameter naam toe aan de \_\_init\_\_-method
-							- Wanneer we nu een object instantiëren moeten we een string meegeven voor de parameter "naam"
-							
-							```Python
-							class Kunstwerk:
-							    def __init__(self, naam, kunstenaar):
-								    self.naam = naam
+								def __init__(self, soort, kunstenaar):
+									self.soort = soort
 									self.kunstenaar = kunstenaar
-							
-							mona_lisa_van_leonardo = Kunstwerk("Mona Lisa", "Leonardo da Vinci")
-							```
 
+								def __str___(self):
+									return f"Dit kunstwerk is een {self.soort.naam} en werd gemaakt door
+									{self.kunstenaar.naam}"
+							```
 				</section>
 				<section>
-							## Wat gebeurt hier bij de instantiëring?
+							## Compositie en aggregatie: een voorbeeld
 
-							- De beschrijving van de Kunstwerk klasse wordt opgezocht
-							- Een nieuw object wordt in het geheugen geïnstantieerd/gecreëerd
-							- De \_\_init\_\_-method wordt aangeroepen: het nieuwe object wordt als self meegegeven, alsook de andere argumenten naam en kunstenaar
-							- De waarden van naam en kunstenaar worden opgeslagen in het object
-							- Het nieuwe object wordt teruggegeven en toegekend aan de variabele mona_lisa_van_leonardo
-							- Binnen de klasse-definitie verwijs je naar de attributen als self.attribuutnaam
-							- Het nieuwe object is zoals elk ander object in Python
+							```Python
+							een_schilderij = Soort("schilderij")
+							een_kunstenaar = Kunstenaar("Francis Picabia")
+							een_kunstwerk = Kunstwerk(een_schilderij, een_kunstwerk)
+							print(een_kunstwerk) 
+							# Dit kunstwerk is een schilderij en werd gemaakt door Francis Picabia
+							```
 				</section>
 				<section>
-							## Het self-argument
-
-							Python gebruikt self om de juiste attributen en methods te kunnen vinden 
+							## Compositie en aggregatie: een voorbeeld (2)
 
 							```Python
-							class Kunstwerk:
-								def vertel(self):
-									print("Wat kan ik vertellen? Ik ben een kunstwerk, dat staat vast!")
-							
-							een_kunstwerk = Kunstwerk()
-							een_kunstwerk.vertel() # Wat kan ik vertellen? Ik ben een kunstwerk, dat staat vast!
+							class Boek():
+								def __init__(self, titel, prijs, auteur=None):
+									self.titel = titel
+									self.prijs = prijs
+									self.auteur = auteur
+									self.hoofdstukken = []
+
+								def voeghoofdstuktoe(self, hoofdstuk):
+									self.hoofdstukken.append(hoofdstuk)
+
+								def getboekpaginatelling(self):
+									resultaat = 0
+									for h in self.hoofdstukken:
+										resultaat += h.paginatelling
+									return resultaat
 							```
-
-							Achter de schermen gebeurt het volgende:
+				</section>
+				<section>
+							## Compositie en aggregatie: een voorbeeld (2)
 
 							```Python
-							Kunstwerk.vertel(een_kunstwerk)
+							class Auteur():
+								def __init__(self, voornaam, familienaam):
+									self.voornaam = voornaam
+									self.familienaam = familienaam
+
+								def __str__(self):
+									return f"{self.voornaam} {self.familienaam}"
+
+
+							class Hoofdstuk():
+								def __init__(self, naam, paginatelling):
+									self.naam = naam
+									self.paginatelling = paginatelling
+							```
+				</section>
+				<section>
+							## Compositie en aggregatie: een voorbeeld (2)
+
+							```Python
+							auteur1 = Auteur("Leo", "Tolstoy")
+							boek1 = Boek("War and Peace", 39.95, auteur1)
+
+							boek1.voeghoofdstuktoe(Hoofdstuk("Hoofdstuk 1", 102))
+							boek1.voeghoofdstuktoe(Hoofdstuk("Hoofdstuk 2", 91))
+							boek1.voeghoofdstuktoe(Hoofdstuk("Hoofdstuk 3", 124))
+
+							print(boek1.titel)
+							print(boek1.auteur)
+							print(boek1.getboekpaginatelling())
 							```
 				</section>
 				<section class="chapter">
-							## Overerving
-				</section>	
-				<section>
-							## Overerving
-
-							- Bij het coden zal je vaak beroep kunnen doen op een bestaande klasse die objecten creëert op een manier die benadert wat je zelf nodig hebt
-							- Je kan de klasse aanpassen, of een nieuwe creëren met dezelfde code maar dat is niet duurzaam en efficiënt
-							- Een oplossing is overerving: een nieuwe klasse creëren afgeleid van een andere, maar met enkele toevoegingen of wijzigingen: een goede manier om code te herbruiken
-
-							```Python
-							class AangepasteFout(Exception):
-							    pass
-
-							raise AangepasteFout
-							```
+							## Magische Methods
 				</section>
 				<section>
-							## Erven van een basis-klasse
+							## Magische Methods
 
-							- In je afgeleide klasse definieer je enkel wat je wenst toe te voegen of te wijzigen. Dit heft (in het Engels: overrides) het gedrag van de basis-klasse op
-							- Voor de originele klasse hebben we verschillende namen: parent, superclass of base klasse. Idem voor de afgeleide klasse: child, subclass of derived klasse
-
-							```Python
-							class Dier():
-							    pass
-
-							class Aap(Dier): 
-							    pass
-
-							een_dier = Dier()
-							een_aapje = Aap()
-							```
+							- Magische methods (_magic methods_ in het Engels) zijn speciale methods in Python
+							- Ze beginnen en eindigen telkens met dubbele underscores en worden hierdoor ook dunder-methods genoemd
+							- Ze zijn niet bedoeld om rechtstreeks door jou te worden aangeroepen. Het aanroepen gebeurt intern vanuit de klasse bij een bepaalde actie
+							- Enkele voorbeelden: \_\_init\_\_ (zagen we reeds in de vorige les), \_\_add\_\_, \_\_len\_\_, \_\_repr\_\_...
 				</section>
 				<section>
-							## Erven van een basis-klasse
+							## Magische methods
 
-							- Een afgeleide klasse is een gespecialiseerde versie van een basis-klasse
-							- De relatie tussen beiden is er één van "IS EEN": een Aap is-een Dier
-							- Je kan checken of een klasse een afgeleide klasse is door gebruik van de issubclass()-functie
-
-							```Python
-							print(issubclass(Aap, Dier)) # True
-							```
-				</section>
-				<section>
-							## Erven van een basis-klasse
-
-							Een afgeleide klasse erft alle functionaliteit van de basis-klasse
-
-							```Python
-							class Dier():
-							    def spreek(self):
-									print("Ik ben een dier")
-
-							class Aap(Dier): 
-							    pass
-
-							een_dier = Dier()
-							een_aapje = Aap()
-							een_dier.spreek() # Ik ben een dier
-							een_aapje.spreek() # Ik ben een dier
-							```
-				</section>
-				<section>
-							## Gedrag opheffen of overriden
-							We kunnen elke method overriden, ook de \_\_init\_\_()-method
-
-
-							```Python
-							class Dier():
-								def __init__(self, naam):
-        					        self.naam = naam
-							    def spreek(self):
-									print("Ik ben een dier")
-
-							class Aap(Dier):
-							    def __init__(self, naam):
-							        self.naam = "Meneer " + naam 
-								def spreek(self):
-									print("Ik ben een aapje")
-							```
-
-
-				</section>
-				<section>
-							## Methods toevoegen aan een afgeleide klasse
-
-							Een afgeleide klasse kan ook één of meerdere nieuwe methods toevoegen
-
-							```Python
-							class Dier():
-								def __init__(self, naam):
-        					        self.naam = naam
-							    def spreek(self):
-									print("Ik ben een dier")
-
-							class Aap(Dier):
-							    def __init__(self, naam):
-							        self.naam = "Meneer " + naam 
-								def spreek(self):
-									print("Ik ben een aapje")
-								def vlooien(self):
-									print("Vlooien, zo ontspannend, mmmm")
-							```
-
-
-				</section>
-				<section>
-							## super()
-
-							Gebruik super() wanneer de afgeleide klasse iets nieuws doet (bvb een method overschrijft) maar toch iets nodig heeft van de base-klasse
-
-							```Python
-							class Dier():
-							    def __init__(self, naam):
-								    self.naam = naam
-
-							class Aap(Dier):
-							    def __init__(self, naam, verwantschap_mens):
-								    super().__init__(naam)
-									self.verwantschap_mens = verwantschap_mens
-							```
-				</section>
-				<section>
-							## Meervoudige overerving en de mro
-
-							- Objecten kunnen erven van meerdere base-klassen
-							- Wanneer je klasse verwijst naar een method of attribuut dat de afgeleide klasse niet heeft, dan zal Python zoeken in alle base-klassen
-							- Python volgt daarbij een "method resolution order"
-							- Elke klasse heeft een mro()-method die een list teruggeeft met daarin alle klassen - in volgorde - die zullen doorzocht worden naar een method of attribuut. De eerste die wordt gevonden wint
-							- Er is een gelijkaardig attribuut \_\_mro\_\_ die dezelfde list teruggeeft
-				</section>
-				<section>
-							## Meervoudige overerving en de mro
-
-							```Python
-							class A():
-    						    def toonA(self):
-        					        print('Je bent in klasse A')
-
-							class B():
-    						    def toonB(self):
-        					        print('Je bent in klasse B')
-							
-							class C(A, B):
-    						    def toonC(self):
-        					        print('Je bent in klasse C')
-
-							klasse_c = C()
-							klasse_c.mro()
-							```
-				</section>
-				<section>
-							## Mixins
-
-							- Je kan zonder problemen een extra basis-klasse toevoegen aan je klasse-beschrijven, die enkel als helper-klasse zal functioneren: bvb logging is een goed voorbeeld
-							- Deze klasse deelt dan geen gemeenschappelijk methods met de eventuele andere basis-klassen
-							- Dergelijke basis-klassen worden vaak mixin-klassen genoemd
-
-							```Python
-							class MijnMixin():
-								def loggen(self):
-									import pprint
-									pprint.pprint(vars(self))
-							
-							class MijnKlasse(MijnMixin):
-								pass
-							```
-				</section>
-				<section class="chapter">
-							## Toegang tot attributen
-				</section>	
-				<section>
-							## Directe toegang tot attributen
-
-							Object attributen en methods zijn in Python (normaal gesproken) publiek. Guido Van Rossum daarover: "we zijn allemaal volwassen"
-
-							```Python
-							class Kunstwerk():
-							    def __init__(self, invoer_naam):
-								    self.naam = invoer_naam
-								
-							mona_lisa_van_leonardo = Kunstwerk("Mona Lisa")
-							print(mona_lisa_van_leonardo.naam) # Mona Lisa 
-							mona_lisa_van_leonardo.naam = "Mano Lasi"
-							print(mona_lisa_van_leonardo.naam) # Mano Lasi
-							```
-				</section>
-				<section>
-							## Getter- en setter-methods
-							- Programmeertalen ondersteunen vaak private attributen die niet van buitenaf kunnen benaderd of gewijzigd worden. Developers moeten in dat geval getter- en setter-methods schrijven 
-							- Python heeft geen private attributen, maar je kan wel getters en setters schrijven met aangepaste attributen-namen om wat veiligheid in te bouwen
-
-							```Python
-							class Kunstwerk():
-							    def __init__(self, invoer_naam):
-								    self.verborgen_naam = invoer_naam
-							    def get_naam(self):
-									return self.verborgen_naam
-							    def set_naam(self, invoer_naam):
-									self.verborgen_naam = invoer_naam
-							```
-				</section>
-				<section>
-							## Toegang tot attributen via properties
-
-							De beste manier om toegang te regelen tot attributen is via properties. Het kan op 2 manieren:
-
-							```Python
-							class Kunstwerk():
-							    def __init__(self, invoer_naam):
-								    self.verborgen_naam = invoer_naam
-							    def get_naam(self):
-									return self.verborgen_naam
-							    def set_naam(self, invoer_naam):
-									self.verborgen_naam = invoer_naam
-								naam = property(get_naam, set_naam)
-
-							mona_lisa_van_leonardo = Kunstwerk("Mona Lisa")
-							print(mona_lisa_van_leonardo.naam) # Mona Lisa 
-							mona_lisa_van_leonardo.naam = "Mano Lasi"
-							print(mona_lisa_van_leonardo.naam) # Mano Lasi
-							```
-				</section>
-				<section>
-							## Toegang tot attributen via properties
-
-							De tweede manier is door gebruik van decorators en door het vervangen van de method-namen get_naam en set_naam door naam:
-
-							```Python
-							class Kunstwerk():
-							    def __init__(self, invoer_naam):
-								    self.verborgen_naam = invoer_naam
-								@property
-							    def naam(self):
-									return self.verborgen_naam
-								@naam.setter
-							    def naam(self, invoer_naam):
-									self.verborgen_naam = invoer_naam
-							```
-				</section>
-
-				<section>
-							## Properties voor berekende waarden
-							- Een property kan ook een berekende waarde (een computed value) teruggeven
-							- Geef je geen setter-property mee, dan kan je de property niet veranderen (handig voor read-only attributen)
-
-							```Python
-							class Rechthoek():
-							    def __init__(self, basis, hoogte):
-								    self.basis = basis
-									self_hoogte = hoogte
-								@property
-								def oppervlakte(self):
-								    return self.basis * self.hoogte
-							
-							mijn_rechthoek = Rechthoek(4,6)
-							print(mijn_rechthoek.oppervlakte) # 24
-							```
-				</section>
-				<section>
-							## Naamaanpassing voor meer privacy
-							- Python heeft een conventie voor attributen die niet zichtbaar horen te zijn buiten hun klasse definitie
-							- Je laat ze beginnen met 2 underscores: \_\_
-							- Biedt geen perfecte bescherming, maar overtredingen zullen altijd zo bedoeld zijn :-)
-
-							```Python
-							class Kunstwerk():
-							    def __init__(self, invoer_naam):
-								    self.__naam = invoer_naam
-								@property
-							    def naam(self):
-									return self.__naam
-								@naam.setter
-							    def naam(self, invoer_naam):
-									self.__naam = invoer_naam
-							```
-				</section>
-				<section class="chapter">
-							## Soorten methods
-				</section>
-				<section>
-							## Soorten methods
-
-							- Methods kunnen onderdeel van de klasse zelf zijn, terwijl andere onderdeel zijn van de objecten die uit die klasse worden geïnstantieerd (instance methods). Nog andere zijn geen van bovenstaande
-							- Indien de method niet wordt voorafgegaan door een decorator (@...) is het een __instance method__ met als eerste argument self (deze hebben we tot nu toe gezien)
-							- Indien de method wordt voorafgegaan door de @classmethod decorator is het een __class method__ met als eerste argument cls 
-							- Indien de method wordt voorafgegan door de @staticmethod decorator is het een __static method__: het eerste argument is dan geen object of klasse
-				</section>
-				<section>
-							## Class methods
-
-							- Een class method heeft betrekking op de klasse in zijn geheel
-							- Elke wijziging die je maakt aan de klasse beïnvloedt alle geïnstantieerde objecten
-							- Een voorafgaande @classmethod decorator geeft aan dat de functie die volgt een class method is
-							- De eerste parameter is de klasse zelf. Conventie is om deze parameter cls te noemen
-				</section>
-				<section>
-							## Class methods
-
-							```Python
-							class Kunstwerk():
-								teller = 0
-							    def __init__(self, invoer_naam):
-								    self.__naam = invoer_naam
-									Kunstwerk.teller += 1
-								@classmethod
-								def aantal(cls):
-								    print("Kunstwerk heeft", cls.teller, "prachtige kunstwerken."
-							
-							kunstwerk_a = Kunstwerk("Mona Lisa")
-							kunstwerk_b = Kunstwerk("David")
-							print(Kunstwerk.aantal) # Kunstwerk heeft 2 prachtige kunstwerken 
-							```
-				</section>
-				<section>
-							## Static methods
-
-							- Static methods hebben geen invloed op de klasse of de geïnstantieerde objecten
-							- We gebruiken ze voor ons gemak en bundelen ze in de klasse voor organisatorische redenen
-							- We geven het aan met de @staticmethod decorator en gebruiken geen self of cls parameter
-							- We hoeven ook geen object te instantiëren om de method te gebruiken
-
-							```Python
-							class Museum():
-							    @staticmethod
-								def open_op_zondag():
-								    print('Het museum is open op zondag')
-							
-							print(Museum.open_op_zondag()
-							```
-				</section>
-				<section class="chapter">
-							## Duck-typing
-				</section>
-				<section>
-							## Duck-typing
-
-							Python has a loose implementation of polymorphism; it applies the same operation to different objects, based on the method’s name and arguments, regardless of their class.
-							Let’s use the same __init__() initializer for all three Quote classes now, but add two new functions:
-							- who() just returns the value of the saved person string
-							- says() returns the saved words string with the specific punctuation
-				</section>
-				<section>
-							## Duck-typing
-
-							```Python
-							class Quote():
-							... def __init__(self, person, words): ... self.person = person ... self.words = words ... def who(self):
-							... return self.person ... def says(self):
-							... return self.words + '.'
-
-							>>> class QuestionQuote(Quote):
-							... def says(self):
-							... return self.words + '?' ...
-							>>> class ExclamationQuote(Quote): ... def says(self):
-							... return self.words + '!'
-							```
-				</section>
-				<section>
-							## Duck-typing
-
-							We didn’t change how QuestionQuote or ExclamationQuote were initialized, so we didn’t override their __init__() methods. Python then automatically calls the __init__() method of the parent class Quote to store the instance variables person and words. That’s why we can access self.words in objects created from the subclasses QuestionQuote and ExclamationQuote.
-							Next up, let’s make some objects:
-				</section>
-				<section>
-							## Duck-typing
-
-							```Python
-							>>> hunter = Quote('Elmer Fudd', "I'm hunting wabbits")
-							>>> print(hunter.who(), 'says:', hunter.says()) Elmer Fudd says: I'm hunting wabbits.
-							>>> hunted1 = QuestionQuote('Bugs Bunny', "What's up, doc")
-							>>> print(hunted1.who(), 'says:', hunted1.says()) Bugs Bunny says: What's up, doc?
-							>>> hunted2 = ExclamationQuote('Daffy Duck', "It's rabbit season")
-							>>> print(hunted2.who(), 'says:', hunted2.says()) Daffy Duck says: It's rabbit season!
-							```
-				</section>
-				<section>
-							## Duck-typing
-
-							Three different versions of the says() method provide different behavior for the three classes. This is traditional polymorphism in object-oriented languages. Python goes a little further and lets you run the who() and says() methods of any objects that have them. Let’s define a class called BabblingBrook that has no relation to our previous woodsy hunter and huntees (descendants of the Quote class):
-
-							```Python
-							class BabblingBrook(): ... def who(self):
-							... return 'Brook' ... def says(self): ... return 'Babble' ...
-							>>> brook = BabblingBrook()
-							```
-				</section>
-				<section>
-							## Duck-typing
-
-							Now run the who() and says() methods of various objects, one (brook) completely unrelated to the others:
-
-							>>> def who_says(obj):
-
-							... print(obj.who(), 'says', obj.says()) ...
-
-							>>> who_says(hunter)
-
-							Elmer Fudd says I'm hunting wabbits.
-
-							>>> who_says(hunted1)
-
-							Bugs Bunny says What's up, doc?
-
-							>>> who_says(hunted2)
-
-							Daffy Duck says It's rabbit season!
-
-							>>> who_says(brook) Brook says Babble
-
-							This behavior is sometimes called duck typing, after the old saying:
-
-							If it walks like a duck and quacks like a duck, it’s a duck.
-				</section>
-				<section class="chapter">
-							## Magic Methods
-				</section>
-				<section>
-							## Magic Methods (Magische methoden ;-)
-
-							When you type something such as a = 3 + 8, how do the integer objects with values 3 and 8 know how to implement +? Or, if you type name = "Daffy" + " " + "Duck", how does Python know that + now means to concatenate these strings? And how do a and name know how to use = to get the result? You can get at these operators by using Python’s special methods (or, more dramatically, magic methods).
-
-							The names of these methods begin and end with double underscores (__). Why? They’re very unlikely to have been chosen by programmers as variable names. You’ve already seen one: __init__() initializes a newly created object from its class definition and any arguments that were passed in. You’ve also seen (“Name Mangling for Privacy” on page 184) how “dunder” naming helps to mangle class attribute names as well as methods.
-
-							Suppose that you have a simple Word class, and you want an equals() method that compares two words but ignores case. That is, a Word containing the value 'ha' would be considered equal to one containing 'HA'.
+							- Wanneer je in je code twee objecten bij elkaar optelt, zoals getal = 3 + 8, hoe weten deze integer objecten hoe ze de "+" moeten implementeren? 
+							- Of in het geval van strings:  kunstenaar = "Damien" + " " + "Hirst", hoe weet Python hoe deze strings aan elkaar te plakken?  
+							- En in beide bovenstaande voorbeelden: hoe weten de objecten getal en kunstenaar hoe ze de "=" moeten implementeren?
+							- Het antwoord is telkens: magische methods :-)
 				</section>
                 <section>
-							## Magic Methods
+							## Magische Methods: voorbeeld
 							
-							```Python
-							class Word():
-							    def __init__(self, text):
-							        self.text = text ...
-							    def equals(self, word2):
-							        return self.text.lower() == word2.text.lower()
+							- We vertrekken in dit voorbeeld van een eenvoudige klasse Kunstenaar. We maken een gelijk_aan method die de naam case-neutraal vergelijkt
+							- Het zou interessant zijn om 2 objecten te kunnen vergelijken en magische methods maken dit mogelijk
 
-							woord1 = Word("ha")
-							woord2 = Word("HA")
-							woord1.equals(woord2) # True
+
+							```Python
+							class Kunstenaar():
+							    def __init__(self, naam):
+							        self.naam = naam
+							    def gelijk_aan(self, andere_kunstenaar):
+							        return self.naam.lower() == andere_kunstenaar.naam.lower()
+
+							kunstenaar1 = Kunstenaar("Andy Warhol")
+							kunstenaar2 = Kunstenaar("ANDY WARHOL")
+							print(kunstenaar1.gelijk_aan(kunstenaar2)) # True
 							```
-							
-							We defined the method equals() to do this lowercase conversion and comparison. It would be nice to just say if first == second, just like Python’s built-in types. So, let’s do that. We change the equals() method to the special name __eq__() 
                 </section>
 				<section>
-							## Magic Methods
+							## Magische Methods: voorbeeld
 							
-							```Python
-							class Word():
-								def __init__(self, text):
-									self.text = text ...
-								def __eq__(self, word2):
-									return self.text.lower() == word2.text.lower()
+							- Het enige dat we moeten doen is de method gelijk_aan te vervangen door de magische method \_\_eq\_\_
 
-							woord1 = Word("ha")
-							woord2 = Word("HA")
-							woord1 == woord2 # True
+							```Python
+							class Kunstenaar():
+							    def __init__(self, naam):
+							        self.naam = naam
+							    def __eq__(self, andere_kunstenaar):
+							        return self.naam.lower() == andere_kunstenaar.naam.lower()
+
+							kunstenaar1 = Kunstenaar("Andy Warhol")
+							kunstenaar2 = Kunstenaar("ANDY WARHOL")
+							print(kunstenaar1 == kunstenaar2) # True
 							```
 				</section>
 				<section>
-							## Magic Methods voor vergelijkingen
+							## Magische methods voor vergelijkingen
 
-							- \_\_eq\_\_( self, other ) self == other 
-							- \_\_ne\_\_( self, other ) self != other 
-							- \_\_lt\_\_( self, other ) self < other 
-							- \_\_gt\_\_( self, other ) self > other 
-							- \_\_le\_\_( self, other ) self <= other 
-							- \_\_ge\_\_( self, other ) self >= other
+							- \_\_eq\_\_( self, ander)	self == ander 
+							- \_\_ne\_\_( self, ander) self != ander 
+							- \_\_lt\_\_( self, ander) self < ander 
+							- \_\_gt\_\_( self, ander) self > ander
+							- \_\_le\_\_( self, ander) self <= ander
+							- \_\_ge\_\_( self, ander) self >= ander
 
-							(een overzicht van de Magic Methods: https://docs.python.org/3/reference/datamodel.html#special-method-names)
+							Overzicht van magische methods: https://docs.python.org/3/reference/datamodel.html#special-method-names
 				</section>
 				<section>
-							## Magic Methods voor wiskunde
+							## Magische methods voor wiskundige operaties
 
-							- \_\_add\_\_( self, other ) self + other
-							- \_\_sub\_\_( self, other ) self – other
-							- \_\_mul\_\_( self, other ) self * other 
-							- \_\_floordiv\_\_( self, other ) self // other
-							- \_\_truediv\_\_( self, other ) self / other
-							- \_\_mod\_\_( self, other ) self % other
-							- \_\_pow\_\_( self, other ) self ** other
+							- \_\_add\_\_( self, ander) self + ander
+							- \_\_sub\_\_( self, ander) self – ander
+							- \_\_mul\_\_( self, ander) self * other 
+							- \_\_floordiv\_\_( self, ander) self // ander
+							- \_\_truediv\_\_( self, ander) self / ander
+							- \_\_mod\_\_( self, ander) self % ander
+							- \_\_pow\_\_( self, ander) self ** ander
+
+							Overzicht van magische methods: https://docs.python.org/3/reference/datamodel.html#special-method-names
 				</section>
 				<section>
-							## Andere, vaak gebruikte Magic Methods
+							## Andere vaak gebruikte magische methods
 
-							- \_\_str\_\_( self ) str( self )
-							- \_\_repr\_\_( self ) repr( self )
-							- \_\_len\_\_( self ) len( self )
-
-							Besides __init__(), you might find yourself using __str__() the most in your own methods. It’s how you print your object. It’s used by print(), str(), and the string formatters, which you can read about in Chapter 5. The interactive interpreter uses the __repr__() function to echo variables to output. If you fail to define either __str__() or __repr__(), you get Python’s default string version of your object:
-				</section>
-				<section>
-							## Magic Methods
+							- Naast \_\_init\_\_ ga je wellicht het meest gebruik maken van \_\_str\_\_ in je eigen methods
+							- Met deze method geef je mee hoe het object moet worden geprint. Het wordt gebruikt door print() en str()
+							- De interactieve interpreter gebruikt de \_\_repr\_\_ method om variabelen te outputten 
 
 							```Python
-							class Word():
-							... def __init__(self, text):
-							... self.text = text ... def __eq__(self, word2):
-							... return self.text.lower() == word2.text.lower() ... def __str__(self):
-							... return self.text ... def __repr__(self):
-							... return 'Word("' + self.text + '")' ...
-							>>> first = Word('ha')
-							>>> first Word("ha")
-							>>> print(first) ha
+							class Kunstenaar():
+							    def __init__(self, naam):
+							        self.naam = naam
+							    def __str__(self):
+							        return f"Hallo, ik ben {self.naam}!"
+
+							kunstenaar1 = Kunstenaar("Andy Warhol")
+							print(kunstenaar1) # Hallo, ik ben Andy Warhol
 							```
 				</section>
 				<section class="chapter">
-							## Compositie en aggregatie
+							## Abstracte basisklassen
 				</section>
 				<section>
-							## Compositie en aggregatie
-
-							Inheritance is a good technique to use when you want a child class to act like its parent class most of the time (when child is-a parent). It’s tempting to build elaborate inheritance hierarchies, but sometimes composition or aggregation make more sense. What’s the difference? In composition, one thing is part of another. A duck is-a bird (inheritance), but has-a tail (composition). A tail is not a kind of duck, but part of a duck.
+							## Abstracte basisklassen
+							- Je wil een basisklasse voorzien die een template biedt voor overerving naar andere klassen
+							- Enkel een blauwdruk, kan niet geïnstantieerd worden
+							- Subklassen worden dan concrete implementaties van dat idee
+							- Je wil afdwingen dat bepaalde methods moeten geïmplementeerd worden in de subklassen
 				</section>
 				<section>
-							## Compositie en aggregatie
+							## Abstracte basisklassen
 
 							```Python
-							class Bill():
-							    def __init__(self, description):
-								    self.description = description
-							
-							class Tail():
-							    def __init__(self, length): 
-								    self.length = length
-									
-							class Duck():
-							    def __init__(self, bill, tail):
-								    self.bill = bill
-									self.tail = tail
-							    def about(self):
-								    print('This duck has a', self.bill.description, 'bill and a', 
-									self.tail.length, 'tail')
+							from abc import ABC, abstractmethod
+
+							class GrafischeVorm(ABC):
+								def __init__(self):
+									super().__init__()
+
+								@abstractmethod
+								def berekenOppervlakte(self):
+									pass
+
+							class Cirkel(GrafischeVorm):
+								def __init__(self, straal):
+									self.straal = straal
+
+								def berekenOppervlakte(self):
+									return 3.14 * (self.straal ** 2)
 							```
 				</section>
 				<section>
-							## Compositie en aggregatie
+							## Abstracte basisklassen
 
 							```Python
-							a_tail = Tail('long')
-							a_bill = Bill('wide orange')
-							duck = Duck(a_bill, a_tail)
-							duck.about()
+							class Vierkant(GrafischeVorm):
+								def __init__(self, zijde):
+									self.zijde = zijde
+
+								def berekenOppervlakte(self):
+									return self.zijde * self.zijde
+
+							cirkel1 = Cirkel(10)
+							print(cirkel1.berekenOppervlakte())
+							vierkant1 = Vierkant(12)
+							print(vierkant1.berekenOppervlakte())
 							```
-
-							Aggregation expresses relationships, but is a little looser: one thing uses another, but both exist independently. A duck uses a lake, but one is not a part of the other.
-
 				</section>
 				<section>
-							## Python Programming - les 10 - kristof.michiels01@ap.be
+							## Abstracte basisklassen
+							- We maken gebruik van de ABC-module van de standard library
+							- We gebruiken de @abstractmethod decorator om aan te geven dat een method abstract is en elke subklasse deze method moet overschrijven
+				</section>
+				<section>
+							## Interfaces
+							- Python geen expliciete taalondersteuning voor interfaces
+							- Een soort contract of belofte om een bepaald gedrag of mogelijkheden te hebben
+							- Hier: combinatie van meervoudige overerving en ABC
+							- We zouden de JSONify klasse kunnen gebruiken als interface voor een andere klasse
+				</section>
+				<section>
+							## Interfaces
+
+							```Python
+							from abc import ABC, abstractmethod
+
+							class GrafischeVorm(ABC):
+								def __init__(self):
+									super().__init__()
+
+								@abstractmethod
+								def berekenOppervlakte(self):
+									pass
+
+							class JSONify(ABC):
+								@abstractmethod
+								def toJSON(self):
+									pass
+							```
+				</section>
+				<section>
+							## Interfaces
+
+							```Python
+							class Cirkel(GrafischeVorm, JSONify):
+								def __init__(self, straal):
+									self.straal = straal
+
+								def berekenOppervlakte(self):
+									return 3.14 * (self.straal ** 2)
+
+								def toJSON(self):
+									return f"{{ \"cirkel\": {str(self.berekenOppervlakte())} }}"
+
+
+							cirkel1 = Cirkel(10)
+							print(cirkel1.berekenOppervlakte())
+							print(cirkel1.toJSON())
+							```
+				</section>
+				<section>
+							## Python Programming - les 11 - kristof.michiels01@ap.be
 				</section>
 	</body>
 </html>
