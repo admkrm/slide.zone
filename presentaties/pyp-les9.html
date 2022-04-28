@@ -32,10 +32,9 @@
 				</section>
 				<section>
 							## Een eenvoudige toepassing maken
-							- Any group of Python statements placed sequentially in a file can be used as a program, or script
-							- useful to introduce additional structure
-							- Op zijn eenvoudigst: creating a controlling function in a file and calling that function
-							- this structure can give you more options and control when you create larger applications, so it’s a good idea to make using it a habit from the beginning.
+							- Een Python programma of script = elke hoeveelheid van opeenvolgende Python statements
+							- Als het aantal statements toeneemt is het zinvol om bijkomende structuur toe te voegen
+							- Een goeie en eenvoudige eerste stap: een controlerende functie (bvb main()) toevoegen in een bestand en deze functie aanroepen
 
 							```Python
 							def main():
@@ -45,85 +44,116 @@
 							```
 				</section>
 				<section>
-							## Een eenvoudige toepassing maken
+							## Verhinderen dat bij importeren code wordt uitgevoerd				
 
-							Nog eens herhalen => bij import verhinderen dat main wordt uitgevoerd
+							- Met een if-statement kan je checken of het bestand al dan niet geïmporteerd werd uitgevoerd 
+							- Wanneer de interpreter een bronbestand inleest zet het een aantal speciale variabelen, zoals \_\_name__
+							- Als je de module als programma runt (en dus niet importeert) dan kent de interpreter de string "__main__" toe aan deze variabele
+							- Goeie manier van werken: steeds onderstaande opzet gebruiken
+
+
+							```Python
+							def main():
+							    print("Kijk eens aan, ons eerste programma ;-)") 
+								
+							if __name__ == "__main__":
+								main()
+							```
 				</section>
 				<section>
 							## Een script starten van de command-line
-							- If you’re using Linux/UNIX, make sure that Python is on your path and you’re in the same directory as your script. Then type the following on your command line to start the script:
-
-							BASH SHELL VOOR WINDOWS!
-
-							```bash
-							python mijn_script.py
-							```
+							- We hebben tot nog toe onze programma's uitgevoerd met de run-knop van VSCode, of via de terminal sessie die VSCode vervolgens voor ons aanmaakt
+							- We kunnen een Python ook starten via een externe terminal sessie: _python mijn_script.py_
+							- Bij Linux/Unix besturingssystemen spreken we een bash of zsh-shell
+							- Windows gebruikers kunnen ook een bash command-line verkrijgen via Git Bash. Installeer git via https://git-scm.com/ en Git Bash wordt automatisch mee-geïnstalleerd
+							- Je kan na installatie ook binnen VSCode kiezen voor een Bash terminal sessie 
 				</section>
 				<section>
 							## Command-line argumenten
 
-							import sys def main():
-
-print("this is our second test script file")
-
-print(sys.argv) main()
-
-If you call this with the line
-
-python script2.py arg1 arg2 3
-
-you get
-
-this is our second test script file ['script2.py', 'arg1', 'arg2', '3']
-
-You can see that the command-line arguments have been stored in sys.argv as a list of strings.
+							- Onze programma's kunnen input meekrijgen via command-line argumenten (zie ook les 6): _python mijn_script.py arg1 arg2 argn_
+							- Deze argumenten worden bijgehouden in een variabele argv (argument vector) die deel uitmaakt van de sys (system) module
+							- argv is een list, waarvan de elementen met type-conversie functies kunnen worden omgezet naar het gewenste datatype
+							- De sys-module is nodig en wordt geïmporteerd met het import statement
+							- Het eerste element van de sys.argv-list is de naam van het uitgevoerde bestand
+							- De volgende elementen in de list zijn de argumenten die na de bestandsnaam zijn meegegeven
 				</section>
 				<section>
-							## Redirecting the input and output of a script
-							You can redirect the input and/or the output for a script by using command-line options. To show this technique, I use this short script.
+							## Command-line argumenten
+
+							```Python
+							import sys
+
+							print(f"Dit programma heeft {len(sys.argv)} command-line argumenten.")
+							print(f"De naam van het bestand is {sys.argv[0]}")
+
+							if len(sys.argv) > 1:
+								print("De overige argumenten zijn:")
+								for i in range(1, len(sys.argv)):
+									print(sys.argv[i])
+							```
+				</section>
+				<section>
+							## De in- en output van een programma kanaliseren
+
+							- We doen dit door gebruik te maken van command-line opties en van sys.stdin.read() en sys.stdout.write()
+							- Je krijgt er toegang mee naar en tot via:_python mijn_script.py zero 0 < input.txt > output.txt_
 
 							```Python
 							import sys 
 							def main():
-							    contents = sys.stdin.read()
-								# Reads from stdin into contents
-							    sys.stdout.write(contents.replace(sys.argv[1], sys.argv[2]))
-								# Replaces first argument with second
+							    output_string = "Hallo wereld"
+							    mijn_input = sys.stdin.read()
+							    sys.stdout.write(output_string)
 
 							main()
 							```
+				</section>
+				<section>
+							## De in- en output van een programma kanaliseren
 
-							This script reads its standard input and writes to its standard output whatever it reads, with all occurrences of its first argument replaced with its second argument. Called as follows, the script places in outfile a copy of infile with all occurrences of zero replaced by 0:
-
-							python replace.py zero 0 < infile > outfile
-
-							Note that this script works on UNIX, but on Windows, redirection of input and/or output works only if you start a script from a command-prompt window.
-
-							In general, the line
-
-							python script.py arg1 arg2 arg3 arg4 < infile > outfile
-
-							has the effect of having any input or sys.stdin operations directed out of infile and any print or sys.stdout operations directed into outfile. The effect is as though you set sys.stdin to infile with 'r' (read) mode and sys.stdout to outfile with 'w' (write):
-
-							python replace.py a A < infile >> outfile
-
-							This line causes the output to be appended to outfile rather than to overwrite it, as happened in the previous example.
-
-							You can also pipe in the output of one command as the input of another command:
-
-							python replace.py 0 zero < infile | python replace.py 1 one > outfile
-
-							This code results in outfile containing the contents of infile, with all occurrences of 0 changed to zero and all occurrences of 1 changed to one.
+							- Toevoegen aan output-bestand ipv overschrijven:_python mijn_script.py zero 0 >> output.txt_
+							- De output van een script doorgeven als input van een ander script (met het pipe-symbool): python script1.py | python script2.py
 				</section>
 				<section>
 							## De argparse module
 
-							p. 145-146
+							- Je kan configure a script to accept command-line options as well as arguments
+							- The argparse module provides support for parsing different types of arguments and can even generate usage messages
+							- To use the argparse module, you create an instance of ArgumentParser, populate it with arguments, and then read both the optional and positional arguments		
 				</section>
 				<section>
-							## De fileinput module
+							## De argparse module
 
-							p. 146-148
+							```Python
+							from argparse import ArgumentParser
+
+							def main():
+							    parser = ArgumentParser() parser.add_argument("indent", type=int, help="indent for report") parser.add_argument("input_file", help="read data from this file")
+							    parser.add_argument("-f", "--file", dest="filename", help="write report to FILE", metavar="FILE")
+							    parser.add_argument("-x", "--xray", help="specify xray strength factor") parser.add_argument("-q", "--quiet", action="store_false", dest="verbose", default=True, help="don't print status messages to stdout")
+							    args = parser.parse_args()
+							    print("arguments:", args) 
+							
+							main()
+							```
+				</section>
+				<section>
+							## De argparse module
+
+							- Deze code creates an instance of ArgumentParser and then adds two positional arguments, indent and input_file, which are the arguments entered after all of the optional arguments have been parsed 
+							- Positional arguments are those without a prefix character (usually ("-") and are required, and in this case, the indent argument must also be parsable as an int
+							- The next line adds an optional filename argument with either '-f' or '--file'
+							- The final option added, the "quiet" option, also adds the ability to turn off the verbose option, which is True by default (action="store_false"). The fact that these options begin with the prefix character "-" tells the parser that they’re optional
+							- The final argument, "-q", also has a default value (True, in this case) that will be set if the option isn’t specified. The action="store_false" parameter specifies that if the argument is specified, a value of False will be stored in the destination
+				</section>
+				<section>
+							## De argparse module
+							- The argparse module returns a Namespace object containing the arguments as attributes. You can get the values of the arguments by using dot notation. If there’s no argument for an option, its value is None
+							- Thus, if you call the previous script with the line: _python opts.py -x100 -q -f outfile 2 arg2_
+							- Geeft volgend resultaat: arguments: Namespace(filename='outfile', indent=2, input_file='arg2', verbose=False, xray='100')
+							- If an invalid argument is found, or if a required argument isn’t given, parse_args raises an error
+							- _python opts.py -x100 -r_ geeft: usage: opts.py [-h] [-f FILE] [-x XRAY] [-q] indent input_file opts.py: error: the following arguments are required: indent, input_file
 				</section>
 				<section>
 							## Een script onmiddellijk uitvoerbaar maken
@@ -131,14 +161,7 @@ You can see that the command-line arguments have been stored in sys.argv as a li
 							p. 148-150
 				</section>
 				<section>
-							## Programma's en modules
-							For small scripts that contain only a few lines of code, a single function works well. But if the script grows beyond this size, separating your controlling function from the rest of the code is a good option to take. T
-				</section>
-				<section class="chapter">
-							## Modules
-				</section>
-				<section>
-							## Wat zijn modules en hoe gebruik je ze?
+							## Code organiseren in modules
 							- In de les over functies hebben we reeds gezien hoe we functies uit het ene bestand kunnen importeren om ze te gebruiken in een ander bestand
 							- We beschrijven een module als elk bestand dat Python objecten beschrijft, dus ook de bestanden die we importeerden zijn modules 
 							- Als een bestand mijn_programma.py heeft als naam dan is mijn_programma de modulenaam
@@ -148,8 +171,8 @@ You can see that the command-line arguments have been stored in sys.argv as a li
 				<section>
 							## Modules als organisatieblokken voor grotere projecten
 
-							- Modules worden gebruikt om grotere projecten beheersbaar te houden. Zo ook bij Python zelf
-							- De meeste standaard Python functies zijn niet in de core van de taal ingebouwd maar worden aangeboden via specifieke modules, die je kan inladen (importeren) wanneer nodig
+							- Modules worden gebruikt om grotere projecten beheersbaar te houden
+							- Ook Python zelf werkt op modulaire manier. De meeste standaard Python functies zijn niet in de core van de taal ingebouwd maar worden aangeboden via specifieke modules, die je kan importeren wanneer nodig
 							- We noemen deze importeerbare reeks modules de [Python standard library](https://docs.python.org/3/library/) 
 							- Het is aan te raden om, wanneer je programma's langer worden, je code gaat opsplitsen in modules. Ook naar mogelijk later hergebruik van functionaliteit is dit een goeie manier van werken
 
@@ -182,51 +205,28 @@ You can see that the command-line arguments have been stored in sys.argv as a li
 							print(mijn_rekenmodule.oppervlakte(3))
 							```
 				</section>
-
 				<section>
-							## Het module search path
+							## Klassen onderbrengen in modules...
+							
+							```Python
+							#module.py
+							class Boek():
+								def __init__(self, titel):
+									self.titel = titel
+							```
 
-							Exactly where Python looks for modules is defined in a variable called path, which you can access through a module called sys. Enter the following:
+							```Python
+							import module
 
->>> import sys
+							boek1 = module.Boek("Brave New World")
+							boek2 = module.Boek("World War Z")
 
->>> sys.path
+							print(boek1)
+							print(boek1.titel)
+							```
 
-_list of directories in the search path_
-
-The value shown in place of _list of directories in the search path_ depends on the configuration of your system. Regardless of the details, the string indicates a list of directories that Python searches (in order) when attempting to execute an import statement. The first module found that satisfies the import request is used. If there’s no satisfactory module in the module search path, an ImportError exception is raised.
-
-If you’re using IDLE, you can graphically look at the search path and the modules on it by using the Path Browser window, which you can start from the File menu of the Python shell window.
-
-The sys.path variable is initialized from the value of the environment (operating system) variable PYTHONPATH, if it exists, or from a default value that’s dependent on your installation. In addition, whenever you run a Python script, the sys.path variable for that script has the directory containing the script inserted as its first element, which provides a convenient way of determining where the executing Python program is located. In an interactive session such as the previous one, the first element of sys.path is set to the empty string, which Python takes as meaning that it should first look for modules in the current directory.
+							Doe je op dezelfde manier als met functies. Het houdt je code georganiseerd en gestructureerd.
 				</section>
-				<section>
-							## Waar je modules plaatsen?
-
-							In the example that starts this chapter, the mymath module is accessible to Python because (1) when you execute Python interactively, the first element of sys.path is "", telling Python to look for modules in the current directory; and (2) you executed Python in the directory that contained the mymath.py file. In a production environment, neither of these conditions typically is true. You won’t be running Python interactively, and Python code files won’t be located in your current directory. To ensure that your programs can use the modules you coded, you need to:
-
- Place your modules in one of the directories that Python normally searches for modules.
-
- Place all the modules used by a Python program in the same directory as the
-
-program.
-
- Create a directory (or directories) to hold your modules, and modify the sys
-
-.path variable so that it includes this new directory (or directories).
-
-Of these three options, the first is apparently the easiest and is also an option that you should never choose unless your version of Python includes local code directories in its default module search path. Such directories are specifically intended for site-specific
-code (that is, code specific to your machine) and aren’t in danger of being overwritten by a new Python install because they’re not part of the Python installation. If your sys.path refers to such directories, you can put your modules there.
-
-The second option is a good choice for modules that are associated with a particular program. Just keep them with the program.
-
-The third option is the right choice for site-specific modules that will be used in more than one program at that site. You can modify sys.path in various ways. You can assign to it in your code, which is easy, but doing so hardcodes directory locations into your program code. You can set the PYTHONPATH environment variable, which is relatively easy, but it may not apply to all users at your site; or you can add it to the default search path by using a .pth file.
-
-Examples of how to set PYTHONPATH are in the Python documentation in the Python Setup and Usage section (under Command line and environment). The directory or directories you set it to are prepended to the sys.path variable. If you use PYTHONPATH, be careful that you don’t define a module with the same name as one of the existing library modules that you’re using. If you do that your module will be found before the library module. In some cases, this may be what you want, but probably not often.
-
-You can avoid this issue by using a .pth file. In this case, the directory or directories you added will be appended to sys.path. The last of these mechanisms is best illustrated by an example. On Windows, you can place a .pth file in the directory pointed to by sys.prefix. Assume your sys.prefix is c:\program files \python, and place the file in this listing in that directory.
-				</section>
-
                 <section class="chapter">
 							## Virtuele Python-omgevingen
                 </section>

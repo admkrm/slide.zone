@@ -1,0 +1,475 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web Services Python: Les 4</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web Services Python
+							## Het Django web framework (1)
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Het Django web framework
+				</section>
+				<section>
+							## Het Django web framework
+							- Website: https://docs.djangoproject.com/en/4.0/
+							- Django wordt omschreven als een "high-level, Python web framework met een helder, pragmatisch design dat snel ontwikkelen toelaat”
+							- Wat verstaan we onder "web framework"? Een verzameling tools die als pakket kunnen gebruikt worden om webtoepassingen te bouwen
+							- Gechreven in Python uiteraard ;-) Huidige versie:  4.0.4
+							- Documentatie: https://docs.djangoproject.com/en/4.0/
+							- Gebruik deze documentatie als leidraad!
+				</section>
+				<section>
+							## Welke mogelijkheden biedt Django?
+							- ORM (object-relational mapper)
+							- URL-routing
+							- HTML templating (DTL)
+							- Verwerken van forms
+							- Unit testing
+							- API's via Django Rest Framework: https://www.django-rest-framework.org/ (volgende week)
+				</section>
+				<section>
+							## Django installeren
+							- Django project openen in Pycharm 
+							- Of, binnen een virtual environment: pip install django
+				</section>
+				<section class="chapter">
+							## Een Django project aanmaken
+				</section>
+				<section>
+							## Een Django project aanmaken							
+							```bash
+							django-admin startproject naam_van_project
+							```
+
+							- manage.py: hiermee voer je Django-taken uit
+							- Folder "naam_van_project" wordt aangemaakt. Deze bevat op zijn beurt enkele bestanden:
+								- \_\_init__: geeft aan Python mee dat deze folder Python bestanden bevat
+								- wsgi.py en asgi.py: hooks voor web servers Apache of nginx
+								- settings.py: configureren van Django
+								- urls.py: URL-routing
+				</section>
+				<section>
+							## Django project opstarten
+							- Doe je via de terminal met: _python manage.py runserver_
+							- Zorg dat je je in de projectfolder bevindt
+							- In Pycharm gewoon via de run-knop
+							- Applicatie openen op http://localhost:8000
+				</section>
+				<section class="chapter">
+							## Django toepassingen
+				</section>
+				<section>
+							## Een Django toepassing maken
+							- Een Django toepassing (of applicatie) mag je beschouwen als een component binnen een Django project
+							- Een project kan meerdere toepassingen bevatten
+							- Bvb een onderdeel van een groter geheel met een specifiek doel
+							- Zorg dat je je in de projectfolder bevindt
+							- Je maakt de applicatie aan in de terminal met: _python manage.py startapp mijn_toepassing_
+							- In Pycharm: Tools / Run manage.py task => _startapp mijn_toepassing_
+				</section>
+				<section>
+							## Django toepassingen
+
+							- Er wordt een nieuwe folder "mijn_toepassing" aangemaakt
+							- Er wordt een db.sqlite-bestand aangemaakt
+							- apps.py: settings specifiek voor deze app - meestal geen editing nodig
+							- models.py: datalaag voor deze toepassing
+							- views.py: logic en control flow voor de toepassing
+							- tests.py: unit tests voor de toepassing
+							- admin.py: admin interface voor de toepassing
+							- migrations folder: bestanden die dienen voor het maken van aanpassingen aan de databank
+				</section>
+				<section>
+							## Onze toepassing toevoegen aan settings.py
+
+							```Python
+							INSTALLED_APPS = [
+								'django.contrib.admin',
+								'django.contrib.auth',
+								'django.contrib.contenttypes',
+								'django.contrib.sessions',
+								'django.contrib.messages',
+								'django.contrib.staticfiles',
+								'mijn_toepassing',
+							]
+							```
+				</section>
+				<section class="chapter">
+							## Werken met Django models en admin
+				</section>
+				<section>
+							## Werken met Django models en admin
+							- Django maakt gebruik van het MVC-architectuur patroon
+							- MVC = Model - View - Controller conceptuele structuur
+							- Componenten: url-patronen, views, models, templates
+							- Anders genoemd: url patronen, views, models, templates
+							    - urls.py: beslissen om naar welke view door te sturen
+								- views.py: functies die logica/control flow bevatten
+								- models.py: elke view kan gebruik maken van Django models, beschreven als klassen
+								- elke view kan gebruik maken van templates (gebruikelijk in een folder templates ondergebracht)
+				</section>
+				<section>
+							## Django models
+							- Bevinden zich dus in models.py in de app-folder
+							- Vertegenwoordigen de datalaag van een Django toepassing
+							- Ze beschrijven de structuur van het datamodel
+							- Ze laten ons toe de databank te bevragen
+							- Elk model is een klasse die erft van django.db.models.Model en definieert data-velden als klasse-attributen
+				</section>
+				<section>
+							## Django datavelden
+
+							models.py:
+
+							```Python
+							from django.db import models
+
+
+							class Kunstwerk(models.Model):
+								ROUTES = [('T', 'Topstukken'), ('L', 'Long Tail')]
+								titel = models.CharField(max_length=100)
+								registrator = models.CharField(max_length=100)
+								soort = models.CharField(max_length=30)
+								oorsprong = models.CharField(max_length=200, blank=True)
+							```
+				</section>
+				<section>
+							## Django datavelden
+
+							- Tekst: CharField, TextField, EmailField, UrlField
+							- Numeriek: IntegerField, DecimalField
+							- Ander: BooleanField, DateTimeField
+							- Relationele data: ForeignKey, ManyToManyField
+							- Attributen: bvb max_length=10, blank=True, null=True, blank=True 
+							- Model field reference: https://docs.djangoproject.com/en/4.0/ref/models/fields/
+				</section>
+				<section>
+							## Django models en datavelden
+							```python
+							from django.db import models
+
+							class Kunstwerk(models.Model):
+								ROUTES = [('T', 'Topstukken'), ('L', 'Long Tail')]
+								titel = models.CharField(max_length=100)
+								registrator = models.CharField(max_length=100)
+								soort = models.CharField(max_length=30)
+								oorsprong = models.CharField(max_length=200, blank=True)
+								beschrijving = models.TextField()
+								route = models.CharField(max_length=1, choices=ROUTES, blank=True)
+								aangemaakt_op = models.DateTimeField()
+								jaar = models.IntegerField(null=True)
+								kunstenaars = models.ManyToManyField('Kunstenaar', blank=True)
+
+							class Kunstenaar(models.Model):
+								voornaam = models.CharField(max_length=100)
+								naam = models.CharField(max_length=100)
+							```
+				</section>
+				<section>
+							## Migraties
+							
+							- Zoals reeds aangegeven: models beschrijven de structuur van het datamodel
+							- Migraties of migrations genereren scripts om de databank-structuur aan te passen aan dit datamodel
+							- Elke code-aanpassing aan het model leidt tot een nieuwe migratie
+							- Wanneer? Als je een model toevoegt, als je een dataveld toevoegt/wijzigt/verwijdert
+							- Migraties moeten worden aangemaakt en daarna uitgevoerd
+							- Zijn genummerde bestanden in folder migrations. Eerste die wordt aangemaakt: 0001_initial.py
+							- Django gebruikt standaard sqlite: DB Browser voor SQLite / http://sqlitebrowser.org
+							- Naamgeving: toepassing_klassenaam, met een autogegenereerd id-veld
+				</section>
+				<section>
+							## Migraties
+							- aanmaken: _python manage.py makemigrations_
+							- tonen: _python manage.py showmigrations_
+							- migreren naar nieuwste toestand: _python manage.py migrate_
+							- migreren naar bepaald punt bvb: _python manage.py migrate mijn_toepassing 4_
+
+				</section>
+				<section>
+							## Werken met Django admin
+							- Met Django admin creëren we een administratieve interface voor onze toepassing
+							- Het laat admin-gebruikers toe data te zien en te editen
+							- Bestand: admin.py
+
+							```Python
+							from django.contrib import admin
+
+						from .models import Kunstwerk
+
+						@admin.register(Kunstwerk)
+						class KunstwerkAdmin(admin.ModelAdmin):
+							list_display = ["naam", "soort", "oorsprong", "beschrijving", "route",
+							    "jaar", "kunstenaars"]
+							```
+				</section>
+				<section>
+							## Werken met Django admin
+							- Eerst een superuser aanmaken: _python manage.py createsuperuser_
+							- Daarna terug server starten: _python manage.py startserver_
+							- Geeft je een automatische goeie minimalistische admin-interface
+							- \_\_str__-method in model soms nodig om heldere naamgeving te krijgen 
+
+							```Python
+							class Kunstenaar(models.Model):
+								voornaam = models.CharField(max_length=100)
+								naam = models.CharField(max_length=100)
+
+								def __str__(self):
+									return self.voornaam + " " + self.naam
+							```
+				</section>
+				<section>
+							## Data bevragen met de Django ORM
+							- ORM = Object-relational mapper (herinner u SQL-Alchemy)
+							- Kan in de shell getest worden: _python manage.py shell_
+							- Geeft een QuerySet terug = collection van objecten
+							- Je kan gebruik maken van filters
+
+							```Python
+							from mijn_toepassing.models import Kunstwerk
+							Kunstwerk.objects.all()
+							```
+				</section>
+				<section>
+							## Data bevragen met de Django ORM
+							```Python
+							kunstwerken = Kunstwerk.objects.all()
+							kunstwerk = kunstwerken[0]
+							kunstwerk.titel
+							kunstwerk.jaar
+							kunstwerk.beschrijving
+							kunstwerk.id
+							ander_kunstwerk = Kunstwerk.objects.get(id=1)
+							nog_ander_kunstwerk = Kunstwerk.objects.get(id=2)
+							onbestaand_kunstwerk = Kunstwerk.objects.get(id=9999) # geeft DoesNotExist-exception
+							Kunstwerk.objects.get(jaar=2034) # geeft MultipleObjectsReturned-exception
+							# gebruiken vooral filters om meerdere objecten terug te krijgen
+							kunstwerk.kunstenaars.all()
+							# QuerySet met kunstenaars dankzij de __str__-magic method
+							```
+				</section>
+				<section class="chapter">
+							## URL-routing en views
+				</section>
+				<section>
+							## Werken met URL-patronen
+							- Deze patronen worden ook url-confs genoemd. We definiëren ze in urls.py
+							- Aan elk patroon wordt een view gekoppeld dat moet gebruikt worden indien patroon matcht
+							- Elk patroon wordt in volgorde nagekeken tot een match wordt gevonden
+							- Indien geen match op het einde wordt een 404-response teruggegeven
+							- Er wordt een path-functie gebruikt met 3 argumenten:
+							    - patroon of path converter: string gedeelte + "capture group" voor variabelen
+								- View die moet worden gebruikt
+								- Name: optioneel, gebruikt om dynamische links aan te maken
+				</section>
+				<section>
+							## URL-patronen
+							- Documentatie: https://docs.djangoproject.com/en/4.0/topics/http/urls/
+
+							```python
+							from mijn_toepassing import views
+
+							urlpatterns = [
+								path('admin/', admin.site.urls),
+								path('', views.home, name='home'),
+								path('kunstwerken/<int:kunstwerk_id>/', views.kunstwerk_detail, 
+									name='kunstwerk_detail')
+							]
+							```
+				</section>
+				<section>
+							## Views aanmaken in views.py (zonder templates)
+
+							```python
+							from django.shortcuts import render
+							from django.http import HttpResponse
+
+							def home(request):
+								return HttpResponse("<p>home view</p>")
+
+							def kunstwerk_detail(request, kunstwerk_id):
+								return HttpResponse(f"<p>kunstwerk_detail view met id {kunstwerk_id}</p>")
+							```
+				</section>
+				<section>
+							## Views aanmaken in views.py (met templates)
+							- In templates folder kan je templates aanmaken
+
+							```python
+							from django.shortcuts import render
+							from django.http import Http404
+
+							from .models import Kunstwerk
+
+
+							def home(request):
+								kunstwerken = Kunstwerk.objects.all()
+								return render(request, 'home.html', {
+									'kunstwerken': kunstwerken,
+								})
+							```
+				</section>
+				<section>
+							## Views aanmaken in views.py (met templates)
+
+							```python
+							def kunstwerk_detail(request, kunstwerk_id):
+								try:
+									kunstwerk = Kunstwerk.objects.get(id=kunstwerk_id)
+								except Kunstwerk.DoesNotExist:
+									raise Http404('Het kunstwerk werd niet gevonden')
+								return render(request, 'kunstwerk_detail.html', {
+									'kunstwerk': kunstwerk,
+								})
+							```
+				</section>
+				<section class="chapter">
+							## Werken met Django templates
+				</section>
+				<section>
+							## Django templates
+							- Zijn html-bestanden met extra syntax
+							- Django: DTL of optioneel, Jinja2
+							- Template tags: worden gebruikt voor loops, ifs enz...
+							- Template filters: nemen een string als input en geven een string als output (zoals pipe-symbool in shell scripting)
+							- conventie: zelfde naam als view-functie
+
+							```python
+							{{ variabele }}
+							{% tag %}
+							{{ variabele|filter }}
+							```
+				</section>
+				<section>
+							## Django templates
+
+							```Python
+							{{ kunstwerk.titel|capfirst}}
+
+							{% for kunstwerk in kunstwerken %}
+							{% endfor %}
+
+							{% url "home" %} => "/"
+							{% url "kunstwerk_detail" kunstwerk.id %} => "kunstwerken/1/"
+							```
+				</section>
+				<section>
+							## Django templates (overerving)
+							
+							base.html
+							```Python
+							{% block content %}
+							{% endblock content %}
+							```
+
+							home.html
+							```Python
+							{% extends "base.html" %}
+							{% block content %}
+							...
+							{% endblock content %}
+							```
+				</section>
+				<section>
+							## Een template aanmaken (home.html)
+
+							```Python
+							<ul>
+								{% for kunstwerk in kunstwerken %}
+									<li>
+										<a href="{% url 'kunstwerk_detail' kunstwerk.id %}">
+										    <h2>{{ kunstwerk.titel|capfirst }}</h2>
+										</a>
+										<p>{{ kunstwerk.soort }}</p>
+										{% if kunsterk.oorsprong %}
+										    <p>Oorsprong: {{ kunstwerk.oorsprong }}</p>
+										{% endif %}
+										<p>{{ kunstwerk.beschrijving }}</p>
+									</li>
+								{% endfor %}
+							</ul>
+							```
+				</section>
+				<section>
+							## Een template aanmaken (kunstwerk_detail.html)
+
+							```Python
+								<h1>{{ kunstwerk.titel|capfirst }}</h1>
+								<p>{{ kunstwerk.soort }}</p>
+								{% if kunstwerk.oorsprong %}
+									<p>Oorsprong: {{ kunstwerk.oorsprong }}</p>
+								{% endif %}
+								{% if kunstwerk.kunstenaars.all %}
+										{% for kunstenaar in kunstwerk.kunstenaars.all %}
+										    {{ kunstenaar.voornaam }} {{ kunstenaar.naam }}
+										{% endfor %}
+								{% endif %}
+								<p>Aangemaakt door: {{ kunstwerk.registrator }}</p>
+								<p>Aangemaakt op: {{ kunstwerk.aangemaakt_op|date:"d M Y" }}</p>
+								<p>{{ kunstwerk.beschrijving }}</p>
+							```
+				</section>
+				<section>
+							## Templates structureren
+							- base.html bevat de basis-html
+							- home.html: _{% extends "base.html" %}_
+				</section>
+				<section>
+							## CSS en JS integreren met static assets
+							- folder static aanmaken in projectfolder
+							- Settings.py aanpassen:
+
+							```Python
+							# Static files (CSS, JavaScript, Images)
+							# https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+							STATIC_URL = '/static/'
+
+							STATICFILES_DIRS = [
+								os.path.join(BASE_DIR, 'static')
+							]
+							```
+				</section>
+				<section>
+							## CSS en JS integreren met static assets
+							- In de templates file (hier base.html):
+
+							```Python
+							{% load static %}
+							{% static 'style.css' %}
+							{% static 'images/logo.png' %}
+							{% static 'images/hoofding.jpg' %}
+							<script src="{% static 'main.js' %}"></script>
+							```
+
+				</section>
+				<section class="chapter">
+							## Pre-Labo
+				</section>
+				<section>
+							## Pre-Labo
+
+							- Je exploreert de mogelijkheden van Django
+							- Je bestudeert de bronnen die bij de slides staan vermeld
+							- Je maakt een eigen kleine toepassing
+				</section>
+				<section>
+							## Web Services Python - les 4 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
