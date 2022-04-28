@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python Development: Les 9</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Development
+							## Python toepassingen en virtuele Python-omgevingen
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Python toepassingen
+							- Virtuele Python-omgevingen
+							- De Python interactieve shell
+				</section>
+				<section class="chapter">
+							## Python toepassingen
+				</section>
+				<section>
+							## Een eenvoudige toepassing maken
+							- Een Python programma of script = elke hoeveelheid van opeenvolgende Python statements
+							- Als het aantal statements toeneemt is het zinvol om bijkomende structuur toe te voegen
+							- Een goeie en eenvoudige eerste stap: een controlerende functie (bvb main()) toevoegen in een bestand en deze functie aanroepen
+
+							```Python
+							def main():
+							    print("Kijk eens aan, ons eerste programma ;-)") 
+								
+							main()
+							```
+				</section>
+				<section>
+							## Verhinderen dat bij importeren code wordt uitgevoerd				
+
+							- Met een if-statement kan je checken of het bestand al dan niet geïmporteerd werd uitgevoerd 
+							- Wanneer de interpreter een bronbestand inleest zet het een aantal speciale variabelen, zoals \_\_name__
+							- Als je de module als programma runt (en dus niet importeert) dan kent de interpreter de string "__main__" toe aan deze variabele
+							- Goeie manier van werken: steeds onderstaande opzet gebruiken
+
+
+							```Python
+							def main():
+							    print("Kijk eens aan, ons eerste programma ;-)") 
+								
+							if __name__ == "__main__":
+								main()
+							```
+				</section>
+				<section>
+							## Een script starten van de command-line
+							- We hebben tot nog toe onze programma's uitgevoerd met de run-knop van VSCode, of via de terminal sessie die VSCode vervolgens voor ons aanmaakt
+							- We kunnen een Python ook starten via een externe terminal sessie: _python mijn_script.py_
+							- Bij Linux/Unix besturingssystemen spreken we een bash of zsh-shell
+							- Windows gebruikers kunnen ook een bash command-line verkrijgen via Git Bash. Installeer git via https://git-scm.com/ en Git Bash wordt automatisch mee-geïnstalleerd
+							- Je kan na installatie ook binnen VSCode kiezen voor een Bash terminal sessie 
+				</section>
+				<section>
+							## Command-line argumenten
+
+							- Onze programma's kunnen input meekrijgen via command-line argumenten (zie ook les 6): _python mijn_script.py arg1 arg2 argn_
+							- Deze argumenten worden bijgehouden in een variabele argv (argument vector) die deel uitmaakt van de sys (system) module
+							- argv is een list, waarvan de elementen met type-conversie functies kunnen worden omgezet naar het gewenste datatype
+							- De sys-module is nodig en wordt geïmporteerd met het import statement
+							- Het eerste element van de sys.argv-list is de naam van het uitgevoerde bestand
+							- De volgende elementen in de list zijn de argumenten die na de bestandsnaam zijn meegegeven
+				</section>
+				<section>
+							## Command-line argumenten
+
+							```Python
+							import sys
+
+							print(f"Dit programma heeft {len(sys.argv)} command-line argumenten.")
+							print(f"De naam van het bestand is {sys.argv[0]}")
+
+							if len(sys.argv) > 1:
+								print("De overige argumenten zijn:")
+								for i in range(1, len(sys.argv)):
+									print(sys.argv[i])
+							```
+				</section>
+				<section>
+							## De in- en output van een programma kanaliseren
+
+							- We doen dit door gebruik te maken van command-line opties en van sys.stdin.read() en sys.stdout.write()
+							- Je krijgt er toegang mee naar en tot via:_python mijn_script.py zero 0 < input.txt > output.txt_
+
+							```Python
+							import sys 
+							def main():
+							    output_string = "Hallo wereld"
+							    mijn_input = sys.stdin.read()
+							    sys.stdout.write(output_string)
+
+							main()
+							```
+				</section>
+				<section>
+							## De in- en output van een programma kanaliseren
+
+							- Toevoegen aan output-bestand ipv overschrijven:_python mijn_script.py zero 0 >> output.txt_
+							- De output van een script doorgeven als input van een ander script (met het pipe-symbool): python script1.py | python script2.py
+				</section>
+				<section>
+							## De argparse module: flags én argumenten
+
+							- Je kan een script zo configureren dat het zowel command-line opties als argumenten kan accepteren
+							- De argparse module geeft ondersteuning voor verschillende soorten van argumenten en kan ook hulpboodschappen meegeven aan gebruikers
+							- Om de argparse module te gebruiken kan je een instance van ArgumentParser creëren, het voorzien van argumenten, en vervolgens zowel de opionele als positionele argumenten uitlezen
+		
+				</section>
+
+				<section>
+							## De argparse module
+							
+							- Een gedetailleerd overzicht van werken met de argparse valt buiten de scope van deze cursus
+							- Voor studenten die meer willen weten raad ik de volgende resource van harte aan: https://realpython.com/command-line-interfaces-python-argparse/ 
+				</section>
+				<section>
+							## Een script onmiddellijk uitvoerbaar maken
+
+							```Bash
+							#! /usr/bin/env python
+							```
+
+							- Op Unix/Linux/macOS kan je een script heel eenvoudig onmiddellijk uitvoerbaar maken
+							- Voeg de bovenstaande lijn code toe aan de toepassing...
+							- En verander de mode met _chmod +x mijn_toepassing.py_
+							- Wil je toegang tot het besturingssysteem of het administratieve gedeelte (bvb gebruikersbeheer) dan zijn er heel wat Python bibliotheken beschikbaar om deze taken te vervullen
+
+				</section>
+				<section>
+							## Code organiseren in modules
+							- In de les over functies hebben we reeds gezien hoe we functies uit het ene bestand kunnen importeren om ze te gebruiken in een ander bestand
+							- We beschrijven een module als elk bestand dat Python objecten beschrijft, dus ook de bestanden die we importeerden zijn modules 
+							- Als een bestand mijn_programma.py heeft als naam dan is mijn_programma de modulenaam
+							- Je gebruikt het import statement om een externe module te linken. Objecten uit externe module kunnen dan gebruikt worden als modulenaam.objectnaam
+							- Nogmaals: je kan bekijken hoe dit precies werkt in de les over functies
+				</section>
+				<section>
+							## Modules als organisatieblokken voor grotere projecten
+
+							- Modules worden gebruikt om grotere projecten beheersbaar te houden
+							- Ook Python zelf werkt op modulaire manier. De meeste standaard Python functies zijn niet in de core van de taal ingebouwd maar worden aangeboden via specifieke modules, die je kan importeren wanneer nodig
+							- We noemen deze importeerbare reeks modules de [Python standard library](https://docs.python.org/3/library/) 
+							- Het is aan te raden om, wanneer je programma's langer worden, je code gaat opsplitsen in modules. Ook naar mogelijk later hergebruik van functionaliteit is dit een goeie manier van werken
+
+				</section>
+				<section>
+							## Modules
+							- Externe modules bevatten meestal Python broncode, maar ze kunnen ook gecompileerde C of C++ objectbestanden zijn
+							- C(++) of Python: beide types worden op dezelfde manier gebruikt
+							- Naast het groeperen van Python objecten helpen modules ook naamgevingsconflicten beheersen. Een objectnaam hoeft enkel uniek te zijn binnen de namespace van een module
+				</section>
+				<section>
+							## Een voorbeeld van een module
+
+							```Python
+							# mijn_rekenmodule.py:
+							"""mijn_rekenmodule - Een voorbeeld van een rekenmodule - bevat een variabele en een 
+							functie """
+							pi = 3.14159
+							def oppervlakte(straal):
+							    """oppervlakte(straal): geef de oppervlakte van een cirkel terug met straal 
+								'straal'.""" 
+								global pi 
+								return(pi * straal * straal)
+							```
+	
+							```Python
+							# ander_programma.py:
+							import mijn_rekenmodule
+							print(mijn_rekenmodule.pi)
+							print(mijn_rekenmodule.oppervlakte(3))
+							```
+				</section>
+				<section>
+							## Klassen onderbrengen in modules...
+							
+							```Python
+							#module.py
+							class Boek():
+								def __init__(self, titel):
+									self.titel = titel
+							```
+
+							```Python
+							import module
+
+							boek1 = module.Boek("Brave New World")
+							boek2 = module.Boek("World War Z")
+
+							print(boek1)
+							print(boek1.titel)
+							```
+
+							Doe je op dezelfde manier als met functies. Het houdt je code georganiseerd en gestructureerd.
+				</section>
+                <section class="chapter">
+							## Virtuele Python-omgevingen
+                </section>
+                <section>
+							## Virtuele Python-omgevingen
+							- Handig Python feature en essentiële kennis voor Python developers
+							- Per projectfolder een privé-kopie maken van de interpreter en gebruikte dependencies
+							- Dependencies zijn alle software-componenten (zoals externe libraries) die nodig zijn om je project succesvol te kunnen runnen
+							- Op deze manier zijn meerdere projecten op je systeem mogelijk, elk met eigen Python-versie en componenten
+							- Wij gebruiken hier venv: https://docs.python.org/3/library/venv.html. Weet dat er verschillende alternatieven zijn.
+                </section>
+				<section>
+							## Een virtuele omgeving opzetten
+
+							- Het venv-script wordt meegeleverd met de Python-interpreter
+							- De tweede venv op de lijn is de naam die we kiezen voor onze virtuele Python-omgeving. Je kan een andere kiezen, maar is zowat standaard om "venv" te kiezen
+							- Na uitvoeren van het script wordt een venv folder aangemaakt waarin de interpreter en eventueel ook later geïnstalleerde dependencies wordt opgeslagen
+
+							```Bash
+							python -m venv venv
+							```
+				</section>
+				<section>
+							## Een virtuele omgeving activeren
+
+							- We activeren de venv via een script in de virtuele omgeving
+							- Zichtbaar aan de prompt van je bash/zsh terminal dat venv actief is
+
+							```Bash
+							# unix, mac:
+							source venv/bin/activate
+							# windows:
+							venv\Scripts\activate
+							```
+
+							Noot: bij een aantal Windows machines hebben we vastgesteld dat je best manueel naar de venv/Scripts directory navigeert en daar de scripts start als volgt: ". activate"
+							
+							Windows + powershell: "Venv won't activate on this system" => https://dev.to/shriekdj/python-venv-or-virtualenv-wont-activate-on-windows-3e2
+				</section>
+				<section>
+							## Een virtuele omgeving de-activeren
+
+							- Gebruik "deactivate" in de terminal om de virtuele omgeving te verlaten
+
+							```Bash
+							deactivate
+							```
+				</section>
+				<section>
+							## Python installer pip
+
+							- We gebruiken pip om externe dependencies te installeren. Meegeleverd met Python en dus ook aanwezig in de virtuele Python-omgeving
+							- Pip is een recursief acronym dat staat voor "Pip Installs Packages" of "preferred installer program" :-) 
+							- Zorg er voor dat je virtuele omgeving geactiveerd is als je packages installeert
+							- Bekijk de verzameling van gepubliceerde Python packages op PyPI: https://pypi.org/
+							- Bijvoorbeeld om de requests-library te installeren:
+
+							```Bash
+							pip install requests
+							```
+				</section>
+				<section>
+							## Doorgeven of deployen van een virtual environment
+
+							- Dumpen naar een bestand:
+								- pip freeze > requirements.txt
+							
+							- Omgeving aanmaken op basis van een bestand:
+								- pip install -r requirements.txt
+
+				</section>
+				<section class="chapter">
+							## De Python interactieve shell
+				</section>
+				<section>
+							## De Python interactieve shell
+
+							- Als je de Python interpreter uitvoert zonder script in een terminal kom je terecht in de interactieve shell
+							- Veel Python handboeken beginnen met de interactieve interpreter. Ik vermeld het hier, net voor we programma's gaan beginnen schrijven :-)
+							- Waarom? Het is een handige tool om tijdens het programmeren snel iets uit te proberen
+							- Ik gebruik het heel vaak in die context
+							- De shell verlaat je met exit()
+				</section>
+				<section>
+							## De Python interactieve shell
+
+							```bash
+							python
+							>>> tekst = "Hallo"
+							>>> for letter in tekst:
+							...     print(letter)
+							... 
+							H
+							a
+							l
+							l
+							o
+							>>> exit()
+							```
+				</section>
+				<section>
+							## Python Development - les 9 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

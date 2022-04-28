@@ -116,49 +116,32 @@
 							- De output van een script doorgeven als input van een ander script (met het pipe-symbool): python script1.py | python script2.py
 				</section>
 				<section>
-							## De argparse module
+							## De argparse module: flags én argumenten
 
-							- Je kan configure a script to accept command-line options as well as arguments
-							- The argparse module provides support for parsing different types of arguments and can even generate usage messages
-							- To use the argparse module, you create an instance of ArgumentParser, populate it with arguments, and then read both the optional and positional arguments		
+							- Je kan een script zo configureren dat het zowel command-line opties als argumenten kan accepteren
+							- De argparse module geeft ondersteuning voor verschillende soorten van argumenten en kan ook hulpboodschappen meegeven aan gebruikers
+							- Om de argparse module te gebruiken kan je een instance van ArgumentParser creëren, het voorzien van argumenten, en vervolgens zowel de opionele als positionele argumenten uitlezen
+		
 				</section>
+
 				<section>
 							## De argparse module
-
-							```Python
-							from argparse import ArgumentParser
-
-							def main():
-							    parser = ArgumentParser() parser.add_argument("indent", type=int, help="indent for report") parser.add_argument("input_file", help="read data from this file")
-							    parser.add_argument("-f", "--file", dest="filename", help="write report to FILE", metavar="FILE")
-							    parser.add_argument("-x", "--xray", help="specify xray strength factor") parser.add_argument("-q", "--quiet", action="store_false", dest="verbose", default=True, help="don't print status messages to stdout")
-							    args = parser.parse_args()
-							    print("arguments:", args) 
 							
-							main()
-							```
-				</section>
-				<section>
-							## De argparse module
-
-							- Deze code creates an instance of ArgumentParser and then adds two positional arguments, indent and input_file, which are the arguments entered after all of the optional arguments have been parsed 
-							- Positional arguments are those without a prefix character (usually ("-") and are required, and in this case, the indent argument must also be parsable as an int
-							- The next line adds an optional filename argument with either '-f' or '--file'
-							- The final option added, the "quiet" option, also adds the ability to turn off the verbose option, which is True by default (action="store_false"). The fact that these options begin with the prefix character "-" tells the parser that they’re optional
-							- The final argument, "-q", also has a default value (True, in this case) that will be set if the option isn’t specified. The action="store_false" parameter specifies that if the argument is specified, a value of False will be stored in the destination
-				</section>
-				<section>
-							## De argparse module
-							- The argparse module returns a Namespace object containing the arguments as attributes. You can get the values of the arguments by using dot notation. If there’s no argument for an option, its value is None
-							- Thus, if you call the previous script with the line: _python opts.py -x100 -q -f outfile 2 arg2_
-							- Geeft volgend resultaat: arguments: Namespace(filename='outfile', indent=2, input_file='arg2', verbose=False, xray='100')
-							- If an invalid argument is found, or if a required argument isn’t given, parse_args raises an error
-							- _python opts.py -x100 -r_ geeft: usage: opts.py [-h] [-f FILE] [-x XRAY] [-q] indent input_file opts.py: error: the following arguments are required: indent, input_file
+							- Een gedetailleerd overzicht van werken met de argparse valt buiten de scope van deze cursus
+							- Voor studenten die meer willen weten raad ik de volgende resource van harte aan: https://realpython.com/command-line-interfaces-python-argparse/ 
 				</section>
 				<section>
 							## Een script onmiddellijk uitvoerbaar maken
 
-							p. 148-150
+							```Bash
+							#! /usr/bin/env python
+							```
+
+							- Op Unix/Linux/macOS kan je een script heel eenvoudig onmiddellijk uitvoerbaar maken
+							- Voeg de bovenstaande lijn code toe aan de toepassing...
+							- En verander de mode met _chmod +x mijn_toepassing.py_
+							- Wil je toegang tot het besturingssysteem of het administratieve gedeelte (bvb gebruikersbeheer) dan zijn er heel wat Python bibliotheken beschikbaar om deze taken te vervullen
+
 				</section>
 				<section>
 							## Code organiseren in modules
@@ -246,7 +229,7 @@
 							- Na uitvoeren van het script wordt een venv folder aangemaakt waarin de interpreter en eventueel ook later geïnstalleerde dependencies wordt opgeslagen
 
 							```Bash
-							python3 -m venv venv
+							python -m venv venv
 							```
 				</section>
 				<section>
@@ -258,11 +241,12 @@
 							```Bash
 							# unix, mac:
 							source venv/bin/activate
-
 							# windows:
 							venv\Scripts\activate
 							```
 
+							Noot: bij een aantal Windows machines hebben we vastgesteld dat je best manueel naar de venv/Scripts directory navigeert en daar de scripts start als volgt: ". activate"
+							
 							Windows + powershell: "Venv won't activate on this system" => https://dev.to/shriekdj/python-venv-or-virtualenv-wont-activate-on-windows-3e2
 				</section>
 				<section>
