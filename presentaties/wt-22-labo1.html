@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web technology 2022-23: Labo 1</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web technology
+							## Week 1: labo
+							#### Kristof Michiels
+				</section>
+				<section>
+							## In de oefeningensessies deze week:
+							- Onze tools leren gebruiken
+							- De algemene html leren gebruiken
+							- Leren foutenvrije html schrijven
+							- Teksten van de juiste elementen voorzien
+				</section>
+				<section>
+							## Onze werkinstrumenten: Visual Studio Code
+							![Visual Studio Code](../img/vscode.png)
+							##### https://code.visualstudio.com/
+				</section>
+				<section>
+							## Onze werkinstrumenten: Google Chrome
+							![Google Chrome](../img/google-chrome.jpg)
+							##### https://www.google.com/chrome/
+				</section>
+				<section>
+							## Eerste Labo
+							- Jij: installeert deze tools 
+							- Jij: vlot leren schakelen tussen beide programma's (ALT + TAB of CMD + TAB)
+							- Jij: goed overweg kunnen met Windows Explorer/Finder en bestanden kunnen openen in de browser
+							- Jij: een overzichtelijke folderstructuur aanmaken op je laptop voor dit vak en de oefeningen
+							- Jij: bestanden vlot kunnen zippen/unzippen!
+				</section>
+				<section class="chapter">
+							## Uitwerken van een eerste webpagina
+				</section>
+				<section>
+							## Stapsgewijs een eerste pagina bouwen
+							- We beginnen met gewone tekst
+							- Daarna geven we het document de eerste structuur
+							- Vervolgens zullen we bepaalde tekstelementen identificeren
+							- Daarna voegen we een afbeelding toe
+							- Tenslotte lopen we een beetje vooruit en voegen we een snuifje CSS toe
+				</section>
+				<section>
+							## 1. Beginnen met niet-opgemaakte tekst
+							![Stap 1](../img/stap1.jpg)
+							##### [Download de tekst](https://gist.github.com/admkrm/5ada94397fe0fc6eab7ecf09f3bf68f5)
+				</section>
+				<section>
+							## 1. Beginnen met niet-opgemaakte tekst
+							- We gaan dit bestand opslaan als index.html
+							- Dit is een goeie gewoonte. Veel webservers gaan ervan uit dat je de startpagina index noemt
+							- De extensie .html geeft aan dat de browser deze pagina als een webpagina hoort te behandelen
+							- Daarna bekijken we het resultaat in de Chrome-browser. Wat valt op?
+							- Vallen op: Chrome toont de pagina maar negeert onze "returns", ook meer dan 1 spatie, en onze pagina mist alle structuur
+				</section>
+				<section>
+							## 1. Beginnen met niet-opgemaakte tekst
+							![Stap 1 resultaat](../img/stap1-resultaat.jpg)
+				</section>
+				<section>
+							## Algemene regels voor naamgeving van bestanden
+
+							- Gebruik nooit spaties in bestandsnamen. Houd het eenvoudig. Houd het kort. Gebruik enkel kleine letters.
+							- HTML-bestanden moeten steeds eindigen op .html of .htm
+							- CSS-bestanden eindigen op .css
+							- JavaScript-bestanden eindigen op .js
+							- Afbeeldingen: .gif, .png, .jpg (soms .jpeg), of .svg
+				</section>
+				<section>
+							## 2. Document de eerste structuur geven
+
+							- We zijn nu klaar om ons document "op te maken"
+							- Anatomie van een html-element: het element bevat informatie die wordt voorafgegaan en afgesloten door html-tags. Die tags noemen we de markup
+							- Je hebt openings-tags (&lt;tagnaam&gt;) en afsluit-tags (&lt;/tagnaam&gt;). Niet moeilijk maar het moet wel juist
+							- De "/" noemen we slash
+							- Niet elk HTML-element heeft informatie in het midden. Niet elk element heeft een afsluit-tag
+				</section>
+				<section>
+							## Basistructuur van elke html-pagina
+
+							```
+							&lt;!DOCTYPE html&gt;
+							&lt;html&gt;
+								&lt;head&gt;
+									<meta charset="utf-8">
+									<title>Titel komt hier</title>
+									<meta name="viewport" content="width=device-width, initial-scale=1.0">
+								&lt;/head&gt;
+								&lt;body&gt;
+									&lt;h1&gt;Hallo wereld!&lt;/h1&gt;
+								&lt;/body&gt;
+							&lt;/html&gt;
+							```
+
+							Dit is de minimale startversie van elk HTML-bestand. Niet zelf in te typen: VSCode helpt ;-)
+
+				</section>
+				<section>
+							## Basistructuur van elke html-pagina
+
+							- DOCTYPE identificeert de pagina als bestaande uit HTML5
+							- We stoppen alles in een root-element
+							- Binnen het root-element: een head en een body element
+							- Een meta-element: aangeven dat onze character encoding unicode versie UTF-8
+							- Een viewport meta-element: belangrijke instelling voor mobiele toestellen
+							- Verplicht ook: het title element
+							- In het body element komt alle html die wij gaan schrijven
+				</section>
+				<section>
+							## 2. Document de eerste structuur geven
+							![Stap 2](../img/stap2.jpg)
+							##### Geeft GEEN verschil in browser t.o.v. stap 1, behalve dat de browser de titel zal weergeven
+				</section>
+				<section>
+							## 3. Tekstelementen identificeren
+
+							- We gaan nu enkele html-tags toevoegen => hoofdingen, paragrafen, benadrukte tekst,
+							- de opmaak in html heeft als doel om betekenis en structuur te geven aan onze tekst. Niet om een bepaalde vormgeving te creëren.
+							- Jouw job is om het meest passende element te gaan kiezen voor elk contentelement. Bvb een h1 voor de belangrijkste titel op de pagina
+							- De vormgeving, die komt later => met css
+				</section>
+				<section>
+							## 3. Tekstelementen identificeren
+							![Stap 3](../img/stap3.jpg)
+				</section>
+				<section>
+							## 3. Tekstelementen identificeren
+							![Stap 3 resultaat](../img/stap3-resultaat.jpg)
+							##### Hiermee kan de browser al een stuk beter om!
+				</section>
+				<section>
+							## Enkele vaststellingen tussendoor
+							- Het ene HTML-element is het andere niet
+							- h1, h2, h3 en p beginnen en eindigen telkens op een nieuwe regel. Het zijn wat we noemen block-level elementen. Ze beschikken als het ware over "ellebogen"
+							- Het em-element heeft die kracht niet. We noemen dit een inline-element
+							- We zullen dit gedrag kunnen wijzigen via CSS
+							- Default stijlen: wij hebben nergens gezegd dat de titels in het vet moesten
+				</section>
+				<section>
+							## 4. Een afbeelding toevoegen
+							- We doen dit met een img-element
+							- Een img-element maakt gebruik van attributen
+							- Attributen zijn instructies die een element verduidelijken of veranderen
+							- Attributen komen enkel voor in de openingstag
+							- Er kunnen er meerdere zijn, de volgorde is niet belangrijk
+							- meeste attributen nemen een waarde aan, die is voorafgegaan door een =
+							- waardes zijn verpakt in dubbele aanhalingstekens. Deze moeten recht ("") zijn.
+							- Sommige attributen zijn verplicht, andere niet
+				</section>
+				<section>
+							## 4. Een afbeelding toevoegen
+
+							```
+							<h1>
+								<img src="screenshot.png" alt="screenshot"><br>
+								Mat Mania or Exciting Hour
+							</h1>
+							```
+
+							- Ik heb er ook een line break (br-element) tussen gesmokkeld
+							- Dit element zorgt ervoor dat wat volgt op een nieuwe lijn wordt begonnen
+
+				</section>
+				<section>
+							## 4. Een afbeelding toevoegen
+							![Stap 4](../img/stap4.jpg)
+				</section>
+				<section>
+							## 4. Een afbeelding toevoegen
+							![Stap 4 resultaat](../img/stap4-resultaat.jpg)
+				</section>
+				<section>
+							## 5. de look aanpassen met een stylesheet
+							![Stap 5](../img/stap5.jpg)
+				</section>
+				<section>
+							## 5. de look aanpassen met een stylesheet
+							![Stap 5 resultaat](../img/stap5-resultaat.jpg)
+							##### [Download deze versie](https://gist.github.com/admkrm/ca7b21ab5b59983cc2373da710156881)
+				</section>
+				<section>
+							## Web technology - Labo 1
+							### Bedankt voor je aandacht!
+							#### kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
