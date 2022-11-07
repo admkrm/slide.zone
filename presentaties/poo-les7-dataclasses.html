@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OO Programming: Les 7</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OO Programming
+							## Les 7: data classes
+							#### Kristof Michiels
+				</section>
+				<section class="chapter">
+							## Wat zijn data classes?
+                </section>
+				<section>
+							## Data classes
+							- Een alternatieve manier om klassen te definiëren
+							- Toegevoegd in Python 3.7
+							- Handig voor klassen die enkel data/attributen bevatten
+							- Helpt creatie en beheer van klassen te automatiseren
+							- https://docs.python.org/3/library/dataclasses.html
+				</section>
+				<section>
+							## Hoe gebruiken?
+							- _Dataclass_ klasse importeren uit de _dataclasses_ module
+							- @dataclass decorator gebruiken
+							- We verwijderen de \_\_init__ functie
+							- Instance attributen worden aangemaakt bvb als volgt: "titel: str"
+							- Achter de schermen zal de data class decorator de klasse herschrijven
+							- In dit proces worden ook \_\_repr__ en \_\_eq__ magic methods toegevoegd: 
+								- je kan object dus out of the box met elkaar vergelijken 
+							- Het zijn Python klassen zoals elke andere die we reeds hebben gezien, maar veel beknopter geschreven
+				</section>
+				<section>
+							## Basisvoorbeeld Data classes
+
+							```Python
+							from dataclasses import dataclass
+
+							@dataclass
+							class Boek:
+								titel: str
+								auteur: str
+								lengte: int
+								prijs: float
+
+								def boekinfo(self):
+									return f"{self.titel}, by {self.auteur}"
+
+							oBoek1 = Boek("Oorlog en Vrede", "Leo Tolstoj", 1225, 39)
+							oBoek2 = Boek("De vanger in het graan", "JD Salinger", 234, 29)
+							```
+				</section>
+				<section>
+							## Basisvoorbeeld Data classes
+
+							```Python
+							print(oBoek1.titel)
+							print(oBoek2.auteur)
+
+							print(oBoek1)
+
+							oBoek3 = Boek("Oorlog en Vrede", "Leo Tolstoj", 1225, 39)
+							print(oBoek1 == oBoek3)
+
+							oBoek1.titel = "Anna Karenina"
+							oBoek1.lengte = 864
+							print(oBoek1.boekinfo())
+							```
+				</section>
+
+				<section class="chapter">
+							## Post-initialisatie gebruiken
+				</section>
+				<section>
+							## Post-initialisatie gebruiken
+							- De \_\_post_init__ method laat toe extra eigenschappen toe te voegen na het initialisatieproces
+							- Bvb nuttig als deze eigenschap samengesteld is of gebaseerd is op bij initalisatie gecreëerde variabelen 
+				</section>
+				<section>
+							## Voorbeeld: post-initialisatie
+
+							```Python
+							from dataclasses import dataclass
+
+							@dataclass
+							class Boek:
+								titel: str
+								auteur: str
+								lengte: int
+								prijs: float
+
+								def __post_init__(self):
+									self.beschrijving = f"{self.titel} door {self.auteur}, {self.lengte} pagina's"
+
+							oBoek1 = Boek("Oorlog en Vrede", "Leo Tolstoj", 1225, 39)
+							oBoek2 = Boek("De vanger in het graan", "JD Salinger", 234, 29)
+							print(oBoek1.beschrijving)
+							print(oBoek2.beschrijving)
+							```
+				</section>
+				<section class="chapter">
+							## Standaardwaarden gebruiken
+				</section>
+				<section>
+							## Standaardwaarden gebruiken
+							- Je kan op eenvoudige manier standaardwaarden (= default values) meegeven bij het declareren van de instance variabelen
+							- Let op: attributen zonder defaultwaarden horen eerst gedefinieerd te worden
+							- Een andere - meer flexibele - manier om defaults toe te voegen is via de field functie:
+								- "prijs: float = field(default=0.0)"
+							- Met default_factory kan je externe functies aanroepen en de returnwaarde als default laten gelden
+
+				</section>
+				<section>
+							## Voorbeeld: standaardwaarden gebruiken
+
+							```Python
+							from dataclasses import dataclass, field
+							import random
+
+							def prijs_func():
+								return float(random.randrange(20, 40))
+
+							@dataclass
+							class Boek:
+								titel: str = "Geen titel"
+								auteur: str = "Geen auteur"
+								lengte: int = 0
+								prijs: float = field(default_factory=prijs_func)
+							```
+				</section>
+				<section>
+							## Voorbeeld: standaardwaarden gebruiken
+
+							```Python
+							oBoek1 = Boek()
+							print(oBoek1)
+
+							oBoek2 = Boek("Oorlog en Vrede", "Leo Tolstoj", 1225)
+							oBoek3 = Boek("De vanger in het graan", "JD Salinger", 234)
+							print(oBoek2)
+							print(oBoek3)
+							```
+				</section>
+				<section class="chapter">
+							## Onveranderlijke data classes
+				</section>
+				<section>
+							## Onveranderlijke (=immutable) data classes
+							- Data kan niet veranderd worden van buiten de klasse
+							- @dataclass decorator => (frozen = True)
+				</section>
+				<section>
+							## Voorbeeld: onveranderlijke data classes
+
+							```Python
+							from dataclasses import dataclass
+
+							@dataclass(frozen=True)
+							class OnveranderlijkeKlasse:
+								waarde1: str = "Waarde 1"
+								waarde2: int = 0
+
+								def mijnfunctie(self, nieuwewaarde):
+									self.waarde2 = nieuwewaarde
+
+
+							oOnveranderlijkeKlasse = OnveranderlijkeKlasse()
+							print(oOnveranderlijkeKlasse.waarde1)
+							oOnveranderlijkeKlasse.waarde1 = "Andere waarde"
+							print(oOnveranderlijkeKlasse.waarde1)
+							oOnveranderlijkeKlasse.mijnfunctie(20)
+							```
+				</section>
+ 
+				<section>
+							##  Python OO programming - les 7 - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
