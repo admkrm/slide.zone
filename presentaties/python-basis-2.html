@@ -1,0 +1,652 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OOP: snel van start met Python</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OOP
+							## 2/ Snel van start met Python
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Het doel van deze les?
+							- Python in een notendop. De __absolute basis__ van Python bekijken om snel onze eerste programma's te kunnen schrijven.  
+							- Dat geeft __motivatie en zin__ om verder te doen. In de komende lessen behandelen we deze zaken in groter detail én we dringen dieper door in het Python universum. 
+							- Dit helikopter-uitzicht is het __begin van je reis__ naar het kunnen oplossen van complexe problemen met Python. Welke je afstudeerrichting ook is - AI, Cyber Security, Cloud of Internet of Things - Python heeft de oplossingen
+				</section>
+				<section>
+							## Inhoud
+							- Variabelen (en hun datatypes)
+							- Operatoren
+							- Datastructuren
+							- Control flow
+							- Functies
+							- Klassen en objecten
+							- Input van de gebruiker
+				</section>
+				<section class="chapter">
+							## Variabelen (en hun datatypes)
+				</section>
+				<section>
+							## Variabelen
+
+							```Python
+							getal = 12
+							favoriete_taal = "Python"	
+							print(mijn_getal)
+							```
+
+							- De basisbouwstenen van je programma's: eenheden die een naam en een waarde toegewezen krijgen
+							- Worden automatisch gemaakt wanneer ze voor het eerst worden toegewezen
+							- Het gelijkheidsteken noemen we een toekenningsoperator
+							- Als waarde zijn verschillende data types mogelijk: tekst, getallen, booleans,...
+							- Waarde kan gewijzigd worden tijdens looptijd van je programma
+				</section>
+				<section>
+							## Naam van variabelen
+
+							```Python 
+							1_getal = 12 # mag niet, geeft syntax error
+							getal_1 = 12 # kan wel
+							mijn_school = "Artesis Plantijn Hogeschool"
+							x = 2 # waarvoor staat x ? Probeer meer betekenis aan de naam te geven
+							```
+							- Mag niet beginnen met een getal
+							- Mag geen speciale karakters bevatten. Enkel underscores
+							- Best practice om enkel kleine letters te gebruiken. Nooit starten met een hoofdletter (zoals klassen)
+							- Geef betekenisvolle namen aan je variabelen
+				</section>
+				<section>
+							## Meerdere toewijzigen
+
+							```Python
+							voornaam, familienaam, beroep = "Kristof", "Michiels", "Docent"
+							```
+
+							- Je kan waarden aan meerdere variabelen toekennen in één enkele statement
+							- Dit maakt je programma's korter en beter leesbaar
+							- Je scheidt hiervoor de namen van de variabelen met komma's en doet hetzelfde met de waarden
+							- Python kent dan de respectievelijke waarde toe aan elke genoemde variabele
+				</section>
+				<section>
+							## Constanten
+
+							```Python
+							STUDENTEN_PER_GROEP = 4
+							```
+
+							- Een constante is zoals een variabele, maar met een waarde die niet verandert tijdens de looptijd van je programma
+							- Python heeft geen ingebouwde ondersteuning voor constanten maar developers gebruiken een naam bestaande uit enkel hoofdletters om aan te geven dat het hier over een niet te veranderen constante gaat
+				</section>
+				<section>
+							## Datatypes (ook: gegevenstypes)
+
+							```Python 
+							mijn_school = "Artesis Plantijn Hogeschool"
+							getal = 12
+							print(type(mijn_school)) # str
+							print(type(getal)) # int
+							```
+
+							- Datatypes zijn de verschillende soorten data die we aan variabelen kunnen meegeven
+							- Op basis van de waarde die we aan een variabele toekennen kiest Python __zelf__ het datatype
+							- De waarde wordt dan een object van die klasse. Daar hoort bepaalde functionaliteit bij
+							- We zagen in de voorbeelden reeds tekst en (gehele) getallen, maar Python kent er een pak meer 
+							- De Python-functie type geeft op basis van de naam van je variabele het datatype terug
+				</section>
+				<section>
+							## Getallen: integers en floats
+
+							```Python 
+							dag = 21
+							temperatuur = -15
+							gewicht = 75.5
+							stand_bankrekening = -260.3
+							```
+
+							- Integers zijn gehele getallen. Dit zijn positieve of negatieve getallen zonder komma
+							- Floats zijn decimale getallen. Positieve of negatieve getallen met een komma
+							- Float wordt binair opgeslagen in een vast aantal bits = zwevendekommagetal m.a.w. de komma zweeft  
+				</section>
+				<section>
+							## Tekst: strings
+
+							```Python 
+							mijn_school = "Artesis Plantijn Hogeschool"
+							store = 'Nick's pizza shop'
+							store = "Nick's pizza shop"
+							store = "Nick\'s pizza shop, the \"best\" there is"
+							```
+
+							- Strings are a way to represent text inside of Python
+							- Strings? And the reason this is called a string has to do with the fact that it's a string of characters / So remember how computers lay things out in memory? Each character in the string gets its own segment of memory and the computer strings them together into these arbitrarily large strings. 
+							is you can use double quotes or single quotes, to represent a string. So for example, if I do single quotes here instead of double, and I run our code, we're going to have the exact same output. The only thing that we can't do is have a mix. We can't start with a double quote and then end with a single quote, we have to be consistent about how we represent our strings.
+
+							- can use double quotes or single quotes, to represent a string. So for example, if I do single quotes here instead of double, and I run our code, we're going to have the exact same output. The only thing that we can't do is have a mix. We can't start with a double quote and then end with a single quote, we have to be consistent about how we represent our strings. 
+				</section>
+				<section>
+							## Werken met tekst: strings
+							- Een string bestaat uit een reeks tekst-karakters
+							- Alles binnen aanhalingstekens wordt beschouwd als een string
+							- Je mag gebruik maken van enkele of dubbele aanhalingstekens
+							- Deze flexibiliteit laat toe om aanhalings- en afkappingstekens te gebruiken in je strings
+							- Wees standvastig in je keuzes
+
+
+							```Python
+							boodschap = "Dit is een string."
+							boodschap = 'Dit is ook een string.'
+							boodschap = 'Mijn vriend vroeg: "Programmeer jij ook in Python?" '
+							boodschap = "Ik hou van het schrijven van Python programma's"
+							```
+				</section>
+				<section>
+							## Hoofdlettergebruik wijzigen in een string
+
+							```Python
+							naam = "Guido van Rossum"
+							print(naam.title()) # Elk woord laten beginnen met een hoofdletter: Guido Van Rossum
+							print(naam.upper()) # Alles in hoofdletters: GUIDO VAN ROSSUM
+							print(naam.lower()) # Alles in kleine letters: guido van rossum
+							```
+							- We beschikken hiervoor over een aantal zgn. methods. Dit zijn acties die je op bepaalde data kan toepassen
+							- De dot-notatie (".") vertelt Python in het eerste vb. om de title-method uit te voeren op de variabele naam
+							- Elke method wordt gevolgd door haakjes, omdat methods vaak bijkomende informatie nodig hebben om hun werk te kunnen doen. Hier is dit evenwel niet het geval
+							- De lower()-method wordt vaak gebruikt om data op te slaan die door een gebruiker werd ingegeven
+
+				</section>
+				<section>
+							## Variabelen gebruiken in een string: f-strings
+
+							```Python
+							voornaam = "Guido"
+							familienaam = "van Rossum"
+							volledige_naam = f"{voornaam} {familienaam}"
+							boodschap = f"Bedankt voor Python, {volledige_naam.title()}!"
+							print(boodschap)
+							```
+
+							- Om variabelen te gebruiken binnen strings plaats je de letter f onmiddellijk voor het eerste aanhalingsteken
+							- Je omringt de variabelen die je in de string gebruikt met accolades
+							- Python vervangt elke variabele door de waarde
+							- De f in f-strings staat voor "format"
+				</section>
+
+
+				<section>
+							## Variabelen gebruiken in strings
+
+							```Python 
+							day = 25
+							month = "oktober"
+							temp = 13
+
+							print("Het is vandaag 25 oktober en de temperatuur bedraagt 13 graden")
+							print(f"Het is vandaag {day} {month} en de temperatuur bedraagt {temp} graden")
+							```
+				</section>
+				<section>
+							## Witruimte toevoegen aan strings
+
+							```Python
+							print("\tHelderheid")
+							print("Pythonisch programmeren:\nHelder\nGeloofwaardig\nEfficiënt")
+							print("Pythonisch programmeren:\n\tHelder\n\tGeloofwaardig\n\tEfficiënt")
+							```
+							
+							- Met witruimte doelen we op niet-afdrukbare tekens als spaties, tabs en einde-lijnsymbolen
+							- Je gebruikt ze om je output op een beter leesbare manier te organiseren
+							- Een tab-insprong toevoegen aan je tekst doe je met "\t"
+							- Een nieuwe regel voeg je toe met "\n"
+							- Combinaties zijn mogelijk: "\n\t" zorgt ervoor dat Python op een nieuwe regel begint, met een tabinsprong
+				</section>
+				<section>
+							## Witruimte elimineren binnen strings
+
+							```Python
+							boodschap = " Ik hou van Python "
+							print(boodschap.rstrip())
+							print(boodschap.lstrip())
+							print(boodschap.strip())
+							```
+
+							- Python maakt het eenvoudig om (eventueel) aanwezige witruimte te verwijderen
+							- Er kan een onderscheid worden gemaakt tussen witruimte links, rechts of aan beide zijden van een string
+							- Handig als je twee strings met elkaar wil vergelijken
+				</section>
+				<section>
+							## Data types: booleans
+
+							```Python 
+							licht_is_aan = True
+							```
+
+							booleans are true and false values. Note that they start with a capital letter here. If I try to do a lowercase true, it tries to interpret this as a variable name and says that it's not defined. However, if you want to be very confusing, you can write a little program like this. So how are booleans usually used in programming? Well, they're not usually used directly by typing true and false explicitly, but we usually get them as the result of statements like this one. Now remember a single equal sign, if we scroll up, this is an assignment operator. The double equal sign is a statement. It's saying 1 is equal to 1, and we get back true. We could also do 1 is equal to 2, which is, of course, false. This double equals is a comparison operator. So this is a comparison operator, we're comparing two values, versus the assignment operator, where we're assigning a value into a variable. 
+				</section>
+				<section class="chapter">
+							## Operators en expressies
+				</section>
+				<section>
+							## Operators en expressies
+
+							- Een operator is een code-element dat een bewerking uitvoert op een of meer code-elementen die waarden bevatten. Waarde-elementen omvatten variabelen, constanten, letterlijke waarden, eigenschappen
+							- Een expressie is een reeks waarde-elementen in combinatie met operatoren, wat een nieuwe waarde oplevert. De operators handelen op de waarde-elementen door berekeningen, vergelijkingen of andere bewerkingen uit te voeren.
+							- Er bestaan verschillende soorten operators en dus ook expressies
+				</section>
+				<section>
+							## Wiskundige operatoren
+
+							```Python
+							print(1 + 1)
+							print(day + 3)
+							print(4 * 5)
+							print(5 ** 2)
+							print(20 / 5) # 4.0 een float
+							print(13 % 4) # 1
+							```
+							- Standaardregels van rekenkundige voorrang zijn van toepassing
+							- Meest voor de hand liggende type. Je kent ze uit de wiskunde
+							- Optellen, aftrekken, vermenigvuldigen (*), delen (/), machtsverheffing (**)
+							- Een speciale operator is de modulus-operator: de rest bij deling door (%). We gebruiken deze vaak bij het schrijven van onze programma's
+				</section>
+				<section>
+							## Werken met gehele getallen (integers)
+
+							```Python
+							getal1 = -2
+							getal2 = 3
+							print(getal1 + getal2) # 1
+							print(getal1 ** getal2) # -8
+							print((getal1 + getal2) * getal1) # -2
+							```
+
+							- Integers kunnen in Python opgeteld (+), afgetrokken (-), vermenigvuldigd (*) en gedeeld (/) worden
+							- Python gebruikt twee vermenigvuldigingssymbolen (**) om exponenten weer te geven
+							- Elke expressie kan meerdere bewerkingen bevatten. De volgorde van bewerkingen wordt gerespecteerd 
+							- Je mag gebruik maken van haakjes om deze volgorde aan te passen
+				</section>
+				<section>
+							## Werken met decimale getallen (floats)
+
+							```Python
+							getal1 = 0.4
+							getal2 = 0.2
+							print(getal1 + getal2) # 0.6000000000000001
+							print(getal1 * 2) # 0.8
+							```
+
+
+							- Python noemt elk kommagetal een float
+							- Deze term wordt in de meeste programmeertalen gebruikt en verwijst naar het feit dat een decimaalteken op elke positie in een getal kan voorkomen
+							- Houd er rekening mee dat je soms een willekeurig aantal decimalen in je antwoord kunt krijgen
+				</section>
+				<section>
+							## Gehele en decimale getallen
+
+							```Python
+							print(9 / 3) # 3.0
+							print(13 + 2.0) # 15.0
+							print(4 * 5.0) # 20.0
+							print(2.0 ** 3) # 8.0
+							totaal_aantal_aardbewoners = 7_902_193_151
+							print(totaal_aantal_aardbewoners) # 7902193151
+							```
+
+							- Wanneer je twee getallen deelt is het resultaat altijd een float
+							- Python gebruikt standaard een float als resultaat voor elke bewerking die een float bevat, zelfs als de uitvoer een geheel getal is
+							- Bij grote getallen kun je cijfers groeperen met underscores om ze leesbaarder te maken
+				</section>
+				<section>
+							## Wiskundige expressies
+
+							Expressies met enkel gehele getallen leveren niet altijd een geheel getal op
+Een deling van gehele getallen geeft een kommagetal terug
+Wil je enkel het gehele gedeelte terugkrijgen als geheel getal, gebruik dan de //-operator
+				</section>
+				<section>
+							## Wiskundige operatoren met strings
+
+							```Python
+							"string1" + "string2"
+							"string1" * 4
+							"1" + 4 # error
+							```
+
+							- We kunnen strings aaneen plakken door ze "bij elkaar op te tellen". In het Engels: concatenation.
+							- We kunnen strings met elkaar "vermenigvuldigen"
+							- Een string + een getal geven een foutmelding
+				</section>
+				<section>
+							## Vergelijkende operatoren
+
+							```Python
+							True == true
+							4 < 5
+							5 >= 2
+							5 <= 5
+							5 > 2
+							```
+
+							- That's the double equal sign, is the comparison operator
+				</section>
+				<section>
+							## Logische operatoren
+
+							```Python
+							True and True
+							True and False
+							True or False
+							False or False
+							not True 
+							```
+
+							- Engelse woorden and/or
+							- Werken op booleans
+							- not flips the boolean
+							- Logical operators are actually just plain English words.
+							- the not operator, this is a little bit special. It only operates on one thing at a time and simply flips the Boolean that it's operating on. 
+				</section>
+				<section>
+							## Identity operators
+
+							Identity operators are used to compare the objects, not if they are equal, but if they are actually the same object, with the same memory location:
+							is 	Returns true if both variables are the same object	x is y	
+							is not	Returns true if both variables are not the same object	x is not y
+				</section>
+				<section>
+							## Membership operators
+
+							```Python
+							1 in [1,2,3,4,5]
+							10 not in [1,2,3,4,5]
+							"cat" in "my pet cat"
+							```
+
+							- In of not in. Checkt als iets in iets zit
+
+				</section>
+
+				<section class="chapter">
+							## Datastructuren
+				</section>
+				<section>
+							## Datastructuren
+
+							- De datatypes die we tot nog toe hebben gezien vertegenwoordigen telkens één enkele waarde, zoals 3.11, "Python" of True
+							- We beschikken in Python ook over datatypes die het vasthouden van een reeks waarden in één variabele mogelijk maken
+							- We spreken hier over datastructuren en de meest gebruikte zijn de vier die hier kort zullen worden besproken: lists, sets, tuples en dictionaries
+							- Ze zijn supernuttig bij het schrijven van programma's en worden dan ook heel vaak gebruikt door developers
+							- Ze worden hier heel kort overlopen maar no worries: ze krijgen later hun eigen les ;-)
+				</section>
+				<section>
+							## Lists
+
+							```Python
+							mijn_list = [3.11, "Python", False]
+							print(len(mijn_list)) # 3
+							print(mijn_list[1]) # "Python"
+							```
+							- Lists worden geschreven met vierkante haakjes en bevatten een aantal door komma's gescheiden waarden
+							- Deze waarden kunnen alle datatypes zijn die we tot nu toe hebben gezien
+							- Je kan dus een list van strings hebben, een list met strings en integers, ... tot en met lists die lists als elementen hebben
+							- List objecten hebben een handige length-functie (len) die het aantal elementen in de list teruggeeft
+							- De volgorde van elementen in een lijst is belangrijk want we roepen deze op via het indexgetal
+				</section>
+				<section>
+							## Sets
+
+							```Python
+							mijn_set = {"C#", "JavaScript", "C++"}
+							print(len(mijn_set)) # 3
+							```
+
+							- Sets zijn verwant met lists, met dat verschil dat alle elementen uniek moeten zijn
+							- Je beschrijft een set met accolades
+							- Je kan ook bij set objecten de length functie gebruiken
+							- De volgorde binnen een set is niet van belang
+
+				</section>
+				<section>
+							## Tuples
+
+							```Python
+							mijn_tuple = ("IoT", "AI", "CSC")
+							print(len(mijn_tuple)) # 3
+							```
+
+							- Tuples worden geschreven met haakjes en lijken sterk op lists
+							- De volgorde van elementen in een lijst is belangrijk en ook hier beschikken we over de length-functie
+							- Het verschil met lists is dat eens een tuple is gecreëerd je geen nieuwe elementen meer kan toevoegen
+							- Waarom gebruiken programmeurs indien geschikt tuples i.p.v. lists: geheugenefficiëntie 
+				</section>
+				<section>
+							## Dictionaries
+
+							```Python
+							mijn_dict = {
+								"programmeertaal": "Python",
+								"jaar_van_ontstaan": 1991,
+								"huidige_versie": 3.11
+							}
+							print(mijn_dict["programmeertaal"])
+							```
+
+							- Dictionaries kan je vergelijken met een woordenboek. Je kan een woord opzoeken en je krijgt een definitie
+							- We gebruiken accolades aan de buitenzijde en binnenin spreken we over key-value-paren
+							- De sleutels binnen een dictionary moeten uniek zijn. De volgorde van de elementen is niet van belang
+							- Dictionaries zijn een beetje als sets: unieke waarden, volgorde niet van belang, accolades als notatie
+				</section>
+				<section class="chapter">
+							## Control Flow
+				</section>
+				<section>
+							## Control Flow
+
+							- Met control flow-elementen neem je de volgorde waarin de instructies van je programma wordt uitgevoerd in handen
+							- De elementen die je hier tot je beschikking hebt zijn beslissingsstructuren, loops en het aanroepen van functies
+				</section>
+				<section>
+							## If/else beslissingsstructuren
+
+							```Python
+							voorwaarde = True # elke expressie die een True of False teruggeeft
+							if voorwaarde:
+							    print("De voorwaarde was waar!")
+								print("Ik behoor ook tot de if-structuur")
+							print("Ik behoor niet meer tot de if-structuur")
+							```
+
+							```Python
+							if voorwaarde:
+							    print("De voorwaarde was waar")
+							else:
+								print("De voorwaarde was niet waar")
+							```
+
+							Beslissingsstructuren laten toe code uit te voeren afhankelijk v.h. resultaat van de voorwaarde: True of False
+
+				</section>
+				<section>
+							## If/else beslissingsstructuren
+
+							```Python
+							voorwaarde_1 = True
+							voorwaarde_2 = False
+							if voorwaarde_1:
+								print("De eerste voorwaarde is waar")
+								if voorwaarde_2:
+							        print("Voorwaarde één én twee zijn beiden waar")
+							else:
+							    print("De eerste voorwaarde is niet waar")	
+							```
+
+							If-structuren kunnen in elkaar verweven (=genest) worden, zoveel als nodig
+				</section>
+				<section>
+							## For loops
+
+							```Python
+							gemeten_temperaturen = [14,12,15,9]
+							for meting in gemeten_temperaturen:
+								print(meting)
+							```
+							- For loops doorlopen wat we in Python iterables noemen. Een list is bijvoorbeeld zo'n iterable
+							- Binnen een for loop kan je dus voor elk element in een lijst een bepaalde actie beschrijven
+							- Wanneer de voorwaarden tijdens het doorlopen van de iterable moeten kunnen wijzigen gebruik je beter een while-loop
+							- Is niet dezelfde als de in-operator die we eerder tegenkwamen
+				</section>
+				<section>
+							## While loops
+
+							```Python
+							teller = 1
+							while teller < 10:
+							    print(teller)
+								teller = teller + 1
+							```
+
+							- While loops gebruik je om één of meerdere statements een aantal keer te laten uitvoeren, zo lang de voorwaarde die je aan de loop meegeeft True is. Wordt de voorwaarde False, dan stopt de loop
+							- Je moet zorgen dat in de statements binnen de loop een mechanisme aanwezig is dat de voorwaarde na verloop van tijd doet veranderen in False. Doe je dit niet dan beland je in wat we noemen een infinite loop. De loop gaat dan continue door en je programma blijft vastzitten
+
+				</section>
+				<section class="chapter">
+							## Functies
+				</section>
+				<section>
+							## Functies
+
+							```Python
+							print("Print is een Python functie")
+							
+							def vermenigvuldig_met_zes(waarde):
+								return 6 * waarde
+
+							print(vermenigvuldig_met_zes(4))
+							```
+
+							- We hebben al wat functies gezien zoals print() of len(). Deze functie worden voorzien door de Python interpreter 
+							- Maar we kunnen ook onze eigen functies schrijven
+							- Dit zijn handige verzamelingen statements die kunnen uitgevoerd worden telkens de functie wordt aangeroepen
+				</section>
+				<section>
+							## Functies
+
+							```Python
+							def vermenigvuldig_waardes(waarde_1, waarde_2):
+							    return waarde_1 * waarde_2
+
+							print(vermenigvuldig_waardes(3, 5)) # 15
+
+							def voeg_element_toe_aan_lijst(mijn_lijst, element):
+								mijn_lijst.append(element)
+							
+							voeg_element_toe_aan_lijst([1,2,3],4)
+							```
+							- Voor functies gebruiken we het keyword def. Een functie-declaratie eindigt op een ":"
+							- De naamgeving voor functies is dezelfde als die voor variabelen
+							- Binnen de haakjes na de functienaam kan je geen, één of meerdere argumenten meegeven
+				</section>
+				<section>
+							## Functies en het None type
+
+							```Python
+							print(print("Hallo wereld")) # None
+							type(None) # NoneType
+							```
+							- We gebruiken variabelennamen als parameter en deze namen kan je binnen de functie gaan gebruiken. Ze vertegenwoordigen daar de waarden die al argument worden meegegeven telkens de functie wordt aangeroepen
+							- Functies kunnen een waarde teruggeven (met return), maar dat is niet verplicht
+							- Een functie zonder return statement geeft None terug
+							- None is een bijzonder Python keyword zoals null of undefined in andere programmeertalen. Het vertegenwoordigt de afwezigheid van een bepaalde waarde				
+				</section>
+				<section>
+							## None
+
+							- None is een speciaal basisgegevenstype dat een enkel speciaal gegevensobject definieert met de naam None 
+							- Wordt gebruikt om een lege waarde weer te geven. Vaak gebruikt als een tijdelijke aanduiding om een punt in een gegevensstructuur aan te geven waar uiteindelijk betekenisvolle gegevens zullen worden gevonden
+							- Je kan eenvoudig testen op de aanwezigheid van None, omdat er slechts één instantie van None is in het hele Python-systeem (alle verwijzingen naar None verwijzen naar hetzelfde object) en None is alleen gelijk aan zichzelf
+
+							```Python
+							var = None
+							if var is None:
+								print("None")
+							else:
+								print("Niet None")
+				</section>
+				<section class="chapter">
+							## Klassen en objecten
+				</section>
+				<section>
+							## Klassen en objecten
+
+							```Python
+							class Kat():
+							    def __init__(self, naam):
+								    self.naam = naam
+									self.poten = 4
+								
+								def spreek(self):
+								    print(f"{self.naam} zegt 'Miauw'!")
+							
+							een_kat_object = Kat("Felix")
+							een_andere_kat_object = Kat("Minnie")
+							een_kat_object.spreek() # Felix zegt 'Miauw'!
+							```
+
+							Klassen en objecten zijn de ingrediënten van Objectgeoriënteerd programmeren (= de OOP in ons vak)
+				</section>
+				<section>
+							## Klassen en objecten
+
+							- OOP is een werkwijze om de structuur logisch en overzichtelijk te houden
+							- Gebruik van klassen maakt het mogelijk om honderden variabelen en functies overzichtelijk in georganiseerde en van heldere naamgeving voorziene structuren onder te brengen
+							- Een klasse noemen we de blauwdruk/het plan
+							- Het object noemen we de instance of een afdruk van die blauwdruk
+							- De init-functie noemen we de initialisatiefunctie. Ze wordt aangeroepen telkens een nieuw object gecreëerd wordt
+							- self verwijst naar de specifieke instance
+							- De naam van een klasse laten we starten met een hoofdletter
+				</section>
+				<section class="chapter">
+							## Input van de gebruiker
+				</section>
+				<section>
+							## Input van de gebruiker
+							- Je kan de functie input() gebruiken om invoer van de gebruiker te krijgen
+							- Gebruik de promptstring die u aan de gebruiker wilt tonen als invoerparameter:
+
+							```python
+							naam = input("Naam? ") 
+							print(naam) 
+							leeftijd = int(input("Leeftijd? "))
+							print(leeftijd)
+							```
+				</section>
+				<section>
+							## Input van de gebruiker
+							- Nadeel is dat de invoer binnenkomt als een string, dus als je het als een getal wilt gebruiken, moet je de functie int() of float() gebruiken om de string om te zetten naar een getal
+
+							```python
+							basis = float(input("Basis in cm? "))
+							hoogte = float(input("Hoogte in cm? "))
+							oppervlakte = basis * hoogte 
+							print(f"De oppervlakte van de rechthoek is {oppervlakte}cm2")
+							```
+				</section>
+				<section>
+							## Python OOP - Snel van start met Python
+							## kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
