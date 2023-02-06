@@ -25,12 +25,12 @@
 							## Het doel van deze les?
 							- Python in een notendop. De __absolute basis__ van Python bekijken om snel onze eerste programma's te kunnen schrijven.  
 							- Dat geeft __motivatie en zin__ om verder te doen. In de komende lessen behandelen we deze zaken in groter detail én we dringen dieper door in het Python universum. 
-							- Dit helikopter-uitzicht is het __begin van je reis__ naar het kunnen oplossen van complexe problemen met Python. Welke je afstudeerrichting ook is - AI, Cyber Security, Cloud of Internet of Things - Python heeft de oplossingen
+							- Dit helikopter-uitzicht is het __begin van je reis__ naar het kunnen oplossen van complexe problemen met Python. Welke je afstudeerrichting ook is - AI, Cyber Security, Cloud of Internet of Things - Python heeft oplossingen
 				</section>
 				<section>
 							## Inhoud
 							- Variabelen (en hun datatypes)
-							- Operatoren
+							- Operators en expressies
 							- Datastructuren
 							- Control flow
 							- Functies
@@ -49,14 +49,14 @@
 							print(mijn_getal)
 							```
 
-							- De basisbouwstenen van je programma's: eenheden die een naam en een waarde toegewezen krijgen
-							- Worden automatisch gemaakt wanneer ze voor het eerst worden toegewezen
+							- Zijn de basisbouwstenen van je programma's: eenheden die een naam en een waarde toegewezen krijgen
+							- Ze worden automatisch gemaakt wanneer ze voor het eerst worden toegewezen
 							- Het gelijkheidsteken noemen we een toekenningsoperator
 							- Als waarde zijn verschillende data types mogelijk: tekst, getallen, booleans,...
-							- Waarde kan gewijzigd worden tijdens looptijd van je programma
+							- De waarde kan gewijzigd worden tijdens looptijd van je programma
 				</section>
 				<section>
-							## Naam van variabelen
+							## Naamgeving variabelen
 
 							```Python 
 							1_getal = 12 # mag niet, geeft syntax error
@@ -66,11 +66,11 @@
 							```
 							- Mag niet beginnen met een getal
 							- Mag geen speciale karakters bevatten. Enkel underscores
-							- Best practice om enkel kleine letters te gebruiken. Nooit starten met een hoofdletter (zoals klassen)
-							- Geef betekenisvolle namen aan je variabelen
+							- Best practice is om enkel kleine letters te gebruiken. Nooit starten met een hoofdletter (doen we bij klassen)
+							- Geef betekenisvolle namen aan je variabelen!
 				</section>
 				<section>
-							## Meerdere toewijzigen
+							## Optioneel: meerdere toewijzigen
 
 							```Python
 							voornaam, familienaam, beroep = "Kristof", "Michiels", "Docent"
@@ -89,7 +89,7 @@
 							```
 
 							- Een constante is zoals een variabele, maar met een waarde die niet verandert tijdens de looptijd van je programma
-							- Python heeft geen ingebouwde ondersteuning voor constanten maar developers gebruiken een naam bestaande uit enkel hoofdletters om aan te geven dat het hier over een niet te veranderen constante gaat
+							- Python heeft geen ingebouwde ondersteuning voor constanten maar ontwikkelaars gebruiken een naam bestaande uit enkel hoofdletters om aan te geven dat het hier over een niet te veranderen constante gaat
 				</section>
 				<section>
 							## Datatypes (ook: gegevenstypes)
@@ -101,8 +101,8 @@
 							print(type(getal)) # int
 							```
 
-							- Datatypes zijn de verschillende soorten data die we aan variabelen kunnen meegeven
-							- Op basis van de waarde die we aan een variabele toekennen kiest Python __zelf__ het datatype
+							- Datatypes zijn de verschillende soorten data die we aan variabelen kunnen toekennen
+							- Op basis van die data kiest Python __zelf__ het datatype
 							- De waarde wordt dan een object van die klasse. Daar hoort bepaalde functionaliteit bij
 							- We zagen in de voorbeelden reeds tekst en (gehele) getallen, maar Python kent er een pak meer 
 							- De Python-functie type geeft op basis van de naam van je variabele het datatype terug
@@ -119,42 +119,37 @@
 
 							- Integers zijn gehele getallen. Dit zijn positieve of negatieve getallen zonder komma
 							- Floats zijn decimale getallen. Positieve of negatieve getallen met een komma
-							- Float wordt binair opgeslagen in een vast aantal bits = zwevendekommagetal m.a.w. de komma zweeft  
+							- Float wordt binair opgeslagen in een vast aantal bits = zwevendekommagetal m.a.w. de komma zweeft
+							- We zien verder bij operators en expressies nog wat je allemaal met getallen kunt doen  
 				</section>
 				<section>
 							## Tekst: strings
 
-							```Python 
-							mijn_school = "Artesis Plantijn Hogeschool"
-							store = 'Nick's pizza shop'
-							store = "Nick's pizza shop"
-							store = "Nick\'s pizza shop, the \"best\" there is"
+							```Python
+							boodschap = "Dit is een string."
+							boodschap = 'Dit is ook een string.'
+							boodschap = 'Mijn vriend vroeg: "Programmeer jij ook in Python?"'
+							boodschap = "Ik hou van het schrijven van Python programma's"
 							```
 
-							- Strings are a way to represent text inside of Python
-							- Strings? And the reason this is called a string has to do with the fact that it's a string of characters / So remember how computers lay things out in memory? Each character in the string gets its own segment of memory and the computer strings them together into these arbitrarily large strings. 
-							is you can use double quotes or single quotes, to represent a string. So for example, if I do single quotes here instead of double, and I run our code, we're going to have the exact same output. The only thing that we can't do is have a mix. We can't start with a double quote and then end with a single quote, we have to be consistent about how we represent our strings.
-
-							- can use double quotes or single quotes, to represent a string. So for example, if I do single quotes here instead of double, and I run our code, we're going to have the exact same output. The only thing that we can't do is have a mix. We can't start with a double quote and then end with a single quote, we have to be consistent about how we represent our strings. 
-				</section>
-				<section>
-							## Werken met tekst: strings
 							- Een string bestaat uit een reeks tekst-karakters
 							- Alles binnen aanhalingstekens wordt beschouwd als een string
 							- Je mag gebruik maken van enkele of dubbele aanhalingstekens
 							- Deze flexibiliteit laat toe om aanhalings- en afkappingstekens te gebruiken in je strings
 							- Wees standvastig in je keuzes
-
-
-							```Python
-							boodschap = "Dit is een string."
-							boodschap = 'Dit is ook een string.'
-							boodschap = 'Mijn vriend vroeg: "Programmeer jij ook in Python?" '
-							boodschap = "Ik hou van het schrijven van Python programma's"
-							```
 				</section>
 				<section>
-							## Hoofdlettergebruik wijzigen in een string
+							## Tekst: strings
+
+							```Python 
+							zin = "\"Deze piano\'s klinken fantastisch!\" zegt de muziekliefhebber enthousiast."
+							```
+
+							- Wat doen wanneer je een mix hebt van enkele en dubbele aanhalingstekens binnen je string? Je kan de aanhalingstekens binnen de string escapen met een backslash (\\)
+							- Waarom de naam string? Een reeks van tekens. Elk karakter krijgt individuele geheugenruimte en Python reigt ze aan elkaar.  
+				</section>
+				<section>
+							## Acties op strings: hoofdlettergebruik wijzigen
 
 							```Python
 							naam = "Guido van Rossum"
@@ -162,14 +157,14 @@
 							print(naam.upper()) # Alles in hoofdletters: GUIDO VAN ROSSUM
 							print(naam.lower()) # Alles in kleine letters: guido van rossum
 							```
-							- We beschikken hiervoor over een aantal zgn. methods. Dit zijn acties die je op bepaalde data kan toepassen
+							- Met een string-object komt extra functionaliteit: functies (methods) die we op onze waarde kunnen toepassen
 							- De dot-notatie (".") vertelt Python in het eerste vb. om de title-method uit te voeren op de variabele naam
 							- Elke method wordt gevolgd door haakjes, omdat methods vaak bijkomende informatie nodig hebben om hun werk te kunnen doen. Hier is dit evenwel niet het geval
 							- De lower()-method wordt vaak gebruikt om data op te slaan die door een gebruiker werd ingegeven
 
 				</section>
 				<section>
-							## Variabelen gebruiken in een string: f-strings
+							## f-strings: variabelen gebruiken in een string
 
 							```Python
 							voornaam = "Guido"
@@ -184,22 +179,8 @@
 							- Python vervangt elke variabele door de waarde
 							- De f in f-strings staat voor "format"
 				</section>
-
-
 				<section>
-							## Variabelen gebruiken in strings
-
-							```Python 
-							day = 25
-							month = "oktober"
-							temp = 13
-
-							print("Het is vandaag 25 oktober en de temperatuur bedraagt 13 graden")
-							print(f"Het is vandaag {day} {month} en de temperatuur bedraagt {temp} graden")
-							```
-				</section>
-				<section>
-							## Witruimte toevoegen aan strings
+							## Strings: witruimte toevoegen
 
 							```Python
 							print("\tHelderheid")
@@ -214,7 +195,7 @@
 							- Combinaties zijn mogelijk: "\n\t" zorgt ervoor dat Python op een nieuwe regel begint, met een tabinsprong
 				</section>
 				<section>
-							## Witruimte elimineren binnen strings
+							## Strings: witruimte verwijderen
 
 							```Python
 							boodschap = " Ik hou van Python "
@@ -228,13 +209,21 @@
 							- Handig als je twee strings met elkaar wil vergelijken
 				</section>
 				<section>
-							## Data types: booleans
+							## "Waar" of "Niet waar": booleans
 
 							```Python 
-							licht_is_aan = True
+							licht_is_aan = False
+							ik_hou_van_python = True
+							
+							if licht_is_aan:
+							    print("Het licht is aan!")
+							else:
+								print("Het licht is uit!")
 							```
 
-							booleans are true and false values. Note that they start with a capital letter here. If I try to do a lowercase true, it tries to interpret this as a variable name and says that it's not defined. However, if you want to be very confusing, you can write a little program like this. So how are booleans usually used in programming? Well, they're not usually used directly by typing true and false explicitly, but we usually get them as the result of statements like this one. Now remember a single equal sign, if we scroll up, this is an assignment operator. The double equal sign is a statement. It's saying 1 is equal to 1, and we get back true. We could also do 1 is equal to 2, which is, of course, false. This double equals is a comparison operator. So this is a comparison operator, we're comparing two values, versus the assignment operator, where we're assigning a value into a variable. 
+							- Booleans zijn de waarden True en False (let op de hoofdletters T en F)
+							- We verkrijgen ze meestal als het resultaat van een vergelijkende expressie (zie volgend hoofdstukje)
+							- Ze zijn op die manier bijzonder handig in het bepalen van de control flow van een toepassing
 				</section>
 				<section class="chapter">
 							## Operators en expressies
@@ -242,16 +231,16 @@
 				<section>
 							## Operators en expressies
 
-							- Een operator is een code-element dat een bewerking uitvoert op een of meer code-elementen die waarden bevatten. Waarde-elementen omvatten variabelen, constanten, letterlijke waarden, eigenschappen
-							- Een expressie is een reeks waarde-elementen in combinatie met operatoren, wat een nieuwe waarde oplevert. De operators handelen op de waarde-elementen door berekeningen, vergelijkingen of andere bewerkingen uit te voeren.
+							- Een operator is een code-element dat een bewerking uitvoert op een of meer code-elementen die waarden bevatten
+							- Een expressie is een reeks waarde-elementen in combinatie met operators, wat een nieuwe waarde oplevert. De operators handelen op de waarde-elementen door berekeningen, vergelijkingen of andere bewerkingen uit te voeren.
 							- Er bestaan verschillende soorten operators en dus ook expressies
 				</section>
 				<section>
-							## Wiskundige operatoren
+							## Wiskundige operators
 
 							```Python
 							print(1 + 1)
-							print(day + 3)
+							print((-2 + 3) * -1) # -1
 							print(4 * 5)
 							print(5 ** 2)
 							print(20 / 5) # 4.0 een float
@@ -263,38 +252,7 @@
 							- Een speciale operator is de modulus-operator: de rest bij deling door (%). We gebruiken deze vaak bij het schrijven van onze programma's
 				</section>
 				<section>
-							## Werken met gehele getallen (integers)
-
-							```Python
-							getal1 = -2
-							getal2 = 3
-							print(getal1 + getal2) # 1
-							print(getal1 ** getal2) # -8
-							print((getal1 + getal2) * getal1) # -2
-							```
-
-							- Integers kunnen in Python opgeteld (+), afgetrokken (-), vermenigvuldigd (*) en gedeeld (/) worden
-							- Python gebruikt twee vermenigvuldigingssymbolen (**) om exponenten weer te geven
-							- Elke expressie kan meerdere bewerkingen bevatten. De volgorde van bewerkingen wordt gerespecteerd 
-							- Je mag gebruik maken van haakjes om deze volgorde aan te passen
-				</section>
-				<section>
-							## Werken met decimale getallen (floats)
-
-							```Python
-							getal1 = 0.4
-							getal2 = 0.2
-							print(getal1 + getal2) # 0.6000000000000001
-							print(getal1 * 2) # 0.8
-							```
-
-
-							- Python noemt elk kommagetal een float
-							- Deze term wordt in de meeste programmeertalen gebruikt en verwijst naar het feit dat een decimaalteken op elke positie in een getal kan voorkomen
-							- Houd er rekening mee dat je soms een willekeurig aantal decimalen in je antwoord kunt krijgen
-				</section>
-				<section>
-							## Gehele en decimale getallen
+							## Wiskundige operators
 
 							```Python
 							print(9 / 3) # 3.0
@@ -303,21 +261,16 @@
 							print(2.0 ** 3) # 8.0
 							totaal_aantal_aardbewoners = 7_902_193_151
 							print(totaal_aantal_aardbewoners) # 7902193151
+							print(9 // 4) # 2
 							```
 
 							- Wanneer je twee getallen deelt is het resultaat altijd een float
-							- Python gebruikt standaard een float als resultaat voor elke bewerking die een float bevat, zelfs als de uitvoer een geheel getal is
+							- Python gebruikt standaard een float als resultaat voor elke bewerking die een float bevat
 							- Bij grote getallen kun je cijfers groeperen met underscores om ze leesbaarder te maken
+							- Wil je enkel het gehele gedeelte terugkrijgen als geheel getal, gebruik dan de //-operator
 				</section>
 				<section>
-							## Wiskundige expressies
-
-							Expressies met enkel gehele getallen leveren niet altijd een geheel getal op
-Een deling van gehele getallen geeft een kommagetal terug
-Wil je enkel het gehele gedeelte terugkrijgen als geheel getal, gebruik dan de //-operator
-				</section>
-				<section>
-							## Wiskundige operatoren met strings
+							## Wiskundige operators met strings
 
 							```Python
 							"string1" + "string2"
@@ -330,52 +283,67 @@ Wil je enkel het gehele gedeelte terugkrijgen als geheel getal, gebruik dan de /
 							- Een string + een getal geven een foutmelding
 				</section>
 				<section>
-							## Vergelijkende operatoren
+							## Vergelijkende operators
 
 							```Python
-							True == true
-							4 < 5
-							5 >= 2
-							5 <= 5
-							5 > 2
+							print(4 == 5) # False
+							print(4 < 5) # True
+							print(5 >= 2) # True
+							print(5 <= 5) # True
+							print(5 > 2) # True
 							```
 
-							- That's the double equal sign, is the comparison operator
+							- Het resultaat van een vergelijkende expressie met deze operators is een boolean
+							- We kunnen deze resultaten gebruiken in beslissingstructuren en loops (zie verder)
+							- Willen we twee waarden met elkaar vergelijken, dan gebruiken we een dubbel gelijkheidsteken
+
+
 				</section>
 				<section>
-							## Logische operatoren
+							## Logische operators
 
 							```Python
-							True and True
-							True and False
-							True or False
-							False or False
-							not True 
+							print(True and True) # True
+							print(True and False) # False 
+							print(True or False) # True
+							print(False or False) # False
+							print(not True)
+							print(3 < 5 and 6 > 2) # True 
 							```
+							- Het betreft hier de Engelse termen and, or en not
+							- Ze laten toe om gecombineerde expressies - die resulteren in een boolean - te evalueren
+							- De not-operator keert de boolean om: True wordt False en omgekeerd
 
-							- Engelse woorden and/or
-							- Werken op booleans
-							- not flips the boolean
-							- Logical operators are actually just plain English words.
-							- the not operator, this is a little bit special. It only operates on one thing at a time and simply flips the Boolean that it's operating on. 
 				</section>
 				<section>
-							## Identity operators
-
-							Identity operators are used to compare the objects, not if they are equal, but if they are actually the same object, with the same memory location:
-							is 	Returns true if both variables are the same object	x is y	
-							is not	Returns true if both variables are not the same object	x is not y
-				</section>
-				<section>
-							## Membership operators
+							## Identiteitsoperators
 
 							```Python
-							1 in [1,2,3,4,5]
-							10 not in [1,2,3,4,5]
-							"cat" in "my pet cat"
+							string_1 = "Aap"
+							string_2 = "Noot"
+							string_3 = string_1
+							print(string_1 is string_2) # False
+							print(string_1 is not string_2) # True
+							print(string_1 is string_3) # True
 							```
 
-							- In of not in. Checkt als iets in iets zit
+							- Identiteitsoperators (identity operators) worden gebruikt om objecten met elkaar te vergelijken
+							- Niet om te zien of ze gelijkwaardig zijn, maar of ze hetzelfde object zijn, met dezelfde geheugenlocatie
+							- Is: als de expressie True teruggeeft zijn x en y hetzelfde object
+							- Is not: als de expressie True teruggeeft zijn x en y niet hetzelfde object
+				</section>
+				<section>
+							## Lidmaatschap operators
+
+							```Python
+							print(1 in [1,2,3,4,5]) # True
+							print(10 not in [1,2,3,4,5]) # True
+							print("Python" in "Mijn favoriete programmeertaal is Python") # True
+							```
+
+							- Lidmaatschap operators (membership operators) worden gebruikt om te evalueren of een reeks aanwezig is in een object  
+							- In: is de reeks aanwezig in het object
+							- Not in: is de reeks niet aanwezig in het object
 
 				</section>
 
