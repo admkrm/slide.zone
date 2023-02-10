@@ -1,0 +1,374 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OO: herhaling basis</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OO
+							## 1/ De basis: applicaties bouwen met klassen
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Basics: klassen en objecten
+							- Object compositie
+							- Overerving: erven van andere klassen
+							- Een parent klasse extenden
+							- Gebruik van compositie en overerving
+							- De super-functie
+							- Collecties van klassen
+				</section>
+				<section class="chapter">
+							## basics: klassen en objecten
+				</section>
+				<section>
+							## basics: klassen en objecten
+
+							```Python
+							class Kat():
+								def __init__(self, naam):
+									self.naam = naam
+									self.poten = 4
+								
+								def spreek(self):
+									print(f"{self.naam} zegt 'Miauw'!")
+							
+							een_kat_object = Kat("Felix")
+							een_andere_kat_object = Kat("Minnie")
+							een_kat_object.spreek() # Felix zegt 'Miauw'!
+							```
+
+							Klassen en objecten zijn de ingrediënten van Objectgeoriënteerd programmeren (= de OOP in ons vak)
+				</section>
+				<section>
+							## basics: klassen en objecten
+
+							- OOP is een werkwijze om de structuur logisch en overzichtelijk te houden
+							- Gebruik van klassen maakt het mogelijk om honderden variabelen en functies overzichtelijk in georganiseerde en van heldere naamgeving voorziene structuren onder te brengen
+							- Een klasse noemen we de blauwdruk/het plan
+							- Het object noemen we de instance of een afdruk van die blauwdruk
+							- De init-functie noemen we de initialisatiefunctie. Ze wordt aangeroepen telkens een nieuw object gecreëerd wordt
+							- self verwijst naar de specifieke instance
+							- De naam van een klasse laten we starten met een hoofdletter
+				</section>
+				<section class="chapter">
+							## Object compositie
+				</section>
+				<section>
+							## Object compositie
+
+							```Python
+							class Punt:
+								def __init__(self, x, y):
+									self.x = x
+									self.y = y
+							```
+
+							```Python
+							class Vorm:
+								def __init__(self, punten):
+									self.punten = punten
+							```
+
+							Compositie is het krachtigste systeem om object-based applicaties te bouwen 
+				</section>
+				<section>
+							## Object compositie
+
+							```Python
+							onderaan_links = Punt(0, 0)
+							onderaan_rechts = Punt(10, 0)
+							bovenaan_links = Punt(0, 10)
+							bovenaan_rechts = Punt(10, 10)
+							```
+
+							```Python
+							vierkant = Vorm([onderaan_links, onderaan_rechts, bovenaan_links,bovenaan_rechts])
+							print(type(vierkant))
+							print(vierkanten.punten)
+							```
+				</section>
+				<section class="chapter">
+							## Overerving: erven van andere klassen
+
+				</section>
+				<section>
+							## Overerving: erven van andere klassen
+
+							- Een subklasse erft in principe alles van de parent klassen
+							- Methods kunnen worden overschreven, aangepast of toegevoegd
+							- Alle andere methods blijven werken, ook de initialisatie-method
+				</section>
+				<section>
+							## Overerving: erven van andere klassen
+
+							```Python
+							class Kat:
+								soort = "Felis silvestris catus"
+
+								def __init__(self, naam, leeftijd):
+									self.naam = naam
+									self.leeftijd = leeftijd
+
+								def __str__(self):
+									return f"{self.naam} is {self.leeftijd} jaar oud"
+
+								def spreek(self, geluid):
+									return f"{self.naam} zegt {geluid}"
+							```
+				</section>
+				<section>
+							## Overerving: erven van andere klassen
+
+							```Python
+							simba = Kat("Simba", 2)
+							luna = Kat("luna", 9)
+							nala = Kat("nala", 10)
+							luna = Kat("luna", 4)
+							```
+
+							```Python
+							luna.spreek("miauw") # "Luna zegt miauw "
+							nala.spreek("hschsch") # "Nala zegt hschsch"
+							simba.spreek("brrrh") # "Simba zegt brrrh"
+							```
+				</section>
+				<section>
+							## Overerving: erven van andere klassen
+
+							```Python
+							class Abessijn(Kat):
+								pass
+
+							class Burmees(Kat):
+    							pass
+
+							class Karthuizer(Kat):
+    							pass
+							```
+
+							```Python
+							simba = Abessijn("Simba", 2)
+							luna = Burmees("luna", 9)
+							nala = Abessijn("nala", 10)
+							luna = Karthuizer("luna", 4)
+							```
+				</section>
+				<section>
+							## Overerving: erven van andere klassen
+
+							``` Python
+							nala.soort # "Felis silvestris catus"
+							simba.naam # "Simba"
+							print(nala) # "Nala is 10 jaar oud"
+							luna.spreek("miauw") # "Luna zegt miauw"
+							```
+
+							```Python
+							type(nala) # <class '__main__.Abessijn'>
+							isinstance(simba, Kat) # True
+							isinstance(luna, Burmees) # True
+							```
+							Kat is hier de parent- of base klasse. Abessijn, Burmees en Karthuizer de sub-, kind- of afgeleide klassen
+				</section>
+				<section class="chapter">
+							## Een parent klasse uitbreiden
+				</section>
+				<section>
+							## Een parent klasse uitbreiden
+
+							``` Python
+							class Karthuizer(Kat):
+								def spreek(self, geluid="miauw"):
+									return f"{self.naam} zegt {geluid}"
+							```
+
+							```Python
+							luna = Karthuizer("Luna", 4)
+							luna.spreek() # "Luna zegt miauw"
+							```
+
+							De spreek-method van de parent-klasse werd overschreven en uitgebreid in de afgeleide klasse
+
+				</section>
+				<section class="chapter">
+							## Gebruik van compositie én overerving
+
+				</section>
+				<section>
+							## Gebruik van compositie én overerving
+
+							```Python
+							class Punt:
+								def __init__(self, x, y):
+									self.x = x
+									self.y = y
+							```
+
+							```Python
+							class Vorm:
+								def __init__(self, punten):
+									self.punten = punten
+							```
+
+							- Compositie en overerving gaan in goed OO-design hand in hand. 
+							- Zie je - in deze én volgende slide - waar de compositie zit, en waar de overerving?
+
+				</section>
+				<section>
+							## Gebruik van compositie én overerving
+
+							```Python
+							class VerkeerdAantalPunten(Exception):
+    							pass
+							
+							class Vierkant(Vorm):
+								def __init__(self, punten):
+									if len(punten) != 4:
+										raise VerkeerdAantalPunten
+									self.punten = punten
+							
+							class Driehoek(Vorm):
+								def __init__(self, punten):
+									if len(punten) != 3:
+										raise VerkeerdAantalPunten
+									self.punten = punten
+							```
+				</section>
+				<section class="chapter">
+							## De super-functie
+
+				</section>
+				<section>
+							## De super-functie
+
+							- Bij het programmeren met klassen wil je zo efficient mogelijk werken en niet alles overschrijven
+							- Zeker als de methods van de parent klasse in omvang toenemen
+							- En vaak is er enkel behoefte om een method uit de parent klasse licht aan te passen
+							- Daarom kunnen we vanuit de afgeleide klasse de method van de parent klasse aanroepen met super() 
+							- We zien dit patroon heel vaak gebruikt worden in de \_\_init\_\_() initialisatie-method, maar het kan overal
+				</section>
+				<section>
+							## De super-functie
+
+							```Python
+							class Vorm:
+								def __init__(self, punten):
+									for punt in punten:
+										if not isinstance(punt, Punt):
+										    raise TypeError("Alle punten moeten tot de Punt klasse behoren")
+									self.punten = punten
+
+							class Vierkant(Vorm):
+								def __init__(self, punten):
+									if len(punten) != 4:
+										raise VerkeerdAantalPunten
+									self.punten = punten # hier ook de isinstance() functie toevoegen?
+							```
+
+							We zouden een groot deel van de code moeten herhalen in de afgeleide klasse. Weinig efficiënt, [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)!
+				</section>
+				<section>
+							## De super-functie
+
+							```Python
+							class Vorm:
+								def __init__(self, punten):
+									for punt in punten:
+										if not isinstance(punt, Punt):
+									        raise TypeError("Alle punten moeten tot de Punt klasse behoren")
+									self.punten = punten
+
+							class Vierkant(Vorm):
+								def __init__(self, punten):
+									if len(punten) != 4:
+										raise VerkeerdAantalPunten
+									super().__init__(punten)
+							```
+
+							De super-functie lost dit probleem voor ons op!
+				</section>
+				<section class="chapter">
+							## Collecties van klassen
+				</section>
+				<section>
+							## Collecties van klassen
+
+							```Python
+							class Kunstenaar():
+								def __init__(self, voornaam, achternaam):
+									self.id = None
+									self.voornaam = voornaam
+									self.achternaam = achternaam
+
+								def __str__(self):
+									return f"{self.id}  : {self.voornaam} {self.achternaam}"
+							```
+
+							Waar bewaren we alle instances? Hoe organiseren we onze code? We komen hier de komende weken nog op terug. In deze code zie je een App, een Kunstenaars en een Kunstenaar-klasse die je tonen hoe je te werk kunt gaan.
+				</section>
+				<section>
+							## Collecties van klassen
+
+							```Python
+							class Kunstenaars():
+								def __init__(self):
+									self.kunstenaar_dict = {} # kunstenaars_dictionary
+									self.index = 1 # start ID
+
+								def voeg_kunstenaar_toe(self, kunstenaar):
+									kunstenaar.id = self.index # ID zetten
+									self.index += 1	# ga naar volgende ID
+									self.kunstenaar_dict.update({kunstenaar.id: kunstenaar}) # toevoegen
+							```
+				</section>
+				<section>
+							## Collecties van klassen
+
+							```Python
+							class App():
+								def __init__(self):
+									self.kunstenaar_data = Kunstenaars()
+									self.kunstenaar_data.voeg_kunstenaar_toe(Kunstenaar("Pablo", "Picasso"))
+									self.kunstenaar_data.voeg_kunstenaar_toe(Kunstenaar("Agnes", "Martin"))
+									self.kunstenaar_data.voeg_kunstenaar_toe(Kunstenaar("Francis", "Picabia"))
+								
+								def toon_kunstenaars(self):
+									dict = self.kunstenaar_data.kunstenaar_dict
+									for key in dict:
+										kunstenaar = dict[key]
+										print(kunstenaar.id, " : ", kunstenaar.voornaam, kunstenaar.achternaam)
+							```
+				</section>
+				<section>
+							## Collecties van klassen
+
+							```Python
+							mijn_app = App()
+							mijn_app.toon_kunstenaars()
+							print(mijn_app.kunstenaar_data.kunstenaar_dict)
+							mijn_app.kunstenaar_data.kunstenaar_dict[3].achternaam = "Bacon"
+							mijn_app.toon_kunstenaars()
+							francis_bacon = mijn_app.kunstenaar_data.kunstenaar_dict[3]
+							print(francis_bacon)
+							```
+				</section>
+				<section>
+							## Python OO - De basis
+							## kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

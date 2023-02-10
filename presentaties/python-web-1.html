@@ -1,0 +1,374 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web Services Python: Les 1</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web Services Python
+							## 1/ web API's gebruiken en integreren met Python
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Web Services Python?
+							- Python en API's
+							- HTTP-requests maken met Python
+				</section>
+				<section class="chapter">
+							## Web Services Python?
+				</section>
+				<section>
+							## Web Services Python?
+							- Je ontwikkelt verschillende types web services en maakt hiervoor gebruik van de meest geschikte Python frameworks en technieken
+							- Je vertrekt van het consumeren van third-party API's en integreert ze in een eigen toepassing. 
+							    - Daarna maak je een eigen web service met het micro-framework [Flask](https://flask.palletsprojects.com/en/2.0.x/)
+								- En we nemen er dit jaar FastAPI nog bij 
+								- Vervolgens exploreer je de mogelijkheden van het [Django framework](https://www.djangoproject.com/)
+							- Je ontsluit hierbij verschillende types achtergelegen databronnen (JSON, SQL en NoSQL databanken)
+				</section>
+				<section class="chapter">
+							## Python en API's
+				</section>
+				<section>
+							## Python en API's
+							
+							- Wat zijn API's? Belangrijke API-gerelateerde concepten
+							- Hoe een API gebruiken met behulp van Python
+							- Hoe Python gebruiken om beschikbare online API-data te lezen
+
+							We concentreren ons deze week op het _consumen_ van API's. Met het binnentrekken en integreren van externe data kan je al heel wat doen. Bovendien is het een belangrijk facet van het bouwen van API-gedreven toepassingen.
+				</section>
+				<section>
+							## Wat zijn API's?
+
+							- API = Application Programming Interface
+							- Een interface voor systemen
+							- Communicatielaag die interactie tussen verschillende systemen mogelijk maakt 
+							- Systemen moeten enkel de API kunnen "gebruiken" om te kunnen samenwerken
+							- Verschillende types: web api's, hardware API's
+							- Werken meestal op dezelfde manier: een data-request wordt beantwoord door een data-response
+							- Kan interactie mogelijk maken tussen gescheiden systemen, maar binnen één en dezelfde toepassing kan de datalaag ook gelinkt zijn met de presentatielaag via een API
+				</section>
+				<section>
+							## Soorten API's
+
+							- web API's bestaan al langere tijd, sinds ongeveer eind jaren 1990
+							- Twee grote design modellen: [SOAP vs REST](https://blog.postman.com/soap-vs-rest/)
+							- [SOAP](https://www.altexsoft.com/blog/engineering/what-is-soap-formats-protocols-message-structure-and-how-soap-is-different-from-rest/) (Simple Object Access Protocol): meer gericht op de enterprise wereld, contract-gebaseerd gebruik, _actions_ staan centraal
+							- [REST](https://restfulapi.net/) (Representational State Transfer): dé manier bij uitstek waarmee publieke API's ontsloten zijn en de meeste data via het web kan worden opgevraagd. Veel dichter bij HTTP specs dan SOAP. Wij concentreren ons voor nu op REST
+							- [GraphQL](https://graphql.org/learn/): zeer flexibele querytaal voor API's waarbij de client zeer fijnmazig de relevante data kan opvragen
+				</section>
+				<section>
+							## De requests library
+
+							- API's benaderen in Python kan relatief eenvoudig met behulp van de [requests library](https://docs.python-requests.org/en/latest/)
+							- De documentatie is zeer goed en bevat alle nodige informatie
+							- Volstaat voor alle acties noodzakelijk om API's te gebruiken
+							- De Python Standard Library geeft ons ook de [urllib](https://docs.python.org/3/howto/urllib2.html) package
+
+							```python
+							import requests
+							antwoord = requests.get("https://swapi.dev/api/people/1") # response object
+							print(antwoord)  # Response [200]
+							print(antwoord.text)
+							print(antwoord.status_code)
+							```
+				</section>
+				<section>
+							## Endpoints en resources
+
+							- Elke API vertrekt van een base URL, hier https://swapi.dev/api. Vaak vind je er het woord API in terug. Andere voorbeelden: https://api.twitter.com, https://api.github.com
+							- Om gericht data (resources) te kunnen opvragen werken we met endpoints: ze vormen het gedeelte van de URL waarin je meegeeft welke data je wil terugkrijgen. Hoe vind je ze? Via de API reference als die er is 
+							- De eenvoudigste manier om endpoints te testen en manipuleren is [HTTPie](https://httpie.io/): pip install httpie
+							- Een professionele service is https://www.postman.com/
+							
+				</section>
+				<section>
+							## Vraag en antwoord: request en response
+
+							Alle interacties tussen client en API zijn opgesplitst tussen een request en een response
+
+							- __Request__: bevatten alle relevante data over de API call: de base URL, het endpoint, de gebruikte method, de headers, ...
+							- __Response__: data teruggestuurd door de server zoals de content, de status code, de headers, ...
+
+							Het voorbeeld op de volgende pagina demonstreert de belangrijkste beschikbare attributen voor de request/response objecten. 
+
+							Gedetailleerde informatie over HTTP messages vind je in de [MDN documentatie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages)
+				</section>
+				<section>
+							## Request en response: voorbeeld
+
+							```python
+							# custom headers en onderdelen van het response-object (zien we straks)
+							import requests
+							headers = {"X-Request-Test-id": "<mijn-request-test-id>"}
+							antwoord = requests.get("https://swapi.dev/api/planets", headers=headers)
+							print(antwoord)
+							print(antwoord.request)
+							print(antwoord.request.url)
+							print(antwoord.request.path_url)
+							print(antwoord.request.method)
+							print(antwoord.request.headers)
+							print(antwoord.text)
+							print(antwoord.status_code)
+							print(antwoord.reason)
+							print(antwoord.headers)
+							```
+				</section>
+				<section>
+							## Status codes
+
+							- Elke API response komt met een status code. Deze code vertelt je of je request succesvol was of (waarom) niet. Dit zijn de meest voorkomende status codes:
+								- __200 OK__: request was succesvol
+								- __201 Created__: request geaccepteerd en resources aangemaakt (nuttig voor vervolg)
+								- __400 Bad Request__: request fout of informatie ontbreekt	
+								- __401 Unauthorized__: permissies ontbreken
+								- __404 Not Found__: resource bestaat niet
+								- __405 Method Not Allowed__: gebruikte method niet toegestaan
+								- __500 Internal Server Error__: fout gebeurd langs de kant van de server
+				</section>
+				<section>
+							## Status codes
+
+							- Requests: gebruik antwoord.raise_for_status() of antwoord.status_code om je er in je code van te vergewissen dat het antwoord correct is binnengekomen
+							- Gedetailleerde informatie over status codes vind je in de [MDN documentatie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+				</section>
+				<section>
+							## HTTP Headers
+
+							- Worden gebruikt om een aantal parameters voor verzoeken en antwoorden te definiëren:
+								- __Accept__: type content die de client accepteert 
+								- __Content-Type__: type content waarmee de server zal antwoorden
+								- __User-Agent__: software gebruikt door de client om te communiceren met de server
+								- __Server__: software gebruikt door de server om te communiceren met de client
+								- __Authentication__: wie gebruikt de API en met welke credentials
+							- Gedetailleerde informatie over alle types headers vind je in de [MDN documentatie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+				</section>
+				<section>
+							## Custom headers
+
+							- Het gebeurt dat je bij het aanroepen van API's verwacht wordt custom headers te gebruiken
+							- Hiermee kan bijkomende extra informatie worden meegestuurd vanuit de client die dan door de server kan worden geïnterpreteerd en gebruikt
+							- Gebruikelijk: voorafgegaan door "X-". Je kan een dictionary gebruiken om custom headers toe te voegen
+
+							```python
+							import requests
+							headers = {"X-Request-Test-id": "<mijn-request-test-id>"}
+							antwoord = requests.get("https://swapi.dev/api/planets", headers=headers)
+							```
+				</section>
+				<section>
+							## Content types: JSON domineert
+
+							- Het overgrote merendeel van de API's gebruiken vandaag JSON (application/json) als default content type
+							- Hier en daar kom je andere content types tegen: afbeeldingen, video, XML,...
+							- [Hier](http://www.iana.org/assignments/media-types/media-types.xhtml) vind je een oplijsting van zowat alle mogelijke content types 
+
+							```python
+							import requests
+							antwoord = requests.get("https://via.placeholder.com/150")
+							print(antwoord)
+							print(antwoord.headers.get("Content-Type"))
+							if (antwoord.headers.get("Content-Type") == "image/png"):
+								bestand = open("afb.png", "wb")
+								bestand.write(antwoord.content)
+								bestand.close()
+							```							
+				</section>
+				<section>
+							## Response content
+
+							- De requests library biedt verschillende Response attributen waarmee je de response data kunt aanpassen:
+								- __.text__: response content in unicode. Zie voorgaande voorbeeld. 
+								- __.content__: response content in bytes. Bij voorkeur te gebruiken voor bepaalde types niet-textuele data zoals bvb afbeeldingen
+								- __.json()__: specifieke method voor json-responses. Zet antwoord automatisch om in een Python data-structuur
+				</section>
+				<section>
+							## Response content: voorbeeld
+
+							```python
+							import requests
+							antwoord = requests.get("https://swapi.dev/api/starships/")
+							print(antwoord)  # Response [200]
+							print(antwoord.text)
+							print(antwoord.content)
+							print(antwoord.json())
+							print(antwoord.json()["results"])
+							for starship in antwoord.json()["results"]:
+								print(f'{starship["name"]} (crew: {starship["crew"]})')
+							```
+				</section>
+				<section>
+							## HTTP Methods
+
+							- Een API kan worden aangeroepen met verschillende methods
+							- Deze methods, ook REST _verbs_ genoemd bepalen welke actie zal worden uitgevoerd: 
+								- __POST__: requests.post() - nieuwe resource aanmaken	
+								- __GET__: requests.get() -	bestaande resource opvragen
+								- __PUT__: requests.put() -	bestaande resource updaten
+								- __DELETE__: requests.delete() - bestaande resource verwijderen
+							- We spreken hier vaak over CRUD-handelingen (create, read, update, delete).
+							- Gedetailleerde informatie over alle HTTP methods vind je in de [MDN documentatie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+				</section>
+				<section>
+							## HTTP Methods
+
+							```Python
+							# Een POST request
+							antwoord = requests.post("http://httpbin.org/post", data={"key": "value"})
+							print(antwoord.text)
+							```
+
+							Check de Requests-documentatie op voorbeelden die gebruik maken van de andere REST verbs!
+				</section>
+				<section>
+							## Query Parameters
+
+							- Met query parameters kan je (indien de API dit ondersteunt) je datazoektocht meer precies maken
+							- Bij goed ontworpen API's kan de URL-structuur in principe query parameters vervangen: documentatie maakt dit duidelijk
+							- voorafgegaan door ? voor de eerste query parameter
+							- Meerdere parameters worden gescheiden door een ampersand (&)
+
+							
+							
+				</section>
+				<section>
+							## Query parameters
+
+							```python
+							# https://metmuseum.github.io/
+							import requests
+							antwoord = requests.get("https://collectionapi.metmuseum.org/public/" \
+    							"collection/v1/search?hasImages=true&q=Peter Paul Rubens")
+							print(antwoord.json())
+							query_params = {"hasImages": "true", "q": "Peter Paul Rubens"}
+							endpoint = "https://collectionapi.metmuseum.org/public/collection/v1/search"
+							antwoord2 = requests.get(endpoint, params=query_params).json()
+							print(antwoord2)
+							```
+				</section>
+				<section>
+							## Authenticatie
+
+							- Sommige API's vereisen geen authenticatie en zijn volledig publiek
+							- Voor anderen heb je authenticatie nodig
+							- Hier vind je een goed overzicht: https://github.com/public-apis. Bvb de GitHub en Twitter API vereisen authentificatie
+							- Je hebt basisauthenticatie met een API key of meer geavanceerde zoals OAuth
+				</section>
+				<section>
+							## Authenticatie met een API Key
+							- Soms dien je een API key aan te vragen bij de service om jezelf bij gebruik van de API te kunnen identificeren en je gebruik te kunnen monitoren
+							- API keys worden dan meegegeven aan de request als een request header of via een query parameter
+				</section>
+				<section>
+							## Authenticatie met een API Key: voorbeeld
+							```python
+							import requests
+							endpoint = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
+							api_key = "API Key komt hier"
+							query_params = {"api_key": api_key, "earth_date": "2020-07-01"}
+							response = requests.get(endpoint, params=query_params)
+							print(response)
+							photos = response.json()["photos"]
+							print(f"Found {len(photos)} photos")
+							print(photos[4]["img_src"])
+							```
+				</section>
+				<section>
+							## Open Authentication of OAuth
+
+							- Vaak gebruikte vorm van authenticatie, veiliger dan een API-key
+							- Je dient een applicatie aan te maken die een ID zal hebben (app_id of client_id) en een secret (app_secret of client_secret)
+							- Je hebt een redirect URL nodig die door de API zal gebruikt worden om je informatie toe te sturen (redirect_uri)
+							- Je krijgt een code terug als resultaat van de authenticatie die je dient in te ruilen voor een access token
+							- Als redirect URL kan je httpbin en meer bepaald https://httpbin.org/anything gebruiken
+							- Zij die het nodig hebben: zie demo!
+				</section>
+				<section>
+							## Voorbeeldcode authenticatie
+
+							```Python
+							import requests
+							from requests.auth import HTTPDigestAuth
+
+							user = "gebruikersnaam"
+							passwd = "wachtwoord"
+							url = "..."
+
+							# basic authentication methode
+							antwoord = requests.get(url, auth=(user, passwd))
+
+							# digest authentication methode
+							antwoord = requests.get(url, auth=HTTPDigestAuth(user, passwd))
+							```
+							Check de Requests-documentatie op voorbeelden rond allerlei vormen van authenticatie
+				</section>
+				<section>
+							## Paginering
+
+							- Bij grote(re) datasets gaan API's soms gebruik maken van paginering. Je kan dit ook zien in de lesvoorbeelden die swapi.dev gebruiken
+							- De data wordt hierbij opgesplits in kleinere onderdelen
+							- itereren naar de volgende (of vorige) pagina gebeurt meestal door gebruik van een query parameter (gebruikelijk page of size)
+				</section>
+				<section>
+							## Snelheidsbeperking
+							- Om misbruik tegen te gaan gaan API's vaak beperken hoe vaak ze kunnen aangesproken worden binnen een bepaalde tijd (rate limiting)
+							- Bij misbruik kan de API key geblokkeerd worden
+				</section>
+				<section>
+							## Timeout-waarde voor een request
+
+							```Python
+							import requests
+							antwoord = requests.get("https://httpbin.org/delay/0.5", timeout=1.0)
+							print(antwoord.status_code)
+							```
+				</section>
+				<section>
+							## Redirection history
+
+							```Python
+							antwoord = requests.get("http://github.com")
+							print(antwoord.url)
+							print(antwoord.history)
+							orig = antwoord.history.pop()
+							print(orig.status_code)
+							print(orig.url)
+							print(orig.reason)
+							```
+				</section>
+				<section>
+							## Session object: groeperen van requests en settings
+
+							```Python
+							sess = requests.Session()
+							# bvb om een cookie te persisten doorheen de requesten
+							sess.get('https://httpbin.org/cookies/set/sample/123456789')
+							antwoord = sess.get('https://httpbin.org/cookies')
+							print(antwoord.text)
+							sess.headers.update({
+								"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:68.0) 
+								Gecko/20100101 Firefox/68.0"
+							})
+							antwoord = sess.get("http://google.com")
+							print(len(antwoord.content))
+							```
+				</section>
+				<section>
+							## Web Services Python - API's gebruiken en integreren - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
