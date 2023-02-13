@@ -267,16 +267,16 @@
 							## Structurele patroonherkenning
 
 							```Python
-							getal = 32
-							match(getal % 3 == 0, getal % 5 == 0):
-							  case (0,0):
-								return "fizzbuzz"
-							  case (_,0):
-								return "buzz"
-							  case (0,_):
-								return "fizz"
-							  case _:
-								return str(getal)
+							getal = 13
+							match(getal % 3, getal % 5):
+								case (0,0):
+									print("fizzbuzz")
+								case (_,0):
+									print("buzz")
+								case (0,_):
+									print("fizz")
+								case _:
+									print(str(getal))
 							```
 
 							- Hier match je de elementen in een tuple gelijktijdig met mogelijke patronen. De mogelijkheden zijn krachtig!
