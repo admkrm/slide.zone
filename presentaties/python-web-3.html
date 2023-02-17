@@ -1,0 +1,482 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web Services Python: Les 2</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web Services Python
+							## 2/ web API's bouwen met FastAPI
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Starten met FastAPI
+							- FastAPI routes
+							- Response models en foutafhandeling
+							- FastAPI en templates
+				</section>
+				<section class="chapter">
+							## Starten met FastAPI
+				</section>
+				<section>
+							## FastAPI?
+							- Web framework om API's te bouwen in Python
+							- Snel, robuust en schaalbaar
+							- Intuïtief en relatief eenvoudig om mee te werken, je oplossingen bevatten minder code 
+							- Gebaseerd op standaarden zoals OpenAPI: je implementeert automatisch de huidige best practices
+							- Nieuwste van "de drie": Flask, Django en FastAPI
+							- Uitgebreide documentatie: https://fastapi.tiangolo.com/
+				</section>
+				<section>
+							## Vertrouwd worden met FastAPI
+							- Frameworks als Django, Flask en FastAPI zijn omvangrijk en laten zich slechts geleidelijk aan kennen
+							- Je zal gedeeltelijk zelf op zoek moeten naar informatie
+							- De officiële documentatie is hiervoor een uitstekende bron. Bvb:
+								- ...
+								- ...
+								- ...
+							- Door te experimenteren met deze informatie in je oefeningen bouw je kennis en vertrouwdheid op
+				</section>
+				<section>
+							## FastAPI installeren
+							- Je werkt zoals steeds binnen een virtuele omgeving
+							- Je installeert FastAPI en uvicorn
+							```Bash
+							pip install fastapi uvicorn
+							```
+							- Met FastAPI bouw je de API, Uvicorn is de server voor de requests
+							- Je API-toepassing uitvoeren met Uvicorn doe je zo:
+							```Bash
+							uvicorn main:app --reload
+							```
+				</section>
+				<section>
+							## Een basisvoorbeeld
+
+							```Python
+							from fastapi import FastAPI
+
+							app = FastAPI()
+
+							@app.get("/") # belangrijk: de path operation decorator
+							async def root() -> dict:
+								return {"boodschap": "Hallo studenten van Web Services Python :-)"}
+							```
+
+							- Voer het script (bvb main.py) uit met uvicorn en bekijk de toepassing in de browser op http://127.0.0.1:8000
+							- Op http://127.0.0.1:8000/docs zie je de door [Swagger UI](https://swagger.io/tools/swagger-ui/) gegenereerde interactieve API documentatie
+							- De alternatieve [Redoc](https://redocly.com/)-documentatie vind je op http://127.0.0.1:8000/redoc
+				</section>
+				<section class="chapter">
+							## FastAPI routes
+				</section>
+				<section>
+							## FastAPI routes
+							- Routing is een essentiële component van elke webtoepassing 
+							- Voor het creëren van endpoints gebruiken we het FastAPI routing systeem
+							- Het regelt de afhandeling van http requests naar een door een path en operation gevormde resource 
+							- Het antwoord van de server komt in een response object. Jij kan in je code dictionaries, lists, strings, integers, enz teruggeven. Ook een antwoord in de vorm van een [pydantic](https://docs.pydantic.dev/) model is mogelijk (zie verder)
+							- In het voorbeeld hierboven vertaalt FastAPI het Python dictionary object automatisch naar een json response (heel handig)
+				</section>
+				<section>
+							## Path parameters met types
+
+							```Python
+							from fastapi import FastAPI
+
+							app = FastAPI()
+
+							@app.get("/bericht/{bericht_id}")
+							async def lees_bericht(bericht_id: int):
+								return {"bericht_id": bericht_id}
+							```
+
+							- Bij verschillende routes: order Matters: Put Fixed Paths First
+							- The value of the path parameter item_id will be passed to your function as the argument item_id.
+							- You can declare the type of a path parameter in the function using standard Python type hints
+							- !!!Data-conversie EN data-validatie: with that type declaration, FastAPI gives you automatic request parsing
+
+				</section>
+				<section>
+							## Een woordje over type hints
+
+							- Hier komt een woordje over type hints - boek p. 37
+							- Declaring the type of a path parameter will give you editor support inside of your function, with error checks, completion, and so on
+				</section>
+				<section>
+							## Request Body: Receiving JSON Data
+							- Je stuurt data naar je server als een request body / A request body is data sent by the client to your API / clients don’t necessarily need to send request bodies all the time.
+							- To send data, you should use POST (the most common approach), PUT, DELETE
+							- To declare a request body, you use pydantic models, with all their power and benefits. 
+
+				</section>
+				<section>
+							##  Data-afhandeling met pydantic
+
+							- All the data validation is performed under the hood by pydantic, so you get all the benefits from it, and you know you are in good hands.
+							- You can use the same type declarations with str, float, bool and many other complex data types.
+							- Use pydantic to Declare JSON Data Models (Data Shapes)
+							- First, you need to import BaseModel from pydantic and then use it to create subclasses defining the schema, or data shapes, you want to receive.
+							- Next, you declare your data model as a class that inherits from BaseModel, using standard Python types for all the attributes:
+				</section>
+				<section>
+							## Pydantic data shapes
+
+							- Next, add the new pydantic model to your path operation as a parameter. You declare it the same way you declared path parameters:
+							- The parameter item has a type hint of Item, which means that item is declared as an instance of the class Item.
+
+							```Python
+							from typing import Optional
+
+							from fastapi import FastAPI
+							from pydantic import BaseModel
+
+							class Item(BaseModel):
+								name: str
+								description: Optional[str] = None
+								price: float
+								tax: Optional[float] = None
+
+							app = FastAPI()
+
+							@app.post("/items/")
+							async def create_item(item: Item):
+								return item
+							```
+				</section>
+				<section>
+							## Pydantic data shapes
+
+							- When a model attribute has a default value, it is not required. Otherwise, it is required. To make an attribute optional, you can use None.
+							- For example, the model above declares a JSON object (or Python dict) like this:
+							- In this case, since description and tax are optional because they have a default value of None, this JSON object would also be valid:
+							- A JSON object that omits the default values is also valid.
+
+							```json
+							{
+								"name": "Foo",
+								"description": "An optional description",
+								"price": 45.2,
+								"tax": 3.5
+							}
+							```
+				</section>
+				<section>
+							## Pydantic data shapes
+
+							With that Python type declaration, FastAPI will:
+
+							Read the body of the request as JSON
+							Convert the corresponding types if needed
+							Validate the data and return a clear error if it is invalid
+							Give you the received data in the parameter item—since you declared it to be of type Item, you will also have all the editor support, with completion and type checks for all the attributes and their types
+							Generate JSON Schema definitions for your model that you can also use anywhere else that makes sense for your project
+							By using standard type hints with pydantic, FastAPI helps you build APIs that have all these best practices by default, with little effort.
+				
+							!!! The JSON Schemas of your pydantic models will be part of the OpenAPI generated for your application and will be shown in the interactive API documentation:
+							!!! In your editor, inside your function, you will get type hints and completion everywhere. This wouldn’t happen if you received a dict instead of a pydantic model:
+				</section>
+				<section>
+							## Use the pydantic model
+
+							...
+				</section>
+				<section>
+							## Request body and path parameters
+
+							...
+				</section>
+
+
+
+
+				<section>
+							## Routen met de APIRouter klasse
+
+							```Python
+							from fastapi import APIRouter
+
+							router = APIRouter()
+
+							@router.get("/hallo")
+							async def hallo_zeggen() -> dict:
+								return {"boodschap": "Hallo FastAPI!"}
+							```
+
+							- The APIRouter class belongs to the FastAPI package and creates path operations for multiple routes. The APIRouter class encourages modularity and organization of application routing and logic.
+							- The APIRouter class is imported from the fastapi package, and an instance is created. The route methods are created and distributed from the instance created
+							- Traditionally, the FastAPI() instance can be used for routing operations, as seen previously. However, this method is commonly used in applications that require a single path during routing. In a situation where a separate route performing a unique function is created using the FastAPI() instance, the application will be unable to run both routes, as uvicorn can only run one entry point.
+							- How then do you handle extensive applications that require a series of routes performing different functions? We’ll look at how the APIRouter class helps with multiple routing in the next section.
+				</section>
+				<section>
+							## Voorbeeldtoepassing
+
+							- Let’s create a new path operation with the APIRouter class to create and retrieve todos. In the todos folder from the previous chapter, create a new file, todo.py
+							- We’ll start by importing the APIRouter class from the fastapi package and creating an instance
+							- Next, we’ll create a temporary in-app database, alongside two routes for the addition and retrieval of todos:
+							- In the preceding code block, we have created two routes for our todo operations. The first route adds a todo to the todo list via the POST method, and the second route retrieves all the todo items from the todo list via the GET method.
+							- The APIRouter class works in the same way as the FastAPI class does. However, uvicorn cannot use the APIRouter instance to serve the application, unlike the FastAPIs. Routes defined using the APIRouter class are added to the fastapi instance to enable
+							their visibility.
+							To enable the visibility of the todo routes, we’ll include the todo_router path operations handler to the primary FastAPI instance using the include_router() method.
+							- The include_router(router, ...) method is responsible for adding routes defined with the APIRouter class to the main application’s instance to enable the routes to become visible.
+				</section>
+				<section>
+							## Valideren van request bodies met Pydantic models
+
+							- request bodies can be validated to ensure only defined data is sent. This is crucial, as it serves to sanitize request data and reduce malicious attacks’ risks. This process is known as validation.
+							- A model in FastAPI is a structured class that dictates how data should be received or parsed. Models are created by subclassing Pydantic’s BaseModel class.
+							- Pydantic is a Python library that handles data validation using Python-type annotations.
+							- Models, when defined, are used as type hints for request body objects and request-response objects (hier enkel kijken naar models voor request bodies)
+							- A variable type hinted to the PacktBook class can only take four fields, as defined previously. In the next couple of examples, we see how Pydantic helps in validating inputs.
+							- For example, to ensure only the request body contains fields in the preceding example, create a new model.py file and add the following code below to it:
+
+							```Python
+							# in model.py
+							from Pydantic import BaseModel
+							class Todo(BaseMode):
+								id: int
+							item: str
+							```
+
+							In the preceding code block, we have created a Pydantic model that accepts only two fields:
+• id of type integer
+• item of type string
+				</section>
+				<section>
+							## Valideren met Pydantic models
+
+							- In api.py, import the model: 
+							
+							```Python
+							from model import Todo
+							todo_list = []
+
+							@todo_router.post("/todo")
+							async def add_todo(todo: Todo) -> dict:
+								todo_list.append(todo)
+								return {"message": "Todo added successfully"}
+							```
+				</section>
+				<section>
+							## Nested models
+
+
+				</section>
+				<section>
+							## Path en query parameters
+				</section>
+				<section>
+							## Request body
+
+							- A request body is data that you send to your API using a routing method such as POST and UPDATE.
+
+				</section>
+				<section>
+							## FastAPI automatic docs
+
+							- FastAPI generates JSON schema definitions for our models and automatically documents our routes, including their request body type, path and query parameters, and response models. This documentation is of two types:
+							- Swagger
+							- Redoc
+				</section>
+				<section>
+							## Een eenvoudige CRUD app bouwen
+
+							- We have built routes for creating and retrieving todos. Let’s build the routes for updating and deleting the added todo. Let’s start by creating a model for the request body for the UPDATE route in model.py:
+				</section>
+
+				<section class="chapter">
+							## Responses, response modeling, error handling en status codes
+				</section>
+				<section>
+							## Responses in FastAPI
+							- Response models serve as templates for returning data from an API route path. They are built on Pydantic to properly render a response from requests sent to the server.
+				
+				</section>
+				<section>
+							## Response models bouwen						
+				</section>
+				<section>
+							## Foutafhandeling
+				</section>
+				<section class="chapter">
+							## Templates in FastAPI
+				</section>
+				<section>
+							## Templates in FastAPI
+							- Templating is the process of displaying the data gotten from the API in various formats
+							- Templates act as a frontend component in web applications. can be used to create views and render responses from the API.
+							- FastAPI kan responses weergeven geven die gebruik maken van [Jinja templates](https://jinja.palletsprojects.com/en/3.1.x/)
+							- Jinja is a templating engine written in Python designed to help the rendering process of API responses
+							- In every templating language, there are variables that get replaced with the actual values passed to them when the template is rendered, and there are tags that control the logic of the template.
+				</section>
+				<section>
+							## Jinja
+							- Jinja templating engine makes use of curly brackets { } to distinguish its expressions and syntax from regular HTML, text and any other variable in the template file
+							- The {{ }} syntax is called a variable block. The {% %} syntax houses control structures such as if/else, loops, and macros
+							- The three common syntax blocks used in the Jinja templating language include the following:
+								- {% ... %} – This syntax is used for statements such as control structures.
+								- {{ todo.item }} – This syntax is used to print out the values of the expressions passed to it.
+								- {# This is a great API book! #} – This syntax is used when writing comments and is not displayed on the web page.
+							- Jinja template variables can be of any Python type or object if they can be converted into strings. A model, list, or dictionary type can be passed to the template and have its attributes displayed by placing these attributes in the second block listed previously.
+				</section>
+				<section>
+							## Filters
+
+							- filters enable us to execute certain functions such as joining values from a list and retrieving the length of an object, among others.
+							- A filter is separated from the variable by a pipe symbol (|) and may entertain optional arguments in parentheses. A filter is defined in this format (haakjes weglaten indien geen argumenten):
+
+							```Python
+							{{ variable | filter_name(*args) }}
+							```
+
+							- For a full list of filters and to learn more about filters in Jinja, visit
+							https://jinja.palletsprojects.com/en/3.0.x/ templates/#builtin-filters.
+				</section>
+				<section>
+							## Filters
+
+							- The default filter variable is used to replace the output of the passed value if it turns out to be None:
+							
+							```Python
+							{{ todo.item | default('This is a default todo item') }}
+							```
+
+							- The escape filter is used to render raw HTML output:
+
+							```Python
+							{{ "<title>Todo Application</title>" | escape }}
+							```
+
+							- The conversion filters include int and float filters used to convert from one data type to another:
+
+							```Python
+							{{ 3.142 | int }}
+							```
+				</section>
+				<section>
+							## Filters
+
+							- The join filter / is used to join elements in a list into a string as in Python:
+							
+							```Python
+							{{ ['Packt', 'produces', 'great', 'books!'] | join(' ') }}
+							```
+
+							- The length filter is used to return the length of the object passed. It fulfills the same role as len() in Python:
+
+							```Python
+							Todo count: {{ todos | length }}
+							```
+				</section>
+				<section>
+							## If-statements
+
+							- The usage of if statements in Jinja is similar to their usage in Python. if statements are used in the {% %} control blocks
+				
+							```Python
+							{% if todo | length < 5 %}
+								You dont have much items on your todo list!
+							{% else %}
+								You have a busy day it seems!
+							{% endif %}
+							```
+				</section>
+				<section>
+							## Loops
+
+							We can also iterate through variables in Jinja. This could be a list or a general function, such as the following, for example:
+
+							```Python
+							{% for todo in todos %}
+									<b> {{ todo.item }} </b>
+							{% endfor %}
+							```
+
+							You can access special variables inside a for loop: https://jinja.palletsprojects.com/en/3.0.x/templates/, such as loop.index, which gives the index of the current iteration. 
+							loop.index: current iteration of the loop (1 indexed); loop.index0; loop.revindex: number of iterations from the end of the loop (1 indexed) of loop.revindex0
+							loop.first: true if first iteration
+				</section>
+				<section>
+							## Macros
+
+							- A macro in Jinja is a function that returns an HTML string. The main use case for macros is to avoid the repetition of code and instead use a single function call. For example, an input macro is defined to reduce the continuous definition of input tags in an HTML form:
+				
+							```Jinja
+							{% macro input(name, value='', type='text', size=20 %}
+								<div class="form">
+								<input type="{{ type }}" name="{{ name }}" value="{{ value|escape }}" size="{{ size }}">
+								</div>
+							{% endmacro %}
+							```
+							
+							```Jinja
+							{{ input('item') }}
+							```
+
+				</section>
+				<section>
+							## Template inheritance
+
+							- Jinja’s most powerful feature is the inheritance of templates. This feature advances the don't repeat yourself (DRY) principle and comes in handy in large web applications. Template inheritance is a situation where a base template is defined and child templates can interact, inherit, and replace defined sections of the base template.
+							- You can learn more about Jinja’s template inheritance at https://jinja. palletsprojects.com/en/3.0.x/templates/#template- inheritance.
+				</section>
+				<section>
+							## Jinja en FastAPI
+
+							- install the Jinja package (pip install jinja2) and create a new folder, templates, in our project directory. This folder will store all our Jinja files, which are HTML files mixed with Jinja’s syntax. 
+							- We’ll start by creating the homepage template, which will house the section for creating new todos.
+							- home.html for the application’s home page / todo.html for the todo page
+							- Before moving on to build our templates, let’s configure Jinja in our FastAPI application:
+							- Let’s modify the POST route of the todo API component, todo.py:
+							- Ook de GET routes gelijkaardige aanpassingen...
+							In the preceding code block, we have configured Jinja to look into the templates directory to serve the templates passed to the templates. TemplateResponse() method.
+The POST method for adding a todo has also been updated to include a dependency on the input passed.
+In model.py, add the highlighted code before the Config subclass !!! nog niet getoond
+
+				</section>
+				<section>
+							## FastAPI en Jinja
+
+							```Python
+							from fastapi.templating import Jinja2Templates
+
+							templates = Jinja2Templates(directory="templates/")
+
+							@todo_router.post("/todo")
+							async def add_todo(request: Request, todo: Todo = Depends(Todo.as_form)):
+								todo.id = len(todo_list) + 1
+								todo_list.append(todo)
+								return templates.TemplateResponse("todo.html",
+								{
+									"request": request,
+									"todos": todo_list
+								})
+							```
+				</section>
+				<section>
+							## Volgende les
+
+							-  complete API that uses a database, authentication, and templates
+							-  structure your application to enhance efficiency, readability, and scalability
+							- connect your application to both a SQL database and a NoSQL database, integrate templates, and build authentication
+
+				</section>
+		
+				<section>
+							## Web Services Python - web API's bouwen met FastAPI - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OOP / development: werken met de terminal</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OOP / Development
+							## 1.1/ Python en de terminal
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Het doel van deze les?
+							- Terminal is een onmisbare en zeer krachtige tool voor een Python developer
+							- With just a few commands in the terminal, you can do tasks that are impossible or at least very tedious to do in a GUI
+							- Het gidsje dat ik had willen hebben toen ik voor het eerst de terminal gebruikte
+				</section>
+				<section>
+							## Inhoud
+							- De terminal in orde krijgen
+							- De meest gebruikte terminal commando's
+							- Virtuele omgevingen en packages installeren met pip
+							- Werken met git
+				</section>
+				<section class="chapter">
+							## De terminal in orde krijgen
+				</section>
+				<section>
+							## De terminal in orde krijgen
+
+							- Onze terminal is eigenlijk een terminal emulator
+							- shell provides the commands that you use in a command-line interface
+							- the terminal is the application that you run to access the shell
+							- Find the terminal on your operating system
+							- Open the terminal for the first time
+				</section>
+				<section>
+							## De terminal op je computer
+							- If you’re using a Linux or macOS machine, then the terminal is already built in. You can start using it right away
+							- On Windows, you also have access to command-line applications like the [Command Prompt](https://en.wikipedia.org/wiki/Cmd.exe).
+							- you should use the Windows terminal application instead
+							- If you have Windows 11 or above, chances are that the Windows terminal is already present on your machine. Otherwise, you can download the application from the [Microsoft Store](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) or from the official [GitHub repository](https://github.com/microsoft/terminal)
+							- https://realpython.com/python-coding-setup-windows/#installing-windows-terminal
+							- After you install the Windows terminal, you can find it in the Start menu under Terminal.
+							- via git -> git bash shell for windows?
+				</section>
+				<section>
+							## De terminal op je computer
+							- Depending on your operating system, you’ll run the terminal commands in a specific shell. For Linux, it’s most likely Bash, for newer macOS versions it’s Zsh, and for Windows it’s PowerShell. These shells differ in their features, but they share most of the basic commands.
+							- You can think of commands as little programs that are built into your shell or can be added by external applications. In PowerShell, commands are also known as cmdlets.
+				</section>
+				<section class="chapter">
+							## De meest gebruikte terminal commando's
+				</section>
+				<section>
+							## De meest gebruikte terminal commando's
+
+							- Terminal commands are the instructions that you type into the terminal to execute a specific task.
+							- Navigate your file system with basic commans
+							- Create files and folders with the terminal
+				</section>
+				<section>
+							## Navigate Your File System
+
+							- The file system is the hierarchical structure of directories and files on a computer. It’s usually what you see when you open a GUI file system application like Windows Explorer or the macOS Finder
+							- Find out what your current working directory is / The pwd command stands for print working directory, which is the command that you use to determine your current location within the file system.
+
+							```Bash
+							$ pwd
+							```
+
+							- To see which files and folders directory contains, you can use ls, which is short for list:
+
+							```Bash
+							$ ls
+							```
+				</section>
+				<section>
+							## Environment variabelen en PATH
+
+							```Bash
+							# Linux + macOS
+							$ echo "${PATH//:/\n}"
+							# Windows
+							PS> (cat ENV:Path) -Split ";"
+							```
+
+							- Environment variables are variables that store stateful information about the environment in which the terminal is running. They can be used to store information such as the current working directory, the location of installed software, or the user’s home directory. The terminal can access and use this information to determine how to operate and where to look for files.
+							- PATH is an environment variable that stores a list of directories. To see what paths are in your PATH, call the following command:
+							- When you enter a command in the terminal, the system will look for a program that matches the command in the directories listed in the PATH. The list visible after running the previous command is the list of locations that your system will look for when evaluating which program to run.
+				</section>
+				<section>
+							## Navigate Your File System
+
+							- You can also use the -a flag with the ls command, which stands for all. The -a flag shows you all the items in the current working directory, including the hidden items. Herkenbaar aan de dot.
+							- Another flag that you can use is -l, which stands for long. When you use this flag along with ls, the command shows you detailed information about the items in the current working directory.
+							-  owner and group permissions: [notation of traditional Unix permissions](https://en.wikipedia.org/wiki/File-system_permissions#Notation_of_traditional_Unix_permissions)
+
+							```Bash
+							$ ls -al
+							```
+				</section>
+				<section>
+							## Navigate Your File System
+
+							-  To change the current working directory into the Desktop/ subfolder, you use the change directory command, cd:
+							- Note that you don’t specify a slash / or drive indicator like C:\ at the beginning of Desktop. Calling a path like this indicates that you want to navigate into a path that’s relative to the directory that you’re in right now.
+
+							```Bash
+							$ pwd
+							/Users/realpython
+							$ cd Desktop
+							$ pwd
+							/Users/realpython/Desktop
+							```
+				</section>
+				<section>
+							## Navigate Your File System
+
+							You used a relative path in the command above to navigate into a subfolder. Relative paths make it convenient to reference items in your file system because you don’t have to specify the complete path from the root directory. That being said, you can also change into any directory of your file system by using a complete or absolute path:
+
+							```Bash
+							# Linux + macOS
+							cd /Users/realpython/Desktop
+							# Windows
+							PS> cd C:\Users\realpython\Desktop
+							```
+				</section>
+				<section>
+							## Navigate Your File System
+
+							- To move one directory up, you usually don’t use the name of the parent folder but two dots:
+							- The two dots (..) represent the parent directory of the current directory. Using cd .. moves you up one directory in the file system hierarchy.
+
+							```Bash
+							$ cd ..
+							```
+				</section>
+				<section>
+							## Create files and folders
+
+							- With the knowledge from this section, you’ll be able to create and organize your projects from within the terminal.
+							- You use the mkdir command to create a new directory. The command stands for make directory. Here, you name the new directory rp_terminal.
+
+							```Bash
+							$ mkdir rp_terminal
+							```
+				</section>
+				<section>
+							## Create files and folders
+
+							- When you run the touch/ni command, you create an empty file with the given name. In this case, the file is a Python script named hello_terminal.py.
+							- If a file with the provided name already exists, then using touch updates the file’s timestamp to the current date and time. The touch command also updates a file’s access and modification times, even if its content remains the same.
+
+							```Bash
+							# Linux + macOS
+							$ touch hello_terminal.py
+							# Windows
+							PS> ni hello_terminal.py
+							```
+				</section>
+				<section>
+							## Create files and folders
+
+							- However, for the echo command, it’s a plain string, which it outputs back into the terminal. More specifically, the echo command sends the string to the standard output stream (stdout).
+							- The stdout is the default destination for data that a command-line program sends. The data is displayed on the screen, but you can tell the terminal to redirect stdout to a file:
+							- Again, you’re using echo to output a given string. But this time, you use the caret symbol (>) to send the output into hello_terminal.py.
+							- When you redirect the output of the echo command into a nonexistent file, then you’re creating the file in the same step.
+
+							```Bash
+							$ echo 'print("Hello, terminal!")' > hello_terminal.py
+							```
+				</section>
+				<section>
+							## Create files and folders
+
+							- To verify that it contains the print() function call, you can use the cat command /  It’s short for concatenate.
+							- When you use cat with multiple files as arguments, you can concatenate them and display the contents one after another. If you use cat with only one file, then cat is a convenient way to display the contents of a file in the terminal.
+
+							```Bash
+							$ cat hello_terminal.py
+							```
+				
+				</section>
+				<section class="chapter">
+							## Virtuele omgevingen en packages installeren met pip
+				</section>
+				<section>
+							## Virtuele omgevingen en packages installeren met pip
+
+							- Manage packages with pip commands
+				</section>
+				<section class="chapter">
+							## Werken met git
+				</section>
+				<section>
+							## Werken met git
+
+							- Keep track of your files with Git in the terminal
+				</section>
+				
+				<section>
+							## Python OOP / development: werken met de terminal
+							## kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

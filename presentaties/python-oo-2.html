@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OO: design patterns deel I</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OO
+							## 2/ Python design patterns deel I
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Wat zijn design patterns?
+				</section>
+				<section class="chapter">
+							## Wat zijn design patterns?
+				</section>
+				<section>
+							## Wat zijn design patterns?
+
+							- DPs: frequently used algorithms that describe convenient ways for classes to communicate
+							- DPs: convenient ways of reusing object-oriented code between projects and programmers
+							- Idea is simple: write down and catalog common interactions between objects that programmers have frequently found useful  
+							- Behoefte aan design patterns - gegroeid vanuit nood aan elegante en toch eenvoudige herbruikbare oplossingen
+							- DPs describe how objects communicate without becoming entangled in each others data models and methods
+							- Keeping this separation has always been an objective of good OO programming / keep classes separated and prevent them from knowing too much about each other
+							- Most such patterns are discovered rather than written / process of looking for these patterns is called pattern mining
+				</section>
+				<section>
+							## Geschiedenis 
+
+							- Vroege jaren 90: Erich Gamma, Helm, Johnson & Vlissides, Design Patterns: Elements of Reusable Software. Gang of Four, "GoF"-book
+							- Powerful impact on programmers seeking to understand how to use design patterns: 23 commonly occurring and generally useful patterns and comments on how and when to apply them
+				</section>
+				<section>
+							## Design patterns
+
+							- Patterns selected for inclusion in the original DP book, had several known applications and were on a middle level of generality
+							- The authors divided these patterns into 3 types: creational, structural and behavioral
+				</section>
+				<section>
+							## Hoe ga je daarmee om?
+
+							- Acceptance: accept that they are important to your work
+							- Recognition: recognize that you need to read about them in order to determine when you might use them
+							- Internalize: internalize the patterns in sufficient detail that you know which ones might help you solve a given design problem
+				</section>
+				<section>
+							## OO strategies for achieving separation
+
+							- encapsulation and inheritance
+							- program to an interface and not to an implementation: you should define the top of any class hierarchy with an ABC or an interface, which implements no methods but simply defines the methods that class will support. 
+							- Then in all your derived classes you have more freedom to implement these methods as best suits your purposes.
+							- Python does not support interfaces but lets you write ABC, where the methods have no implementation 
+				</section>
+				<section>
+							## OO strategies for achieving separation
+
+							- The other major concept is object composition = simply the construction of objects that contain others
+							- ! Favor object composition over inheritance
+
+				</section>
+				<section>
+							## Creational patterns
+
+							- Create objects for you instead of having you instantiate objects directly
+							- Gives your program more flexibility in deciding which objects need to be created for a given case
+							- Deal with ways to create instances of objects
+							- This is important because your program should not depend on how objects are created and arranged
+							- Creating a variable of the class type: fred = Fred() => amounts to hard coding
+							- Abstracting the creation process into a special "creator" class can make your program more flexible and general
+				</section>
+				<section>
+							## Structural patterns
+
+							- Help you compose groupss of objects into larger structures, such as complex user interfaces or accounting data
+				</section>
+				<section>
+							## Behavioral patterns
+
+							- Help you define the communication between objects in your system and control the flow in a complex program
+				</section>
+				<section class="chapter">
+							## The factory method
+				</section>
+				<section>
+							## The factory method
+
+							- provides a simple decision-making class that returns one of several possible subclasses of an ABC, depending on the data provided
+				</section>
+				<section class="chapter">
+							## The abstract factory method
+				</section>
+				<section>
+							## The abstract factory method
+
+							- provides an interface to create and return one of several families of related objects
+							- = is used to return one of several groups of classes. In some cases, it actually returns a factory for that group of classes
+							-  Abstract factory is useful when its user expects to receive a family of related objects at a given time but doesn't have to know which family it is until runtime. 
+							- Well first build a pet factory whose concrete factories include dog factory and cat factory. Both dog and cat factories produce dogs and cats, as well as related products, such as dog food and cat food. In theory, our solution, abstract factory, consists of abstract factory, concrete factory, abstract product and concrete product. For the abstract factory, we use pet factory. For concrete factory, we use dog factory and cat factory. And finally, for the concrete products, we'll be creating dogs, the type of pet and dog food, and also cats and cat food. We implement our abstract factory without using inheritance because Python is a dynamically typed language, and therefore does not require abstract classes. Abstract factory is related to the factory pattern in a sense that it creates objects. Concrete factories are singletons.
+				</section>
+				<section class="chapter">
+							## The builder pattern
+				</section>
+				<section>
+							## The builder pattern
+
+							- separates the construction of a complex object from its representation so that several different representations can be created, depending on the needs of the program
+							- = assembles a number of objects to make a new object , based on the data with which it is presented. Frequently, the choice of which way the objects are assembled is achieved using a factory  
+							-  The builder pattern separates a class from the process of building complex objects. This way it makes creating similar objects that require the same steps, more efficient and elegant. Let's say that you want to build a Mustang instead of a Skylark, all you have to do is add another concrete builder for Mustang.
+				</section>
+				<section class="chapter">
+							## The Prototype pattern
+				</section>
+				<section>
+							## The Prototype pattern
+
+							- starts with an instantiated class and copies or clones it to make new instances
+							- these instances can then be further tailored using their public methods
+							- - Prototype clones objects according to a prototypical instance. Here the keyword is cloning. Note that we're talking about making a copy instead of building. Prototype is useful when instantiating many identical objects individually, which could be expensive in terms of computing power. Cloning could be a good alternative because it makes a carbon copy in the memory space instead of building individual objects, respectively, from scratch the usual way. Let's assume that we are building a car. We can mass produce cars more easily and quickly If the cars have the same color and options. Similarly, in our Python programming scenario, you can clone the objects by making a copy of a prototype object instead of building them through constructors, as long as they're supposed to be identical without variations. Our solution consists of creating a prototypical instance first and then cloning it whenever you need the replica. The pattern related to the prototype pattern is the abstract factory.
+				</section>
+				<section class="chapter">
+							## The Singleton pattern
+				</section>
+				<section>
+							## The Singleton pattern
+
+							- defines a class that can have no more than one instance
+							- it provides a single global point of access to that instance
+							- OO form of global variables
+
+				</section>
+				<section>
+							## Python OO - Design Patterns deel I
+							## kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Web Services Python: Les 2</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Web Services Python
+							## 2/ web API's bouwen met FastAPI
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Starten met FastAPI
+							- FastAPI routes
+							- Path parameters
+							- Type hints
+							- Pydantic data shapes
+							- Request body (met JSON ontvangen) 
+				</section>
+				<section class="chapter">
+							## FastAPI: de basisprincipes
+				</section>
+				<section>
+							## FastAPI?
+							- Web framework om API's te bouwen in Python
+							- Snel, robuust en schaalbaar
+							- Intuïtief en relatief eenvoudig om mee te werken, je oplossingen bevatten minder code 
+							- Gebaseerd op standaarden zoals OpenAPI: je implementeert automatisch de huidige best practices
+							- Nieuwste van "de drie": Flask, Django en FastAPI
+							- Uitgebreide documentatie: https://fastapi.tiangolo.com/
+				</section>
+				<section>
+							## Jezelf vertrouwd maken met FastAPI
+							- Frameworks als Django, Flask en FastAPI zijn omvangrijk en laten zich slechts geleidelijk aan kennen
+							- Je zal - naast het lesmateriaal - ook zelf op zoek moeten naar informatie
+							- De officiële documentatie een uitstekende bron. Bestudeer grondig alle onderdelen van de [basistutorial](https://fastapi.tiangolo.com/tutorial/)
+							- Heb je nog goesting over? Ga dan door de [tutorials](https://fastapi.tiangolo.com/advanced/) voor gevorderde gebruikers
+							- Door te experimenteren met deze informatie in je oefeningen bouw je kennis en vertrouwdheid op
+				</section>
+				<section>
+							## FastAPI installeren
+							- Je werkt zoals steeds binnen een virtuele omgeving
+							- Je installeert FastAPI en uvicorn
+							```Bash
+							pip install fastapi uvicorn
+							```
+							- Met FastAPI bouw je de API, Uvicorn is de server voor de requests
+							- Je API-toepassing uitvoeren met Uvicorn doe je zo:
+							```Bash
+							uvicorn main:app --reload
+							```
+				</section>
+				<section>
+							## Een basisvoorbeeld
+
+							```Python
+							from fastapi import FastAPI
+
+							app = FastAPI()
+
+							@app.get("/") # belangrijk: de path operation decorator
+							async def root() -> dict:
+								return {"boodschap": "Hallo studenten van Web Services Python :-)"}
+							```
+
+							- Voer het script (bvb main.py) uit met uvicorn en bekijk de toepassing in de browser op http://127.0.0.1:8000
+							- Op http://127.0.0.1:8000/docs zie je de door [Swagger UI](https://swagger.io/tools/swagger-ui/) gegenereerde interactieve API documentatie
+							- De alternatieve [Redoc](https://redocly.com/)-documentatie vind je op http://127.0.0.1:8000/redoc
+				</section>
+				<section>
+							## FastAPI routes
+							- Routing is een essentiële component van elke webtoepassing en dus ook van FastAPI
+							- Voor het creëren van endpoints gebruiken we het FastAPI routing systeem
+							- Het regelt de afhandeling van http requests naar een door een path en operation gevormde resource 
+							- Het antwoord van de server komt in een response object. Je kan in je code dictionaries, lists, strings, integers, enz teruggeven. Ook een antwoord in de vorm van een [pydantic](https://docs.pydantic.dev/) model is mogelijk (zie verder)
+							- In het voorbeeld hierboven vertaalt FastAPI het Python dictionary object automatisch naar een json response (heel handig)
+				</section>
+				<section>
+							## Path parameters
+
+							```Python
+							from fastapi import FastAPI
+
+							app = FastAPI()
+
+							@app.get("/bericht/{bericht_id}")
+							async def lees_bericht(bericht_id: int):
+								return {"bericht_id": bericht_id}
+							```
+							- Path parameters zijn handig om variabele data te ontvangen vanuit de URL structuur van de resource
+							- In het vb. hier wordt de waarde van path parameter bericht_id meegegeven als argument van de functie
+							- Volgorde van de routes is belangrijk: plaats altijd verwante routes zonder parameters eerst
+
+				</section>
+				<section>
+							## FastAPI en type hints
+
+							- Het is warm aanbevolen om gebruik te maken van [type hints](https://peps.python.org/pep-0484/)
+							- Je krijgt er in FastAPI heel wat voor terug: 
+								- automatische data-omzetting
+								- automatische data-validering
+								- editor-ondersteuning
+				</section>
+				<section>
+							## Type hints
+							- Je kan hiermee het verwachte type meegeven van waarden, bvb bij functies. In onderstaand vb zien we dat een argument van het type string verwacht wordt en dat de returnwaarde van het type string zal zijn
+
+							```Python
+							def groeten(naam: str) -> str:
+								return f"Hallo {naam}"
+							```
+
+							- Hier zien we int en bool als type hint, in combinatie met default waarden
+
+							```Python
+							def groeten(aantal_keer: int = 1, stil: bool = False) -> None:
+								if not stil:
+									for _ in range(aantal_keer):
+										print("Hallo")
+							```
+				</section>
+				<section>
+							## JSON-data ontvangen: pydantic data shapes 
+
+							- Bij Post, Put of Delete acties stuurt de client doorgaans data mee naar de server, in een request body 
+							- FastAPI vormt voor het beschrijven van hoe deze er horen uit te zien een goede tandem met [pydantic](https://docs.pydantic.dev/)
+							- We declareren er JSON Data Models mee en pydantic vervult alle nodige data validatie
+							- Bij het beschrijven een model (= een schema of data shape) als een subklasse van pydantics BaseModel
+							- Je gebruikt de standaard Python types als attributen
+							- Je voegt het pydantic model dan toe als een parameter aan je path operation. Als type hint, zodat FastAPI weet dat de functie een instance van de klasse zal ontvangen
+
+
+				</section>
+				<section>
+							## Pydantic data shapes
+
+							```Python
+							from typing import Optional
+							from fastapi import FastAPI
+							from pydantic import BaseModel
+
+							class Boodschap(BaseModel):
+								titel: str
+								bericht: Optional[str] = None
+								zender: str
+								id: int
+
+							app = FastAPI()
+
+							@app.post("/boodschappen/")
+							async def maak_boodschap(boodschap: Boodschap):
+								return boodschap
+							```
+				</section>
+				<section>
+							## Pydantic data shapes
+
+							- Wanneer een model attribute een default waarde heeft is het niet verplicht mee te geven. Om een attribute optioneel te maken kan je None gebruiken
+							- Het model uit vorige slide beschrijft een JSON object (of Python dict) zoals hier beschreven
+							- Een JSON-object dat de optionele boodschap niet zou bevatten wordt ook probleemloos geaccepteerd
+
+							```json
+							{
+								"titel": "Een hallo-wereld bericht",
+								"bericht": "Een niet verplicht mee te geven bericht",
+								"zender": "Kristof",
+								"id": 1
+							}
+							```
+				</section>
+				<section>
+							## Pydantic data shapes
+
+							- FastAPI zal dit JSON object inlezen, als onderdeel van de request body
+							- De data zal worden gevalideerd (error geven indien invalid) en omgezet naar de types in het model
+							- De ontvangen data wordt toegekend aan de functie-parameter
+							- De JSON schema's van de pydantic models worden onderdeel van de OpenAPI en zullen getoond worden in de interactieve API documentatie (Swagger UI)
+							- In VSCode krijg je code completion en type hints
+				</section>
+				<section>
+							## Pydantic model attributen gebruiken binnen je functie
+
+							```Python
+							@app.post("/boodschappen/")
+							async def maak_boodschap(boodschap: Boodschap):
+								boodschap_dict = boodschap.dict()
+								titel = boodschap.titel
+								bericht = boodschap.bericht
+								boodschap_dict.update({"titel": "Veranderen van titel"})
+								return boodschap_dict
+							```
+
+							De parameter boodschap wordt gedeclareerd als een instance van de klasse Boodschap en FastAPI zorgt dat je dit exact type object krijgt!
+				</section>
+				<section>
+							## Request body en path parameters combineren
+
+							```Python
+							@app.put("/boodschappen/{boodschap_id}")
+							async def update_boodschap(boodschap_id: int, boodschap: Boodschap):
+								return {"boodschap_id": boodschap_id, **boodschap.dict()}
+							```
+							De functie-parameters uit de request body bedoeld voor het pydantic model en deze bedoeld voor de path parameters kunnen allebei meegegeven worden aan de functie. 
+				</section>
+				<section class="chapter">
+							## Volgende stappen
+				</section>
+				<section>
+							## Voorbeeldtoepassing - SpyApi
+
+							Bestudeer de code van de toepassing die je vorig labo gebruikte als API om mee te communiceren: https://replit.com/@admkrm/spyapi 
+				</section>
+				<section>
+							## Foutafhandeling
+
+							Bestudeer de code van de toepassing in combinatie met de tutorial op de FastAPI site
+							- https://fastapi.tiangolo.com/tutorial/handling-errors/
+				</section>
+				<section>
+							## Geneste models
+
+							- Je kan uiteraard meerdere Pydantic modellen toevoegen aan je toepassing
+							- Die modellen kunnen onderling met elkaar verbonden (genest) zijn
+							- https://fastapi.tiangolo.com/tutorial/body-nested-models/
+							- https://docs.pydantic.dev/usage/models/
+				</section>
+				<section>
+							## Voorbeelddata aanbieden voor de requests
+
+							- Je kan met een Config klasse binnen je pydantic model voorbeelddata aangeven die je app wenst te ontvangen
+							- https://fastapi.tiangolo.com/tutorial/schema-extra-example/
+				</section>
+				<section>
+							## Beveiliging 
+
+							- In de volgende les toon ik jullie een API die voorzien is van beveiliging met JWT: https://jwt.io/
+							- Er zijn verschillende manieren om de data en het gebruik te beveiligen: https://fastapi.tiangolo.com/tutorial/security/
+							- Een goeie tutorial voor het aanbrengen van JWT-authenticatie vind je hier: https://testdriven.io/blog/fastapi-jwt-auth/
+				</section>
+				<section>
+							## Werken met databanken
+
+							- Een API werkt met achterliggende data
+							- Je kan deze bewaren in een eenvoudige variabele (een list of dictonary)
+							- Maar uiteraard ook een vaster karakter geven: 
+								- Een JSON bestand
+								- Een databank zoals SQLite 
+
+							- https://fastapi.tiangolo.com/tutorial/sql-databases/
+				</section>
+				<section>
+							## Grotere toepassingen - bestandsstructuur
+
+							Grotere toepassingen worden doorgaans opgesplitst in meerdere bestanden. Er is een aanbevolen applicatiestructuur: 
+
+							- https://fastapi.tiangolo.com/tutorial/bigger-applications/
+				</section>
+				<section>
+							## Volgende les...
+
+							Gaan we in op al deze elementen en bekijken we een volledige API die al deze zaken ondersteunt
+				</section>
+		
+				<section>
+							## Web Services Python - web API's bouwen met FastAPI - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
