@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OOP / development: Functies</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OOP / Development
+							## Functies
+							#### Kristof Michiels
+				</section>
+				<section>
+					## Inhoud
+					- Wat zijn functies?
+					- De basis van functies
+					- Informatie meegeven met parameters
+					- Variabelen in functies en return-waarden
+					- Functies gebruiken uit andere bestanden
+				</section>
+				<section class="chapter">
+							## Wat zijn functies?
+				</section>
+				<section>
+							## Wat zijn functies?
+							- Functies helpen om de complexiteit in een programma beheersbaar te houden
+							- Ze dienen meerdere doelen: 
+								- ze maken het mogelijk om code op te splitsen in kleinere units
+								- ze laten ons toe code eenmaal te schrijven en vanop verschillende plaatsen aan te roepen wanneer nodig 
+								- ze laten toe om de onderdelen van onze toepassing individueel te testen
+				</section>
+				<section>
+							## Wat zijn functies?
+							- Ze doen dat door een reeks statements af te zonderen voor later meermaals gebruik	
+							- Een functie wordt uitgevoerd door ze aan te roepen vanuit je code
+							- Na het uitvoeren wordt teruggekeerd naar de locatie waar de functie werd aangeroepen en gaat de uitvoering van het programma verder
+				</section>
+				<section>
+							## Wat zijn functies?
+							- We hebben in de eerste week reeds functies gebruikt: bvb input(), print(), int() en float()
+							- Het zijn functies die Python ons standaard biedt en kunnen vanuit elk Python programma worden aangeroepen
+							- Bovenstaande voorbeelden hebben één en slechts één helder doel: dat is ook hoe jouw functies horen te zijn!
+							- We leren in dit document onze eigen functies te schrijven en aan te roepen
+				</section>
+				<section class="chapter">
+							## De basis van functies
+				</section>
+				<section>
+							## Basisvoorbeeld
+
+							```Python
+							def groet_gebruiker():
+							    """Toon een eenvoudige begroeting"""
+							    print("Hallo daar!")
+
+							groet_gebruiker()
+							```
+							
+							- We definiëren functies met het trefwoord _def_, gevolgd door de naam van de functie en (voorlopig lege) haakjes en tot slot een dubbelpunt
+							- Op deze regel volgen (met telkens een insprong van 4 spaties) een reeks statements die zullen worden uitgevoerd wanneer de functie wordt aangeroepen
+							- De haakjes kunnen argumenten bevatten, dat is informatie die aan de functie van buitenaf wordt meegegeven 
+				</section>
+				<section>
+							## Basisvoorbeeld
+
+							```Python
+							def groet_gebruiker():
+								"""Toon een eenvoudige begroeting"""
+								print("Hallo daar!")
+
+							groet_gebruiker()
+							```
+							
+							- Merk in het vb op dat je in je code de functie moet aanroepen. Doe je dit niet, dan wordt ze nooit uitgevoerd
+							- Je kiest steeds voor een naam die helder beschrijft wat binnen de functie gebeurt
+							- Een goed gekozen functienaam bevat vaak een werkwoord (actie) en zelfstandig naamwoord
+							- Gebruik geen hoofdletters en scheid woorden door een underscore
+				</section>
+				<section>
+							## Basisvoorbeeld
+
+							```Python
+							def groet_gebruiker():
+								"""Toon een eenvoudige begroeting"""
+								print("Hallo daar!")
+
+							groet_gebruiker()
+							```
+							
+							- Elke functie hoort een korte beschrijving te hebben van wat de functie doet 
+							- Deze beschrijving komt onmiddellijk na de functie-definitie en gebruikt het docstring format
+							- Een goedgedocumenteerde functie zorgt ervoor dat andere programmeurs de functie kunnen gebruiken enkel en alleen door het lezen van de docstring
+				</section>			
+				<section>
+							## De basis van functies
+
+							```Python
+							def groet_gebruiker():
+							    """Toon een eenvoudige begroeting"""
+							    print("Hallo daar!")
+
+							for _ in range(5):
+								groet_gebruiker()
+							
+							print("De code (en het leven) gaan verder")
+							```
+							
+							
+							- Een functie kan zo vaak als nodig worden aangeroepen vanop verschillende plaatsen binnen de toepassing
+							- In bovenstaand voorbeeld een aantal keer binnen een loop. We gebruiken hier "_" als teller omdat we de for-lus louter als loop willen gebruiken en geen variabele teller nodig hebben binnen onze code 
+				</section>
+				<section class="chapter">
+							## Informatie meegeven met parameters
+				</section>
+				<section>
+							## Functies met parameters
+
+							- Onze voorbeeldfunctie miste flexibiliteit: stel dat je een andere boodschap wil meegeven?
+							- We kunnen de mogelijkheden en de flexibiliteit vergroten door het voorzien van één of meer argumenten
+							- De functie ontvangt die argumentwaarden in de vorm van parameter-variabelen die toegevoegd worden binnen de haakjes wanneer de functie wordt gedefinieerd
+							- Het aantal parameter-variabelen die in de functie staan beschreven geven aan hoeveel argumenten moeten worden meegegeven wanneer de functie wordt aangeroepen
+				</section>
+				<section>
+							## Functies met parameters
+
+							```Python
+							def groet_gebruiker(naam_gebruiker):
+								"""Toon een gepersonaliseerde begroeting"""
+								print(f"Hallo daar {naam_gebruiker.title()}!")
+							
+							groet_gebruiker("Anneleen")
+							```
+
+							- In bovenstaand voorbeeld werd één parameter toegevoegd: _naam_gebruiker_
+							- Eventuele meerdere parameters worden gescheiden door een komma
+							- De functie wordt hier aangeroepen met het argument "Anneleen"	
+							- Binnen de functie kunnen de waarden van de parameter variabelen worden gebruikt wanneer nodig					 
+				</section>
+				<section>
+							## Functies met parameters
+
+							```python
+							def teken_kader(breedte, hoogte):
+								"""Deze functie tekent een kader, vanaf een breedte x hoogte van 2x2 """
+								if breedte < 2 or hoogte < 2:
+									print("Ik kan de rechthoek niet tekenen: breedte of hoogte zijn te klein")
+									quit()
+								print("#" * breedte)
+								for i in range(hoogte - 2):
+									print("#" + " " * (breedte - 2) + "#")
+								print("#" * breedte)
+							
+							teken_kader(8, 6)
+							teken_kader(4, 4)
+							```
+
+							- In dit voorbeeld moeten 2 argumenten worden voorzien telkens de functie wordt aangeroepen omdat de functie-definitie dit vereist
+				</section>
+				<section>
+							## Functies met parameters
+
+							```python
+							def teken_kader(breedte, hoogte, teken_kader, teken_vulling):
+								"""Deze functie tekent een kader en gebruikt vier argumenten """
+								print(teken_kader * breedte)
+								for i in range(hoogte - 2):
+									print(teken_kader + teken_vulling * (breedte - 2) + teken_kader)
+								print(teken_kader * breedte)
+							
+							teken_kader(8, 6, "*", "/")
+							```
+
+							- Wanneer de functie wordt uitgevoerd zal de waarde van het eerste argument worden gekoppeld aan de eerste parameter, en de waarde van het tweede argument aan de tweede parameter
+							- Wil je de functie nog meer flexibiliteit geven, dan kan je meer parameters gaan gebruiken (in dit vb: 4)
+				</section>
+				<section>
+							## Default-waarden
+							- Wil je de functie aanroepen, dan zal je telkens 4 parameters moeten voorzien 
+							- Wanneer bepaalde waarden frequent worden gebruikt dan kan je standaard (_default_) waarden voor parameters meegeven aan de functie-definitie. Parameters met default komen steeds achteraan  
+							- De functie kan vanaf dan aangeroepen worden met 2, 3 of 4 argumenten. Bij 3 of 4 argumenten worden de default waarden overschreven. 
+
+							```python
+							def teken_kader(breedte, hoogte, teken_kader="#", teken_vulling=" "):
+								...
+							
+							teken_kader(8, 6)
+							teken_kader(8, 6, "@")
+							teken_kader(8, 6, "#", ".")
+							```
+				</section>
+				<section>
+							## Positionele vs trefwoord-argumenten
+
+							```python
+							teken_kader(breedte=8, hoogte=6)
+							teken_kader(breedte=8, hoogte=6, teken_kader="@")
+							teken_kader(breedte=8, hoogte=6, teken_kader="#", teken_vulling=".")
+							```
+
+							- Een trefwoord-argument is een naam-waarde-paar dat je meegeeft aan een functie
+							- Je koppelt daarmee onmiddelijk een waarde aan een parameter 
+							- Je geeft explicieter aan wat bij wat hoort en moet de volgorde van de parameters niet meer respecteren
+				</section>
+				<section>
+							## Een willekeurig aantal argumenten meegeven
+
+							- Python laat toe dat functies een willekeurig aantal argumenten kunnen ontvangen
+							- De asterisk in de parameternaam draagt Python op om een tuple aan te maken en alle waarden die meegegeven worden in deze tuple op te slaan
+
+							```python
+							def geef_favoriete_series(*series):
+								"""Deze functie drukt een reeks favoriete tv-series af """
+								for serie in series:
+									print(serie)
+
+							geef_favoriete_series("Yellowjackets")
+							geef_favoriete_series("Yellowjackets", "Station Eleven", "The Righteous Gemstones")
+							```
+				</section>
+				<section>
+							## Positionele en willekeurige argumenten combineren
+
+							- Positionele en willekeurige argumenten kunnen zonder problemen worden gecombineerd
+							- De parameter die een willekeurig aantal argumenten accepteert moet steeds als laatste in de functie-definitie worden geplaatst
+
+							```python
+							def geef_favoriete_series(naam_kijker, *series):
+								"""Deze functie drukt een reeks favoriete tv-series af """
+								print(naam_kijker)
+								for serie in series:
+									print(serie)
+
+							geef_favoriete_series("Kristof", "Yellowjackets")
+							geef_favoriete_series("Tim", "Yellowjackets", "Station Eleven", "Ted Lasso")
+							```
+				</section>
+				<section>
+							## Willekeurige trefwoordargumenten gebruiken
+							- In het vorige voorbeeld accepteerde de functie een willekeurig aantal series als argument 
+							- in bepaalde situaties wil je een functie evenwel in staat stellen een willekeurig aantal verschillende argumenten te accepteren
+							- In dat geval kan je je functie een ongelimiteerd aantal key-value-paren laten aannemen
+							- De dubbele asterisk voor het argument draagt Python op een lege dictionary aan te maken en er de eventuele binnenkomende key-value paren in onder te brengen 
+				</section>
+				<section>
+							## Willekeurige trefwoordargumenten gebruiken
+
+							```python
+							def verzamel_gebruikersinformatie(voornaam, familienaam, **extra_informatie):
+								"""Een dictionary bouwen met alle informatie die we over de gebruiker kennen"""
+								extra_informatie["voornaam"] = voornaam
+								extra_informatie["naam"] = familienaam
+								return extra_informatie
+							
+							kristof_info = verzamel_gebruikersinformatie("Kristof", "Michiels", 
+								favoriete_taal="Python", favoriete_muziek="Little Simz",
+								favoriete_serie="Station Eleven")
+
+							print(kristof_info)
+							```
+				</section>
+				<section class="chapter">
+							## Variabelen in functies en return-waarden
+				</section>
+				<section>
+							## Variabelen in functies
+
+							- Variabelen kunnen ook gecreëerd worden binnen een functie
+							- Deze bestaan dan enkel binnen de functie, wanneer de functie wordt uitgevoerd
+							- De variabele houdt op te bestaan wanneer de functie eindigt en kan na afloop niet meer gebruikt worden
+							- We noemen dit lokale variabelen en spreken van een lokale _scope_ (of reikwijdte)
+							- In onderstaand voorbeeld kan de variabele exponent niet opgevraagd worden buiten de functie
+
+							```python
+							def bereken_macht(grondtal)
+								exponent = 3
+								print(f"De {exponent}-de macht van {grondtal} is {grondtal ** exponent}")
+							```
+				</section>
+				<section>
+							## Return-waarden
+							- De statements in de functies die we hebben gezien zorgden met de print()-functie voor een resultaat
+							- We konden met argumenten het resultaat van de functie beïnvloeden, maar er was geen verdere communicatie met de code buiten de functie
+							- Soms zal je als resultaat van een functie een resultaat berekenen dat later in het programma en buiten de functie zal worden gebruikt 
+				</section>
+				<section>
+							## Return-waarden: een voorbeeld
+
+							```Python
+							def groet_gebruiker(naam_gebruiker):
+								"""Toon een gepersonaliseerde begroeting"""
+								return f"Hallo daar {naam_gebruiker.title()}!"
+							
+							print(groet_gebruiker("Anneleen"))
+							```
+
+							- We doen dit door de functie een return waarde te laten teruggeven met het return trefwoord gevolgd door de waarde die wordt teruggegeven
+							- Wanneer het return statement uitgevoerd is eindigt de functie meteen en wordt de controle teruggegeven aan de locatie waar de functie werd aangeroepen
+				</section>
+				<section>
+							## Return-waarden
+
+							- Functies die waarden teruggeven met return staan vaak aan de rechterkant van een toekennings-statement (bvb getal = mijn_functie())
+							- Ze kunnen evenwel ook in andere contexten functioneren waarin een waarde nodig is: bvb bij een voorwaarde in een if-statement of een while-loop, of als argument voor een andere functie
+							- Een functie die geen waarde teruggeeft moet het return trefwoord niet gebruiken
+							- Je kan het return trefwoord evenwel gebruiken zonder waarde om ergens een einde van een functie te forceren
+							- Elke functie kan meerdere return statements bevatten (al dan niet met een waarde). Van zodra de interpreter een return tegenkomt bij het uitvoeren van een functie, stopt de functie
+				</section>
+				<section class="chapter">
+							## Functies gebruiken uit andere bestanden
+				</section>
+				<section>
+							## Functies gebruiken uit andere bestanden
+							- Functies helpen je je code te structuren en overzichtelijk te houden
+							- Bij grotere programma's worden functies vaak in afzonderlijke bestanden (we noemen deze modules) bijgehouden
+							- Wil je ze gebruiken dan importeer je de module of de functie in je programma
+							- Je maakt een functie beschikbaar binnen je programma met een import-statement
+							- Je gaat dit binnenkort ook vaak doen voor functies uit libraries en modules die je niet zelf geschreven hebt
+				</section>
+				<section>
+							## Een volledige module importeren
+
+							In onderstaand voorbeeld hebben we twee bestanden: kleuren.py en gebruik_kleuren.py
+
+							```python
+							# kleuren.py
+							def geef_kleur()
+								return ...
+								
+							def geef_complementaire_kleur(primaire_kleur)
+								return ...
+							```
+
+							```python
+							# gebruik_kleuren.py
+							import kleuren
+							print(kleuren.geef_complementaire_kleur("geel"))
+							```
+
+				</section>
+				<section>
+							## Een volledige module importeren
+
+							- Een module is een bestand dat eindigt op .py. Hier wordt _kleuren.py_ gebruikt als module
+							- Om de functionaliteit van de module beschikbaar te maken in _gebruik_kleuren.py_ voegen we een import statement toe bovenaan het bestand 
+							- We roepen de externe functies aan door eerst te verwijzen naar de module, en dan met een dot-notatie de functie te vernoemen: bvb. kleuren.geef_complementaire_kleur()
+				</section>
+				<section>
+							## Specifieke functies importeren
+
+							- Het is ook mogelijk slechts één of enkele functie(s) te importeren. Je scheidt ze door een komma
+							- Met deze syntax hoef je de dot-notatie niet te gebruiken wanneer je de functie aanroept
+							- Dit is de beste en meest efficiënte aanpak
+
+							```python
+							from module_naam import functie_naam
+							```							
+
+							```python
+							from module_naam import functie_0, functie_1, functie_2
+							```
+
+							```python
+							# gebruik_kleuren.py
+							from kleuren import geef_complementaire_kleur
+							print(geef_complementaire_kleur("geel"))
+							```
+				</section>
+				<section>
+							## "as" gebruiken om de functie een alias te geven
+
+							- Als de functie-naam conflicteert met een andere functie die je gebruikt (of te lang is) dan kan je gebruik maken van een alias:
+
+							```python
+							from module_naam import functie_naam as fie
+							```
+
+							```python
+							# gebruik_kleuren.py
+							from kleuren import geef_complementaire_kleur as ck
+							print(ck("geel"))
+							```
+				</section>
+				<section>
+							## "as" gebruiken om de module een alias te geven
+
+							- Je kan ook een alias geven aan een module en zo tot kortere notaties komen:
+
+							```python
+							import module_naam as md
+							```
+
+							```python
+							# gebruik_kleuren.py
+							import kleuren as kl
+							print(kl.geef_complementaire_kleur("geel"))
+							```
+				</section>
+				<section>
+							## Alle functies in een module importeren
+
+							- Je kan aangeven aan Python om elke functie in de module te importeren door gebruik te maken van de asterisk operator (*)
+							- Voordeel hier is dat je de dot-notatie niet hoeft te gebruiken
+							- Te vermijden bij gebruik van grote modules
+
+							```python
+							from module_naam import *
+							```
+
+							```python
+							# gebruik_kleuren.py
+							from kleuren import *
+							print(geef_complementaire_kleur("geel"))
+							```
+				</section>
+				<section>
+							## Verhinderen dat bij importeren code in een module wordt uitgevoerd				
+
+							- Doe je door de code in de module bvb in een main()-functie te stoppen
+							- Met een if-statement kan je dan checken of het bestand daadwerkelijk autonoom werd uitgevoerd, of dat het werd geïmporteerd 
+							- Deze structuur moet toegepast worden telkens je een programma maakt dat functies bevat die mogelijk door een ander bestand zullen gebruikt worden
+
+							```python
+							if __name__ == "__main__":
+  							    main()
+							```
+				</section>
+				<section>
+							## Python OOP / development: functies - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
