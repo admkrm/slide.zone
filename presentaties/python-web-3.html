@@ -23,291 +23,35 @@
 				</section>
 				<section>
 							## Inhoud
-							- Starten met FastAPI
-							- FastAPI routes
-							- Response models en foutafhandeling
-							- FastAPI en templates
+							- Geneste models
 				</section>
 				<section class="chapter">
-							## Starten met FastAPI
+							## Geneste models
 				</section>
 				<section>
-							## FastAPI?
-							- Web framework om API's te bouwen in Python
-							- Snel, robuust en schaalbaar
-							- Intuïtief en relatief eenvoudig om mee te werken, je oplossingen bevatten minder code 
-							- Gebaseerd op standaarden zoals OpenAPI: je implementeert automatisch de huidige best practices
-							- Nieuwste van "de drie": Flask, Django en FastAPI
-							- Uitgebreide documentatie: https://fastapi.tiangolo.com/
-				</section>
-				<section>
-							## Vertrouwd worden met FastAPI
-							- Frameworks als Django, Flask en FastAPI zijn omvangrijk en laten zich slechts geleidelijk aan kennen
-							- Je zal gedeeltelijk zelf op zoek moeten naar informatie
-							- De officiële documentatie is hiervoor een uitstekende bron. Bvb:
-								- ...
-								- ...
-								- ...
-							- Door te experimenteren met deze informatie in je oefeningen bouw je kennis en vertrouwdheid op
-				</section>
-				<section>
-							## FastAPI installeren
-							- Je werkt zoals steeds binnen een virtuele omgeving
-							- Je installeert FastAPI en uvicorn
-							```Bash
-							pip install fastapi uvicorn
-							```
-							- Met FastAPI bouw je de API, Uvicorn is de server voor de requests
-							- Je API-toepassing uitvoeren met Uvicorn doe je zo:
-							```Bash
-							uvicorn main:app --reload
-							```
-				</section>
-				<section>
-							## Een basisvoorbeeld
-
-							```Python
-							from fastapi import FastAPI
-
-							app = FastAPI()
-
-							@app.get("/") # belangrijk: de path operation decorator
-							async def root() -> dict:
-								return {"boodschap": "Hallo studenten van Web Services Python :-)"}
-							```
-
-							- Voer het script (bvb main.py) uit met uvicorn en bekijk de toepassing in de browser op http://127.0.0.1:8000
-							- Op http://127.0.0.1:8000/docs zie je de door [Swagger UI](https://swagger.io/tools/swagger-ui/) gegenereerde interactieve API documentatie
-							- De alternatieve [Redoc](https://redocly.com/)-documentatie vind je op http://127.0.0.1:8000/redoc
-				</section>
-				<section class="chapter">
-							## FastAPI routes
-				</section>
-				<section>
-							## FastAPI routes
-							- Routing is een essentiële component van elke webtoepassing 
-							- Voor het creëren van endpoints gebruiken we het FastAPI routing systeem
-							- Het regelt de afhandeling van http requests naar een door een path en operation gevormde resource 
-							- Het antwoord van de server komt in een response object. Jij kan in je code dictionaries, lists, strings, integers, enz teruggeven. Ook een antwoord in de vorm van een [pydantic](https://docs.pydantic.dev/) model is mogelijk (zie verder)
-							- In het voorbeeld hierboven vertaalt FastAPI het Python dictionary object automatisch naar een json response (heel handig)
-				</section>
-				<section>
-							## Path parameters met types
-
-							```Python
-							from fastapi import FastAPI
-
-							app = FastAPI()
-
-							@app.get("/bericht/{bericht_id}")
-							async def lees_bericht(bericht_id: int):
-								return {"bericht_id": bericht_id}
-							```
-
-							- Bij verschillende routes: order Matters: Put Fixed Paths First
-							- The value of the path parameter item_id will be passed to your function as the argument item_id.
-							- You can declare the type of a path parameter in the function using standard Python type hints
-							- !!!Data-conversie EN data-validatie: with that type declaration, FastAPI gives you automatic request parsing
-
-				</section>
-				<section>
-							## Een woordje over type hints
-
-							- Hier komt een woordje over type hints - boek p. 37
-							- Declaring the type of a path parameter will give you editor support inside of your function, with error checks, completion, and so on
-				</section>
-				<section>
-							## Request Body: Receiving JSON Data
-							- Je stuurt data naar je server als een request body / A request body is data sent by the client to your API / clients don’t necessarily need to send request bodies all the time.
-							- To send data, you should use POST (the most common approach), PUT, DELETE
-							- To declare a request body, you use pydantic models, with all their power and benefits. 
-
-				</section>
-				<section>
-							##  Data-afhandeling met pydantic
-
-							- All the data validation is performed under the hood by pydantic, so you get all the benefits from it, and you know you are in good hands.
-							- You can use the same type declarations with str, float, bool and many other complex data types.
-							- Use pydantic to Declare JSON Data Models (Data Shapes)
-							- First, you need to import BaseModel from pydantic and then use it to create subclasses defining the schema, or data shapes, you want to receive.
-							- Next, you declare your data model as a class that inherits from BaseModel, using standard Python types for all the attributes:
-				</section>
-				<section>
-							## Pydantic data shapes
-
-							- Next, add the new pydantic model to your path operation as a parameter. You declare it the same way you declared path parameters:
-							- The parameter item has a type hint of Item, which means that item is declared as an instance of the class Item.
-
-							```Python
-							from typing import Optional
-
-							from fastapi import FastAPI
-							from pydantic import BaseModel
-
-							class Item(BaseModel):
-								name: str
-								description: Optional[str] = None
-								price: float
-								tax: Optional[float] = None
-
-							app = FastAPI()
-
-							@app.post("/items/")
-							async def create_item(item: Item):
-								return item
-							```
-				</section>
-				<section>
-							## Pydantic data shapes
-
-							- When a model attribute has a default value, it is not required. Otherwise, it is required. To make an attribute optional, you can use None.
-							- For example, the model above declares a JSON object (or Python dict) like this:
-							- In this case, since description and tax are optional because they have a default value of None, this JSON object would also be valid:
-							- A JSON object that omits the default values is also valid.
-
-							```json
-							{
-								"name": "Foo",
-								"description": "An optional description",
-								"price": 45.2,
-								"tax": 3.5
-							}
-							```
-				</section>
-				<section>
-							## Pydantic data shapes
-
-							With that Python type declaration, FastAPI will:
-
-							Read the body of the request as JSON
-							Convert the corresponding types if needed
-							Validate the data and return a clear error if it is invalid
-							Give you the received data in the parameter item—since you declared it to be of type Item, you will also have all the editor support, with completion and type checks for all the attributes and their types
-							Generate JSON Schema definitions for your model that you can also use anywhere else that makes sense for your project
-							By using standard type hints with pydantic, FastAPI helps you build APIs that have all these best practices by default, with little effort.
-				
-							!!! The JSON Schemas of your pydantic models will be part of the OpenAPI generated for your application and will be shown in the interactive API documentation:
-							!!! In your editor, inside your function, you will get type hints and completion everywhere. This wouldn’t happen if you received a dict instead of a pydantic model:
-				</section>
-				<section>
-							## Use the pydantic model
-
-							...
-				</section>
-				<section>
-							## Request body and path parameters
-
-							...
-				</section>
-
-
-
-
-				<section>
-							## Routen met de APIRouter klasse
-
-							```Python
-							from fastapi import APIRouter
-
-							router = APIRouter()
-
-							@router.get("/hallo")
-							async def hallo_zeggen() -> dict:
-								return {"boodschap": "Hallo FastAPI!"}
-							```
-
-							- The APIRouter class belongs to the FastAPI package and creates path operations for multiple routes. The APIRouter class encourages modularity and organization of application routing and logic.
-							- The APIRouter class is imported from the fastapi package, and an instance is created. The route methods are created and distributed from the instance created
-							- Traditionally, the FastAPI() instance can be used for routing operations, as seen previously. However, this method is commonly used in applications that require a single path during routing. In a situation where a separate route performing a unique function is created using the FastAPI() instance, the application will be unable to run both routes, as uvicorn can only run one entry point.
-							- How then do you handle extensive applications that require a series of routes performing different functions? We’ll look at how the APIRouter class helps with multiple routing in the next section.
-				</section>
-				<section>
-							## Voorbeeldtoepassing
-
-							- Let’s create a new path operation with the APIRouter class to create and retrieve todos. In the todos folder from the previous chapter, create a new file, todo.py
-							- We’ll start by importing the APIRouter class from the fastapi package and creating an instance
-							- Next, we’ll create a temporary in-app database, alongside two routes for the addition and retrieval of todos:
-							- In the preceding code block, we have created two routes for our todo operations. The first route adds a todo to the todo list via the POST method, and the second route retrieves all the todo items from the todo list via the GET method.
-							- The APIRouter class works in the same way as the FastAPI class does. However, uvicorn cannot use the APIRouter instance to serve the application, unlike the FastAPIs. Routes defined using the APIRouter class are added to the fastapi instance to enable
-							their visibility.
-							To enable the visibility of the todo routes, we’ll include the todo_router path operations handler to the primary FastAPI instance using the include_router() method.
-							- The include_router(router, ...) method is responsible for adding routes defined with the APIRouter class to the main application’s instance to enable the routes to become visible.
-				</section>
-				<section>
-							## Valideren van request bodies met Pydantic models
-
-							- request bodies can be validated to ensure only defined data is sent. This is crucial, as it serves to sanitize request data and reduce malicious attacks’ risks. This process is known as validation.
-							- A model in FastAPI is a structured class that dictates how data should be received or parsed. Models are created by subclassing Pydantic’s BaseModel class.
-							- Pydantic is a Python library that handles data validation using Python-type annotations.
-							- Models, when defined, are used as type hints for request body objects and request-response objects (hier enkel kijken naar models voor request bodies)
-							- A variable type hinted to the PacktBook class can only take four fields, as defined previously. In the next couple of examples, we see how Pydantic helps in validating inputs.
-							- For example, to ensure only the request body contains fields in the preceding example, create a new model.py file and add the following code below to it:
-
-							```Python
-							# in model.py
-							from Pydantic import BaseModel
-							class Todo(BaseMode):
-								id: int
-							item: str
-							```
-
-							In the preceding code block, we have created a Pydantic model that accepts only two fields:
-• id of type integer
-• item of type string
-				</section>
-				<section>
-							## Valideren met Pydantic models
-
-							- In api.py, import the model: 
+							## Geneste models
 							
 							```Python
-							from model import Todo
-							todo_list = []
+							from fastapi import FastAPI
+							from pydantic import BaseModel
+							app = FastAPI()
+							
+							class Item(BaseModel):
+								name: str
+								description: str | None = None
+								price: float
+								tax: float | None = None
+								tags: list = []
 
-							@todo_router.post("/todo")
-							async def add_todo(todo: Todo) -> dict:
-								todo_list.append(todo)
-								return {"message": "Todo added successfully"}
+							@app.put("/items/{item_id}")
+							async def update_item(item_id: int, item: Item):
+								results = {"item_id": item_id, "item": item}
+								return results
 							```
-				</section>
-				<section>
-							## Nested models
 
-
-				</section>
-				<section>
-							## Path en query parameters
-				</section>
-				<section>
-							## Request body
-
-							- A request body is data that you send to your API using a routing method such as POST and UPDATE.
-
-				</section>
-				<section>
-							## FastAPI automatic docs
-
-							- FastAPI generates JSON schema definitions for our models and automatically documents our routes, including their request body type, path and query parameters, and response models. This documentation is of two types:
-							- Swagger
-							- Redoc
-				</section>
-				<section>
-							## Een eenvoudige CRUD app bouwen
-
-							- We have built routes for creating and retrieving todos. Let’s build the routes for updating and deleting the added todo. Let’s start by creating a model for the request body for the UPDATE route in model.py:
+							https://fastapi.tiangolo.com/tutorial/body-nested-models
 				</section>
 
-				<section class="chapter">
-							## Responses, response modeling, error handling en status codes
-				</section>
-				<section>
-							## Responses in FastAPI
-							- Response models serve as templates for returning data from an API route path. They are built on Pydantic to properly render a response from requests sent to the server.
-				
-				</section>
-				<section>
-							## Response models bouwen						
-				</section>
 				<section>
 							## Foutafhandeling
 				</section>
