@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OOP / development: werken met bestanden</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OOP / development
+							## Werken met bestanden
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Werken met bestanden
+							- ...
+				</section>
+                <section class="chapter">
+							## Bestanden in Python
+                </section>
+                <section>
+							## Werken met bestanden
+
+							- De input in onze programma's bleef tot nu toe beperkt tot gebruikersinput via het toetsenbord. Alle output werd dan weer getoond op het terminalscherm
+							- Bestanden kunnen eveneens gebruikt worden als input en output voor onze programma's. Deze kunnen dan snel grote hoeveelheden data analyseren. Bovendien kunnen ze data ook permanent vasthouden
+							- We zullen hier werken met tekstbestanden: 
+								- Ze bestaan uit bitreeksen die ASCII of UTF-8 karakters vertegenwoordigen
+								- Tekstbestanden kunnen bewerkt worden in elke teksteditor
+								- Dezelfde principes gelden grotendeels voor binaire bestanden  
+                </section>
+				<section>
+							## Een bestand openen
+
+							- Vooraleer we een bestand kunnen gebruiken moeten we het eerst openen met de open-functie
+							- De open-functie neemt twee string-argumenten: de naam van het bestand en de toegangsmodus ("r" voor read, "w" voor write en "a" voor append)
+							- De functie geeft een file-object terug waarop we verschillende methods kunnen toepassen om van het bestand te lezen of om er data naar weg te schrijven
+							- Nadat de lees- en/of schrijfbewerkingen afgerond zijn dient het bestand gesloten te worden. We doen dit expliciet met de close-method of kunnen dit ook overlaten aan Python
+
+							```python
+							mijn_bestand = open("bestand.txt", "r")
+							#...
+							mijn_bestand.close()
+							```
+				</section>
+				<section>
+							## Een bestand openen
+							- Gebruik je het with-blok en zorg je ervoor dat alle bestandsbewerkingen zich binnen dit blok bevinden, dan hoef je het bestand niet zelf af te sluiten. Python doet dit voor jou.
+							
+							```Python
+							with open("bestand.txt", "r") as mijn_bestand:
+							    inhoud = mijn_bestand.read()
+							print(inhoud)
+							```
+				</section>
+				<section>
+							## Regel per regel uit een bestand lezen
+							- Input lezen kan op verschillende manieren, maar __enkel__ als het bestand geopend is in read-modus (met "r")
+							- De readline-method leest één regel en geeft het terug als string
+							- Elk volgend aanroepen van deze method geeft de volgende regel terug, van boven naar onder
+							- Wanneer het einde van het bestand is bereikt wordt een lege string teruggegeven
+				</section>
+				<section>
+							## Regel per regel uit een bestand lezen
+
+							```Python
+							with open("bestand.txt","r") as mijn_bestand:
+							    for regel in mijn_bestand:
+							        print(regel)
+							```
+
+							```python
+							mijn_bestand = open("bestand.txt", "r")
+							aantal_regels = 0
+							regel = mijn_bestand.readline()
+							while regel != "":
+								aantal_regels += 1
+								regel = mijn_bestand.readline()
+							mijn_bestand.close()
+							print(f"Het aantal regels in dit bestand is {aantal_regels}")
+							```
+
+				</section>
+				<section>
+							## Volledig bestand in één keer lezen
+
+							- Soms kan het aangewezen zijn om alle data in een bestand in één keer uit te lezen
+							- Je kan dit doen door gebruik van de read-method of met de readlines-method
+							- De read-method geeft de volledige inhoud van het bestand terug als string. Via verdere verwerking kan de string dan in kleinere stukken worden opgebroken
+							- De readlines-method geeft een list terug waarbij elk element een regel is uit het bestand. Een loop kan gebruikt worden om door alle regels te itereren
+						
+				</section>
+				<section>
+							## Volledig bestand in één keer lezen
+
+							```Python
+							with open("bestand.txt","r") as mijn_bestand:
+							    regels = mijn_bestand.readlines()
+							
+							for regel in regels:
+								print(regel.rstrip())
+							```
+
+							```Python
+							mijn_bestand = open("bestand.txt", "r")
+							aantal_regels = 0
+							regels = mijn_bestand.readlines()
+							for regel in regels:
+							    aantal_regels += 1
+							mijn_bestand.close()
+							print(f"Het aantal regels in dit bestand is {aantal_regels}")
+							```
+				</section>
+				<section>
+							## Einde-regel tekens
+
+							- Bij het uitlezen van een regel of een volledig bestand wordt telkens geëindigd met een lege string
+							- Je kan rstrip() gebruiken om dit weg te werken
+
+							```Python
+							with open("bestand.txt", "r") as mijn_bestand:
+							    inhoud = mijn_bestand.read()
+							print(inhoud.rstrip())
+							```
+
+							```Python
+							with open("bestand.txt", "r") as mijn_bestand:
+							    regels = mijn_bestand.readlines()
+							    for regel in regels:
+							        print(regel.rstrip())
+							```
+				</section>
+				<section>
+							## Bestandspaden
+
+							Indien een bestand dat je wil openen zich in de programma-folder bevindt dan dien je enkel de bestandsnaam mee te geven. Bevindt het bestand zich op een andere plaats dan moet je het file path meegeven
+							- Dit kan een relatief pad zijn:
+
+							```Python
+							with open("mijn_bestanden/bestand.txt","r") as mijn_bestand
+							```
+
+							- Maar met een absoluut pad kan je verwijzen naar elke locatie op je computer:
+
+							```Python
+							absoluut_bestandspad = "/Users/kristofmichiels/bestand.txt"
+							with open(absoluut_bestandspad,"r") as mijn_bestand
+							```
+				</section>
+				<section>
+							## Schrijven naar een bestand
+
+							- Schrijven kan naar een geopend bestand in ofwel write ("w") of append ("a")-mode 
+							- Bestaat het geopende bestand nog niet dan wordt een nieuw, leeg bestand aangemaakt
+							- In write-modus wordt een geopend bestaand bestand volledig leeggemaakt
+							- In append-modus wordt een geopend bestaand bestand intact gelaten en wordt nieuwe data weggeschreven onderaan het bestand
+							- De write-method neemt één string-argument, namelijk de data die zal worden weggeschreven
+							- Andere datatypes kunnen eerst geconverteerd worden met de str-functie
+				</section>
+				<section>
+							## Schrijven naar een bestand
+							- Je kan meerdere regels wegschrijven: 
+								- door ze ofwel bij elkaar te voegen tot één lange string
+								- meerdere regels worden dan gescheiden door "\n"
+								- je kan ook de write-method meerdere keren aanroepen
+
+							```Python
+							with open("bestand.txt", "w") as mijn_bestand:
+							    mijn_bestand.write("Ik hou van programmeren.")
+								mijn_bestand.write("Python rocks!")
+							```
+				</section>
+				<section>
+							## Toevoegen aan een bestand
+
+							```Python
+							with open("bestand.txt", "a") as mijn_bestand:
+							    mijn_bestand.write("Ik hou van programmeren.")
+							    mijn_bestand.write("Python rocks!")
+							```
+				</section>
+				<section>
+							## Data opslaan
+
+							- De technieken die we daarnet hebben gezien kunnen gebruikt worden om programma-data vast te houden
+							- Een eenvoudige manier om dit te doen is door gebruik te maken van de json-module
+							- Deze module  laat toe om eenvoudige Python data-structuren vast te houden in een bestand, en bij een volgend gebruik van je programma terug vast te nemen 
+							- We maken hierbij gebruik van het JSON-dataformaat
+				</section>
+				<section>
+							## json.dump() en json.load()
+
+							- We gebruiken json.dump() om een list als json op te slaan in een bestand
+							- De json.dump() functie neemt 2 argumenten: data om op te slaan en een bestands-object om de data aan toe te voegen
+
+							```Python
+							import json
+
+							getallen = [5, 2, 1, 7, 13, 23]
+
+							with open("bestand.json","w") as f:
+							    json.dump(getallen,f)
+							```
+				</section>
+				<section>
+							## json.dump() en json.load()
+
+							- In onderstaand codevoorbeeld gebruiken we json.load() om de list vanuit het bestand terug in de toepassing te krijgen
+							- De json.load() functie neemt 1 argument: een bestands-object om de data uit in te lezen
+
+							```Python
+							import json
+
+							with open("bestand.json","r") as f:
+								getallen = json.load(f)
+							```
+				</section>
+				<section>
+							## Lezen en opslaan van applicatie-gegenereerde data
+
+							Dit is een oefening die jullie zelf maken!
+				</section>
+				
+				<section>
+							## Python OOP / development - bestanden - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
