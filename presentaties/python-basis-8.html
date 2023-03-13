@@ -22,12 +22,24 @@
 							#### Kristof Michiels
 				</section>
 				<section>
-							## Exceptions
-							- Wanneer tijdens het lopen (de zgn. runtime) van een programma een fout optreedt:
+							## Inhoud
+
+							- Wat zijn exceptions? 
+							- Voorbeelden van exceptions
+							- Hoe omgaan met exceptions?
+							- Het try en except-blok
+							- Meerdere except-blokken
+							- Else
+							- Finally
+							- Zelf een exception oproepen
+				</section>
+				<section>
+							## Wat zijn exceptions?
+							- Exceptions zijn fouten (errors, letterlijk: uitzonderingen). Wanneer tijdens het uitvoeren van een programma zo'n fout optreedt:
 								- wordt een __exception object__ aangemaakt
 								- __stopt het programma__ met de verdere uitvoering
 								- schrijft Python de __traceback__ naar de console, die eindigt met een beschrijving vd exception
-							- Over welke fouten hebben we het? Heel vaak langs invoerkant
+							- Over welke fouten hebben we het? Heel vaak langs de invoerzijde
 								- Bvb de gebruiker kan een niet-numerieke waarde ingeven waar er één wordt verwacht 
 								- Bvb de gebruiker kan verkeerdelijk een niet-bestaande bestandsnaam meegeven 
 				</section>
@@ -76,17 +88,18 @@
 							```
 				</section>
 				<section>
-							## Omgaan met exceptions
+							## Hoe omgaan met exceptions?
 
 							- In elk van de bovenstaande voorbeelden bestaat het foutbericht op de laatste regel uit twee delen (gescheiden door een dubbelpunt):  het type fout en de bijzonderheden over deze fout 
-							- In bepaalde gevallen willen we een gebeurlijke exception niet het programma laten stoppen
-							- We kunnen actie ondernemen als antwoord op de exception en daarna het programma laten verder gaan
-							- We kunnen hiervoor het try-statement gebruiken en plaatsen rond een code-blok die onder bepaalde omstandigheden tot een exception zou kunnen leiden
+							- In bepaalde gevallen willen we wanneer een exception gebeurt het programma __niet laten stoppen__
+							- Gelukkig kunnen we in dat geval __actie ondernemen__ en daarna het programma laten __verder gaan__
+							- We kunnen hiervoor het __try-except-statement__ gebruiken en plaatsen rond een code-blok die onder bepaalde omstandigheden tot een exception zou kunnen leiden
 				</section>
 				<section>
 							## Try en except
 
-							- In dit voorbeeld verzoeken we de gebruiker een bestandsnaam in te voeren en proberen dit bestand vervolgens te openen
+							- In dit voorbeeld vragen we de gebruiker een bestandsnaam in te voeren en proberen dit bestand vervolgens te openen
+							- Hier gebruiken we een algemene except-blok. Daarmee wordt elke mogelijk voorkomende exception op dezelfde manier afgehandeld
 					
 							```Python
 							mijn_bestand_naam = input("Geef een bestandsnaam: ")
@@ -99,9 +112,16 @@
 				<section>
 							## Try en except
 
-							- In het bovenstaande voorbeeld wordt elke mogelijk voorkomende exception afgehandeld door een algemene except-blok
+							- _Try_ voert en observeert de statements in het codeblok uit
+							- Indien er zich geen exceptions voordoen dat wordt de except-blok overgeslagen
+							- Wanneer een exception zich voordoet binnen een try-blok stopt de verdere uitvoering binnen deze blok en springt de uitvoering onmiddellijk naar de aangewezen except-blok 
+							- Na uitvoering van de statements in de _except_-blok uitgevoerd gaat de toepassing verder
+				</section>
+				<section>
+							## Try en except
+
 							- We kunnen gaan verfijnen en expliciet een FileNotFoundError exception afhandelen
-							- Hier zie je dat we de toepassing zelf expliciet beëindigen met de quit()- functie
+							- Noot: hier zie je dat we de toepassing zelf expliciet beëindigen met de quit()- functie (dit is niet verplicht)
 
 							```Python
 							antwoord = input("Geef een bestandsnaam: ")
@@ -113,26 +133,7 @@
 							```
 				</section>
 				<section>
-							## Try en except
-
-							- Wanneer een exception zich voordoet binnen een try-blok stopt de verdere uitvoering binnen deze blok en springt de uitvoering onmiddellijk naar de aangewezen except-blok 
-							- Elke except-blok kan aangeven welk soort exception het wil opvangen door na het except trefwoord onmiddellijk het type exception mee te geven
-							- Een except-blok zonder specifieke exception zal elk type exception opvangen (die nog niet door een specifieke exception werd behandeld)
-							- In plaats daarvan voeren we het except-blok uit en handelen we de exception af. Deze wordt enkel in het geval van een fout uitgevoerd
-				</section>
-				<section>
-							## Try, except, finally
-
-							- Het try statement bestaat uit drie verschillende onderdelen: try, except en finally
-							- _Try_ voert en observeert de statements in het codeblok uit
-							- Indien er zich geen exceptions voordoen dat wordt de except-blok overgeslagen
-							- Indien wel dan worden de statements in de _except_-blok uitgevoerd en dan gaat de toepassing verder
-							- Er mogen verschillende _except_-blokken worden toegevoegd, elk met een specifiek af te handelen exception
-							- _Finally_ bevat code die mag uitgevoerd worden nadat de exception is afgehandeld. Deze blok mag weggelaten worden
-
-				</section>
-				<section>
-							## Try en except
+							## Voorbeeld in een loop
 
 							```Python
 							antwoord = input("Geef een bestandsnaam: ")
@@ -149,58 +150,78 @@
 							- Hier passen we bovenstaande code aan zodat het programma blijft proberen tot een bestaand bestand werd gevonden
 				</section>
 				<section>
-							## Encapsuleren in een functie
-
-							- exists which takes a filename and returns true if the file exists, false if it doesn’t:
+							## Meerdere except-blokken
 
 							```Python
-							def exists(filename):
-								try:
-									f = open(filename)
-									f.close()
-									return True 
-								except:
-									return False 
+							try:
+								print(onbestaande_variabele)
+							except NameError:
+								print("Deze variabele is niet gedefinieerd")
+							except:
+								print("Iets anders is foutgelopen")
 							```
 
-							The function we’ve just shown is not one we’d recommend. It opens and closes the file, which is semantically different from asking “does it exist?”. How? Firstly, it might update some timestamps on the file. Secondly, it might tell us that there is no such file if some other program already happens to have the file open, or if our permission settings don’t allow us to open the file.
-
-							Python provides a module called os.path within the os module. It provides a number of useful functions to work with paths, files and directories, so you should check out the help.
+							- We kunnen in één en het zelfde try-except-blok meerdere excepts toevoegen, elk voor één of meerdere specifieke exceptions
+							- Elke except-blok kan aangeven welk soort exception het wil opvangen door na het except trefwoord onmiddellijk het type exception mee te geven
+							- Een except-blok zonder specifieke exception zal elk type exception opvangen (die nog niet door een specifieke exception werd behandeld)
+				</section>
+				<section>
+							## else-blok
 
 							```Python
-							import os
+							try:
+								print("Hallo wereld")
+							except:
+								print("Er is een fout opgetreden bij het uitvoeren van het programma")
+							else:
+								print("Alles is perfect verlopen. Geen fout(en)!")
+  							```
 
-							# This is the preferred way to check if a file exists.
-							if os.path.isfile("c:/temp/testdata.txt"):
-```
+							- Je kan een else-blok toevoegen om code mee te geven die moet worden uitgevoerd enkel indien er geen fout(en) zijn opgetreden
+							- Gebruik van else is niet verplicht
 				</section>
 				<section>
-							## Meerdere _except_-blokken
+							## finally-blok
 
-							We can use multiple except clauses to handle different kinds of exceptions (see the Errors and Exceptions lesson from Python creator Guido van Rossum’s Python Tutorial for a more complete discussion of exceptions). So the program could do one thing if the file does not exist, but do something else if the file was in use by another program.
+							```Python
+							try:
+								print(niet_bestaande_variabele)
+							except:
+								print("Er is iets foutgelopen")
+							finally:
+								print("De try-except-blok is afgelopen")
+							```
 
-							https://docs.python.org/3/tutorial/index.html
+							- Het finally-blok bevat code die hoe dan ook uitgevoerd wordt nadat de try-except-blok is afgehandeld, los van of er zich een fout heeft voorgedaan of niet
+							- Je hoeft finally niet te gebruiken, maar ze is heel handig als je bepaalde code wil laten lopen op het einde van de blok. Bvb het netjes sluiten van bestanden of objecten...
+
 				</section>
 				<section>
-							## Raising our own exceptions
+							## Zelf een exception oproepen
 
-							Can our program deliberately cause its own exceptions? If our program detects an error condition, we can raise an exception. Here is an example that gets input from the user and checks that the number is non-negative:
-							
-							Line 5 creates an exception object, in this case, a ValueError object, which encapsulates specific information about the error. Assume that in this case function A called B which called C which called D which called get_age. The raise statement on line 6 carries this object out as a kind of “return value”, and immediately exits from get_age() to its caller D. Then D again exits to its caller C, and C exits to B and so on, each returning the exception object to their caller, until it encounters a try ... except that can handle the exception. We call this “unwinding the call stack”.
-							
-							ValueError is one of the built-in exception types which most closely matches the kind of error we want to raise. The complete listing of built-in exceptions can be found at the Built-inExceptions section of the Python Library Reference , again by Python’s creator, Guido van Rossum.
-							
-							If the function that called get_age (or its caller, or their caller, …) handles the error, then the program can carry on running; otherwise, Python prints the traceback and exits:
-				</section>
+							```Python
+							mijn_getal = -34
+							if mijn_getal < 0:
+  								raise Exception("Negatieve getallen zijn niet toegelaten")
+							```
+
+							- Het raise keyword stelt je in staat zelf een bepaalde error te initiëren 
+							- Hier wordt een algemene exception opgeroepen wanneer een getal kleiner is dan of gelijk aan 0
+							- Behalve de naam van de fout (hier dus een algemene exception) wordt ook de tekst in het argument meegegeven naar de gebruiker
+				</section>		
 				<section>
-							## The finally clause of the try statement
+							## Zelf een exception oproepen
 
-							A common programming pattern is to grab a resource of some kind — e.g. we create a window for turtles to draw on, or we dial up a connection to our internet service provider, or we may open a file for writing. Then we perform some computation which may raise an exception, or may work without any problems.
-							
-							Whatever happens, we want to “clean up” the resources we grabbed — e.g. close the window, disconnect our dial-up connection, or close the file. The finally clause of the try statement is the way to do just this. Consider this (somewhat contrived) example:
-				</section>
+							```Python
+							mijn_getal = "Hallo wereld!"
 
-				
+							if not type(mijn_getal) is int:
+  								raise TypeError("Enkel gehele getallen zijn toegelaten")
+							```
+
+							- Je kan ook een specifieke fout oproepen: hier een TypeError
+							- Deze fouten kunnen uiteraard afgehandeld worden als ze gebeuren binnen een try-except-blok
+				</section>		
 				<section>
 							## Python OOP / development - foutafhandeling - kristof.michiels01@ap.be
 				</section>
