@@ -24,101 +24,157 @@
 				<section>
 							## Inhoud
 							- Werken met bestanden
-							- ...
+							- Schrijven naar een bestand
+							- Een bestand regel per regel inlezen
+							- Een bestand omzetten in een list van regels
+							- Het gehele bestand in één keer inlezen
+							- Werken met binaire bestanden
+							- Bestandspaden
+							- Command-line argumenten
 				</section>
                 <section class="chapter">
-							## Bestanden in Python
+							## Werken met bestanden
                 </section>
                 <section>
-							## Werken met bestanden
+							## Het nut van werken met bestanden
 
-							- De input in onze programma's bleef tot nu toe beperkt tot gebruikersinput via het toetsenbord. Alle output werd dan weer getoond op het terminalscherm
-							- Bestanden kunnen eveneens gebruikt worden als input en output voor onze programma's. Deze kunnen dan snel grote hoeveelheden data analyseren. Bovendien kunnen ze data ook permanent vasthouden
-							- We zullen hier werken met tekstbestanden: 
-								- Ze bestaan uit bitreeksen die ASCII of UTF-8 karakters vertegenwoordigen
-								- Tekstbestanden kunnen bewerkt worden in elke teksteditor
-								- Dezelfde principes gelden grotendeels voor binaire bestanden  
+							- De input in onze programma's bleef tot nu toe beperkt tot gebruikersinput via het toetsenbord
+							- Alle output werd dan weer getoond op het terminalscherm
+							- We kunnen data opslaan als variabelen in het random access memory (RAM)
+							- RAM is snel en goedkoop, maar volatiel. Sluiten we ons programma af, dan verliezen we deze data
+							- Om data langere tijd bij te houden moeten we het wegschrijven naar een niet-volatiel opslagmedium
+							- Bestanden zijn hiervoor uitstekend geplaatst. Door ervan te lezen of ernaar weg te schrijven kunnen we data duurzaam opvragen en bijhouden
                 </section>
 				<section>
-							## Een bestand openen
-
-							- Vooraleer we een bestand kunnen gebruiken moeten we het eerst openen met de open-functie
-							- De open-functie neemt twee string-argumenten: de naam van het bestand en de toegangsmodus ("r" voor read, "w" voor write en "a" voor append)
-							- De functie geeft een file-object terug waarop we verschillende methods kunnen toepassen om van het bestand te lezen of om er data naar weg te schrijven
-							- Nadat de lees- en/of schrijfbewerkingen afgerond zijn dient het bestand gesloten te worden. We doen dit expliciet met de close-method of kunnen dit ook overlaten aan Python
-
-							```python
-							mijn_bestand = open("bestand.txt", "r")
-							#...
-							mijn_bestand.close()
-							```
+							## Hoe werken met bestanden?
+								
+							- Werken met bestanden in Python is vergelijkbaar met werken met een notitieboek
+							    - Om het te gebruiken moet je het openen
+							    - Wanneer je klaar bent wordt het gesloten
+							    - Terwijl het open is kan erin gelezen worden, of naar geschreven
+								- Je kan het in zijn geheel lezen of regel per regel
+							- We zullen hier hoofdzakelijk werken met tekstbestanden: 
+								- Ze bestaan uit bitreeksen die ASCII of UTF-8 karakters vertegenwoordigen
+								- Tekstbestanden kunnen bewerkt worden in elke teksteditor
+								- Dezelfde principes gelden grotendeels voor binaire bestanden (zie verder)
+				</section>
+				<section class="chapter">
+							## Schrijven naar een bestand
 				</section>
 				<section>
-							## Een bestand openen
+							## Schrijven naar een bestand
+
+							```Python
+							mijn_bestand = open("mijn_bestand.txt", "w")
+							mijn_bestand.write("Mijn eerste bestand, gemaakt door Python\n")
+							mijn_bestand.write("---------------------------------\n")
+							mijn_bestand.write("Hallo wereld!\n")
+							mijn_bestand.close()
+							```
+
+							- Een bestand openen creëert een bestands-object dat we toekennen aan een variabele. We kunnen hierop methods als write() uitvoeren
+							- De open()-functie neemt twee argumenten: de naam van het bestand en de modus 
+							- Modus "w" betekent dat we het bestand openen om naar te schrijven
+							- Indien er nog geen bestand met deze naam bestaat dan wordt het aangemaakt
+				</section>	
+				<section>
+							## Schrijven naar een bestand
+
+							- Indien het wel reeds bestaat wordt het vervangen door het bestand dat we nu gaan schrijven
+							- Openen we het bestand in "a" of append modus dan wordt een bestaand bestand niet overschreven maar voegen we er op het einde nieuwe regels aan toe
+							- Om data toe te voegen gebruiken we de write()-method. Wordt vaak uitgevoerd binnen een loop
+							- Met de close()-method voltooien we het schrijfproces en maken het bestand (terug) beschikbaar
+							- Je kan meerdere regels wegschrijven: 
+							    - door ze ofwel bij elkaar te voegen tot één lange string
+							    - meerdere regels worden dan gescheiden door "\n"
+							    - je kan ook de write-method meerdere keren aanroepen
+				</section>	
+				<section class="chapter">
+							## Een bestand regel per regel inlezen
+				</section>
+				<section>
+							## Een bestand regel per regel inlezen
+
+							```Python
+							mijn_bestand = open("mijn_bestand.txt", "r")
+							while True:
+								regel = mijn_bestand.readline()
+								if len(regel) == 0: # einde van het bestand
+									break
+								print(regel, end="") # geen extra newline karakter 
+							mijn_bestand.close()
+							```
+
+							- Hier openen we een bestand om te lezen, in modus "r". Deze modus is de default en mag ook worden weggelaten 
+							- Met de readline()-method lezen we alle regels stuk voor stuk in
+				</section>
+				<section>
+							## Een bestand regel per regel inlezen
+
+							- Hier wordt een regel ingelezen en met print() afgedrukt maar uiteraard zijn veel complexere bewerkingen mogelijk
+							- In Python bereiken we het einde van een bestand door het mislukken van het inlezen van een nieuwe regel
+							- Proberen we een bestand te openen dat niet bestaat dan krijgen we een foutmelding:
+
+							```Python
+							mijn_bestand = open("niet_bestaand_bestand.txt", "r")
+							# IOError: [Errno 2] No such file or directory: "niet_bestaand_bestand.txt"
+							```
+				</section>
+				<section class="chapter">
+							## Een bestand omzetten in een list van regels
+				</section>
+				<section>
+							## Een bestand omzetten in een list van regels
+
+							```Python
+							mijn_bestand = open("mijn_bestand.txt", "r")
+							list_van_regels = mijn_bestand.readlines()
+							mijn_bestand.close()
+
+							list_van_regels.sort()
+
+							gesorteerd_nieuw_bestand = open("gesorteerd_nieuw_bestand.txt", "w")
+							for regel in list_van_regels:
+								gesorteerd_nieuw_bestand.write(regel)
+							gesorteerd_nieuw_bestand.close()
+							```
+
+							- Een nuttige techniek is deze waarin je data uitleest uit een bestand en deze omzet in een list van regels
+							- De readlines()-method leest alle regels in en transformeert ze tot een list met de regels als elementen
+				</section>
+				<section>
+							## Een bestand omzetten in een list van regels
+
+							- Bovenstaand voorbeeld illustreert dit, sorteert de list en schrijft deze gesorteerd regel per regel terug weg naar een nieuw bestand
+				</section>
+				<section class="chapter">
+							## Het gehele bestand in één keer inlezen
+				</section>
+				<section>
+							## Het gehele bestand in één keer inlezen
+
+							```Python
+							mijn_bestand = open("mijn_bestand.txt")
+							bestand_als_string = mijn_bestand.read()
+							mijn_bestand.close()
+
+							individuele_woorden = bestand_als_string.split()
+							print(f"Het bestand bestaat uit {len(individuele_woorden)} woorden.")
+							```
+
+							- Een andere manier van werken met tekstbestanden is de volledige inhoud inlezen als een string
+							- We kunnen dan string-manipulatie gebruiken om met de inhoud te werken 
+							- Je gebruikt deze techniek als je niet geïnteresseerd bent in de regels maar wil werken met de gehele tekst
+							- Zoals in bovenstaand voorbeeld: hier tellen we het aantal woorden waaruit het document bestaat
+				</section>
+				<section>
+							## Een bestand openen in een with-block
 							- Gebruik je het with-blok en zorg je ervoor dat alle bestandsbewerkingen zich binnen dit blok bevinden, dan hoef je het bestand niet zelf af te sluiten. Python doet dit voor jou.
 							
 							```Python
 							with open("bestand.txt", "r") as mijn_bestand:
-							    inhoud = mijn_bestand.read()
+								inhoud = mijn_bestand.read()
 							print(inhoud)
-							```
-				</section>
-				<section>
-							## Regel per regel uit een bestand lezen
-							- Input lezen kan op verschillende manieren, maar __enkel__ als het bestand geopend is in read-modus (met "r")
-							- De readline-method leest één regel en geeft het terug als string
-							- Elk volgend aanroepen van deze method geeft de volgende regel terug, van boven naar onder
-							- Wanneer het einde van het bestand is bereikt wordt een lege string teruggegeven
-				</section>
-				<section>
-							## Regel per regel uit een bestand lezen
-
-							```Python
-							with open("bestand.txt","r") as mijn_bestand:
-							    for regel in mijn_bestand:
-							        print(regel)
-							```
-
-							```python
-							mijn_bestand = open("bestand.txt", "r")
-							aantal_regels = 0
-							regel = mijn_bestand.readline()
-							while regel != "":
-								aantal_regels += 1
-								regel = mijn_bestand.readline()
-							mijn_bestand.close()
-							print(f"Het aantal regels in dit bestand is {aantal_regels}")
-							```
-
-				</section>
-				<section>
-							## Volledig bestand in één keer lezen
-
-							- Soms kan het aangewezen zijn om alle data in een bestand in één keer uit te lezen
-							- Je kan dit doen door gebruik van de read-method of met de readlines-method
-							- De read-method geeft de volledige inhoud van het bestand terug als string. Via verdere verwerking kan de string dan in kleinere stukken worden opgebroken
-							- De readlines-method geeft een list terug waarbij elk element een regel is uit het bestand. Een loop kan gebruikt worden om door alle regels te itereren
-						
-				</section>
-				<section>
-							## Volledig bestand in één keer lezen
-
-							```Python
-							with open("bestand.txt","r") as mijn_bestand:
-							    regels = mijn_bestand.readlines()
-							
-							for regel in regels:
-								print(regel.rstrip())
-							```
-
-							```Python
-							mijn_bestand = open("bestand.txt", "r")
-							aantal_regels = 0
-							regels = mijn_bestand.readlines()
-							for regel in regels:
-							    aantal_regels += 1
-							mijn_bestand.close()
-							print(f"Het aantal regels in dit bestand is {aantal_regels}")
 							```
 				</section>
 				<section>
@@ -129,16 +185,51 @@
 
 							```Python
 							with open("bestand.txt", "r") as mijn_bestand:
-							    inhoud = mijn_bestand.read()
+								inhoud = mijn_bestand.read()
 							print(inhoud.rstrip())
 							```
 
 							```Python
 							with open("bestand.txt", "r") as mijn_bestand:
-							    regels = mijn_bestand.readlines()
-							    for regel in regels:
-							        print(regel.rstrip())
+								regels = mijn_bestand.readlines()
+								for regel in regels:
+									print(regel.rstrip())
 							```
+				</section>
+				<section class="chapter">
+							## Werken met binaire bestanden
+				</section>
+				<section>
+							## Werken met binaire bestanden
+
+							```Python
+							mijn_zip_bestand = open("mijn_bestand.zip", "rb")
+							mijn_ander_zip_bestand = open("mijn_ander_bestand.zip", "wb")
+
+							while True:
+								buffer = mijn_zip_bestand.read(1024)
+								if len(buffer) == 0:
+									break
+								mijn_ander_zip_bestand.write(buf)
+
+							mijn_zip_bestand.close()
+							mijn_ander_zip_bestand.close()
+							```
+
+							- Binaire bestanden (afbeeldingen, video's, zip-bestanden, ...) bestaan niet uit tekstregels
+							- Python maakt het even eenvoudig om met binaire bestanden te werken
+							- Een binair bestand inlezen levert bytes op in plaats van strings
+							- In bovenstaand voorbeeld lezen we één binair bestand in en schrijven we het weg naar een ander
+				</section>
+				<section>
+							## Werken met binaire bestanden
+
+							- We voegen hier telkens een "b" toe aan de modus om aan te geven dat het hier om binaire bestanden gaat
+							- We kozen er hier voor het bestand in te lezen in stappen van 1024 bytes
+							- Wanneer de buffer uiteindelijk leeg is breken we uit de loop
+				</section>
+				<section class="chapter">
+							## Bestandspaden
 				</section>
 				<section>
 							## Bestandspaden
@@ -153,44 +244,17 @@
 							- Maar met een absoluut pad kan je verwijzen naar elke locatie op je computer:
 
 							```Python
-							absoluut_bestandspad = "/Users/kristofmichiels/bestand.txt"
+							absoluut_bestandspad = "c:/temp/bestand.txt" # windows
+							absoluut_bestandspad = "c:\\temp\\bestand.txt" # windows
+							absoluut_bestandspad = "/Users/kristofmichiels/bestand.txt" # unix, mac
 							with open(absoluut_bestandspad,"r") as mijn_bestand
 							```
 				</section>
-				<section>
-							## Schrijven naar een bestand
-
-							- Schrijven kan naar een geopend bestand in ofwel write ("w") of append ("a")-mode 
-							- Bestaat het geopende bestand nog niet dan wordt een nieuw, leeg bestand aangemaakt
-							- In write-modus wordt een geopend bestaand bestand volledig leeggemaakt
-							- In append-modus wordt een geopend bestaand bestand intact gelaten en wordt nieuwe data weggeschreven onderaan het bestand
-							- De write-method neemt één string-argument, namelijk de data die zal worden weggeschreven
-							- Andere datatypes kunnen eerst geconverteerd worden met de str-functie
+				<section class="chapter">
+							## Data opslaan als json
 				</section>
 				<section>
-							## Schrijven naar een bestand
-							- Je kan meerdere regels wegschrijven: 
-								- door ze ofwel bij elkaar te voegen tot één lange string
-								- meerdere regels worden dan gescheiden door "\n"
-								- je kan ook de write-method meerdere keren aanroepen
-
-							```Python
-							with open("bestand.txt", "w") as mijn_bestand:
-							    mijn_bestand.write("Ik hou van programmeren.")
-								mijn_bestand.write("Python rocks!")
-							```
-				</section>
-				<section>
-							## Toevoegen aan een bestand
-
-							```Python
-							with open("bestand.txt", "a") as mijn_bestand:
-							    mijn_bestand.write("Ik hou van programmeren.")
-							    mijn_bestand.write("Python rocks!")
-							```
-				</section>
-				<section>
-							## Data opslaan
+							## Data opslaan als json
 
 							- De technieken die we daarnet hebben gezien kunnen gebruikt worden om programma-data vast te houden
 							- Een eenvoudige manier om dit te doen is door gebruik te maken van de json-module
@@ -224,15 +288,41 @@
 							with open("bestand.json","r") as f:
 								getallen = json.load(f)
 							```
+				</section>	
+				<section class="chapter">
+							## Command-line argumenten
 				</section>
 				<section>
-							## Lezen en opslaan van applicatie-gegenereerde data
+							## Command-line argumenten
 
-							Dit is een oefening die jullie zelf maken!
+							- De Python-programma's die we schrijven worden uitgevoerd via de command-line (python mijn_bestand.py)
+							- Onze programma's kunnen input meekrijgen via command-line argumenten
+							- Deze argumenten worden bijgehouden in een variabele argv (argument vector) die deel uitmaakt van de sys (system) module
+							- argv is een list, waarvan de elementen met type-conversie functies kunnen worden omgezet naar het gewenste datatype
 				</section>
-				
 				<section>
-							## Python OOP / development - bestanden - kristof.michiels01@ap.be
+							## Command-line argumenten
+
+							```Python
+							import sys
+
+							print(f"Dit programma heeft {len(sys.argv)} command-line argumenten.")
+							print(f"De naam van het bestand is {sys.argv[0]}")
+
+							if len(sys.argv) > 1:
+								print("De overige argumenten zijn:")
+								for i in range(1, len(sys.argv)):
+									print(sys.argv[i])
+							```
+				</section>
+				<section>
+							## Command-line argumenten
+							- De sys-module is nodig en wordt geïmporteerd met het import statement
+							- Het eerste element van de sys.argv-list is de naam van het uitgevoerde bestand
+							- De volgende elementen in de list zijn de argumenten die na de bestandsnaam zijn meegegeven
+				</section>			
+				<section>
+							## Python OOP / development - werken met bestanden - kristof.michiels01@ap.be
 				</section>
 	</body>
 </html>
