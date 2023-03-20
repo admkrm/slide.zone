@@ -1,0 +1,624 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OOP / development: terminal, git en virtuele omgevingen</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OOP / Development
+							## Terminal, virtuele omgevingen en git
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Deze les beschrijft een aantal belangrijke __basisvaardigheden__ om te werken met Python
+							- Eerst zetten we onze __terminal-omgeving__ in orde en leren we werken met __essentiële terminal commando's__
+							- Vervolgens gaan we __Virtuele omgevingen__ opzetten en packages installeren met __pip__
+							- Verbeter de kwaliteit van je code met __static analyzers__: Flake8 en Black  
+							- We bekijken ook de basis van werken met __Git__ in de terminal
+				</section>
+				<section class="chapter">
+							## De terminal / command-line interface
+				</section>
+				<section>
+							## De terminal / command-line interface
+
+							- Onze terminal is eigenlijk een terminal emulator. We krijgen er toegang mee tot de shell
+							- De shell is een programma dat functioneert als de interface tussen de gebruiker en het besturingssysteem
+							- De shell kan grafisch zijn (GUI) of een command-line interface (CLI). Wij zijn hier geïnteresseerd in de CLI
+							- Werk je met __Mac of Linux__ dan is de terminal standaard ingebouwd in je besturingssysteem
+							- Je start in dat geval de terminal-toepassing en je kan ze meteen beginnen te gebruiken
+							- Er zijn verschillende alternatieve terminal-toepassingen die je kan installeren (bvb [iterm2](https://iterm2.com/) op Mac)
+				</section>
+				<section>
+							## Onder Windows
+							- Op __Windows__ heb je standaard toegang tot command-line toepassingen zoals de [Command Prompt](https://en.wikipedia.org/wiki/Cmd.exe)
+							- Het is evenwel beter om de Windows terminal-toepassing te gebruiken
+							- Bij Windows 11+ is de kans groot dat deze toepassing standaard geïnstalleerd is
+							- Indien niet: download het van de [Microsoft Store](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) of van de [GitHub repository](https://github.com/microsoft/terminal)
+							- Hier vind je een volledige en goeie tutorial om [Windows terminal te installeren](https://realpython.com/python-coding-setup-windows/#installing-windows-terminal)
+							- Na het installeren van Windows terminal vind je de terminal-toepassing in het startmenu onder terminal 
+				</section>
+				<section>
+							## De verschillende shells
+							- Afhankelijk van je besturingssysteem voer je je terminal commando's uit in een specifieke shell
+							- Voor Linux is dit quasi steeds [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), bij MacOS is dat [Zsh](https://en.wikipedia.org/wiki/Z_shell)
+							- Windows terminal werkt standaard met [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+							- Deze shells verschillen voor wat bepaalde commando's betreft, maar ze delen de meeste basiscommando's
+							- Voor een Bash shell (zoals Linux) volg je [deze](https://itsfoss.com/install-bash-on-windows/) richtlijnen
+							- Je kan ook Git (inclusief de Git Bash shell) [installeren](https://git-scm.com/)
+				</section>
+				<section class="chapter">
+							## De meest gebruikte terminal commando's
+				</section>
+				<section>
+							## De meest gebruikte terminal commando's
+
+							- Onder terminal commando's verstaan we de instructies die je ingeeft om specifieke taken uit te voeren
+							- Wij concentreren ons hier op het werken met het bestandssysteem 
+							- Daarnaast en daaraan gekoppeld bekijken we hoe je bestanden en directories aanmaakt en wijzigt
+							- Onder bestandssysteem verstaan we de hiërarchisch geordende structuur van bestanden en directories
+							- Je bent gewoon het te bekijken en te wijzigen vanuit een GUI-toepassing zoals Windows Explorer
+				</section>
+				<section>
+							## Het bestandssysteem: pwd en ls
+							- Met pwd of "print working directory" krijg je je huidige plaats binnen het bestandssysteem te zien:
+
+							```Bash
+							$ pwd
+							```
+
+							- Met ls of "list" krijg je te zien welke bestanden en directories je "working directory" bevat:
+
+							```Bash
+							$ ls
+							```
+				</section>
+				<section>
+							## Het bestandssysteem: ls met flags
+
+							- Een command-line flag (ook gekend als option of switch) wijzigt de werking van een commando
+							- Welke flags je kan gebruiken hangt af welke het specifieke commando accepteert
+							- Bij ls heb je de -a flag. Deze staat voor _all_, dus ook verborgen bestanden (met een puntje voor de naam)
+							- Er is ook de -l flag. Deze betekent _long_ en levert gedetailleerde informatie af over de bestanden en folders
+							- Je krijgt dan ook informatie over permissies (owner en group). Meer info daarover [hier](https://en.wikipedia.org/wiki/File-system_permissions#Notation_of_traditional_Unix_permissions)
+							- alle mogelijke opties vind je op de "[man page](https://en.wikipedia.org/wiki/Man_page)": _man ls_. Je kan elke flag individueel gebruiken of combineren:
+
+							```Bash
+							$ ls -al
+							```
+				</section>
+				<section>
+							## Omgevingsvariabelen en Path
+
+							- Omgevingsvariabelen zijn sleutel-waardeparen die gegevens opslaan nuttig voor programma's en systeem
+							- Ze worden vaak gebruikt om paden, instellingen of configuratiegegevens op te slaan
+							- De terminal heeft toegang tot deze informatie en __Path__ is een belangrijke omgevingsvariabele
+							- Telkens je een commando uitvoert zal de terminal deze zoeken in de directories die staan opgelijst in Path
+							- Andere nuttige omgevingsvariabelen zijn __Home__ (pad naar de thuismap van de gebruiker) en __User__ (gebruikersnaam van de huidige gebruiker)
+
+							```Bash
+							$ echo "${PATH//:/\n}" # zshell en bash
+							PS> (cat ENV:Path) -Split ";" # Path variable tonen in Windows
+							```
+				</section>
+				<section>
+							## Omgevingsvariabelen (Zshell/Bash)
+							- __Instellen__ doe je met het export-commando: export MIJN_VARIABELE="mijn_waarde"
+							- __Opvragen__: echo $MIJN_VARIABELE
+							- __Verwijderen__ doe je met het unset_commando: unset MIJN_VARIABELE
+							- __Toevoegen of aanpassen__: export PATH="/nieuwe/folder:$PATH". Voegt toe aan begin van de huidige waarde
+							- __Om altijd beschikbaar te maken__ kan je de informatie toevoegen aan het configuratiebestand van je shell, meestal ~/.bashrc, ~/.bash_profile, of ~/.zshrc. Na wijzigingen: source ~/.zshrc  
+							- __Lijst omgevingsvariabelen__: gebruik het env, printenv of set-commando om alle omgevingsvariabelen in de huidige sessie weer te geven							
+				</section>
+				<section>
+							## Navigeren door je bestandssysteem
+
+							- We gebruiken het commando _cd_ - staat voor _change directory_ - om onze _working directory_ te wijzigen
+							- We gebruiken de naam van de directory gelegen in de huidige directory en gaan zo een niveau dieper
+							- We noemen dit navigeren aan de hand van een relatief pad
+
+							```Bash
+							$ pwd
+							/Users/kristofmichiels
+							$ cd ap
+							$ pwd
+							/Users/kristofmichiels/ap
+							```
+				</section>
+				<section>
+							## Navigeren door je bestandssysteem
+
+							- Je kan ook navigeren aan de hand van een volledig of absoluut pad, zoals hier te zien:
+
+							```Bash
+							# Linux + macOS
+							cd /Users/kristofmichiels/ap
+							# Windows
+							PS> cd C:\Users\\Desktop
+							```
+				</section>
+				<section>
+							## Navigeren door je bestandssysteem
+
+							- Je kan ook een directory terug naar boven gaan en doet dit met _cd .._ 
+							- Dit commando laat je één niveau opschuiven in de hiërarchie van het bestandssysteem
+							- De twee puntjes (..) vertegenwoordigen de parent directory van de huidige
+							- Trouwens: met _cd_ (dus zonder de puntjes) ga je, waar je je ook mag bevinden, automatisch terug naar de start-directory (meestal de user-folder)  
+
+							```Bash
+							$ pwd
+							/Users/kristofmichiels/ap
+							$ cd ..
+							$ pwd
+							/Users/kristofmichiels
+							```
+				</section>
+				<section>
+							## Directories aanmaken of verwijderen
+
+							- De volgende commando's laten je toe om op de snelst mogelijke wijze projectconfiguraties aan te maken
+							- Met het _mkdir_ commando maak je een nieuwe folder aan binnen de huidige _working directory_ 
+
+							```Bash
+							$ mkdir mijn_python_project
+							```
+
+							- met _rmdir_ kan je een lege directory terug verwijderen. Een niet-lege directory verwijder je met _rmdir -r_
+
+							```Bash
+							$ rmdir mijn_python_project
+							```
+				</section>
+				<section>
+							## Bestanden aanmaken of verwijderen
+
+							- Met het touch/ni commando maak je een leeg bestand aan met een meegegeven naam
+							- Indien het bestand al bestaat, wordt de timestamp (voor toegang en aanpassing) geactualiseerd 
+
+							```Bash
+							# Linux + macOS
+							$ touch main.py
+							# Windows
+							PS> ni main.py
+							```
+
+							- Een bestand verwijderen doe je met _rm_:
+
+							```Bash
+							$ rm main.py
+							```
+
+
+				</section>
+				<section>
+							## Bestanden aanmaken of verwijderen
+
+							- Met echo kan je via de standard output stream (stdout) een string toevoegen aan een bestand
+							- Standaard wordt de stdout op het scherm getoond maar je kan deze ook redirecten, bvb naar een bestand
+							- We redirecten deze output met het > symbool (= "caret symbol")
+							- Wanneer je redirect naar een niet-bestaand bestand dan wordt dit bestand voor jou aangemaakt 
+
+							```Bash
+							$ echo 'print("Hallo wereld!")' > main.py
+							```
+				</section>
+				<section>
+							## Inhoud van bestanden weergeven met cat en tail
+
+							- _cat_ laat toe de inhoud van een bestand af te drukken. Goed voor minder omvangrijke bestanden
+							- Het commando is is afgeleid van concatenate (samenvoegen): je kan ook meerdere bestanden meegeven als argument en de inhoud van deze bestanden wordt achter elkaar weergegeven
+							- _tail_ drukt de laatste N aantal lijnen (de staart) van een bestand af. Standaard is N = 10. In het vb hieronder laten we de laatste 100 lijnen afdrukken
+							- Je kan met _tail -f_ (=follow) de veranderingen laten weergeven aan de inhoud van een bestand
+							- Het verdient in deze context ook de aanbeveling om jezelf vertrouwd te maken met [vim](https://www.linkedin.com/learning/learning-vim) of met [neovim](https://neovim.io/)
+							
+							```Bash
+							$ cat main.py
+							$ tail -n 100 mijn_bestand.txt
+							```
+				</section>
+				<section>
+							## Het terminal venster leegmaken
+
+							- _clear_ is een vaak gebruikt commando om je terminal venster leeg te maken
+
+							```Bash
+							$ clear
+							```
+
+				</section>
+				<section class="chapter">
+							## Virtuele Python omgevingen
+				</section>
+				<section>
+							## Virtuele Python-omgevingen
+							- Krachtig packaging systeem om de dependencies van je projecten te beheren
+							- Per project-directory kan je een privé-kopie maken van de interpreter én de gebruikte dependencies
+							- Onder dependencies verstaan we alle software-componenten (zoals externe libraries) die nodig zijn om je project succesvol te kunnen runnen
+							- De virtuele omgeving vormt een volledig geïsoleerde python omgeving binnen de context van een directory
+							- Wij gebruiken de [venv-module van Python](https://docs.python.org/3/library/venv.html)
+				</section>
+				<section>
+							## Een virtuele omgeving opzetten
+
+							- Het venv-script wordt meegeleverd met de Python-interpreter
+							- De tweede venv op de lijn is de naam die we kiezen voor onze virtuele Python-omgeving. Je kan een andere kiezen, maar is zowat standaard om "venv" te kiezen
+							- Na uitvoeren van het script wordt een venv folder aangemaakt waarin de interpreter en eventueel ook later geïnstalleerde dependencies wordt opgeslagen
+							- Je mag deze folder negeren en ze wordt ook niet ingecheckt in GitHub als je gebruik maakt van versiebeheer
+							- Op Mac of Linux gebruiken we python3 -m venv venv
+
+							```Bash
+							$ python -m venv venv
+							```
+				</section>
+				<section>
+							## Een virtuele omgeving activeren
+
+							- We activeren de virtuele omgeving via het aanroepen van een script in de virtuele omgeving
+							- Een geactiveerde venv is zichtbaar aan de prompt (toont "venv") van je bash/zsh shell
+
+							```Bash
+							# windows:
+							$ venv\Scripts\activate
+
+							# unix, mac:
+							$ source venv/bin/activate
+							```
+				</section>
+				<section>
+							## Je virtuele omgeving testen
+
+							- Kan je doen met which, dat het pad geeft naar bvb python of pip
+							- Test deze commando's met én zonder een geactiveerde virtuele omgeving en observeer het verschil
+							- Je ziet hier het verschil tussen een globale en lokale omgeving
+
+							```Bash
+							$ which python
+							$ which pip
+							```
+				</section>
+				<section>
+							## Python installer pip
+
+							- We gebruiken het met Python meegeleverde pip om externe dependencies te installeren
+							- [Pip](https://packaging.python.org/en/latest/tutorials/installing-packages/) is een recursief acronym dat staat voor "Pip Installs Packages" of "preferred installer program" :-) 
+							- Zorg er voor dat je virtuele omgeving geactiveerd is als je packages installeert
+							- Bekijk de verzameling van gepubliceerde Python packages op PyPI: https://pypi.org/
+							- Bijvoorbeeld om de requests-library te installeren:
+
+							```Bash
+							$ pip install requests
+							```
+				</section>
+				<section>
+							## Doorgeven of deployen van een virtual environment
+
+							- Om de lijst van de geïnstalleerde dependencies te zien:
+
+							```Bash
+							$ pip list
+							```
+
+							- Dependencies opslaan in een requirements.txt teks-bestand
+
+							```Bash
+							$ pip freeze > requirements.txt
+							```
+							
+							- Een virtuele omgeving configureren op basis van een requirements.txt tekst-bestand
+
+							```Bash
+							$ pip install -r requirements.txt
+							```
+
+				</section>
+				<section>
+							## Een virtuele omgeving de-activeren
+
+							- Hoe keer je terug naar de globale omgeving?
+							- Gebruik "deactivate" in de terminal om de virtuele omgeving te verlaten
+
+							```Bash
+							deactivate
+							```
+				</section>
+				<section class="chapter">
+							## Verbeter de kwaliteit van je code met Static Analyzers
+				</section>
+				<section>
+							## Static analyzers
+
+							- Dit zijn tools die helpen bij het analyseren, verbeteren en onderhouden van de kwaliteit van je Python-code
+							- Ze controleren de code op fouten, bugs en naleving van stijlrichtlijnen
+							- Je kunt ze linken en gebruiken in VSCode (zoek in de settings op "Python" en "formatting" of "linting")
+							- Minstens zo nuttig is ze gebruiken vanuit de terminal
+							- Er zijn diverse opties, bij linters (Pylint, Flake8, ...) én autoformatters (Autopep8, Black, ...)
+							- Wij kozen voor Flake8 en Black
+
+				</section>
+				<section>
+							## Flake8
+
+							- Een populaire en gebruiksvriendelijke statische code-analyzer voor Python
+							- Combineert de functionaliteit van meerdere analyzers, zoals PyFlakes (linting), pycodestyle (stijlchecker, PEP8-compatibiliteit) en Mccabe (checkt complexiteit van je code)
+							- Biedt een goede balans tussen eenvoud en grondige code-analyse
+							- Verbetert de codekwaliteit en vermindert de kans op fouten
+							- Zorgt voor consistentie in de codebase, wat samenwerking vergemakkelijkt
+							- Installeren met pip, in je virtuele omgeving: _pip install flake8_
+							- Uitvoeren doe je zo: _flake8 bestand.py_ of _flake8 --max-complexity 10 bestand.py_ (bij gebruik Mccabe)
+							- Documentatie: https://flake8.readthedocs.io/
+				</section>
+				<section>
+							## Flake8
+
+							- Als je Flake8 een probleem wil laten negeren, gebruik dan een inline # noqa comment (op de lijn waar de zgn fout zich voordoet), gevolgd door de error-code die je wil laten negeren
+
+							```Python
+							def wandelen():
+								geblesseerd = False # noqa F841
+								print(spieren) # noqa F821, F841
+								return stijfheid # noqa
+							```
+
+							- Eerste noqa: negeren waarschuwing F841. Tweede noqa: 2 waarschuwingen (F821 en F841) negeren. Derde noqa: alle mogelijke waarschuwingen negeren
+							- Flake8 ondersteunt eveneens configuratie-bestanden. In de project-root kan je een .flake8-bestand toevoegen. Je vindt alle nodige info in de documentatie
+				</section>
+				<section>
+							## Black - De onbuigzame codeformatter voor Python
+							- Herschrijft de code zonder de functionaliteit ervan te wijzigen
+							- Hanteert één consistente stijl voor de gehele codebase en formatteert volgens de PEP8-stijlgids
+							- Biedt aanpasbare configuratieopties en ondersteunt plug-ins voor uitbreidbaarheid
+							- Gemakkelijk te integreren met IDE's en CI/CD-pipelines
+							- Installeer Black via pip: _pip install black_
+							- Voer Black uit op een Python-bestand: _black mijn_bestand.py_
+							- Black formatteert automatisch de code en slaat de wijzigingen op
+							- Documentatie: https://black.readthedocs.io/ of: black --help in de terminal
+				</section>				
+				<section class="chapter">
+							## Werken met Git
+				</section>
+				<section>
+							## Werken met Git
+
+							- Git is een __versiebeheersysteem__ waarmee je __wijzigingen__ in je code bijhoudt tijdens het ontwikkelproces
+							- Je kan daarbij op elk moment __terugkeren naar vorige versies__
+							- Je code zit - bij gebruik van een Git provider als GitHub - __veilig opgeborgen__
+							- Git kan gebruikt worden om __samen te werken in team__ en heeft zijn roots in __open source__ 
+							- Er zijn __grafische tools__ om te werken met Git. Eén ervan is de source control tab in VSCode
+							- De meest directe manier om met Git te interageren is evenwel via de __terminal__
+							
+				</section>
+				<section>
+							## Doel van dit git-overzicht?
+
+							- Werken met git is een uitgebreid en voor beginnende gebruikers vaak overweldigende topic
+							- Maar relax 😀: Dit document wil je op een niveau brengen waarbij je kan starten met git en github
+							- Op een niveau goed genoeg om het dagelijks te beginnen gebruiken en er hierdoor steeds beter in te worden 💪
+							- Meer geavanceerde concepten zoals branching en workflows bij samenwerkingen laten we hier buiten beschouwing
+
+				</section>
+				<section>
+							## Git installeren
+							- Je installeert git lokaal via https://git-scm.com/downloads
+							- Op Windows kies je bij de installatie: 
+								- VSCode als Gits default editor
+								- Selecteer je main als de default branch
+								- Kies je "Git from the commandline and also from 3rd party software"
+								- Gebruik: "Powershell, CMD or terminal" (default)
+							- Git heeft ook een cloud-component in de vorm van een Git provider. We gebruiken hier https://github.com. Maak een account aan indien je deze nog niet hebt.
+				</section>
+				<section>
+							## Git configureren
+
+							- De Git configuratie wordt bijgehouden in een .gitconfig-bestand (kan ook rechtstreeks worden aangepast)
+							- Er zijn 2 scopes die we vanuit de terminal kunnen bewerken met _git config_: 
+							    - __globale scope__: geldt voor alle repositories op je computer
+								- __lokale scope__: geldt voor een specifieke repository en overschrijft eventuele globale settings
+
+							```Bash
+							$ git config --global --list
+							$ git config --global user.name "jouw naam"  # verplicht
+							$ git config --global user.email "jouw GitHub (!) email adres" # verplicht
+							$ git config --global init.defaultBranch main
+							$ git config --global core.editor "code --wait"
+							```
+				</section>
+				<section>
+							## __Git lokaal__: initialiseren van een nieuw repository 
+							- Je initialiseert hiervoor eerst (en eenmalig) een Git repository in de werkmap van een project
+							- Een repository is een container die alle bestanden, directories en metadata van je project bijhoudt
+							- Wanneer je het _git init_ commando uitvoert zal Git in de werkmap een leeg repository aanmaken, in de vorm van een .git directory
+							- Hierin zal Git alle versies van je code lokaal bijhouden
+							
+							```Bash
+							$ git init
+							```
+				</section>
+				<section>
+							## __Git lokaal__: de staging area
+
+							- We gebruiken het concept van de __staging area__ als een ruimte waar je wijzigingen in je code klaar zet 
+
+							```Bash
+							$ git add .  # alle wijzigingen toevoegen aan de staging area
+							$ git add main.py  # een specifiek bestand toevoegen aan de staging area
+							```
+
+							- Je kan op elk moment de situatie van je repository (ook de staging situatie) opvragen met __git status__
+							- Git status geeft ook telkens __tips over mogelijke en wenselijke acties__ (zeer handig 😉)
+
+							```Bash
+							$ git status
+							```
+				</section>
+				<section>
+							## __Git lokaal__: commit toevoegen aan het repository
+
+							- Eens klaar met stagen neem je een __snapshot__ van de situatie in de staging area met _git commit_ 
+							- De __nieuwe versie__ wordt dan __gecreëerd en lokaal opgeslagen__ in het repository in de .git-folder
+							- Je geeft telkens een -m flag met een boodschap mee die bondig de wijzigingen in de nieuwe versie beschrijft
+							- Na elke commit is het raadzaam even ook de status van je repository te checken met _git status_
+							
+							```Bash
+							$ git commit -m "Eerste commit - start van het project"
+							$ git status
+							```
+
+				</section>
+				<section>
+							## __Git provider__: remote repository aanmaken en linken
+
+							- Wil je je lokale repository ook beschikbaar maken in de cloud dan [maak je een repository aan op GitHub](https://github.com/new)
+							- Deze zal een integrale kopie bevatten van het lokale repo: bestanden, folders én metadata (bvb. versies)
+							- Je kiest een naam voor je repo, het publieke of private karakter en laat de rest van de keuzes ongemoeid
+							- Je voegt je nieuwe remote repository op GitHub als volgt toe (eenmalig uit te voeren): 
+
+							```Bash
+							$ git remote add origin git@github.com:jouw_gebruikersnaam/jouw_reponaam.zone.git
+							```
+
+							- Wil je deze remote repository verwijderen (en daarna een andere terug toevoegen)?
+
+							```Bash
+							$ git remote remove origin
+							```
+
+
+				</section>
+				<section>
+							## __Git provider__: SSH toegangscontrole
+
+							- SSH-toegangscontrole voor GitHub helpt je om veilig verbinding te maken met GitHub-repositories via een versleutelde verbinding
+							- Om SSH-toegangscontrole voor GitHub te configureren, moet je een SSH-sleutelpaar genereren en de publieke sleutel toevoegen aan je GitHub-account
+							- Volg hiervoor de stappen die op de GitHub site staan beschreven: [een SSH-key genereren](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) (eventueel [checken of er al één bestaat](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys)) en hem vervolgens [toevoegen aan je GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) 
+				</section>
+				<section>
+							## __Git provider__: lokaal repository pushen naar GitHub
+
+							- Telkens je lokaal met _git commit_ een nieuwe versie van je code aan Git hebt toegevoegd kan je je versie als volgt synchroniseren met GitHub:  
+
+							```Bash
+							$ git push -u origin main
+							```
+				</section>
+				<section>
+							## __Git provider__: vertrekken van remote GitHub repository
+
+							- In de voorgaande workflow zijn we vertrokken van een bestaande lokale repository
+							- Soms zal je starten van een remote GitHub repository dat je wil downloaden en als lokaal project aanmaken
+							- Dit doe je door eenmalig _git clone_ te gebruiken, in de folder waarin je je project een plaats wil geven
+							- Het repository-adres kan je bekomen op de betreffende GitHub pagina
+
+							```Bash
+							$ git clone https://github.com/jouw_gebruikersnaam/jouw_reponaam.git
+							```
+				</section>
+				<section>
+							## __Git provider__: remote wijzigingen ophalen met git pull
+
+							- Het is mogelijk dat je remote repository één of meer commits voor staat op je lokale repository
+							- Je kan dan geen commits meer pushen tot je lokale repository hebt bijgewerkt
+							- git pull (combinatie van git fetch en git merge) haalt de meest recente wijzigingen op uit de remote repository en voegt deze automatisch samen met je huidige lokale branch
+							- git pull is handig als je snel je lokale repository wilt bijwerken, maar je moet voorzichtig zijn, omdat het automatisch samenvoegen van wijzigingen kan leiden tot conflicten of ongewenste resultaten als je niet zeker weet wat er in de externe repository is gewijzigd
+							- Indien er in dat laatste geval zich toch een probleem voordoet lees dan nauwkeurig de boodschap die git je geeft. Een oplossing wordt meestal min of meer aangereikt
+
+							```Bash
+							$ git pull origin main
+							```
+
+				</section>
+				<section>
+							## Bestanden negeren: .gitignore
+
+							- Je kan Git bestanden en directories laten negeren door een .gitignore bestand aan te maken
+							- Een lijst van vaak genegeerde Python-onderdelen vindt je hier: https://github.com/github/gitignore/blob/main/Python.gitignore
+							- Met https://gitignore.io maak je .gitignore-bestanden aan voor verschillende programmeertalen en situaties
+							- Onderstaand commando maakt vanuit de terminal een .gitignore bestand aan en voegt de _venv_ directory toe aan de lijst van de te negeren zaken
+
+							```Bash
+							$ echo "venv" > .gitignore
+							```
+				</section>
+				<section>
+							## Git log - commitgeschiedenis raadplegen
+
+							```Bash
+							$ git log  # overzicht van alle commits
+							$ git log --oneline  # heel kort overzicht van alle commits (handig!)
+							$ git show <checksum>  # wat is er gebeurd in die specifieke commit
+							$ git log -p  # wat is er gebeurd in alle commits
+							$ git log --graph  # visualisatie
+							$ git log --grep="zoek regex"  # op zoek naar een specifieke commit
+							```
+
+							- Nadat je een aantal commits gemaakt hebt, of als je een repository met een bestaande commit-geschiedenis gekloond hebt, zul je soms terug willen zien wat er gebeurd is
+							- De meest eenvoudige en krachtige tool om dit te doen is het git log commando
+				</section>
+				<section>
+							## Git diff - het vergelijken van veranderingen 
+
+							```Bash
+							$ git diff  # tussen de werkmap en de laatste commit
+							$ git diff <commit>  # tussen de werkmap en een specifieke commit
+							$ git diff <commit1> <commit2>  # tussen twee commits
+							$ git diff --staged  # tussen de staging area en de laatste commit
+							```
+
+							- git diff wordt gebruikt om de verschillen tussen bestanden en wijzigingen in je werkmap en/of commits te tonen
+							- Qua output toont de regels die zijn toegevoegd of verwijderd, samen met het bestand waarin de wijziging heeft plaatsgevonden. Toegevoegde regels worden aangegeven met een "+" en verwijderde regels met een "-".
+				</section>
+				<section>
+							## Git restore - wijzigingen ongedaan maken
+
+							- Staging van bepaalde bestanden ongedaan maken:
+
+							```Bash
+							$ git restore --staged mijn_bestand.txt
+							$ git restore --staged .
+							```
+
+							- Verwijderen uit de werkmap en terugkeren naar de vorige versie:
+
+							```Bash
+							$ git restore .
+							```
+				</section>
+				<section>
+							## Git checkout - terugkijken in de Git-geschiedenis
+
+							- Doe je met get checkout. Belangrijk is hier het woord "kijken": je kan niet wijzigen
+
+							```Bash
+							$ git log --oneline  # commit-id kopiëren
+							$ git checkout <commit id>  # je kan KIJKEN naar de oudere versie, niet wijzigen
+							$ git checkout main  # terugkeren naar de laatste versie 
+							```
+				</section>
+				<section>
+							## Git revert - terugkeren naar een oudere situatie
+
+							- Ditmaal om te wijzigen: 
+
+							```Bash
+							$ git log --oneline  # commit-id kopiëren
+							$ git revert <commit>  # maakt nieuwe commit aan met oude commit als nieuwe situatie
+							```
+				</section>
+				<section>
+							## Python OOP / development: terminal, git en virtuele omgevingen
+							## kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>

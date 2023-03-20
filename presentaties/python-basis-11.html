@@ -1,0 +1,409 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OOP / development: werken met booleans en getallen, Math en Random</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python Programming
+							## Werken met booleans en getallen, Math en Random
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Werken met booleans en getallen
+							- Wiskundige functies met de math library
+							- Gebruik van de random-module
+				</section>
+				<section class="chapter">
+							## Werken met booleans en getallen
+				</section>
+				<section>
+							## Werken met booleans en getallen
+
+							We gooien een tweede blik op Pythons eenvoudigste ingebouwde datatypes:
+							- Booleans (met waarden True of False)
+							- Integers (gehele getallen zoals 12, -4 en 2000000)
+							- Floats (getallen met een zwevende komma zoals 3.14159, of ook exponenten als 1.0e7, dat staat voor 1 x 10 tot de zevende macht, of 10000000.0)
+				</section>
+				<section>
+							## Werken met booleans
+							- We zagen eerder dat de enige waarden voor het booleaanse datatype True en False zijn. We hebben het belang gezien voor gebruik van vergelijkingsoperatoren
+							- In sommige gevallen zal je deze rechtstreeks gebruiken: zie eerder in de cursus
+							- In andere gevallen zal je de "truthiness" van de waarden van andere datatypes evalueren:
+								- Truthy waarden zijn waarden die in een booleaanse context in True evalueren
+								- Falsy waarden zijn waarden die in een booleaanse context in False evalueren
+							- De speciale Python-functie bool() kan elk ander data type converteren naar een boolean: bool() kan elke mogelijke waarde als argument nemen en geeft het booleaanse equivalent terug
+							- Daarbij geldt [algemeen](https://docs.python.org/3/library/stdtypes.html#truth-value-testing) dat alle niet-nul-waarden als True worden beschouwd en nul-waarden als False
+				</section>
+				<section>
+							## Werken met booleans
+
+							Voorbeelden van gebruik van de bool-functie:
+
+							```Python
+							print(bool(True)) # True ! Let op: omdat True niet nul of leeg is
+							print(bool(1)) # True
+							print(bool(0)) # False
+							print(bool(45)) # True
+							print(bool(-45)) # True
+							print(bool(False)) # False
+							print(bool(0)) # False
+							print(bool(0.0)) # False
+							print(bool(1.0)) # True
+							print(bool({})) # False
+							print(bool([])) # False
+							print(bool("")) # False
+							```
+				</section>
+				<section>
+							## Werken met booleans
+							- False wordt behandeld als 0 of 0.0 wanneer je ze mixt met integers of floats
+							- True wordt in dat geval behandeld als 1 of 1.0
+
+							```Python
+							print(True + 2) # 3
+							print(False + 5.0) # 5.0
+							```
+				</section>
+				<section>
+							## Werken met integers
+							
+							- Integers of gehele getallen kunnen in Python opgeteld (+), afgetrokken (-), vermenigvuldigd (*) en gedeeld (/) worden. Dat zagen we eerder al.
+							- De iets minder gekende //-operator geeft het gehele gedeelte van het quotiënt terug
+							- Python gebruikt twee vermenigvuldigingssymbolen (**) om exponenten weer te geven
+							- Elke expressie kan meerdere bewerkingen bevatten. De wiskundige volgorde van bewerkingen wordt gerespecteerd 
+							- Je mag gebruik maken van haakjes om deze volgorde aan te passen
+				</section>
+				<section>
+							## Werken met integers
+
+							```Python
+							getal1 = -2
+							getal2 = 3
+							print(getal1 + getal2) # 1
+							print(getal1 ** getal2) # -8
+							print((getal1 + getal2) * getal1) # -2
+							print(14 // 3) # 4 is het gehele gedeelte van het quotiënt
+							```
+				</section>
+				<section>
+							## Combinatie wiskundige- met toekenningsoperatoren
+
+							Je mag wiskundige operatoren combineren met toekenningsoperatoren:
+
+							```Python
+							a -= 3 # a = a -3
+							a += 8 # a = a + 8
+							a *= 2 # a = a * 2
+							a /= 3 # a = a / 3
+							```
+				</section>
+				<section>
+							## De modulus operator
+
+							De modulus operator (%) produceert de rest bij deling
+
+							```Python
+							print(9 % 5) # 4
+							print(8 % 2) # 0
+							```
+
+							Met de divmod-functie krijg je zowel het (afgekapte) quotiënt als de rest
+							
+							```Python
+							print(divmod(18,5)) (3, 3)
+							```
+
+				</section>
+				<section>
+							## Werken met andere talstelsels
+
+							- Gehele getallen zijn in Python geacht decimaal te zijn (base 10), tenzij je een prefix gebruikt die verwijst naar een ander talstelsel of basis (base)
+							- Een base is hoeveel cijfers je kan gebruiken tot je "de één overdraagt". In het decimaal stelsel gebeurt dat bij 10, vandaar de term tiendelig talstelsel
+							- In Python kan je integers naast het decimale ook in drie andere talstelsels uitdrukken. Je doet dit door gebruik te maken van volgende prefixen:
+							    - 0b of 0B voor het binaire talstelsel (base 2)
+								- 0o of 0O voor het octaal talstelsel (base 8)
+								- 0x of 0X voor het hexadecimaal talstelsel (base 16)
+				</section>
+				<section>
+							## Werken met andere talstelsels
+
+							- Enkele voorbeelden:
+							    - Een binaire (base 2) 0b10, wat staat voor 2 in het decimale talstelsel
+							    - Een octale (base 8) 0o10, wat staat voor 8 in het decimale talstelsel
+							    - Een hexadecimale (base 16) 0x10, wat staat voor 16 in het decimale talstelsel
+
+							```Python
+							print(0b10) # 2
+							print(0o10) # 8
+							print(0x10) # 16
+							```
+				</section>
+				<section>
+							## Werken met andere talstelsels
+
+							Je kan in Python ook in de andere richting gaan en met de functies bin, oct en hex integers omzetten naar de respectievelijke andere talstelsels
+
+							```Python
+							print(bin(63)) # 0b111111
+							print(oct(32)) # 0o40
+							print(hex(342)) # 0x156
+							```
+				</section>
+				<section>
+							## Datatypes omzetten naar integers met de int-functie
+
+							```Python
+							print(int(True)) # 1
+							print(int(False)) # 0
+							print(int(98.6)) # 98
+							print(int(1.0e4)) # 10000
+							print(int('99')) # 99
+							print(int('-23')) # -23
+							print(int('+12')) # 12
+							print(int('1_000_000')) # 1000000
+							print(int('10', 2)) # binaire 2
+							print(int('10', 8)) # octale 8
+							print(int('10', 16)) # hexadecimale 16
+							```
+				</section>
+				<section>
+							## Floats
+							- Worden zoals we eerder zagen op dezelfde manier behandeld als integers
+							- Je kan gebruik maken van de operatoren +, –, *, /, //, **, en %) én van de divmod() functie
+							- Om om te zetten naar float gebruiken we de float-functie
+
+							```Python
+							print(float(True)) # 1.0
+							print(float(False)) # 0.0
+							print(float(76)) # 76.0
+							print(float("99")) # 99.0
+							print(43 + 2.) # 45.0
+							print(False + 0.) # 0.0
+							print(True + 0.) # 1.0
+							```
+				</section>
+				<section>
+							## Nauwkeuriger na de komma rekenen met decimal
+
+							- Floats in programmeren gedragen zich niet helemaal zoals reële getallen uit de wiskunde.
+					
+							```Python
+							print(10.0 / 3.0) # 3.3333333333333335
+							```
+
+							- We zien hier 5 op het 16de getal na de komma, terwijl het eigenlijk 3 zou moeten zijn. Het getal wordt dus niet 100% volledig accuraat gerepresenteerd.
+				</section>
+				<section>	
+							## Nauwkeuriger na de komma rekenen met decimal
+					
+							- Met de decimal module laat Python ons toe om getallen exacter weer te geven. Dit is handig wanneer meer precisie nodig is, zoals in het bankwezen.
+
+							```Python
+							from decimal import Decimal
+							prijs = Decimal("19.99")
+							btw = Decimal("0.21")
+							totaal = prijs + (prijs * btw)
+							print(totaal) # 24.1879
+							```
+				</section>
+				<section>
+							## Rationele breuken met de fractions module
+
+							- We kunnen breuken weergeven als fractions door gebruik te maken van de fractions module
+							
+							```Python
+							from fractions import Fraction
+							print(Fraction(1, 3) * Fraction(2, 3)) # 2/9
+							print(Fraction(Decimal('1.0')/Decimal('3.0'))) 
+							#3333333333333333333333333333/10000000000000000000000000000
+							```
+							
+							- De fractions module biedt ook zaken als de grootst gemene deler:
+
+							```Python
+							import fractions
+							print(fractions.gcd(24, 16)) # 8
+							```
+				</section>
+				<section>
+							## Complexe getallen
+
+							- Gebruik van complexe getallen wordt volledig ondersteund door Python, met hun notatie van een reëel en imaginair gedeelte
+							- We maken hiervoor over het algemeen gebruik van de cmath module
+
+							```Python
+							import cmath
+							getal = complex(5,3)
+							print(getal.real) # 5.0
+							print(getal.imag) # 3.0
+							print (cmath.phase(getal)) # de fase: 0.5404195002705842
+							print(cmath.polar(getal)) 
+							# polair / modulus en argument: (5.830951894845301, 0.5404195002705842)
+							print(cmath.rect(5.830951894845301, 0.5404195002705842))  
+							# rechthoekig: (5+3.0000000000000004j)
+							```
+
+				</section>
+				<section class="chapter">
+							## Wiskundige functies met de math library
+				</section>
+				<section>
+							## Wiskundige functies met de math library 
+
+							- Python laat ons gebruik maken van een groot aantal wiskundige functies via de standard math library
+							- Je activeert de library via het import statement
+							- Ze bevat constantes zoals pi en e
+
+							```Python
+							import math
+							print(math.pi) # 3.141592653589793
+							print(math.e) # 2.718281828459045
+							```
+				</section>
+				<section>
+							## fabs()
+
+							De fabs functie geeft de absolute waarde terug van zijn argument
+
+							```Python
+							import math
+							print(math.fabs(88.7)) # 88.7
+							print(math.fabs(-153.1)) # 153.1
+							```
+				</section>
+				<section>
+							## floor() en ceil()
+
+							- Met de floor-functie krijg je het geheel getal onder het meegegeven getal terug
+							- Met de ceil-functie krijg je het geheel getal boven het meegegeven getal terug
+
+							```Python
+							import math
+							print(math.floor(78.7)) # 78
+							print(math.floor(-154.2)) # -155
+							print(math.ceil(68.4)) # 69
+							print(math.ceil(-154.7)) # -154
+							```
+				</section>
+				<section>
+							## Faculteit van n (n!)
+
+							In de wiskunde is de uitdrukking 3! wordt gelezen als "drie faculteit" en is in feite een verkorte manier om de vermenigvuldiging van meerdere opeenvolgende gehele getallen aan te duiden.
+
+							```Python
+							import math
+							print(math.factorial(3)) # 6
+							print(math.factorial(10)) # 3628800
+							print(math.factorial(5)) # 120
+				</section>
+				<section>
+							## pow()
+
+							- De pow-functie gaat een getal tot een bepaalde macht verheffen:
+
+							```Python
+							import math
+							print(math.pow(2, 3)) # 8.0
+							```
+				</section>
+				<section>
+							## sqrt()
+
+							- Met de sqrt-functie bereken je de vierkantswortel uit een getal:
+
+							```Python
+							import math
+							print(math.sqrt(100.0)) # 10.0
+							```
+
+				</section>
+				<section>
+							## Goniometrische functies
+
+							- Alle courante goniometrische functies zijn aanwezig: 
+							sin(), cos(), tan(), asin(), acos(), atan(), en atan2()- Er is ook een hypot()-functie om de hypotenusa of schuine zijde van een rechthoekige rechthoek te berekenen (stelling van Pythagoras). We hebben deze eerder berekend in een oefening
+							
+							```Python
+							import Math
+							print(math.sin(90)) # 0.8939966636005579
+							print(math.hypot(3, 4)) # 5.0
+							```
+				</section>
+				<section class="chapter">
+							## Gebruik van de random-module
+				</section>
+				<section>
+							## random.choice()
+
+							- De random-module biedt je aantal functies voor het genereren van pseudo-randomgetallen, zo ook choice()
+							- https://docs.python.org/3/library/random.html
+							- Bijna alle functies die binnen deze module voorzien zijn zijn afgeleid van de random-functie, die een willekeurige float genereert binnen de range [0.0, 1.0)
+							- De choice-functie geeft een willekeurige waarde terug uit een reeks (list, tuple, dictionary, string)
+
+							```Python
+							from random import choice
+							print(choice([4, 3, 6, 10])) #10
+							print(choice(("een", "twee", "drie", "vier"))) # "een"
+							print(choice(range(100))) # 83
+							print(choice("hemellichaam")) # t
+							```
+				</section>
+				<section>
+							## random.sample()
+
+							Gebruik de sample-functie om meer dan één willekeurige waarde terug te krijgen
+
+							```Python
+							from random import sample
+							print(sample([1, 2, 3, 3, 5, 6, 7, 8], 3)) # [1, 8, 2]
+							print(sample(("een", "twee", "drie", "vier", "vijf", "zes"), 2)) # ['drie', 'twee']
+							print(sample(range(100), 5)) # [80, 36, 19, 88, 24]
+							print(sample("begunstigde", 5)) # ['d', 't', 'e', 'u', 'b']
+				</section>
+				<section>
+							## random.randint() en random.randrange()
+
+							- Om een willekeurig integer-getal terug te krijgen uit een range kan je choice() of sample() gebruiken met range(), maar ook randint() of randrange()
+							- randrange() heeft zoals range() argumenten voor start (inclusief) en eind (exclusief) integers, maar ook een derde optioneel argument waarmee je sprongetjes doorheen de range maakt
+
+							```Python
+							from random import randint
+							print(randint(40, 88)) # 64
+							print(randint(1, 10)) # 6
+
+							from random import randrange
+							print(randrange(40, 88)) # 61
+							print(randrange(30, 70, 10)) # 50
+							print(randrange(28, 70, 10)) # 38
+							```
+				</section>
+				<section>
+							## random()
+
+							De random-functie genereert zoals gezegd een willekeurige float binnen de range [0.0, 1.0)
+
+							```Python
+							from random import random
+							print(random()) # 0.9038328860897611
+							```
+				</section>
+
+				<section>
+							## Python OOP / development: werken met booleans en getallen, Math en Random - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
