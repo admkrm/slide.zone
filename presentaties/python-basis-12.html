@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Python OOP / development: directories en bestanden</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# Python OOP / Development
+							## Directories en bestanden in Python
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Inhoud
+							- Bestanden en subdirectories binnen een directory oplijsten
+							- Bestandsattributen opvragen
+							- Eén of meerdere directories aanmaken
+							- Zoeken in bestandsnamen
+							- Door directories itereren en bestanden behandelen
+							- Bestanden en directories verwijderen
+							- Een volledige directorystructuur verwijderen
+							- Bestanden en directories kopiëren, verplaatsen of hernoemen
+							- Werken met zip-bestanden
+
+				</section>
+				<section>
+							## Bestanden binnen een directory oplijsten
+
+							- We gebruiken hier de pathlib module: pathlib.Path() objecten hebben een.iterdir() method om een iterator te creëren van alle bestanden en directories in een directory
+							- We roepen pathlib.Path() aan en geven een directory-argument mee. We gebruiken .iterdir() om een list met alle bestanden en directories in deze directory te krijgen
+
+							```Python
+							from pathlib import Path
+							basispad = Path("mijn_directory/")
+							bestanden_in_basispad = basispad.iterdir()
+							for item in bestanden_in_basispad:
+								if item.is_file():
+									print(item.name)
+							```
+				</section>
+				<section>
+							## Subdirectories binnen een directory oplijsten
+
+							- We gebruiken de is_file() method om na te gaan of het een bestand betreft
+							- De .is_dir() method aanroepen op elk item in de iterator gaat na of een item een bestand is of een directory
+						
+							```Python
+							from pathlib import Path
+							basispad = Path("mijn_directory/")
+							bestanden_in_basispad = basispad.iterdir()
+							for item in bestanden_in_basispad:
+								if item.is_dir():
+									print(item.name)
+							```
+				</section>
+				<section>
+							## Bestandsattributen opvragen
+
+							- In onderstaand voorbeeld krijgen we de tijd van de laatste wijziging mee van alle bestanden in "mijn_directory"
+							- We verkrijgen de attributen van de bestanden door het aanroepen van .stat()
+							- st_mtime geeft een float waarde terug die het aantal seconden teruggeeft sinds epoch
+
+							```Python
+							from pathlib import Path
+							huidige_directory = Path("mijn_directory")
+							for path in huidige_directory.iterdir():
+								info = path.stat()
+								print(info.st_mtime)
+							```
+
+				</section>
+				<section>
+							## Eén directory aanmaken
+
+							- We kunnen pathlib gebruiken om een directory aan te maken
+							- Als het pad reeds bestaat volgt standaard een exception die we evenwel kunnen afhandelen
+							- Als alternatief kan je het exist_ok=True argument meegeven aan de .mkdir() method
+
+							```Python
+							from pathlib import Path
+
+							p = Path("mijn_nieuwe_directory/")
+							try:
+								p.mkdir()
+							except FileExistsError as exc:
+								print(exc)
+							```
+				</section>
+				<section>
+							## Meerdere geneste directories aanmaken
+
+							- Geef je het parents=True argument mee aan Path.mkdir() de drie directories in het voorbeeld aangemaakt
+
+							```Python
+							import pathlib
+
+							p = pathlib.Path("een_directory/nog_eentje/en_nog_een_laatste")
+							p.mkdir(parents=True)
+							```
+				</section>
+				<section>
+							## Zoeken in bestandsnamen
+
+							- Zoeken in bestandsnamen kan op verschillende manieren (denk bvb aan de string functies van vorige week)
+							- We kiezen er hier voor om de glob method te gebruiken (onderdeel van Pathlib) om te filteren op bestandsnaam
+							- Hier filteren we op bestandsextensies die beginnen met de letter p
+
+							```Python
+							from pathlib import Path
+							p = Path(".")
+							for naam in p.glob("*.p*"):
+								print(naam)
+							```
+				</section>
+				<section>
+							## Door directories itereren en bestanden behandelen
+
+							- Soms moeten we door een directorystructuur "wandelen" en alle bestanden erin behandelen
+							- Python heeft hiervoor een ingebouwde functie os.walk() 
+							- os.walk() geeft drie waarden terug bij elke iteratie van de loop: de naam van de huidige directory, een list van directories en een list van bestanden in de huidige directory
+
+							```Python
+							import os
+							for dirpath, dirnames, files in os.walk("."):
+								print(f"Directory gevonden: {dirpath}")
+								for bestandsnaam in files:
+									print(bestandsnaam)
+							```
+				</section>
+				<section>
+							## Door directories itereren en bestanden behandelen
+							
+							- Standaard "wandelt" os.walk() van boven naar onder (de dieper gelegen folders)
+							- Om van onder naar boven te gaan geven we topdown=False mee als argument
+							- Eerst komen dan de diepst gelegen subdirectories aan de beurt 
+							- Handig wanneer je die folders eerst wil leegmaken en verwijderen
+
+							```Python
+							import os
+							for dirpath, dirnames, files in os.walk(".", topdown=False):
+								print(f"Directory gevonden: {dirpath}")
+								for bestandsnaam in files:
+									print(bestandsnaam)
+							```
+				</section>
+				<section>
+							## Bestanden en directories verwijderen
+
+							- Met een Path object verwijzen we naar een bestand. Door de unlink() method aan te roepen verwijderen we het bestand
+							- Indien we met deze method een directory proberen te verwijderen dan krijgen we een IsADirectoryError
+							- De gebruiker die de Python interpreter uitvoert moet over voldoende rechten beschikken om te verwijderen, anders krijgen we een PermissionError
+
+							```Python
+							from pathlib import Path
+							data_bestand = Path("directory/mijn_bestand.txt")
+							try:
+								data_bestand.unlink()
+							except IsADirectoryError as e:
+								print(f"Fout: {data_bestand} : {e.strerror}")
+							```
+				</section>
+				<section>
+							## Een lege directory verwijderen
+
+							- Met een Path object verwijzen we naar een directory die we willen verwijderen.
+							- We roepen de .rmdir() method aan op dit object om de folder - indien leeg! - te verwijderen
+
+							```Python
+							from pathlib import Path
+
+							te_verwijderen_directory = Path("pad/naar/directory")
+
+							try:
+							te_verwijderen_directory.rmdir()
+							except OSError as e:
+								print(f"Fout: {te_verwijderen_directory} : {e.strerror}")
+							```
+				</section>
+				<section>
+							## Een volledige directorystructuur verwijderen
+
+							- Python voorziet ons van de handig shutil (= shell utilities) module, die in een aantal bestands- en directory-operaties voorziet (zie ook de volgende slides)
+							- Om een directory met volledige inhoud te verwijderen gebruiken we shutil.rmtree():
+
+							```Python
+							import shutil
+
+							te_verwijderen_directory = "pad/naar/directory"
+
+							try:
+								shutil.rmtree(te_verwijderen_directory)
+							except OSError as e:
+								print(f"Fout: {te_verwijderen_directory} : {e.strerror}")
+							```
+				</section>
+				<section>
+							## Bestanden kopiëren
+
+							- We kunnen een bestand kopiëren met shutil.copy()
+							- Indien bestemming een bestand is dan wordt dat bestand overschreven met de nieuwe inhoud
+							- Is bestemming een directory dan wordt het bestand naar deze directory gekopieerd
+							- De inhoud en de permissies worden gekopieerd. Andere metadata (bvb tijdstip aanmaak) blijft niet bewaard
+							- Wil je alle metadata wel behouden, gebruik shutil.copy2()
+
+							```Python
+							import shutil
+
+							shutil.copy("pad/naar/bestand.txt", "bestemming")
+							shutil.copy2("pad/naar/bestand.txt", "bestemming")
+							```
+				</section>
+				<section>
+							## Directories kopiëren
+
+							- Terwijl shutil.copy() één bestand kopieert zal shutil.copytree() een directory met inhoud kopiëren 
+							- shutil.copy() neemt twee argumenten: een bronfolder en een bestemmingsfolder
+							- Biedt een goede manier om je bestanden te backuppen
+
+							```Python
+							import shutil
+							shutil.copytree("bronfolder", "bestemmingsfolder")
+							```
+				</section>
+				<section>
+							## Bestanden en directories verplaatsen
+
+							- Hiervoor gebruiken we shutil.move(bron, bestemming).
+							- Bron is hier het te verplaatsen bestand of directory en bestemming is de plaats waar het heen moet
+							
+							```Python
+							import shutil
+							
+							shutil.move("mijn_directory/", "nieuwe_bestemmming/")
+							```
+				</section>
+				<section>
+							## Bestanden en directories hernoemen
+
+							- We creëren hiervoor een pathlib.Path() object dat een pad bevat naar het te hernoemen bestand of directory 
+							- Volgende stap is rename() method gebruiken op path object en een nieuwe bestandsnaam meegeven
+
+							```Python
+							from pathlib import Path
+							data_bestand = Path("bestand.txt")
+							data_bestand.rename("nieuwe_naam.txt")
+							```
+				</section>
+				<section>
+							## Werken met zip-bestanden
+
+							- De archieftools binnen shutil laten toe ZIP en TAR archieven te maken, lezen en uit te pakken
+							- shutil.make_archive() neemt als argumenten de naam van het archief, het archief-formaat en (optioneel, standaard = huidige directory) de foldernaam waarin de bestanden die je wil archiveren zich bevinden
+							- Met .unpack_archive() pakken we een archief uit, met argumenten de archiefnaam en de bestemmingsdirectory
+
+							```Python
+							import shutil
+							shutil.make_archive("bestemming/backup", "zip", "inpak_directory/")
+							```
+
+							```Python
+							shutil.unpack_archive("backup.zip", "uitpak_directory/")
+							```
+				</section>
+				<section>
+							## Python OOP / development: directories en bestanden in Python - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
