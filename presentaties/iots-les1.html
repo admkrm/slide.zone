@@ -1,0 +1,345 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IOT Security: Les 1</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../highlight/styles/googlecode.css">
+		<link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/agnes.css">
+		<link rel="stylesheet" type="text/css" href="../css/htmlgallery.css">
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/194554/scroll-converter.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script src='../highlight/highlight.pack.js'></script>
+		<script src="../js/script.js" defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+	</head>
+	<body data-markdown="true">
+				<section>
+							# IOT Security
+							## Inleidende les
+							### Uittekenen van het probleemgebied 
+							#### Kristof Michiels
+				</section>
+				<section>
+							## Topics
+							- Het domein "Internet of Things" gedefinieerd
+							- De specifieke kwetsbaarheden in kaart gebracht 
+							- Aanvallen op IoT infrastructuren herkennen
+							- Aanvallen op IoT-infrastructuren voorkomen
+				</section>
+				<section class="chapter">
+							## Het domein "Internet of Things" gedefinieerd
+				</section>
+				<section>
+							## Wat we verstaan onder IoT?
+							- Genetwerkte hardware-devices die data verzamelen en uitwisselen 
+							- Concreet: camera's, auto's, domotica, smartwatches, slimme thermostaten, industriëel procesbeheer,...
+							- Samengesteld uit nodes, sensoren, controllers, data, infrastructuur, mensen en processen
+							- Vaak gericht op één specifieke taak en gebootstrapped met minimale processing-kracht en geheugen		
+				</section>
+				<section>
+							## Wat we verstaan onder IoT?
+							- Processen: hoe alles samenwerkt, vaak een cyclus van observeren, oriënteren, beslissen en handelen
+							- Data: vloeit daarbij van device naar device, van mens naar device of van device naar mens. Data-knooppunten: centrale gateways, cloud. Deze kunnen meer geavanceerde data-verwerking uitvoeren
+							- Infrastructuur: servers, software-componenten, besturingssystemen, clouddiensten
+							- Mensen: eindgebruikers, bedrijven, overheden
+				</section>
+				<section>
+							## Wat we verstaan onder IoT?
+							- Hardware + data + processen + infrastructuur + mensen: vormen complex kluwen van beveiligingsuitdagingen
+							- We staan aan het begin van een revolutie van het zakelijke en ons dagelijks leven
+							- Een toekomst waarin zo goed als alle dingen rondom ons verbonden zijn en interageren met elkaar 
+							- Welke ook de sector, IoT zal impact hebben op vlak van kost, duurzaamheid, efficiëntie, snelheid geleverde diensten, snelheid product design 
+							- Gigantische opportuniteiten (en risico's, niet in het minst op vlak van security)
+				</section>
+				<section>
+							## De sturende processen
+							
+							- SCADA (Supervisory Control And Data Acquisition):
+								- Systeem dat wordt gebruikt om processen en apparaten op afstand te bewaken en te besturen
+								- Verzamelt realtime data van verschillende sensoren en actuatoren, stelt operators in staat om industriële processen te overzien en biedt de mogelijkheid om via een centrale computer controlecommando’s te versturen
+								- SCADA-systemen worden traditioneel gebruikt in industriële omgevingen zoals waterbehandeling, elektriciteitsnetwerken en productielijnen
+				</section>
+				<section>
+							## De sturende processen
+
+							- IIoT (Industrial Internet of Things):
+								- Gebruik van internet of things-technologieën in de industriële sector
+								- Het verbindt machines, apparaten en sensoren, waardoor data verzameld, geanalyseerd en gedeeld kan worden voor een verbeterde efficiëntie en optimalisatie van industriële processen
+								- Stelt bedrijven in staat om predictief onderhoud uit te voeren, operationele kosten te verlagen en innovatie te stimuleren door inzicht te krijgen in de verzamelde data
+				</section>
+				<section>
+							## Overgang van SCADA naar IIoT
+
+							- SCADA:
+								- Traditioneel systeem gebruikt voor industriële controle en monitoring
+								- Werkt veelal op gesloten, propriëtaire systemen
+								- Beperkte connectiviteit en schaalbaarheid
+
+							- IIoT:
+								- Nieuwe generatie van geconnecteerde industriële apparaten
+								- Open standaarden en bredere interoperabiliteit
+								- Wereldwijde connectiviteit en cloud-integratie
+				</section>
+				<section>
+							## Voordelen van IIoT
+
+							- __Verhoogde efficiëntie__:
+								- Realtime data-analyse en predictief onderhoud
+								- Minder downtime en verhoogde productiviteit
+							- __Flexibiliteit en schaalbaarheid__:
+								- Naadloze integratie van nieuwe apparaten en technologieën
+								- Mogelijkheid om snel aan te passen aan veranderende marktomstandigheden				</section>
+				<section>
+							## Voordelen van IIoT
+
+							- __Kostenbesparing__:
+								- Verminderde operationele kosten door optimalisatie
+								- Lagere kosten voor systeemuitbreiding en -onderhoud
+							- __Verbeterde veiligheid en beveiliging__:
+								- Geavanceerde monitoring en responsmogelijkheden.
+								- Verbeterde bescherming tegen externe en interne bedreigingen
+				</section>
+				<section>
+							## Voorhoede-sectoren voor IoT: 
+							
+							- __Industrie__: maken van meer data-gedreven beslissingen leiden tot efficiëntiewinsten op diverse vlakken
+							- __Gezondheidszorg/ziekenhuizen__: monitoren van patiënten leidt tot verhogen van veiligheid en patiëntervaring 
+							- __Retail__: inventaristracking, bewegingsstromen en andere keuzes van klanten analyseren 
+							- __Justitie__: enkelbanden, locatie- en toegangsbeheer in gevangenissen
+							- __Onderwijs__: aanwezigheid tracken, interactief en participatief leren  
+
+				</section>
+				<section>
+							## IoT in steden: efficiëntie en duurzaamheid
+
+							- __Verkeersmanagement__: verbeterde verkeersstromen en vermindering van congestie
+							- __Energiebeheer__: optimalisatie van energieverbruik en vermindering van verspilling
+							- __Afvalbeheer__: efficiëntere inzameling en bevordering van recycling
+							- __Milieu monitoring__: realtime monitoring van luchtkwaliteit en snelle respons op milieuproblemen
+				</section>
+				<section>
+							## IoT in steden: veiligheid en levenskwaliteit
+							- __Openbare veiligheid en nooddiensten__: verbeterde surveillance, snellere respons en efficiëntere coördinatie van noodrespons
+							- __Openbare diensten en gezondheidszorg__: betere toegang tot en levering van diensten en verbeterde patiëntenzorg door real-time monitoring
+							- __Economische groei en toerisme__: stimulering van innovatie, creatie van nieuwe banen, en verbeterde toeristische ervaringen
+				</section>
+				<section>
+							## IoT in gebouwen: efficiëntie en Duurzaamheid
+							- __Energiebeheer__: 
+								- Optimalisatie van energieverbruik en vermindering van energiekosten
+								- Gebruik van hernieuwbare energiebronnen
+							- __Gebouwbeheer__:
+								- Automatisering van verlichting, verwarming, koeling en ventilatie
+								-Predictief onderhoud van systemen en apparatuur.
+							- __Waterbeheer__:
+								- Reductie van waterverbruik en lekdetectie
+				</section>
+				<section>
+							## IoT in gebouwen: veiligheid en comfort
+
+							- __Veiligheid en beveiliging__:
+								- Geavanceerde beveiligingssystemen en toegangscontrole
+								- Realtime surveillance en noodrespons
+							- __Gebruikerscomfort__:
+								- Aanpassing van omgevingscondities aan persoonlijke voorkeuren
+								- Verbeterde binnenluchtkwaliteit en akoestiek
+				</section>
+				<section>
+							## De toekomst van IoT?
+							- Bruce Sterlings wereld van Spimes biedt een blik op de toekomst van IoT
+							- Sterling is een science fiction auteur. Zijn visie op de toekomst van design/productie en IoT wordt beschreven in zijn boek __Shaping Things__
+							- het concept van spimes is een visionaire blik op de toekomst van objecten en technologie is en momenteel nog niet volledig gerealiseerd
+				</section>
+				<section>
+							## De toekomst van IoT? Definitie van Spimes
+
+							- __Definitie__: 
+								- spimes zijn hypothetische objecten die worden gekenmerkt door hun vermogen om informatie over zichzelf te verzamelen, te verwerken en door te geven
+								- Ze zijn zowel fysieke objecten als volledig gedigitaliseerde informatie
+							- __Karakteristieken__:
+								- Zelf-documenterend: Spimes creëren een constante stroom van data over hun eigen geschiedenis en status
+								- Locatiebewust: Ze weten altijd waar ze zich bevinden in tijd en ruimte
+								- Vormbaar: Hun fysieke vorm kan veranderen en aanpassen aan de behoeften
+				</section>
+				<section>
+							## De toekomst van IoT? Definitie van Spimes
+
+							- __Context__:
+								- Sterling suggereert dat spimes de opvolgers zijn van wat we nu "smart devices" noemen
+								- Ze vertegenwoordigen een convergentie van informatietechnologie, locatietechnologie en industriële ontwerp
+				</section>
+				<section>
+							## De toekomst van IoT? Impact van Spimes
+
+							- __Duurzaamheid__:
+								- Spimes dragen bij aan duurzaamheid door optimalisatie van hun eigen levenscyclus
+								- Ze kunnen zichzelf recyclen en hun ecologische voetafdruk minimaliseren
+							- __Economie en productie__:
+								- Ze veranderen de manier waarop we produceren, consumeren en recyclen
+								- Productie wordt meer op maat en dynamisch, afgestemd op individuele behoeften
+				</section>
+				<section>
+							## De toekomst van IoT? Impact van Spimes
+
+							- __Sociaal-culturele impact__:
+								- De relatie tussen mensen en objecten zal veranderen door de toegenomen interactie en afhankelijkheid van spimes
+								- Er zullen nieuwe vormen van gemeenschappen en sociale interacties ontstaan rondom de data en ervaringen die spimes bieden
+				</section>
+
+				<section class="chapter">
+							## De specifieke kwetsbaarheden in kaart gebracht
+				</section>
+				<section>
+							## Resources kwetsbaarheden op vlak van IoT-beveiliging
+
+							- __National Vulnerability Database (NVD)__: betrouwbare overheidsbron die lijst van beveiligingskwetsbaarheden biedt. URL: https://nvd.nist.gov/
+							- __CVE (Common Vulnerabilities and Exposures)__: lijst van inlichtingen die beveiligingslekken in software en hardware identificeert, met inbegrip van IoT-systemen. URL: https://cve.mitre.org/
+							- __OWASP Internet of Things Project__: een organisatie die zich richt op verbeteren van de softwarebeveiliging. Het IoT-project van OWASP biedt informatie over veelvoorkomende kwetsbaarheden in IoT. URL: https://owasp.org/www-project-internet-of-things/
+				</section>
+				<section>
+							## Resource kwetsbaarheden op vlak van IoT-beveiliging
+
+							- __Internet of Things Security Foundation (IoTSF)__: non-profitorganisatie die zich toelegt op het verbeteren van de beveiliging van IoT. Het biedt best practices, richtlijnen en andere resources voor IoT-security. URL: https://www.iotsecurityfoundation.org/
+							- __ICS-CERT (Industrial Control Systems Cyber Emergency Response Team)__: biedt informatie en alerts over beveiligingskwetsbaarheden die van invloed zijn op industriële controlesystemen, inclusief die in IoT-toepassingen in de industrie. URL: https://us-cert.cisa.gov/ics
+				</section>
+				<section>
+							## bvb OWASP IoT vulnerabilities Top 10 (2018)
+
+							- __Weak, Guessable, or Hardcoded Passwords__: gebruik van zwakke, te raden, of hardcoded wachtwoorden maakt ongeautoriseerde toegang mogelijk
+							- __Insecure Network Services__: onveilige netwerkservices kunnen blootstaan aan aanvallen, waardoor systemen en gegevens gecompromitteerd kunnen worden
+							- __Insecure Ecosystem Interfaces__: onveilige web, backend API, cloud, of mobiele interfaces in het IoT-ecosysteem kunnen leiden tot ongeautoriseerde toegang en aanvallen
+							- __Lack of Secure Update Mechanism__: ontbreken van een veilig update-mechanisme kan oudere, kwetsbare software in het systeem achterlaten, wat kan leiden tot compromittering
+							- __Use of Insecure or Outdated Components__: gebruik van onveilige of verouderde componenten kan kwetsbaarheden introduceren die uitgebuit kunnen worden door aanvallers
+				</section>
+				<section>
+							## bvb OWASP IoT vulnerabilities Top 10 (2018)
+
+							- __Insufficient Privacy Protection__: onvoldoende privacybescherming kan leiden tot ongeautoriseerde toegang tot gevoelige gebruikersinformatie
+							- __Insecure Data Transfer and Storage__: onveilig overdragen of opslaan van data kan leiden tot blootstelling van gevoelige informatie
+							- __Lack of Device Management__: ontbreken van apparaatbeheer kan leiden tot een breed scala aan veiligheidsrisico's, zoals het onvermogen om kwetsbaarheden te patchen
+							- __Insecure Default Settings__: onveilige standaardinstellingen kunnen apparaten blootstellen aan aanvallen als ze niet correct geconfigureerd zijn
+							- __Lack of Physical Hardening__: ontbreken van fysieke beveiliging zoals vergrendelingen, kan leiden tot fysieke aanvallen en ongeautoriseerde toegang
+				</section>
+				<section>
+							## Uitdagingen bij het beveiligen van IoT-hardware
+							- __bugs en glitches__: IoT-systemen kunnen zoals elk systeem kampen met storingen of bugs
+							- __niet upgradebaar__: sommige IoT-apparaten kunnen niet worden geüpgraded, met verouderde firmware of geen modificaties mogelijk
+							- __uniforme onderbouw__: veel apparaten gebruiken dezelfde onderbouw, dus gelijkaardige kwetsbaarheden en aanvallen zijn waarschijnlijk.
+							- __gebrek aan standaarden__: leidt tot compatibiliteitsproblemen en inconsistentie in beveiligingsmethoden. Veel IoT-applicaties bieden geen beveiligingsupdates of patches
+							- __Lange levensduur__: eenvoudige IoT-apparaten kunnen de ondersteuning overleven, met potentiële veiligheidsrisico's als gevolg
+				</section>
+				<section>
+							## Uitdagingen bij het beveiligen van IoT-hardware
+							- __Onopgemerkte aantasting__: beveiligingsinbreuken kunnen lang onopgemerkt blijven
+							- __Beperkte rekenkracht__: veel IoT-apparaten hebben beperkte verwerkingscapaciteit, wat het implementeren van robuuste beveiligingsmaatregelen moeilijk maakt
+							- __Verscheidenheid aan apparaten__: de enorme diversiteit aan IoT-apparaten en -platforms maakt uniforme beveiliging complex
+							- __Fysieke toegang__: vele IoT-apparaten zijn blootgesteld aan fysieke aanvallen vanwege hun locatie en toegankelijkheid.
+							- __Onvoldoende encryptie__: sommige IoT-apparaten missen sterke encryptie voor data-in-transit en data-at-rest, wat kan leiden tot datalekken.
+				</section>
+				<section class="chapter">
+							## Aanvallen op IoT infrastructuren
+				</section>
+				<section>
+							## Enkele opmerkelijke vbn van IoT-hacking
+
+							- __Mirai Botnet (2016)__: een botnet met naam Mirai infecteerde een groot aantal onbeveiligde IoT-apparaten en gebruikte ze om grootschalige DDoS-aanvallen uit te voeren, waaronder één die delen van het internet onbereikbaar maakte. Toont aan hoe onbeveiligde IoT-apparaten kunnen worden geëxploiteerd om grootschalige aanvallen uit te voeren. https://en.wikipedia.org/wiki/Mirai_(malware)
+							- __Jeep Cherokee Hack (2014)__: twee beveiligingsonderzoekers slaagden erin om op afstand een Jeep Cherokee te hacken, waardoor ze controle kregen over de kritieke systemen van het voertuig. Het onderstreept de potentiële gevaren van kwetsbaarheden in verbonden voertuigen. https://www.wired.com/2015/07/hackers-remotely-kill-jeep-highway/
+				</section>
+				<section>
+							## Enkele opmerkelijke vbn van IoT-hacking
+
+							- __St. Jude Medical Implant Hack (2017)__: beveiligingsonderzoekers ontdekten kwetsbaarheden in de geïmplanteerde hartapparaten van St. Jude Medical, wat aanvallers in staat zou kunnen stellen om de apparaten te manipuleren. Het toont de mogelijke impact aan van kwetsbaarheden in medische IoT-apparaten op de gezondheid en veiligheid van patiënten. https://www.securityweek.com/st-jude-medical-recalls-465000-pacemakers-over-security-vulnerabilities/
+							- __Target Data Breach (2013)__: hackers kregen toegang tot het netwerk van Target via een HVAC-systeem van een derde partij, wat leidde tot een groot datalek. Het toont aan hoe derde partijen en hun IoT-apparaten een ingangspunt kunnen vormen voor aanvallers. https://krebsonsecurity.com/2014/02/email-attack-on-vendor-set-up-breach-at-target/
+				</section>
+				<section>
+							## Enkele opmerkelijke vbn van IoT-hacking
+
+							- __Insecam Website Exploitatie (2014)__: de website "Insecam" toonde real-time streams van duizenden niet-beveiligde privé- en openbare beveiligingscamera's van over de hele wereld, veelal afkomstig van mensen die de standaard login-gegevens van hun camera's niet hadden gewijzigd. Dit incident benadrukt de ernstige privacyschendingen die kunnen optreden als gevolg van onvoldoende beveiliging van IoT-apparaten in huis, zoals beveiligingscamera's. https://www.bbc.com/news/technology-30121159
+				</section>
+				<section>
+							## Botnets en IoT
+
+							- __Definitie__: Botnets zijn netwerken van gehackte computers en IoT-apparaten (bots) die zijn geïnfecteerd met malware en worden gecontroleerd door een centrale commando-server
+							- __Functie en gebruik__: Gebruikt voor grootschalige cyberaanvallen zoals DDoS-aanvallen, spamverzending, en het verspreiden van malware
+							- __Vorming__: Apparaten worden deel van een botnet door malware-infectie, vaak via phishing, softwarekwetsbaarheden, of besmette websites
+							- __Preventie en mitigatie__: Gebruik van sterke wachtwoorden, up-to-date software, en beveiligingssoftware kan infecties voorkomen. Detectie en ontmanteling zijn essentieel om schade te beperken.
+				</section>
+				<section>
+							## Denial-of-sleep aanvallen in IoT
+
+							- __Definitie__: Denial-of-Sleep (DoS) aanvallen beogen het energieverbruik van IoT-apparaten te maximaliseren, waardoor de batterij snel leegraakt en het apparaat onbruikbaar wordt
+							- __Impact op IoT__: DoS-aanvallen kunnen kritieke IoT-apparaten zoals medische sensoren en bewakingssystemen uitschakelen, wat ernstige gevolgen kan hebben
+							- __Werkwijze__: Aanvallers sturen herhaaldelijk verzoeken of berichten naar het doelapparaat, waardoor het constant werkt en snel energie verliest
+							- __Voorbeeld__: Een slimme thermostaat kan door een DoS-aanval worden uitgeschakeld, wat leidt tot temperatuurproblemen en potentiële veiligheidsrisico’s
+							- __Preventie en mitigatie__: Regelmatige firmware-updates, toepassen van energiebesparende technologieën, en monitoring van netwerkverkeer kunnen helpen om DoS-aanvallen te voorkomen en te beperken
+				</section>
+				<section>
+							## IoT wormaanvallen
+
+							- __Definitie__: Een worm is zelfvoortplantende malware die zich autonoom, zonder tussenkomst van een transportagent, kan verspreiden en grote schade aanrichten in netwerken
+							- __Impact op IoT__: wormen kunnen systemen vertragen of taken volledig stopzetten door het consumeren van systeembronnen zoals geheugen, verwerking en bandbreedte
+							- __Voorbeeld__: onderzoekers hebben een proof-of-concept worm ontwikkeld die in staat is een gehele stad te infecteren via slimme lampen, resulterend in omvangrijke storingen. De worm gebruikte het Zigbee protocol en kon zich verspreiden door het ontbreken van authenticatie tussen de lampen
+							- __Potentiële resultaten__: afhankelijk van de capaciteiten kan een IoT worm complete stadsverlichting overnemen, cryptocurrency minen, of zelfs aanvallen op het elektriciteitsnet uitvoeren
+				</section>
+				<section>
+							## IoT wormaanvallen
+
+							- __Preventie en mitigatie__: Ontwikkelaars dienen authenticatie tussen apparaten in te bouwen en malwarebescherming te gebruiken. Ook is het monitoren van netwerkverkeer en het snel reageren op mogelijke bedreigingen essentieel
+				</section>
+				
+				<section class="chapter">
+							## Aanvallen op IoT-infrastructuren voorkomen
+				</section>
+				<section>
+							## Strategieën voor het Voorkomen van IoT Hacking
+
+							- ! Schetst gewoon de aanpak (zie ook voorgaande slides). We bekijken dit in de komende lessen in detail.
+							- __Regelmatige updates en patching__: Zorg ervoor dat alle apparaten en systemen up-to-date zijn om bekende kwetsbaarheden te dichten.
+							- __Sterke, unieke wachtwoorden__: Gebruik sterke, unieke wachtwoorden voor elk apparaat en verander deze regelmatig.
+							- __Netwerksegmentatie__: Verdeel het netwerk in segmenten om de aanvalsmogelijkheden te verminderen.
+							- __Firewalls en intrusiedetectie-systemen__: Implementeer geavanceerde beveiligingstechnologieën om ongeautoriseerde toegang te detecteren en blokkeren.
+				</section>
+				<section>
+							## Proactieve maatregelen en best practices
+
+							- __Veilige ontwikkeling en testen__: Fabrikanten moeten veiligheidsnormen volgen tijdens het ontwikkelingsproces en producten testen op kwetsbaarheden voordat ze op de markt komen.
+							- __Gebruikerseducatie en bewustwording__: Gebruikers moeten op de hoogte zijn van de risico's en best practices kennen om hun apparaten te beschermen.
+							- __Implementatie van Zero Trust security__: Vertrouw geen enkele entiteit en voer continue verificatie en monitoring uit.
+							- __Encryptie van gegevens__: Bescherm de vertrouwelijkheid en integriteit van gegevens door deze zowel in rust als tijdens transmissie te versleutelen.
+				</section>
+				<section>
+							## Verbetering van IoT Beveiliging: Industrie en beleid
+
+							- __Ontwikkeling van standaarden__: De industrie moet samenwerken met experts om universele veiligheidsnormen en protocollen te ontwikkelen.
+							- __Strikte regelgeving__: Regulatoren moeten strikte en heldere regelgeving ontwikkelen en handhaven om de veiligheid van IoT-apparaten te waarborgen.
+							- __Verplichte certificeringen__: Alle IoT-producten moeten een verplichte beveiligingscertificering ondergaan voordat ze op de markt worden gebracht.
+							- __Transparantie en openbaarmaking__: Fabrikanten moeten open zijn over bekende kwetsbaarheden en updates en patches tijdig beschikbaar stellen.
+							- __Consumentenbescherming en -voorlichting__: Het is cruciaal om consumenten voor te lichten over de risico's en ze te beschermen tegen onveilige producten.
+				</section>
+				<section>
+							## Verbetering van IoT-beveiliging met AI
+
+							- AI in IoT Security: AI kan worden ingezet om de beveiliging van IoT-apparaten te verbeteren door real-time monitoring, detectie van afwijkend gedrag en geautomatiseerde respons
+							- Anomaliedetectie: AI-algoritmen kunnen patronen leren en ongewoon gedrag of verdachte activiteiten identificeren, wat essentieel is om potentiële bedreigingen in IoT-netwerken vroegtijdig op te sporen.
+							- Automatische Respons: Bij detectie van een bedreiging kunnen AI-systemen automatisch reageren om de aanval te mitigeren, bijvoorbeeld door het isoleren van geïnfecteerde apparaten.
+							- Voortdurend Leren: AI kan continu leren van nieuwe bedreigingen en aanvalspatronen om de beveiligingsmaatregelen verder te verbeteren en aan te passen aan het evoluerende bedreigingslandschap.
+							- Risicobeoordeling: AI kan helpen bij het identificeren en prioriteren van kwetsbaarheden en risico’s in IoT-systemen, wat bijdraagt aan een proactieve beveiligingsaanpak.			
+				</section>
+				<section>
+							## Zero Trust in IoT-beveiliging
+
+							- Definitie van Zero Trust: Een beveiligingsconcept waarbij geen enkele entiteit (gebruiker, systeem of apparaat) wordt vertrouwd, ongeacht of deze zich binnen of buiten het netwerk bevindt.
+							- Verificatie en Continue Monitoring: Alle apparaten en gebruikers moeten worden geverifieerd en continu worden gemonitord op afwijkend gedrag.
+							- Least-Privilege Toegang: Minimaliseer toegangspunten en verstrek alleen de minimale toegangsrechten die nodig zijn om een taak uit te voeren.
+							- Micro-Segmentatie: Deel netwerk op in kleinere zones om de laterale beweging van aanvallers te beperken.
+							- Encryptie van Gegevens: Alle gegevens moeten worden versleuteld, zowel in rust als tijdens transmissie, om de vertrouwelijkheid te waarborgen.
+							- Multi-Factor Authenticatie (MFA): meer dan één verificatiemethode om identiteit gebruikers te bevestigen.
+				</section>
+				<section>
+							## IOT Security - Inleidende les - kristof.michiels01@ap.be
+				</section>
+	</body>
+</html>
